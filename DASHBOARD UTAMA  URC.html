@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Sistem U-RC Dashboard&lt;/title&gt;
+  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/data_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;style&gt;
+    body {
+      box-sizing: border-box;
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 208, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 208, 0, 0.6);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    header {
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    main {
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .dashboard-card {
+      animation: scaleIn 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .dashboard-card:nth-child(1) { animation-delay: 0.1s; }
+    .dashboard-card:nth-child(2) { animation-delay: 0.2s; }
+    .dashboard-card:nth-child(3) { animation-delay: 0.3s; }
+    .dashboard-card:nth-child(4) { animation-delay: 0.4s; }
+    .dashboard-card:nth-child(5) { animation-delay: 0.5s; }
+    .dashboard-card:nth-child(6) { animation-delay: 0.6s; }
+    .dashboard-card:nth-child(7) { animation-delay: 0.7s; }
+    .dashboard-card:nth-child(8) { animation-delay: 0.8s; }
+    .dashboard-card:nth-child(9) { animation-delay: 0.9s; }
+    
+    .abstract-bg {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .abstract-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 208, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 208, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 208, 0, 0.12) 0%, transparent 40%);
+      opacity: 0.47;
+    }
+    
+    .abstract-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 208, 0, 0.05) 2px, rgba(255, 208, 0, 0.05) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 208, 0, 0.05) 2px, rgba(255, 208, 0, 0.05) 4px),
+        repeating-linear-gradient(45deg, transparent 0px, transparent 10px, rgba(255, 208, 0, 0.03) 10px, rgba(255, 208, 0, 0.03) 20px),
+        repeating-linear-gradient(-45deg, transparent 0px, transparent 10px, rgba(255, 208, 0, 0.03) 10px, rgba(255, 208, 0, 0.03) 20px),
+        radial-gradient(ellipse at 10% 20%, rgba(255, 208, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 90% 80%, rgba(255, 208, 0, 0.08) 0%, transparent 40%);
+      opacity: 0.47;
+    }
+    
+    .cultural-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.47;
+      background-image:
+        repeating-conic-gradient(from 0deg at 15% 30%, transparent 0deg, rgba(255, 208, 0, 0.06) 15deg, transparent 30deg),
+        repeating-conic-gradient(from 45deg at 85% 70%, transparent 0deg, rgba(255, 208, 0, 0.04) 20deg, transparent 40deg),
+        repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 30px, rgba(255, 208, 0, 0.02) 30px, rgba(255, 208, 0, 0.02) 31px);
+      background-size: 200px 200px, 180px 180px, 60px 60px;
+    }
+    
+    .dashboard-card {
+      animation: scaleIn 0.6s ease-out;
+      animation-fill-mode: both;
+      background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid rgba(255, 208, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 208, 0, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    
+    .dashboard-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #FFD000;
+      box-shadow: 0 20px 50px rgba(255, 208, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(55, 65, 81, 0.9) 0%, rgba(31, 41, 55, 1) 100%);
+    }
+
+    .dashboard-card:hover::before {
+      opacity: 1;
+    }
+    
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%);
+      margin-bottom: 1rem;
+      animation: pulse 3s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(255, 208, 0, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .dashboard-card:hover .card-icon {
+      animation: glow 2s ease-in-out infinite;
+      transform: scale(1.1) rotate(5deg);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;h-full bg-gray-900&quot;&gt;
+  &lt;div class=&quot;h-full w-full overflow-auto&quot;&gt;
+    &lt;!-- Header Section --&gt;
+    &lt;header class=&quot;abstract-bg relative z-10 py-12 px-6&quot;&gt;
+      &lt;div class=&quot;cultural-pattern&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;max-w-7xl mx-auto text-center relative z-10&quot;&gt;
+        &lt;h1 id=&quot;main-title&quot; class=&quot;text-6xl font-bold mb-3&quot; style=&quot;color: #FFD000; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); letter-spacing: 2px;&quot;&gt;Sistem U-RC&lt;/h1&gt;
+        &lt;h2 id=&quot;subtitle&quot; class=&quot;text-3xl font-semibold text-white mb-4 tracking-wide&quot; style=&quot;letter-spacing: 3px;&quot;&gt;UMAS REPORT CENTRE&lt;/h2&gt;
+        &lt;p id=&quot;school-name&quot; class=&quot;text-xl text-gray-200 mb-2 font-medium&quot; style=&quot;animation: slideInRight 0.8s ease-out 0.3s both;&quot;&gt;Sekolah Kebangsaan Umas-Umas, Tawau Sabah&lt;/p&gt;
+        &lt;p id=&quot;motto&quot; class=&quot;text-lg italic font-light&quot; style=&quot;color: #FFD000; animation: slideInRight 0.8s ease-out 0.4s both;&quot;&gt;Sepakat Memperkasakan Kecemerlangan&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Dashboard Grid --&gt;
+    &lt;main class=&quot;max-w-7xl mx-auto px-6 py-12&quot;&gt;
+      &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6&quot;&gt;
+        
+        &lt;!-- Pengurusan --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer&quot; onclick=&quot;togglePengurusan()&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;Pengurusan&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Sistem pengurusan sekolah&lt;/p&gt;
+          &lt;svg id=&quot;pengurusan-arrow&quot; class=&quot;w-6 h-6 text-yellow-400 mx-auto mt-3 transition-transform&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+            &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M19 9l-7 7-7-7&quot;&gt;&lt;/path&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Pengurusan Expanded Section --&gt;
+        &lt;div id=&quot;pengurusan-section&quot; class=&quot;col-span-1 md:col-span-2 lg:col-span-3 hidden&quot;&gt;
+          &lt;div class=&quot;bg-gray-800 rounded-xl p-6 border-2 border-yellow-400&quot;&gt;
+            &lt;h3 class=&quot;text-2xl font-bold mb-6&quot; style=&quot;color: #FFD000;&quot;&gt;Bahagian Pengurusan&lt;/h3&gt;
+            
+            &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+              &lt;!-- Laporan Pemantauan GB/PKanan --&gt;
+              &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot; onclick=&quot;toggleLaporanGBPK()&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                  &lt;div class=&quot;flex items-center&quot;&gt;
+                    &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;h4 class=&quot;text-white font-semibold&quot;&gt;Laporan Pemantauan GB/PKanan&lt;/h4&gt;
+                  &lt;/div&gt;
+                  &lt;svg id=&quot;gbpk-arrow&quot; class=&quot;w-4 h-4 text-yellow-400 transition-transform&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M19 9l-7 7-7-7&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Laporan GB/PKanan Form --&gt;
+            &lt;div id=&quot;laporan-gbpk-form&quot; class=&quot;mt-4 hidden&quot;&gt;
+              &lt;div class=&quot;bg-gray-750 rounded-lg p-6 border border-gray-600&quot;&gt;
+                &lt;!-- Tab Navigation --&gt;
+                &lt;div class=&quot;flex gap-2 mb-6 border-b border-gray-600&quot;&gt;
+                  &lt;button id=&quot;tab-tambah-gbpk&quot; onclick=&quot;switchTabGBPK('tambah')&quot; class=&quot;px-6 py-3 font-semibold transition-all border-b-2 border-yellow-400 text-yellow-400&quot; style=&quot;background: linear-gradient(180deg, rgba(255,208,0,0.1) 0%, transparent 100%); border-radius: 8px 8px 0 0;&quot;&gt;
+                    Tambah Rekod
+                  &lt;/button&gt;
+                  &lt;button id=&quot;tab-lihat-gbpk&quot; onclick=&quot;switchTabGBPK('lihat')&quot; class=&quot;px-6 py-3 font-semibold transition-all border-b-2 border-transparent text-gray-400 hover:text-white&quot; style=&quot;border-radius: 8px 8px 0 0;&quot;&gt;
+                    Lihat Laporan
+                  &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Tambah Rekod Tab --&gt;
+                &lt;div id=&quot;content-tambah-gbpk&quot;&gt;
+                  &lt;h5 class=&quot;text-xl font-semibold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;Borang Laporan Pemantauan Guru Besar / Penolong Kanan&lt;/h5&gt;
+                  
+                  &lt;form id=&quot;laporanGBPKForm&quot; class=&quot;space-y-4&quot;&gt;
+                    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+                      &lt;!-- Nama Pemantau --&gt;
+                      &lt;div&gt;
+                        &lt;label for=&quot;nama-pemantau&quot; class=&quot;block text-white text-sm font-medium mb-2&quot; style=&quot;letter-spacing: 0.5px;&quot;&gt;Nama Pemantau&lt;/label&gt;
+                        &lt;select id=&quot;nama-pemantau&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none focus:shadow-lg focus:shadow-yellow-400/50 transition-all&quot; style=&quot;background: linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(31, 41, 55, 0.8) 100%);&quot;&gt;
+                          &lt;option value=&quot;&quot;&gt;Pilih Pemantau&lt;/option&gt;
+                          &lt;option value=&quot;Salbiah binti Karim&quot;&gt;Salbiah binti Karim&lt;/option&gt;
+                          &lt;option value=&quot;Kamisah binti Mohammad&quot;&gt;Kamisah binti Mohammad&lt;/option&gt;
+                          &lt;option value=&quot;Mohd Sam bin Talip @ Mohd Isham&quot;&gt;Mohd Sam bin Talip @ Mohd Isham&lt;/option&gt;
+                          &lt;option value=&quot;Azizah binti Haris&quot;&gt;Azizah binti Haris&lt;/option&gt;
+                          &lt;option value=&quot;Siti Robasiah binti Hj.Rahamat&quot;&gt;Siti Robasiah binti Hj.Rahamat&lt;/option&gt;
+                        &lt;/select&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Tarikh --&gt;
+                      &lt;div&gt;
+                        &lt;label for=&quot;tarikh-gbpk&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Tarikh&lt;/label&gt;
+                        &lt;input type=&quot;date&quot; id=&quot;tarikh-gbpk&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Hari --&gt;
+                      &lt;div&gt;
+                        &lt;label for=&quot;hari-gbpk&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Hari&lt;/label&gt;
+                        &lt;select id=&quot;hari-gbpk&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                          &lt;option value=&quot;&quot;&gt;Pilih Hari&lt;/option&gt;
+                          &lt;option value=&quot;Isnin&quot;&gt;Isnin&lt;/option&gt;
+                          &lt;option value=&quot;Selasa&quot;&gt;Selasa&lt;/option&gt;
+                          &lt;option value=&quot;Rabu&quot;&gt;Rabu&lt;/option&gt;
+                          &lt;option value=&quot;Khamis&quot;&gt;Khamis&lt;/option&gt;
+                          &lt;option value=&quot;Jumaat&quot;&gt;Jumaat&lt;/option&gt;
+                          &lt;option value=&quot;Sabtu&quot;&gt;Sabtu&lt;/option&gt;
+                          &lt;option value=&quot;Ahad&quot;&gt;Ahad&lt;/option&gt;
+                        &lt;/select&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Masa --&gt;
+                      &lt;div&gt;
+                        &lt;label for=&quot;masa-gbpk&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Masa&lt;/label&gt;
+                        &lt;input type=&quot;time&quot; id=&quot;masa-gbpk&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Soalan Section --&gt;
+                    &lt;div class=&quot;mt-8 pt-8 border-t border-gray-600&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-6&quot; style=&quot;color: #FFD000;&quot;&gt;Laporan Pemantauan&lt;/h6&gt;
+
+                      &lt;!-- Soalan 1 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;1. Kebersihan kawasan jalan utama pintu masuk pagar sekolah (pintu A) dan bunga luar pagar&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_1&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_1&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 2 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;2. Rumput di padang sekolah dan sekitar kawasan sekolah&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_2&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_2&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 3 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;3. Kebersihan/kekemasan dewan sekolah&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_3&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_3&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 4 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;4. Kebersihan/kekemasan surau&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_4&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_4&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 5 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;5. Pemantauan PDP/pengoperasian Prasekolah/ isi buku pelawat Pra&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_5&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_5&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 6 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;6. Pemantauan PDP/ pengoperasian kelas pemulihan/ isi buku pelawat bilik pemulihan&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_6&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_6&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 7 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;7. Rumput dikawasan bangunan prasekolah/bilik pemulihan&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_7&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_7&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 8 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;8. Pemantauan PDP kelas tahun 1, 2, 3&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_8&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_8&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 9 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;9. Pemantauan PDP kelas tahun 4, 5, 6&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_9&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_9&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 10 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;10. Kebersihan/kekemasan blok bilik-bilik khas (projek kilat)&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_10&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_10&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 11 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;11. Kebersihan/kekemasan blok bilik-bilik khas (stor PJ, bilik RBT, bilik pekerja pembersihan)&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_11&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_11&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Soalan 12 --&gt;
+                      &lt;div class=&quot;bg-gray-700 rounded-lg p-4 mb-4 border border-gray-600&quot;&gt;
+                        &lt;p class=&quot;text-white font-semibold mb-3&quot;&gt;12. Dalam dan luar bilik ICT&lt;/p&gt;
+                        &lt;div class=&quot;flex gap-4&quot;&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_12&quot; value=&quot;Tidak Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Tidak Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                          &lt;label class=&quot;flex items-center cursor-pointer&quot;&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;soalan_12&quot; value=&quot;Sangat Memuaskan&quot; class=&quot;mr-2&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                            &lt;span class=&quot;text-gray-300&quot;&gt;Sangat Memuaskan&lt;/span&gt;
+                          &lt;/label&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Submit Button --&gt;
+                    &lt;div class=&quot;flex justify-end mt-8&quot;&gt;
+                      &lt;button type=&quot;submit&quot; class=&quot;px-8 py-3 rounded-lg font-semibold text-black transition-all&quot; style=&quot;background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%); box-shadow: 0 8px 20px rgba(255, 208, 0, 0.3);&quot; onmouseover=&quot;this.style.transform='scale(1.08)'; this.style.boxShadow='0 12px 30px rgba(255, 208, 0, 0.5)'&quot; onmouseout=&quot;this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(255, 208, 0, 0.3)'&quot;&gt;
+                        Simpan Rekod
+                      &lt;/button&gt;
+                    &lt;/div&gt;
+                  &lt;/form&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Lihat Laporan Tab --&gt;
+                &lt;div id=&quot;content-lihat-gbpk&quot; class=&quot;hidden&quot;&gt;
+                  &lt;div class=&quot;flex justify-between items-center mb-4&quot;&gt;
+                    &lt;h5 class=&quot;text-xl font-semibold&quot; style=&quot;color: #FFD000;&quot;&gt;Laporan Pemantauan GB/PKanan&lt;/h5&gt;
+                    &lt;button onclick=&quot;muatTurunPDFGBPK()&quot; class=&quot;px-6 py-2 rounded-lg font-semibold text-black transition-all hover:scale-105 flex items-center gap-2&quot; style=&quot;background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%);&quot;&gt;
+                      &lt;svg class=&quot;w-5 h-5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                      Muat Turun PDF
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+                  
+                  &lt;!-- Reports Container --&gt;
+                  &lt;div id=&quot;laporan-gbpk-container&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Kurikulum --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer&quot; onclick=&quot;toggleKurikulum()&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;Kurikulum&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Pengurusan kurikulum sekolah&lt;/p&gt;
+          &lt;svg id=&quot;kurikulum-arrow&quot; class=&quot;w-6 h-6 text-yellow-400 mx-auto mt-3 transition-transform&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+            &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M19 9l-7 7-7-7&quot;&gt;&lt;/path&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Kurikulum Expanded Section --&gt;
+        &lt;div id=&quot;kurikulum-section&quot; class=&quot;col-span-1 md:col-span-2 lg:col-span-3 hidden&quot;&gt;
+          &lt;div class=&quot;bg-gray-800 rounded-xl p-6 border-2 border-yellow-400&quot;&gt;
+            &lt;h3 class=&quot;text-2xl font-bold mb-6&quot; style=&quot;color: #FFD000;&quot;&gt;Bahagian Kurikulum&lt;/h3&gt;
+            
+            &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;
+              &lt;!-- E-Rekod Kawalan Kelas --&gt;
+              &lt;a href=&quot;https://skumasumasreportcentre.my.canva.site/c1vrf7fmtzrbf9tf&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                  &lt;div class=&quot;flex items-center&quot;&gt;
+                    &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;h4 class=&quot;text-white font-semibold&quot;&gt;E-Rekod Kawalan Kelas&lt;/h4&gt;
+                  &lt;/div&gt;
+                  &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/a&gt;
+
+              &lt;!-- Rekod Pemantauan Sesi PDP --&gt;
+              &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot; onclick=&quot;togglePemantauanPDP()&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                  &lt;div class=&quot;flex items-center&quot;&gt;
+                    &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot;&gt;&lt;/path&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;h4 class=&quot;text-white font-semibold&quot;&gt;Rekod Pemantauan Sesi PDP&lt;/h4&gt;
+                  &lt;/div&gt;
+                  &lt;svg id=&quot;pemantauan-arrow&quot; class=&quot;w-4 h-4 text-yellow-400 transition-transform&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M19 9l-7 7-7-7&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Pekeliling --&gt;
+              &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                &lt;div class=&quot;flex items-center mb-2&quot;&gt;
+                  &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                  &lt;h4 class=&quot;text-white font-semibold&quot;&gt;Pekeliling&lt;/h4&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- PBD (Pembelajaran Berasaskan Dokumen) --&gt;
+              &lt;a href=&quot;https://medancerdik.my.canva.site/pbd-skut&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                  &lt;div class=&quot;flex items-center&quot;&gt;
+                    &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;h4 class=&quot;text-white font-semibold&quot;&gt;PBD&lt;/h4&gt;
+                  &lt;/div&gt;
+                  &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/a&gt;
+
+              &lt;!-- Fail Panitia --&gt;
+              &lt;a href=&quot;https://skumasumasreportcentre.my.canva.site/c1vt50bfgh3z82wr&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                  &lt;div class=&quot;flex items-center&quot;&gt;
+                    &lt;svg class=&quot;w-5 h-5 mr-2&quot; style=&quot;color: #FFD000;&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                      &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z&quot;&gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;h4 class=&quot;text-white font-semibold&quot;&gt;Fail Panitia&lt;/h4&gt;
+                  &lt;/div&gt;
+                  &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/a&gt;
+            &lt;/div&gt;
+
+
+
+            &lt;!-- Rekod Pemantauan Sesi PDP Form --&gt;
+            &lt;div id=&quot;pemantauan-pdp-form&quot; class=&quot;mt-4 hidden&quot;&gt;
+              &lt;div class=&quot;bg-gray-750 rounded-lg p-6 border border-gray-600&quot;&gt;
+                &lt;!-- Tab Navigation --&gt;
+                &lt;div class=&quot;flex gap-2 mb-6 border-b border-gray-600&quot;&gt;
+                  &lt;button id=&quot;tab-tambah-pdp&quot; onclick=&quot;switchTabPDP('tambah')&quot; class=&quot;px-6 py-3 font-semibold transition-all border-b-2 border-yellow-400 text-yellow-400&quot;&gt;
+                    Tambah Rekod
+                  &lt;/button&gt;
+                  &lt;button id=&quot;tab-lihat-pdp&quot; onclick=&quot;switchTabPDP('lihat')&quot; class=&quot;px-6 py-3 font-semibold transition-all border-b-2 border-transparent text-gray-400 hover:text-white&quot;&gt;
+                    Lihat Laporan
+                  &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Tambah Rekod Tab --&gt;
+                &lt;div id=&quot;content-tambah-pdp&quot;&gt;
+                  &lt;h5 class=&quot;text-xl font-semibold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;Borang Rekod Pemantauan Sesi PDP&lt;/h5&gt;
+                  
+                  &lt;form id=&quot;pemantauanPDPForm&quot; class=&quot;space-y-4&quot;&gt;
+                    &lt;!-- Bahagian 1: Maklumat Asas --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;1. Maklumat Asas&lt;/h6&gt;
+                      
+                      &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;&gt;
+                        &lt;!-- Nama Pentadbir Pemantau --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;nama-pentadbir-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Nama Pentadbir Pemantau&lt;/label&gt;
+                          &lt;select id=&quot;nama-pentadbir-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;Pilih Pentadbir&lt;/option&gt;
+                            &lt;option value=&quot;Salbiah binti Karim&quot;&gt;Salbiah binti Karim&lt;/option&gt;
+                            &lt;option value=&quot;Kamisah binti Mohammad&quot;&gt;Kamisah binti Mohammad&lt;/option&gt;
+                            &lt;option value=&quot;Mohd Sam bin Talip @ Mohd Isham&quot;&gt;Mohd Sam bin Talip @ Mohd Isham&lt;/option&gt;
+                            &lt;option value=&quot;Azizah binti Haris&quot;&gt;Azizah binti Haris&lt;/option&gt;
+                            &lt;option value=&quot;Siti Robasiah binti Hj.Rahamat&quot;&gt;Siti Robasiah binti Hj.Rahamat&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Tarikh --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;tarikh-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Tarikh&lt;/label&gt;
+                          &lt;input type=&quot;date&quot; id=&quot;tarikh-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Masa --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;masa-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Masa&lt;/label&gt;
+                          &lt;input type=&quot;time&quot; id=&quot;masa-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Hari --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;hari-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Hari&lt;/label&gt;
+                          &lt;select id=&quot;hari-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;Pilih Hari&lt;/option&gt;
+                            &lt;option value=&quot;Isnin&quot;&gt;Isnin&lt;/option&gt;
+                            &lt;option value=&quot;Selasa&quot;&gt;Selasa&lt;/option&gt;
+                            &lt;option value=&quot;Rabu&quot;&gt;Rabu&lt;/option&gt;
+                            &lt;option value=&quot;Khamis&quot;&gt;Khamis&lt;/option&gt;
+                            &lt;option value=&quot;Jumaat&quot;&gt;Jumaat&lt;/option&gt;
+                            &lt;option value=&quot;Sabtu&quot;&gt;Sabtu&lt;/option&gt;
+                            &lt;option value=&quot;Ahad&quot;&gt;Ahad&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Kelas --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;kelas-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Kelas&lt;/label&gt;
+                          &lt;select id=&quot;kelas-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;Pilih Kelas&lt;/option&gt;
+                            &lt;optgroup label=&quot;Tahun 1&quot;&gt;
+                              &lt;option value=&quot;1 Inovatif&quot;&gt;1 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;1 Kreatif&quot;&gt;1 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;1 Kritis&quot;&gt;1 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;1 Proaktif&quot;&gt;1 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;1 Patriotik&quot;&gt;1 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;optgroup label=&quot;Tahun 2&quot;&gt;
+                              &lt;option value=&quot;2 Inovatif&quot;&gt;2 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;2 Kreatif&quot;&gt;2 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;2 Kritis&quot;&gt;2 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;2 Proaktif&quot;&gt;2 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;2 Patriotik&quot;&gt;2 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;optgroup label=&quot;Tahun 3&quot;&gt;
+                              &lt;option value=&quot;3 Inovatif&quot;&gt;3 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;3 Kreatif&quot;&gt;3 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;3 Kritis&quot;&gt;3 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;3 Proaktif&quot;&gt;3 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;3 Patriotik&quot;&gt;3 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;optgroup label=&quot;Tahun 4&quot;&gt;
+                              &lt;option value=&quot;4 Inovatif&quot;&gt;4 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;4 Kreatif&quot;&gt;4 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;4 Kritis&quot;&gt;4 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;4 Proaktif&quot;&gt;4 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;4 Patriotik&quot;&gt;4 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;optgroup label=&quot;Tahun 5&quot;&gt;
+                              &lt;option value=&quot;5 Inovatif&quot;&gt;5 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;5 Kreatif&quot;&gt;5 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;5 Kritis&quot;&gt;5 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;5 Proaktif&quot;&gt;5 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;5 Patriotik&quot;&gt;5 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                            &lt;optgroup label=&quot;Tahun 6&quot;&gt;
+                              &lt;option value=&quot;6 Inovatif&quot;&gt;6 Inovatif&lt;/option&gt;
+                              &lt;option value=&quot;6 Kreatif&quot;&gt;6 Kreatif&lt;/option&gt;
+                              &lt;option value=&quot;6 Kritis&quot;&gt;6 Kritis&lt;/option&gt;
+                              &lt;option value=&quot;6 Proaktif&quot;&gt;6 Proaktif&lt;/option&gt;
+                              &lt;option value=&quot;6 Patriotik&quot;&gt;6 Patriotik&lt;/option&gt;
+                            &lt;/optgroup&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Subjek --&gt;
+                        &lt;div&gt;
+                          &lt;label for=&quot;subjek-pdp&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Subjek&lt;/label&gt;
+                          &lt;select id=&quot;subjek-pdp&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;Pilih Subjek&lt;/option&gt;
+                            &lt;option value=&quot;Bahasa Melayu&quot;&gt;Bahasa Melayu&lt;/option&gt;
+                            &lt;option value=&quot;Bahasa Inggeris&quot;&gt;Bahasa Inggeris&lt;/option&gt;
+                            &lt;option value=&quot;Matematik&quot;&gt;Matematik&lt;/option&gt;
+                            &lt;option value=&quot;Sains&quot;&gt;Sains&lt;/option&gt;
+                            &lt;option value=&quot;Sejarah&quot;&gt;Sejarah&lt;/option&gt;
+                            &lt;option value=&quot;Pendidikan Islam&quot;&gt;Pendidikan Islam&lt;/option&gt;
+                            &lt;option value=&quot;Pendidikan Moral&quot;&gt;Pendidikan Moral&lt;/option&gt;
+                            &lt;option value=&quot;Bahasa Arab&quot;&gt;Bahasa Arab&lt;/option&gt;
+                            &lt;option value=&quot;Pendidikan Jasmani dan Kesihatan&quot;&gt;Pendidikan Jasmani dan Kesihatan&lt;/option&gt;
+                            &lt;option value=&quot;Pendidikan Muzik&quot;&gt;Pendidikan Muzik&lt;/option&gt;
+                            &lt;option value=&quot;Pendidikan Seni dan Visual&quot;&gt;Pendidikan Seni dan Visual&lt;/option&gt;
+                            &lt;option value=&quot;Reka Bentuk dan Teknologi&quot;&gt;Reka Bentuk dan Teknologi&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Nama Guru Dipantau --&gt;
+                        &lt;div class=&quot;md:col-span-2&quot;&gt;
+                          &lt;label for=&quot;nama-guru-dipantau&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Nama Guru yang Dipantau&lt;/label&gt;
+                          &lt;select id=&quot;nama-guru-dipantau&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none max-h-48 overflow-y-auto&quot;&gt;
+                            &lt;option value=&quot;&quot;&gt;Pilih Guru&lt;/option&gt;
+                            &lt;option value=&quot;Norhainie binti Herman&quot;&gt;Norhainie binti Herman&lt;/option&gt;
+                            &lt;option value=&quot;Noorzalianah binti Insan&quot;&gt;Noorzalianah binti Insan&lt;/option&gt;
+                            &lt;option value=&quot;Nurasyipa binti Ridwan&quot;&gt;Nurasyipa binti Ridwan&lt;/option&gt;
+                            &lt;option value=&quot;Mohd Khairul Amir bin Ahmad&quot;&gt;Mohd Khairul Amir bin Ahmad&lt;/option&gt;
+                            &lt;option value=&quot;Stevon Luntid&quot;&gt;Stevon Luntid&lt;/option&gt;
+                            &lt;option value=&quot;Hjh. Masni Juitah binti Tuda&quot;&gt;Hjh. Masni Juitah binti Tuda&lt;/option&gt;
+                            &lt;option value=&quot;Ridhuan bin Arbin&quot;&gt;Ridhuan bin Arbin&lt;/option&gt;
+                            &lt;option value=&quot;Nordin bin Lagudan&quot;&gt;Nordin bin Lagudan&lt;/option&gt;
+                            &lt;option value=&quot;Hj. Ramsah bin Burhan&quot;&gt;Hj. Ramsah bin Burhan&lt;/option&gt;
+                            &lt;option value=&quot;Misnah binti Miasin&quot;&gt;Misnah binti Miasin&lt;/option&gt;
+                            &lt;option value=&quot;Azmah binti Asha'ari&quot;&gt;Azmah binti Asha'ari&lt;/option&gt;
+                            &lt;option value=&quot;Hjh. Palam binti Karim&quot;&gt;Hjh. Palam binti Karim&lt;/option&gt;
+                            &lt;option value=&quot;Diana binti Darno&quot;&gt;Diana binti Darno&lt;/option&gt;
+                            &lt;option value=&quot;Mohd Hasrul bin Mohd Redzuan&quot;&gt;Mohd Hasrul bin Mohd Redzuan&lt;/option&gt;
+                            &lt;option value=&quot;Antoni Riko Boling&quot;&gt;Antoni Riko Boling&lt;/option&gt;
+                            &lt;option value=&quot;Arbaena binti Nahang&quot;&gt;Arbaena binti Nahang&lt;/option&gt;
+                            &lt;option value=&quot;Mohammad Farid bin Mohd Arbi&quot;&gt;Mohammad Farid bin Mohd Arbi&lt;/option&gt;
+                            &lt;option value=&quot;Alice Dapith&quot;&gt;Alice Dapith&lt;/option&gt;
+                            &lt;option value=&quot;A'in Fhatin Hanani binti Rijan&quot;&gt;A'in Fhatin Hanani binti Rijan&lt;/option&gt;
+                            &lt;option value=&quot;Mohd Khuzaifah Bin Ismail&quot;&gt;Mohd Khuzaifah Bin Ismail&lt;/option&gt;
+                            &lt;option value=&quot;Rahman bin Soga&quot;&gt;Rahman bin Soga&lt;/option&gt;
+                            &lt;option value=&quot;Darmin bin Ladiro&quot;&gt;Darmin bin Ladiro&lt;/option&gt;
+                            &lt;option value=&quot;Halimahton Saadiah binti Mahamad&quot;&gt;Halimahton Saadiah binti Mahamad&lt;/option&gt;
+                            &lt;option value=&quot;Siti Nur Syafiah binti Majid&quot;&gt;Siti Nur Syafiah binti Majid&lt;/option&gt;
+                            &lt;option value=&quot;Abdul Rahim bin MD Lajim&quot;&gt;Abdul Rahim bin MD Lajim&lt;/option&gt;
+                            &lt;option value=&quot;Dzulfadly bin AG Anak&quot;&gt;Dzulfadly bin AG Anak&lt;/option&gt;
+                            &lt;option value=&quot;Roslianah binti Roie&quot;&gt;Roslianah binti Roie&lt;/option&gt;
+                            &lt;option value=&quot;Sharif bin Hamdani&quot;&gt;Sharif bin Hamdani&lt;/option&gt;
+                            &lt;option value=&quot;Marini binti Syed Ali&quot;&gt;Marini binti Syed Ali&lt;/option&gt;
+                            &lt;option value=&quot;Nurhasanah binti Roslan&quot;&gt;Nurhasanah binti Roslan&lt;/option&gt;
+                            &lt;option value=&quot;Abdul Rahman bin Taip&quot;&gt;Abdul Rahman bin Taip&lt;/option&gt;
+                            &lt;option value=&quot;Rozaimi bin Arshad&quot;&gt;Rozaimi bin Arshad&lt;/option&gt;
+                            &lt;option value=&quot;Wirna binti Abd Hamid&quot;&gt;Wirna binti Abd Hamid&lt;/option&gt;
+                            &lt;option value=&quot;Rozinah binti Amirul&quot;&gt;Rozinah binti Amirul&lt;/option&gt;
+                            &lt;option value=&quot;Junita binti Ajirul&quot;&gt;Junita binti Ajirul&lt;/option&gt;
+                            &lt;option value=&quot;Hasbullah bin Ali&quot;&gt;Hasbullah bin Ali&lt;/option&gt;
+                            &lt;option value=&quot;Rosharisa binti Herman&quot;&gt;Rosharisa binti Herman&lt;/option&gt;
+                            &lt;option value=&quot;Hazari bin Hakim&quot;&gt;Hazari bin Hakim&lt;/option&gt;
+                            &lt;option value=&quot;Sharon Francis Chuan&quot;&gt;Sharon Francis Chuan&lt;/option&gt;
+                            &lt;option value=&quot;Mohammad bin Abdul Rajak&quot;&gt;Mohammad bin Abdul Rajak&lt;/option&gt;
+                            &lt;option value=&quot;Dyana Veronica Henry&quot;&gt;Dyana Veronica Henry&lt;/option&gt;
+                            &lt;option value=&quot;Marliyana binti Mohammed&quot;&gt;Marliyana binti Mohammed&lt;/option&gt;
+                            &lt;option value=&quot;Merlyn Loyola&quot;&gt;Merlyn Loyola&lt;/option&gt;
+                            &lt;option value=&quot;Arfah bin Arase&quot;&gt;Arfah bin Arase&lt;/option&gt;
+                            &lt;option value=&quot;Mahfuzah binti Mohamed Desa&quot;&gt;Mahfuzah binti Mohamed Desa&lt;/option&gt;
+                            &lt;option value=&quot;Rabiatun binti Rahman&quot;&gt;Rabiatun binti Rahman&lt;/option&gt;
+                            &lt;option value=&quot;Elly Massalo&quot;&gt;Elly Massalo&lt;/option&gt;
+                            &lt;option value=&quot;Sutrawiya binti Malong&quot;&gt;Sutrawiya binti Malong&lt;/option&gt;
+                            &lt;option value=&quot;Juliyana binti Yahya&quot;&gt;Juliyana binti Yahya&lt;/option&gt;
+                            &lt;option value=&quot;Herna binti Hussin&quot;&gt;Herna binti Hussin&lt;/option&gt;
+                            &lt;option value=&quot;Ummu Nasyibah binti Mamma&quot;&gt;Ummu Nasyibah binti Mamma&lt;/option&gt;
+                            &lt;option value=&quot;Nur Azlin binti Zulkifli&quot;&gt;Nur Azlin binti Zulkifli&lt;/option&gt;
+                            &lt;option value=&quot;Nurul Aida binti Samsudin&quot;&gt;Nurul Aida binti Samsudin&lt;/option&gt;
+                            &lt;option value=&quot;Nur Izzah binti Jainudin&quot;&gt;Nur Izzah binti Jainudin&lt;/option&gt;
+                            &lt;option value=&quot;Auni Nurfarahin binti Aripai&quot;&gt;Auni Nurfarahin binti Aripai&lt;/option&gt;
+                            &lt;option value=&quot;Baiduri binti Dullah&quot;&gt;Baiduri binti Dullah&lt;/option&gt;
+                            &lt;option value=&quot;Suraya binti Mat Yusop&quot;&gt;Suraya binti Mat Yusop&lt;/option&gt;
+                            &lt;option value=&quot;Nur Anissa binti Roslan&quot;&gt;Nur Anissa binti Roslan&lt;/option&gt;
+                            &lt;option value=&quot;Fauziah binti Senen&quot;&gt;Fauziah binti Senen&lt;/option&gt;
+                            &lt;option value=&quot;Merhma binti Masugi&quot;&gt;Merhma binti Masugi&lt;/option&gt;
+                            &lt;option value=&quot;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&quot;&gt;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&lt;/option&gt;
+                            &lt;option value=&quot;Nor Asidah binti Kalbun&quot;&gt;Nor Asidah binti Kalbun&lt;/option&gt;
+                            &lt;option value=&quot;Syahmie bin Syahrulhazni&quot;&gt;Syahmie bin Syahrulhazni&lt;/option&gt;
+                            &lt;option value=&quot;Muhammad Admien bin Jasni&quot;&gt;Muhammad Admien bin Jasni&lt;/option&gt;
+                            &lt;option value=&quot;Mohamad Nurlhafizi bin Abdulnur&quot;&gt;Mohamad Nurlhafizi bin Abdulnur&lt;/option&gt;
+                            &lt;option value=&quot;Ahmad Syazwan bin Saofi&quot;&gt;Ahmad Syazwan bin Saofi&lt;/option&gt;
+                            &lt;option value=&quot;Roshaida binti Yeop Ahmad&quot;&gt;Roshaida binti Yeop Ahmad&lt;/option&gt;
+                            &lt;option value=&quot;Norliewati Binti Hassan&quot;&gt;Norliewati Binti Hassan&lt;/option&gt;
+                            &lt;option value=&quot;Suhana Binti Sumino&quot;&gt;Suhana Binti Sumino&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Bahagian 2: Fokus Pemantauan --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;2. Fokus Pemantauan&lt;/h6&gt;
+                      &lt;div&gt;
+                        &lt;label for=&quot;fokus-pemantauan&quot; class=&quot;block text-white text-sm font-medium mb-2&quot;&gt;Catatan Fokus Pemantauan&lt;/label&gt;
+                        &lt;textarea id=&quot;fokus-pemantauan&quot; placeholder=&quot;Sila nyatakan fokus pemantauan yang dilakukan...&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Bahagian 3: Gred Pengajaran dan Pembelajaran --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;3. Gred Pengajaran dan Pembelajaran&lt;/h6&gt;
+                      &lt;div class=&quot;space-y-3&quot;&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru mengajar, murid belajar melibatkan elemen PDP abad ke-21&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru mengajar, murid belajar melibatkan elemen PDP abad ke-21&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru mengajar, murid belajar secara tradisional&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru mengajar, murid belajar secara tradisional&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru meronda, murid belajar&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru meronda, murid belajar&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru duduk, murid belajar&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru duduk, murid belajar&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru tiada, murid belajar (buat latihan)&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru tiada, murid belajar (buat latihan)&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_pdp&quot; value=&quot;Guru tiada, murid bising&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Guru tiada, murid bising&lt;/span&gt;
+                        &lt;/label&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Bahagian 4: Gred Buku RPH --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;4. Gred Buku Rancangan Mengajar Harian (RPH)&lt;/h6&gt;
+                      &lt;div class=&quot;space-y-3&quot;&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_rph&quot; value=&quot;RPH, rekod prestasi murid dan latihan disediakan&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;RPH, rekod prestasi murid dan latihan disediakan&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_rph&quot; value=&quot;RPH, rekod prestasi murid atau latihan disediakan&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;RPH, rekod prestasi murid atau latihan disediakan&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_rph&quot; value=&quot;RPH sahaja&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;RPH sahaja&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_rph&quot; value=&quot;RPH tidak disediakan&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;RPH tidak disediakan&lt;/span&gt;
+                        &lt;/label&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Bahagian 5: Gred Buku Latihan Murid --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;5. Gred Buku Latihan Murid&lt;/h6&gt;
+                      &lt;p class=&quot;text-gray-300 text-sm mb-4&quot;&gt;(Menyemak sekurang-kurangnya 3 buah buku)&lt;/p&gt;
+                      &lt;div class=&quot;space-y-3&quot;&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_buku_latihan&quot; value=&quot;Bilangan sesuai, pelbagai jenis, ditanda dan ada komen guru&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Bilangan sesuai, pelbagai jenis, ditanda dan ada komen guru&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_buku_latihan&quot; value=&quot;Bilangan sesuai, kurang pelbagai, ditanda dan tiada komen guru&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Bilangan sesuai, kurang pelbagai, ditanda dan tiada komen guru&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_buku_latihan&quot; value=&quot;Bilangan kurang sesuai, kurang pelbagai, ditanda, dan tiada komen guru&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Bilangan kurang sesuai, kurang pelbagai, ditanda, dan tiada komen guru&lt;/span&gt;
+                        &lt;/label&gt;
+                        &lt;label class=&quot;flex items-start cursor-pointer p-3 rounded-lg hover:bg-gray-700 transition&quot;&gt;
+                          &lt;input type=&quot;radio&quot; name=&quot;gred_buku_latihan&quot; value=&quot;Bilangan kurang sesuai, kurang pelbagai, tidak ditanda, tiada komen guru&quot; class=&quot;mt-1 mr-3&quot; style=&quot;accent-color: #FFD000;&quot;&gt;
+                          &lt;span class=&quot;text-gray-200&quot;&gt;Bilangan kurang sesuai, kurang pelbagai, tidak ditanda, tiada komen guru&lt;/span&gt;
+                        &lt;/label&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Bahagian 6: Ulasan dan Cadangan --&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-lg p-4 border-l-4&quot; style=&quot;border-left-color: #FFD000;&quot;&gt;
+                      &lt;h6 class=&quot;text-lg font-bold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;6. Ulasan / Cadangan Penambahbaikan / Tindakan Susulan&lt;/h6&gt;
+                      &lt;textarea id=&quot;ulasan-cadangan-pdp&quot; placeholder=&quot;Sila masukkan ulasan, cadangan penambahbaikan, dan tindakan susulan...&quot; class=&quot;w-full bg-gray-700 text-white rounded-lg px-4 py-2 border border-gray-600 focus:border-yellow-400 focus:outline-none&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Submit Button --&gt;
+                    &lt;div class=&quot;flex justify-end mt-8 gap-4&quot;&gt;
+                      &lt;button type=&quot;button&quot; onclick=&quot;resetFormPDP()&quot; class=&quot;px-6 py-3 rounded-lg font-semibold text-white transition-all bg-gray-600 hover:bg-gray-700&quot;&gt;
+                        Kosongkan
+                      &lt;/button&gt;
+                      &lt;button type=&quot;submit&quot; class=&quot;px-6 py-3 rounded-lg font-semibold text-black transition-all&quot; style=&quot;background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%);&quot; onmouseover=&quot;this.style.transform='scale(1.05)'&quot; onmouseout=&quot;this.style.transform='scale(1)'&quot;&gt;
+                        Simpan Rekod
+                      &lt;/button&gt;
+                    &lt;/div&gt;
+                  &lt;/form&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Lihat Laporan Tab --&gt;
+                &lt;div id=&quot;content-lihat-pdp&quot; class=&quot;hidden&quot;&gt;
+                  &lt;div class=&quot;flex justify-between items-center mb-4&quot;&gt;
+                    &lt;h5 class=&quot;text-xl font-semibold&quot; style=&quot;color: #FFD000;&quot;&gt;Rekod Pemantauan Sesi PDP&lt;/h5&gt;
+                    &lt;button onclick=&quot;muatTurunPDFPemantauan()&quot; class=&quot;px-6 py-2 rounded-lg font-semibold text-black transition-all hover:scale-105 flex items-center gap-2&quot; style=&quot;background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%);&quot;&gt;
+                      &lt;svg class=&quot;w-5 h-5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                      Muat Turun PDF
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+                  
+                  &lt;!-- Reports Container --&gt;
+                  &lt;div id=&quot;laporan-pdp-container&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Fail Panitia Dropdown --&gt;
+            &lt;div id=&quot;fail-panitia-list&quot; class=&quot;mt-4 hidden&quot;&gt;
+              &lt;div class=&quot;bg-gray-750 rounded-lg p-6 border border-gray-600&quot;&gt;
+                &lt;h5 class=&quot;text-lg font-semibold mb-4&quot; style=&quot;color: #FFD000;&quot;&gt;Senarai Panitia Mengikut Subjek&lt;/h5&gt;
+                &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4&quot;&gt;
+                  &lt;!-- Bahasa Melayu --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;    Bahasa Melayu&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Bahasa Inggeris --&gt;
+                  &lt;a href=&quot;https://skuutenglishpanelsite.my.canva.site/home&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;       Bahasa Inggeris&lt;/p&gt;
+                      &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+
+                  &lt;!-- Matematik --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;    Matematik&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Sains --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🔬 Sains&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Sejarah --&gt;
+                  &lt;a href=&quot;https://sites.google.com/view/skuu600-3214/home?authuser=0&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;📖 Sejarah&lt;/p&gt;
+                      &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+
+                  &lt;!-- Pendidikan Islam --&gt;
+                  &lt;a href=&quot;https://mylink.la/hafiziabdulnur&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🕌 Pendidikan Islam&lt;/p&gt;
+                      &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+
+                  &lt;!-- Pendidikan Moral --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;✋ Pendidikan Moral&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Bahasa Arab --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🕌 Bahasa Arab&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Pendidikan Jasmani dan Kesihatan --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;     Pendidikan Jasmani dan Kesihatan&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Pendidikan Muzik --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🎵 Pendidikan Muzik&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Pendidikan Seni dan Visual --&gt;
+                  &lt;div class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition cursor-pointer&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🎨 Pendidikan Seni dan Visual&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Reka Bentuk dan Teknologi --&gt;
+                  &lt;a href=&quot;https://sites.google.com/moe-dl.edu.my/skuu600-3215/home&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition block&quot;&gt;
+                    &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;
+                      &lt;p class=&quot;text-white font-semibold&quot;&gt;🔧 Reka Bentuk dan Teknologi&lt;/p&gt;
+                      &lt;svg class=&quot;w-4 h-4 text-yellow-400&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                        &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/div&gt;
+                  &lt;/a&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Hal Ehwal Murid --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer&quot; onclick=&quot;window.open('https://skumasumasreportcentre.my.canva.site/c1rfmcz64xkj1sr7', '_blank', 'noopener,noreferrer')&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;Hal Ehwal Murid&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Pengurusan hal ehwal murid&lt;/p&gt;
+          &lt;div class=&quot;mt-3 flex items-center justify-center gap-2 text-yellow-400&quot;&gt;
+            &lt;svg class=&quot;w-4 h-4&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            &lt;span class=&quot;text-sm font-semibold&quot;&gt;Klik untuk masuk&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Kokurikulum --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer&quot; onclick=&quot;window.open('https://skumasumasreportcentre.my.canva.site/c0nsr75mf07k0zmk', '_blank', 'noopener,noreferrer')&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;Kokurikulum&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Aktiviti kokurikulum&lt;/p&gt;
+          &lt;div class=&quot;mt-3 flex items-center justify-center gap-2 text-yellow-400&quot;&gt;
+            &lt;svg class=&quot;w-4 h-4&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            &lt;span class=&quot;text-sm font-semibold&quot;&gt;Klik untuk masuk&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Prasekolah --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;Prasekolah&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Program prasekolah&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- PPKI --&gt;
+        &lt;a href=&quot;https://sites.google.com/view/ppkiskut/home&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 cursor-pointer block&quot;&gt;
+          &lt;div class=&quot;card-icon&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-2&quot;&gt;PPKI&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Program Pendidikan Khas Integrasi&lt;/p&gt;
+          &lt;div class=&quot;mt-3 flex items-center justify-center gap-2 text-yellow-400&quot;&gt;
+            &lt;svg class=&quot;w-4 h-4&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            &lt;span class=&quot;text-sm font-semibold&quot;&gt;Klik untuk masuk&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+
+        &lt;!-- Pautan KPM --&gt;
+        &lt;div class=&quot;dashboard-card bg-gray-800 rounded-xl p-6 col-span-1 md:col-span-2 lg:col-span-3&quot;&gt;
+          &lt;div class=&quot;card-icon mx-auto&quot;&gt;
+            &lt;svg class=&quot;w-8 h-8 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;h3 class=&quot;text-2xl font-bold text-white mb-4 text-center&quot;&gt;Pautan KPM&lt;/h3&gt;
+          &lt;p class=&quot;text-gray-400 text-sm text-center mb-6&quot;&gt;Pautan ke portal Kementerian Pendidikan Malaysia&lt;/p&gt;
+          &lt;div class=&quot;flex justify-center&quot;&gt;
+            &lt;a href=&quot;https://www.moe.gov.my/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;inline-flex items-center px-8 py-3 rounded-lg font-semibold text-black transition-all hover:scale-105&quot; style=&quot;background: linear-gradient(135deg, #FFD000 0%, #FFA500 100%);&quot;&gt;
+              &lt;svg class=&quot;w-5 h-5 mr-2&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;&gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              Pergi ke Portal KPM
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    const defaultConfig = {
+      main_title: &quot;Sistem U-RC&quot;,
+      subtitle: &quot;UMAS REPORT CENTRE&quot;,
+      school_name: &quot;Sekolah Kebangsaan Umas-Umas, Tawau Sabah&quot;,
+      motto: &quot;Sepakat Memperkasakan Kecemerlangan&quot;,
+      background_color: &quot;#111827&quot;,
+      card_color: &quot;#1F2937&quot;,
+      primary_color: &quot;#FFD000&quot;,
+      text_color: &quot;#FFFFFF&quot;,
+      secondary_text_color: &quot;#9CA3AF&quot;
+    };
+
+    let allRecords = [];
+    let isSubmitting = false;
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data;
+      }
+    };
+
+    // Initialize Data SDK
+    async function initDataSdk() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error(&quot;Failed to initialize Data SDK&quot;);
+        }
+      }
+    }
+
+    function togglePengurusan() {
+      const section = document.getElementById('pengurusan-section');
+      const arrow = document.getElementById('pengurusan-arrow');
+      
+      if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        section.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function toggleLaporanGBPK() {
+      const form = document.getElementById('laporan-gbpk-form');
+      const arrow = document.getElementById('gbpk-arrow');
+      
+      if (form.classList.contains('hidden')) {
+        form.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        form.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function switchTabGBPK(tab) {
+      const tabTambah = document.getElementById('tab-tambah-gbpk');
+      const tabLihat = document.getElementById('tab-lihat-gbpk');
+      const contentTambah = document.getElementById('content-tambah-gbpk');
+      const contentLihat = document.getElementById('content-lihat-gbpk');
+
+      if (tab === 'tambah') {
+        tabTambah.classList.add('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.remove('border-transparent', 'text-gray-400');
+        tabLihat.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.add('border-transparent', 'text-gray-400');
+        contentTambah.classList.remove('hidden');
+        contentLihat.classList.add('hidden');
+      } else {
+        tabLihat.classList.add('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.remove('border-transparent', 'text-gray-400');
+        tabTambah.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.add('border-transparent', 'text-gray-400');
+        contentLihat.classList.remove('hidden');
+        contentTambah.classList.add('hidden');
+        filterLaporanGBPK();
+      }
+    }
+
+    function filterLaporanGBPK() {
+      const container = document.getElementById('laporan-gbpk-container');
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'laporan_gbpk');
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '&lt;p class=&quot;text-gray-400 text-center py-8&quot;&gt;Tiada laporan dijumpai&lt;/p&gt;';
+        return;
+      }
+      
+      // Sort by date descending
+      filtered.sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      
+      // Display records
+      container.innerHTML = `
+        &lt;div class=&quot;space-y-4&quot;&gt;
+          ${filtered.map((record, idx) =&gt; `
+            &lt;div class=&quot;bg-gray-700 rounded-lg p-4 border border-gray-600&quot;&gt;
+              &lt;div class=&quot;flex justify-between items-start mb-3&quot;&gt;
+                &lt;div&gt;
+                  &lt;p class=&quot;text-white font-semibold&quot;&gt;     ${record.nama_pemantau}&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;${record.hari}, ${formatTarikh(record.tarikh)} | ${record.masa}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;button onclick=&quot;padamRekodGBPK('${record.__backendId}')&quot; class=&quot;px-4 py-2 rounded-lg font-semibold bg-red-600 text-white hover:bg-red-700 transition-all text-sm&quot;&gt;
+                  🗑      Padam
+                &lt;/button&gt;
+              &lt;/div&gt;
+              
+              &lt;div class=&quot;grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-sm&quot;&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q1: Kebersihan Pintu A&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_1 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q2: Rumput Padang&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_2 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q3: Dewan Sekolah&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_3 === 'Sangat Memuaskan' ? '  ' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q4: Surau&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_4 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q5: Prasekolah&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_5 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q6: Kelas Pemulihan&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_6 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q7: Rumput Pra/Pemulihan&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_7 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q8: PDP Th 1,2,3&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_8 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q9: PDP Th 4,5,6&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_9 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q10: Blok Khas (Projek)&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_10 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q11: Blok Khas (Stor)&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_11 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-gray-800 rounded p-2&quot;&gt;
+                  &lt;p class=&quot;text-gray-400 text-xs mb-1&quot;&gt;Q12: Bilik ICT&lt;/p&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold&quot;&gt;${record.soalan_12 === 'Sangat Memuaskan' ? '✓' : '✗'}&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          `).join('')}
+        &lt;/div&gt;
+      `;
+    }
+
+    async function padamRekodGBPK(backendId) {
+      const record = allRecords.find(r =&gt; r.__backendId === backendId);
+      if (!record) return;
+      
+      const confirmDiv = document.createElement('div');
+      confirmDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        z-index: 2000;
+        text-align: center;
+        min-width: 300px;
+      `;
+      confirmDiv.innerHTML = `
+        &lt;h3 style=&quot;margin: 0 0 15px 0; color: #1a1a1a;&quot;&gt;Padam Rekod?&lt;/h3&gt;
+        &lt;p style=&quot;margin: 0 0 20px 0; color: #666;&quot;&gt;Rekod ini akan dipadam secara kekal.&lt;/p&gt;
+        &lt;div style=&quot;display: flex; gap: 10px; justify-content: center;&quot;&gt;
+          &lt;button id=&quot;confirm-delete&quot; style=&quot;padding: 10px 20px; background: #EF4444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Padam&lt;/button&gt;
+          &lt;button id=&quot;cancel-delete&quot; style=&quot;padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Batal&lt;/button&gt;
+        &lt;/div&gt;
+      `;
+      
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+      `;
+      
+      document.body.appendChild(backdrop);
+      document.body.appendChild(confirmDiv);
+      
+      document.getElementById('confirm-delete').onclick = async () =&gt; {
+        const deleteResult = await window.dataSdk.delete(record);
+        if (deleteResult.isOk) {
+          showNotification('Rekod berjaya dipadam', 'success');
+          filterLaporanGBPK();
+        } else {
+          showNotification('Gagal memadam rekod', 'error');
+        }
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      document.getElementById('cancel-delete').onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      backdrop.onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+    }
+
+    function formatTarikh(tarikh) {
+      const date = new Date(tarikh + 'T00:00:00');
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return date.toLocaleDateString('ms-MY', options);
+    }
+
+
+
+    function togglePemantauanPDP() {
+      const form = document.getElementById('pemantauan-pdp-form');
+      const arrow = document.getElementById('pemantauan-arrow');
+      
+      if (form.classList.contains('hidden')) {
+        form.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        form.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function toggleKurikulum() {
+      const section = document.getElementById('kurikulum-section');
+      const arrow = document.getElementById('kurikulum-arrow');
+      
+      if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        section.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function toggleFailPanitia() {
+      const list = document.getElementById('fail-panitia-list');
+      const arrow = document.getElementById('panitia-arrow');
+      
+      if (list.classList.contains('hidden')) {
+        list.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        list.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function togglePBD() {
+      const arrow = document.getElementById('pbd-arrow');
+      
+      if (arrow.style.transform === 'rotate(180deg)') {
+        arrow.style.transform = 'rotate(0deg)';
+      } else {
+        arrow.style.transform = 'rotate(180deg)';
+      }
+      
+      showNotification('Modul PBD akan datang segera!', 'success');
+    }
+
+    function togglePanitiaDetails(panitiaId) {
+      const details = document.getElementById(panitiaId);
+      const arrow = document.getElementById(`arrow-${panitiaId}`);
+      
+      if (details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        details.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function switchTabKelas(tab) {
+      const tabTambah = document.getElementById('tab-tambah-kelas');
+      const tabLihat = document.getElementById('tab-lihat-kelas');
+      const contentTambah = document.getElementById('content-tambah-kelas');
+      const contentLihat = document.getElementById('content-lihat-kelas');
+
+      if (tab === 'tambah') {
+        tabTambah.classList.add('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.remove('border-transparent', 'text-gray-400');
+        tabLihat.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.add('border-transparent', 'text-gray-400');
+        contentTambah.classList.remove('hidden');
+        contentLihat.classList.add('hidden');
+      } else {
+        tabLihat.classList.add('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.remove('border-transparent', 'text-gray-400');
+        tabTambah.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.add('border-transparent', 'text-gray-400');
+        contentLihat.classList.remove('hidden');
+        contentTambah.classList.add('hidden');
+        filterLaporanKelas();
+      }
+    }
+
+    function filterLaporanKelas() {
+      const container = document.getElementById('laporan-kelas-container');
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'rekod_kelas');
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '&lt;p class=&quot;text-gray-400 text-center py-8&quot;&gt;Tiada laporan dijumpai&lt;/p&gt;';
+        return;
+      }
+      
+      // Group by kelas
+      const groupedByKelas = {};
+      filtered.forEach(record =&gt; {
+        if (!groupedByKelas[record.kelas]) {
+          groupedByKelas[record.kelas] = [];
+        }
+        groupedByKelas[record.kelas].push(record);
+      });
+      
+      // Sort each kelas by date descending
+      Object.keys(groupedByKelas).forEach(kelas =&gt; {
+        groupedByKelas[kelas].sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      });
+      
+      container.innerHTML = Object.keys(groupedByKelas).map(kelas =&gt; `
+        &lt;div class=&quot;mb-8&quot;&gt;
+          &lt;h6 class=&quot;text-lg font-bold mb-4 p-3 rounded-lg&quot; style=&quot;background: #FFD000; color: #1a1a1a;&quot;&gt;📚 ${kelas}&lt;/h6&gt;
+          &lt;div class=&quot;space-y-4&quot;&gt;
+            ${groupedByKelas[kelas].map((record, idx) =&gt; `
+              &lt;div class=&quot;bg-gray-700 rounded-lg p-4 border border-gray-600&quot;&gt;
+                &lt;div class=&quot;flex justify-between items-start mb-3&quot;&gt;
+                  &lt;div&gt;
+                    &lt;p class=&quot;text-white font-semibold&quot;&gt;👨‍     ${record.nama_guru}&lt;/p&gt;
+                    &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;${record.subjek}&lt;/p&gt;
+                    &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;${formatTarikh(record.tarikh)} | ${record.masa_masuk} - ${record.masa_keluar}&lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;button onclick=&quot;padamRekodKelas('${record.__backendId}')&quot; class=&quot;px-4 py-2 rounded-lg font-semibold bg-red-600 text-white hover:bg-red-700 transition-all text-sm&quot;&gt;
+                    🗑️ Padam
+                  &lt;/button&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;bg-gray-800 rounded p-3 mt-3&quot;&gt;
+                  &lt;p class=&quot;text-yellow-400 font-semibold mb-2&quot;&gt;💬 Ulasan Guru:&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-300 text-sm&quot;&gt;${record.ulasan_guru}&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            `).join('')}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `).join('');
+    }
+
+    async function padamRekodKelas(backendId) {
+      const record = allRecords.find(r =&gt; r.__backendId === backendId);
+      if (!record) return;
+      
+      const confirmDiv = document.createElement('div');
+      confirmDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        z-index: 2000;
+        text-align: center;
+        min-width: 300px;
+      `;
+      confirmDiv.innerHTML = `
+        &lt;h3 style=&quot;margin: 0 0 15px 0; color: #1a1a1a;&quot;&gt;Padam Rekod?&lt;/h3&gt;
+        &lt;p style=&quot;margin: 0 0 20px 0; color: #666;&quot;&gt;Rekod ini akan dipadam secara kekal.&lt;/p&gt;
+        &lt;div style=&quot;display: flex; gap: 10px; justify-content: center;&quot;&gt;
+          &lt;button id=&quot;confirm-delete&quot; style=&quot;padding: 10px 20px; background: #EF4444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Padam&lt;/button&gt;
+          &lt;button id=&quot;cancel-delete&quot; style=&quot;padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Batal&lt;/button&gt;
+        &lt;/div&gt;
+      `;
+      
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+      `;
+      
+      document.body.appendChild(backdrop);
+      document.body.appendChild(confirmDiv);
+      
+      document.getElementById('confirm-delete').onclick = async () =&gt; {
+        const deleteResult = await window.dataSdk.delete(record);
+        if (deleteResult.isOk) {
+          showNotification('Rekod berjaya dipadam', 'success');
+          filterLaporanKelas();
+        } else {
+          showNotification('Gagal memadam rekod', 'error');
+        }
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      document.getElementById('cancel-delete').onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      backdrop.onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+    }
+
+    function muatTurunPDFKelas() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'rekod_kelas');
+      
+      if (filtered.length === 0) {
+        showNotification('Tiada rekod untuk dimuat turun', 'error');
+        return;
+      }
+      
+      // Group by kelas
+      const groupedByKelas = {};
+      filtered.forEach(record =&gt; {
+        if (!groupedByKelas[record.kelas]) {
+          groupedByKelas[record.kelas] = [];
+        }
+        groupedByKelas[record.kelas].push(record);
+      });
+      
+      // Sort each kelas by date descending
+      Object.keys(groupedByKelas).forEach(kelas =&gt; {
+        groupedByKelas[kelas].sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      });
+      
+      // Header
+      doc.setFontSize(18);
+      doc.setFont(undefined, 'bold');
+      doc.text('E-REKOD KAWALAN KELAS', 105, 20, { align: 'center' });
+      
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text('Sekolah Kebangsaan Umas-Umas, Tawau Sabah', 105, 28, { align: 'center' });
+      doc.text(`Dijana pada: ${new Date().toLocaleDateString('ms-MY')}`, 105, 35, { align: 'center' });
+      
+      let yPos = 45;
+      
+      Object.keys(groupedByKelas).forEach(kelas =&gt; {
+        if (yPos &gt; 240) {
+          doc.addPage();
+          yPos = 20;
+        }
+        
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text(`KELAS: ${kelas}`, 15, yPos);
+        yPos += 8;
+        
+        doc.setFontSize(11);
+        doc.setFont(undefined, 'normal');
+        
+        groupedByKelas[kelas].forEach((record, idx) =&gt; {
+          if (yPos &gt; 240) {
+            doc.addPage();
+            yPos = 20;
+          }
+          
+          doc.setFont(undefined, 'bold');
+          doc.text(`${idx + 1}. ${record.nama_guru}`, 20, yPos);
+          yPos += 5;
+          
+          doc.setFont(undefined, 'normal');
+          doc.setFontSize(10);
+          doc.text(`Subjek: ${record.subjek}`, 25, yPos);
+          yPos += 4;
+          doc.text(`Tarikh: ${formatTarikh(record.tarikh)} | Masa: ${record.masa_masuk} - ${record.masa_keluar}`, 25, yPos);
+          yPos += 4;
+          doc.text(`Kehadiran: ${record.jumlah_kehadiran} murid`, 25, yPos);
+          yPos += 4;
+          
+          doc.setFont(undefined, 'bold');
+          doc.text('Ulasan:', 25, yPos);
+          yPos += 4;
+          
+          doc.setFont(undefined, 'normal');
+          const ulasanLines = doc.splitTextToSize(record.ulasan_guru, 160);
+          ulasanLines.forEach(line =&gt; {
+            if (yPos &gt; 240) {
+              doc.addPage();
+              yPos = 20;
+            }
+            doc.text(line, 30, yPos);
+            yPos += 4;
+          });
+          
+          yPos += 6;
+          doc.setDrawColor(200, 200, 200);
+          doc.line(15, yPos, 195, yPos);
+          yPos += 6;
+        });
+      });
+      
+      // Footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i &lt;= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Halaman ${i} daripada ${pageCount}`, 105, 290, { align: 'center' });
+      }
+      
+      const fileName = `E-Rekod_Kawalan_Kelas_${new Date().getFullYear()}.pdf`;
+      doc.save(fileName);
+      showNotification('PDF berjaya dimuat turun!', 'success');
+    }
+
+    document.getElementById('rekodKelasForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      
+      const namaGuru = document.getElementById('nama-guru-kelas').value;
+      const kelas = document.getElementById('kelas-kelas').value;
+      const subjek = document.getElementById('subjek-kelas').value;
+      const tarikh = document.getElementById('tarikh-kelas').value;
+      const masaMasuk = document.getElementById('masa-masuk-kelas').value;
+      const masaKeluar = document.getElementById('masa-keluar-kelas').value;
+      const jumlahKehadiran = document.getElementById('jumlah-kehadiran').value;
+      const ulusanGuru = document.getElementById('ulasan-guru-kelas').value;
+
+      if (!namaGuru || !kelas || !subjek || !tarikh || !masaMasuk || !masaKeluar || !jumlahKehadiran || !ulusanGuru) {
+        showNotification('Sila lengkapkan semua maklumat!', 'error');
+        return;
+      }
+
+      if (allRecords.length &gt;= 999) {
+        showNotification('Had maksimum 999 rekod telah dicapai. Sila padam beberapa rekod terlebih dahulu.', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      const submitBtn = e.target.querySelector('button[type=&quot;submit&quot;]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '&lt;div class=&quot;inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-black&quot;&gt;&lt;/div&gt;';
+
+      const newRecord = {
+        jenis_rekod: &quot;rekod_kelas&quot;,
+        nama_guru: namaGuru,
+        kelas: kelas,
+        subjek: subjek,
+        tarikh: tarikh,
+        masa_masuk: masaMasuk,
+        masa_keluar: masaKeluar,
+        jumlah_kehadiran: parseInt(jumlahKehadiran),
+        ulasan_guru: ulusanGuru,
+        created_at: new Date().toISOString()
+      };
+
+      window.dataSdk.create(newRecord).then(result =&gt; {
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Simpan Rekod';
+        
+        if (result.isOk) {
+          showNotification('Rekod kawalan kelas berjaya disimpan!', 'success');
+          document.getElementById('rekodKelasForm').reset();
+        } else {
+          showNotification('Gagal menyimpan rekod. Sila cuba lagi.', 'error');
+        }
+      });
+    });
+
+    function switchTabPDP(tab) {
+      const tabTambah = document.getElementById('tab-tambah-pdp');
+      const tabLihat = document.getElementById('tab-lihat-pdp');
+      const contentTambah = document.getElementById('content-tambah-pdp');
+      const contentLihat = document.getElementById('content-lihat-pdp');
+
+      if (tab === 'tambah') {
+        tabTambah.classList.add('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.remove('border-transparent', 'text-gray-400');
+        tabLihat.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.add('border-transparent', 'text-gray-400');
+        contentTambah.classList.remove('hidden');
+        contentLihat.classList.add('hidden');
+      } else {
+        tabLihat.classList.add('border-yellow-400', 'text-yellow-400');
+        tabLihat.classList.remove('border-transparent', 'text-gray-400');
+        tabTambah.classList.remove('border-yellow-400', 'text-yellow-400');
+        tabTambah.classList.add('border-transparent', 'text-gray-400');
+        contentLihat.classList.remove('hidden');
+        contentTambah.classList.add('hidden');
+        filterLaporanPDP();
+      }
+    }
+
+    function resetFormPDP() {
+      document.getElementById('pemantauanPDPForm').reset();
+    }
+
+    function filterLaporanPDP() {
+      const container = document.getElementById('laporan-pdp-container');
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'rekod_pemantauan_pdp');
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '&lt;p class=&quot;text-gray-400 text-center py-8&quot;&gt;Tiada laporan dijumpai&lt;/p&gt;';
+        return;
+      }
+      
+      // Sort by date descending
+      filtered.sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      
+      // Display records
+      container.innerHTML = `
+        &lt;div class=&quot;space-y-6&quot;&gt;
+          ${filtered.map((record, idx) =&gt; `
+            &lt;div class=&quot;bg-gray-700 rounded-lg p-6 border-2 border-gray-600&quot;&gt;
+              &lt;div class=&quot;flex justify-between items-start mb-4&quot;&gt;
+                &lt;div&gt;
+                  &lt;p class=&quot;text-white font-bold text-lg&quot;&gt;👨‍🏫 ${record.nama_guru_dipantau}&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-300 text-sm&quot;&gt;Dipantau oleh: ${record.nama_pentadbir}&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;${record.hari}, ${formatTarikh(record.tarikh)} | ${record.masa}&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;Kelas: ${record.kelas} | Subjek: ${record.subjek}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;button onclick=&quot;padamRekodPDP('${record.__backendId}')&quot; class=&quot;px-4 py-2 rounded-lg font-semibold bg-red-600 text-white hover:bg-red-700 transition-all text-sm&quot;&gt;
+                  🗑️ Padam
+                &lt;/button&gt;
+              &lt;/div&gt;
+              
+              &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4 mt-6&quot;&gt;
+                &lt;div class=&quot;bg-gray-800 rounded-lg p-4&quot;&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold mb-2&quot;&gt;📌 Fokus Pemantauan&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-200 text-sm&quot;&gt;${record.fokus_pemantauan || '-'}&lt;/p&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;bg-gray-800 rounded-lg p-4&quot;&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold mb-2&quot;&gt;📚 Gred PDP&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-200 text-sm&quot;&gt;${record.gred_pengajaran_pembelajaran || '-'}&lt;/p&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;bg-gray-800 rounded-lg p-4&quot;&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold mb-2&quot;&gt;📋 Gred RPH&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-200 text-sm&quot;&gt;${record.gred_buku_rph || '-'}&lt;/p&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;bg-gray-800 rounded-lg p-4&quot;&gt;
+                  &lt;p class=&quot;text-yellow-400 font-bold mb-2&quot;&gt;✏️ Gred Buku Latihan&lt;/p&gt;
+                  &lt;p class=&quot;text-gray-200 text-sm&quot;&gt;${record.gred_buku_latihan_murid || '-'}&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              
+              &lt;div class=&quot;bg-gray-800 rounded-lg p-4 mt-4&quot;&gt;
+                &lt;p class=&quot;text-yellow-400 font-bold mb-2&quot;&gt;💡 Ulasan &amp; Cadangan&lt;/p&gt;
+                &lt;p class=&quot;text-gray-200 text-sm whitespace-pre-wrap&quot;&gt;${record.ulasan_cadangan || '-'}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          `).join('')}
+        &lt;/div&gt;
+      `;
+    }
+
+    async function padamRekodPDP(backendId) {
+      const record = allRecords.find(r =&gt; r.__backendId === backendId);
+      if (!record) return;
+      
+      const confirmDiv = document.createElement('div');
+      confirmDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        z-index: 2000;
+        text-align: center;
+        min-width: 300px;
+      `;
+      confirmDiv.innerHTML = `
+        &lt;h3 style=&quot;margin: 0 0 15px 0; color: #1a1a1a;&quot;&gt;Padam Rekod?&lt;/h3&gt;
+        &lt;p style=&quot;margin: 0 0 20px 0; color: #666;&quot;&gt;Rekod ini akan dipadam secara kekal.&lt;/p&gt;
+        &lt;div style=&quot;display: flex; gap: 10px; justify-content: center;&quot;&gt;
+          &lt;button id=&quot;confirm-delete&quot; style=&quot;padding: 10px 20px; background: #EF4444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Padam&lt;/button&gt;
+          &lt;button id=&quot;cancel-delete&quot; style=&quot;padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;&quot;&gt;Batal&lt;/button&gt;
+        &lt;/div&gt;
+      `;
+      
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+      `;
+      
+      document.body.appendChild(backdrop);
+      document.body.appendChild(confirmDiv);
+      
+      document.getElementById('confirm-delete').onclick = async () =&gt; {
+        const deleteResult = await window.dataSdk.delete(record);
+        if (deleteResult.isOk) {
+          showNotification('Rekod berjaya dipadam', 'success');
+          filterLaporanPDP();
+        } else {
+          showNotification('Gagal memadam rekod', 'error');
+        }
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      document.getElementById('cancel-delete').onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+      
+      backdrop.onclick = () =&gt; {
+        backdrop.remove();
+        confirmDiv.remove();
+      };
+    }
+
+    function muatTurunPDFPemantauan() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'rekod_pemantauan_pdp');
+      
+      if (filtered.length === 0) {
+        showNotification('Tiada rekod untuk dimuat turun', 'error');
+        return;
+      }
+      
+      // Sort by date descending
+      filtered.sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      
+      // Header
+      doc.setFontSize(18);
+      doc.setFont(undefined, 'bold');
+      doc.text('REKOD PEMANTAUAN SESI PDP', 105, 20, { align: 'center' });
+      
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text('Sekolah Kebangsaan Umas-Umas, Tawau Sabah', 105, 28, { align: 'center' });
+      doc.text(`Dijana pada: ${new Date().toLocaleDateString('ms-MY')}`, 105, 35, { align: 'center' });
+      
+      let yPos = 45;
+      
+      filtered.forEach((record, idx) =&gt; {
+        if (yPos &gt; 240) {
+          doc.addPage();
+          yPos = 20;
+        }
+        
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text(`${idx + 1}. ${record.nama_guru_dipantau}`, 15, yPos);
+        yPos += 6;
+        
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Pentadbir: ${record.nama_pentadbir}`, 20, yPos);
+        yPos += 4;
+        doc.text(`Tarikh: ${formatTarikh(record.tarikh)} | Masa: ${record.masa}`, 20, yPos);
+        yPos += 4;
+        doc.text(`Kelas: ${record.kelas} | Subjek: ${record.subjek}`, 20, yPos);
+        yPos += 6;
+        
+        // Details
+        doc.setFont(undefined, 'bold');
+        doc.text('Fokus Pemantauan:', 20, yPos);
+        yPos += 4;
+        doc.setFont(undefined, 'normal');
+        const fokusLines = doc.splitTextToSize(record.fokus_pemantauan || '-', 160);
+        fokusLines.forEach(line =&gt; {
+          if (yPos &gt; 240) {
+            doc.addPage();
+            yPos = 20;
+          }
+          doc.text(line, 25, yPos);
+          yPos += 3;
+        });
+        
+        yPos += 2;
+        doc.setFont(undefined, 'bold');
+        doc.text('Gred Pengajaran &amp; Pembelajaran: ' + (record.gred_pengajaran_pembelajaran || '-'), 20, yPos);
+        yPos += 4;
+        
+        doc.text('Gred RPH: ' + (record.gred_buku_rph || '-'), 20, yPos);
+        yPos += 4;
+        
+        doc.text('Gred Buku Latihan: ' + (record.gred_buku_latihan_murid || '-'), 20, yPos);
+        yPos += 6;
+        
+        doc.text('Ulasan &amp; Cadangan:', 20, yPos);
+        yPos += 4;
+        
+        doc.setFont(undefined, 'normal');
+        const ulasanLines = doc.splitTextToSize(record.ulasan_cadangan || '-', 160);
+        ulasanLines.forEach(line =&gt; {
+          if (yPos &gt; 240) {
+            doc.addPage();
+            yPos = 20;
+          }
+          doc.text(line, 25, yPos);
+          yPos += 3;
+        });
+        
+        yPos += 8;
+        doc.setDrawColor(200, 200, 200);
+        doc.line(15, yPos, 195, yPos);
+        yPos += 8;
+      });
+      
+      // Footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i &lt;= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Halaman ${i} daripada ${pageCount}`, 105, 290, { align: 'center' });
+      }
+      
+      const fileName = `Pemantauan_PDP_${new Date().getFullYear()}.pdf`;
+      doc.save(fileName);
+      showNotification('PDF berjaya dimuat turun!', 'success');
+    }
+
+    document.getElementById('pemantauanPDPForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      
+      const namaPentadbir = document.getElementById('nama-pentadbir-pdp').value;
+      const tarikh = document.getElementById('tarikh-pdp').value;
+      const masa = document.getElementById('masa-pdp').value;
+      const hari = document.getElementById('hari-pdp').value;
+      const kelas = document.getElementById('kelas-pdp').value;
+      const subjek = document.getElementById('subjek-pdp').value;
+      const namaGuruDipantau = document.getElementById('nama-guru-dipantau').value;
+      const fokusPemantauan = document.getElementById('fokus-pemantauan').value;
+      const gredPDP = document.querySelector('input[name=&quot;gred_pdp&quot;]:checked')?.value;
+      const gredRPH = document.querySelector('input[name=&quot;gred_rph&quot;]:checked')?.value;
+      const gredBukuLatihan = document.querySelector('input[name=&quot;gred_buku_latihan&quot;]:checked')?.value;
+      const ulasanCadangan = document.getElementById('ulasan-cadangan-pdp').value;
+
+      if (!namaPentadbir || !tarikh || !masa || !hari || !kelas || !subjek || !namaGuruDipantau || !fokusPemantauan || !gredPDP || !gredRPH || !gredBukuLatihan || !ulasanCadangan) {
+        showNotification('Sila lengkapkan semua maklumat!', 'error');
+        return;
+      }
+
+      if (allRecords.length &gt;= 999) {
+        showNotification('Had maksimum 999 rekod telah dicapai. Sila padam beberapa rekod terlebih dahulu.', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      const submitBtn = e.target.querySelector('button[type=&quot;submit&quot;]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '&lt;div class=&quot;inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-black&quot;&gt;&lt;/div&gt;';
+
+      const dateObj = new Date(tarikh);
+      const bulan = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const tahun = String(dateObj.getFullYear());
+
+      const newRecord = {
+        jenis_rekod: &quot;rekod_pemantauan_pdp&quot;,
+        nama_pentadbir: namaPentadbir,
+        tarikh: tarikh,
+        masa: masa,
+        hari: hari,
+        kelas: kelas,
+        subjek: subjek,
+        nama_guru_dipantau: namaGuruDipantau,
+        fokus_pemantauan: fokusPemantauan,
+        gred_pengajaran_pembelajaran: gredPDP,
+        gred_buku_rph: gredRPH,
+        gred_buku_latihan_murid: gredBukuLatihan,
+        ulasan_cadangan: ulasanCadangan,
+        bulan: bulan,
+        tahun: tahun,
+        created_at: new Date().toISOString()
+      };
+
+      window.dataSdk.create(newRecord).then(result =&gt; {
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Simpan Rekod';
+        
+        if (result.isOk) {
+          showNotification('Rekod pemantauan PDP berjaya disimpan!', 'success');
+          document.getElementById('pemantauanPDPForm').reset();
+        } else {
+          showNotification('Gagal menyimpan rekod. Sila cuba lagi.', 'error');
+        }
+      });
+    });
+
+    document.getElementById('laporanGBPKForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      
+      const namaPemantau = document.getElementById('nama-pemantau').value;
+      const tarikh = document.getElementById('tarikh-gbpk').value;
+      const hari = document.getElementById('hari-gbpk').value;
+      const masa = document.getElementById('masa-gbpk').value;
+
+      // Collect all answers
+      const soalan1 = document.querySelector('input[name=&quot;soalan_1&quot;]:checked')?.value;
+      const soalan2 = document.querySelector('input[name=&quot;soalan_2&quot;]:checked')?.value;
+      const soalan3 = document.querySelector('input[name=&quot;soalan_3&quot;]:checked')?.value;
+      const soalan4 = document.querySelector('input[name=&quot;soalan_4&quot;]:checked')?.value;
+      const soalan5 = document.querySelector('input[name=&quot;soalan_5&quot;]:checked')?.value;
+      const soalan6 = document.querySelector('input[name=&quot;soalan_6&quot;]:checked')?.value;
+      const soalan7 = document.querySelector('input[name=&quot;soalan_7&quot;]:checked')?.value;
+      const soalan8 = document.querySelector('input[name=&quot;soalan_8&quot;]:checked')?.value;
+      const soalan9 = document.querySelector('input[name=&quot;soalan_9&quot;]:checked')?.value;
+      const soalan10 = document.querySelector('input[name=&quot;soalan_10&quot;]:checked')?.value;
+      const soalan11 = document.querySelector('input[name=&quot;soalan_11&quot;]:checked')?.value;
+      const soalan12 = document.querySelector('input[name=&quot;soalan_12&quot;]:checked')?.value;
+
+      if (!namaPemantau || !tarikh || !hari || !masa || !soalan1 || !soalan2 || !soalan3 || !soalan4 || !soalan5 || !soalan6 || !soalan7 || !soalan8 || !soalan9 || !soalan10 || !soalan11 || !soalan12) {
+        showNotification('Sila lengkapkan semua maklumat dan jawapan!', 'error');
+        return;
+      }
+
+      // Extract month and year from date
+      const dateObj = new Date(tarikh);
+      const bulan = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const tahun = String(dateObj.getFullYear());
+
+      // Check limit
+      if (allRecords.length &gt;= 999) {
+        showNotification('Had maksimum 999 rekod telah dicapai. Sila padam beberapa rekod terlebih dahulu.', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      const submitBtn = e.target.querySelector('button[type=&quot;submit&quot;]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '&lt;div class=&quot;inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-black&quot;&gt;&lt;/div&gt;';
+
+      // Save using Data SDK
+      const newRecord = {
+        jenis_rekod: &quot;laporan_gbpk&quot;,
+        nama_pemantau: namaPemantau,
+        tarikh: tarikh,
+        hari: hari,
+        masa: masa,
+        soalan_1: soalan1,
+        soalan_2: soalan2,
+        soalan_3: soalan3,
+        soalan_4: soalan4,
+        soalan_5: soalan5,
+        soalan_6: soalan6,
+        soalan_7: soalan7,
+        soalan_8: soalan8,
+        soalan_9: soalan9,
+        soalan_10: soalan10,
+        soalan_11: soalan11,
+        soalan_12: soalan12,
+        bulan: bulan,
+        tahun: tahun,
+        created_at: new Date().toISOString()
+      };
+
+      window.dataSdk.create(newRecord).then(result =&gt; {
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Simpan Rekod';
+        
+        if (result.isOk) {
+          showNotification('Rekod pemantauan berjaya disimpan!', 'success');
+          document.getElementById('laporanGBPKForm').reset();
+        } else {
+          showNotification('Gagal menyimpan rekod. Sila cuba lagi.', 'error');
+        }
+      });
+    });
+
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+        ${type === 'success' ? 'background: #10B981; color: white;' : 'background: #EF4444; color: white;'}
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() =&gt; {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() =&gt; notification.remove(), 300);
+      }, 3000);
+    }
+
+    async function onConfigChange(config) {
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('main-title').style.color = config.primary_color || defaultConfig.primary_color;
+      
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+      document.getElementById('subtitle').style.color = config.text_color || defaultConfig.text_color;
+      
+      document.getElementById('school-name').textContent = config.school_name || defaultConfig.school_name;
+      document.getElementById('school-name').style.color = config.text_color || defaultConfig.text_color;
+      
+      document.getElementById('motto').textContent = config.motto || defaultConfig.motto;
+      document.getElementById('motto').style.color = config.primary_color || defaultConfig.primary_color;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () =&gt; config.background_color || defaultConfig.background_color,
+            set: (value) =&gt; {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () =&gt; config.card_color || defaultConfig.card_color,
+            set: (value) =&gt; {
+              config.card_color = value;
+              window.elementSdk.setConfig({ card_color: value });
+            }
+          },
+          {
+            get: () =&gt; config.primary_color || defaultConfig.primary_color,
+            set: (value) =&gt; {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () =&gt; config.text_color || defaultConfig.text_color,
+            set: (value) =&gt; {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () =&gt; config.secondary_text_color || defaultConfig.secondary_text_color,
+            set: (value) =&gt; {
+              config.secondary_text_color = value;
+              window.elementSdk.setConfig({ secondary_text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        [&quot;main_title&quot;, config.main_title || defaultConfig.main_title],
+        [&quot;subtitle&quot;, config.subtitle || defaultConfig.subtitle],
+        [&quot;school_name&quot;, config.school_name || defaultConfig.school_name],
+        [&quot;motto&quot;, config.motto || defaultConfig.motto]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    function muatTurunPDFGBPK() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      let filtered = allRecords.filter(r =&gt; r.jenis_rekod === 'laporan_gbpk');
+      
+      if (filtered.length === 0) {
+        showNotification('Tiada rekod untuk dimuat turun', 'error');
+        return;
+      }
+      
+      // Header
+      doc.setFontSize(18);
+      doc.setFont(undefined, 'bold');
+      doc.text('LAPORAN PEMANTAUAN GURU BESAR / PENOLONG KANAN', 105, 20, { align: 'center' });
+      
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text('Sekolah Kebangsaan Umas-Umas, Tawau Sabah', 105, 28, { align: 'center' });
+      doc.text(`Dijana pada: ${new Date().toLocaleDateString('ms-MY')}`, 105, 35, { align: 'center' });
+      
+      let yPos = 45;
+      
+      // Sort by date descending
+      filtered.sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+      
+      filtered.forEach((record, idx) =&gt; {
+        if (yPos &gt; 240) {
+          doc.addPage();
+          yPos = 20;
+        }
+        
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text(`${idx + 1}. ${record.nama_pemantau}`, 15, yPos);
+        yPos += 6;
+        
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`${record.hari}, ${formatTarikh(record.tarikh)} | Masa: ${record.masa}`, 20, yPos);
+        yPos += 7;
+        
+        // Answers grid
+        const answers = [
+          { q: 'Kebersihan Pintu A', a: record.soalan_1 },
+          { q: 'Rumput Padang', a: record.soalan_2 },
+          { q: 'Dewan Sekolah', a: record.soalan_3 },
+          { q: 'Surau', a: record.soalan_4 },
+          { q: 'Prasekolah', a: record.soalan_5 },
+          { q: 'Kelas Pemulihan', a: record.soalan_6 },
+          { q: 'Rumput Pra/Pemulihan', a: record.soalan_7 },
+          { q: 'PDP Th 1,2,3', a: record.soalan_8 },
+          { q: 'PDP Th 4,5,6', a: record.soalan_9 },
+          { q: 'Blok Khas (Projek)', a: record.soalan_10 },
+          { q: 'Blok Khas (Stor)', a: record.soalan_11 },
+          { q: 'Bilik ICT', a: record.soalan_12 }
+        ];
+        
+        answers.forEach((item, i) =&gt; {
+          const col = i % 3;
+          const row = Math.floor(i / 3);
+          const xPos = 20 + col * 60;
+          const yItem = yPos + row * 10;
+          
+          doc.setFont(undefined, 'normal');
+          doc.setFontSize(9);
+          doc.text(`${item.q}: ${item.a === 'Sangat Memuaskan' ? '  ' : '✗'}`, xPos, yItem);
+        });
+        
+        yPos += 40;
+        
+        // Separator
+        doc.setDrawColor(200, 200, 200);
+        doc.line(15, yPos, 195, yPos);
+        yPos += 8;
+      });
+      
+      // Footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i &lt;= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Halaman ${i} daripada ${pageCount}`, 105, 290, { align: 'center' });
+      }
+      
+      const fileName = `Laporan_Pemantauan_GBPK_${new Date().getFullYear()}.pdf`;
+      doc.save(fileName);
+      showNotification('PDF berjaya dimuat turun!', 'success');
+    }
+
+    // Initialize Data SDK on page load
+    initDataSdk();
+  &lt;/script&gt;
+&lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26e9278081a483',t:'MTc3MTg1MTY3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>

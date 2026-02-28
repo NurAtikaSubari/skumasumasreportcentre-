@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Rekod Pencapaian Murid&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/data_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Cinzel:wght@400;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;style&gt;
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 50%, #d4af37 100%); }
+    .gold-text { background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 50%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gold-border { border-color: #d4af37; }
+    .dark-card { background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%); }
+    .input-style { background: #1a1a1a; border: 1px solid #d4af37; color: #f4e4a6; }
+    .input-style:focus { outline: none; box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3); }
+    .input-style::placeholder { color: #8b7355; }
+    .btn-gold { background: linear-gradient(135deg, #d4af37 0%, #b8962e 100%); color: #0d0d0d; font-weight: 600; }
+    .btn-gold:hover { background: linear-gradient(135deg, #f4e4a6 0%, #d4af37 100%); }
+    .btn-delete { background: #2d1f1f; border: 1px solid #8b4545; color: #ff6b6b; }
+    .btn-delete:hover { background: #3d2525; }
+    .scrollbar-gold::-webkit-scrollbar { width: 8px; }
+    .scrollbar-gold::-webkit-scrollbar-track { background: #1a1a1a; }
+    .scrollbar-gold::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+    select option { background: #1a1a1a; color: #f4e4a6; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;h-full bg-black text-amber-100 font-playfair&quot;&gt;
+  &lt;div id=&quot;app&quot; class=&quot;h-full overflow-auto scrollbar-gold&quot; style=&quot;background: radial-gradient(ellipse at top, #1a1a1a 0%, #000000 100%);&quot;&gt;
+    
+    &lt;!-- Header --&gt;
+    &lt;header class=&quot;relative py-8 px-4 text-center border-b gold-border&quot;&gt;
+      &lt;div class=&quot;absolute inset-0 opacity-10&quot; style=&quot;background-image: url('data:image/svg+xml,%3Csvg width=\&quot;60\&quot; height=\&quot;60\&quot; viewBox=\&quot;0 0 60 60\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;%3E%3Cpath d=\&quot;M30 0L60 30L30 60L0 30L30 0z\&quot; fill=\&quot;%23d4af37\&quot; fill-opacity=\&quot;0.1\&quot;/%3E%3C/svg%3E');&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;relative&quot;&gt;
+        &lt;div class=&quot;flex justify-center mb-4&quot;&gt;
+          &lt;svg class=&quot;w-16 h-16 text-amber-400&quot; viewBox=&quot;0 0 100 100&quot; fill=&quot;currentColor&quot;&gt;
+            &lt;path d=&quot;M50 5L61 39H97L68 61L79 95L50 73L21 95L32 61L3 39H39L50 5Z&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;h1 id=&quot;mainTitle&quot; class=&quot;text-3xl md:text-4xl font-cinzel font-bold gold-text mb-2&quot;&gt;REKOD PENCAPAIAN MURID&lt;/h1&gt;
+        &lt;p id=&quot;mottoText&quot; class=&quot;text-lg md:text-xl text-amber-300 font-cinzel tracking-widest&quot;&gt;SEPAKAT MEMPERKASAKAN KECEMERLANGAN&lt;/p&gt;
+        &lt;p id=&quot;yearDisplay&quot; class=&quot;text-sm text-amber-400/70 mt-2&quot;&gt;Tahun: &lt;span id=&quot;currentYear&quot;&gt;2024&lt;/span&gt;&lt;/p&gt;
+        &lt;div class=&quot;mt-4 flex justify-center gap-2&quot;&gt;
+          &lt;div class=&quot;w-20 h-0.5 gold-gradient&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;w-3 h-3 rotate-45 gold-gradient&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;w-20 h-0.5 gold-gradient&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;main class=&quot;max-w-7xl mx-auto p-4 md:p-6&quot;&gt;
+      
+      &lt;!-- Form Section --&gt;
+      &lt;section class=&quot;dark-card rounded-xl p-6 mb-8 border gold-border shadow-2xl&quot;&gt;
+        &lt;h2 class=&quot;text-xl font-cinzel font-semibold gold-text mb-6 flex items-center gap-3&quot;&gt;
+          &lt;svg class=&quot;w-6 h-6 text-amber-400&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z&quot;/&gt;&lt;/svg&gt;
+          Borang Laporan Pencapaian
+        &lt;/h2&gt;
+        
+        &lt;form id=&quot;achievementForm&quot; class=&quot;space-y-6&quot;&gt;
+          &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4 mb-4&quot;&gt;
+            
+            &lt;!-- Tarikh --&gt;
+            &lt;div&gt;
+              &lt;label for=&quot;tarikh&quot; class=&quot;block text-amber-300 text-sm mb-2 font-semibold&quot;&gt;Tarikh&lt;/label&gt;
+              &lt;input type=&quot;date&quot; id=&quot;tarikh&quot; class=&quot;w-full input-style rounded-lg px-4 py-3&quot; required&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Penganjur --&gt;
+            &lt;div&gt;
+              &lt;label for=&quot;penganjur&quot; class=&quot;block text-amber-300 text-sm mb-2 font-semibold&quot;&gt;Penganjur&lt;/label&gt;
+              &lt;input type=&quot;text&quot; id=&quot;penganjur&quot; placeholder=&quot;Nama penganjur program&quot; class=&quot;w-full input-style rounded-lg px-4 py-3&quot; required&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Pencapaian --&gt;
+            &lt;div&gt;
+              &lt;label for=&quot;pencapaian&quot; class=&quot;block text-amber-300 text-sm mb-2 font-semibold&quot;&gt;Pencapaian&lt;/label&gt;
+              &lt;select id=&quot;pencapaian&quot; class=&quot;w-full input-style rounded-lg px-4 py-3&quot; required&gt;
+                &lt;option value=&quot;&quot;&gt;-- Pilih Pencapaian --&lt;/option&gt;
+                &lt;option value=&quot;Johan&quot;&gt;Johan&lt;/option&gt;
+                &lt;option value=&quot;Naib Johan&quot;&gt;Naib Johan&lt;/option&gt;
+                &lt;option value=&quot;Ketiga&quot;&gt;Ketiga&lt;/option&gt;
+                &lt;option value=&quot;Keempat&quot;&gt;Keempat&lt;/option&gt;
+                &lt;option value=&quot;Kelima&quot;&gt;Kelima&lt;/option&gt;
+                &lt;option value=&quot;Saguhati&quot;&gt;Saguhati&lt;/option&gt;
+                &lt;option value=&quot;Penyertaan&quot;&gt;Penyertaan&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Peringkat --&gt;
+            &lt;div&gt;
+              &lt;label for=&quot;peringkat&quot; class=&quot;block text-amber-300 text-sm mb-2 font-semibold&quot;&gt;Peringkat&lt;/label&gt;
+              &lt;select id=&quot;peringkat&quot; class=&quot;w-full input-style rounded-lg px-4 py-3&quot; required&gt;
+                &lt;option value=&quot;&quot;&gt;-- Pilih Peringkat --&lt;/option&gt;
+                &lt;option value=&quot;Zon&quot;&gt;Zon&lt;/option&gt;
+                &lt;option value=&quot;Daerah&quot;&gt;Daerah&lt;/option&gt;
+                &lt;option value=&quot;Negeri&quot;&gt;Negeri&lt;/option&gt;
+                &lt;option value=&quot;Kebangsaan&quot;&gt;Kebangsaan&lt;/option&gt;
+                &lt;option value=&quot;Antarabangsa&quot;&gt;Antarabangsa&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/div&gt;
+            
+          &lt;/div&gt;
+          
+          &lt;!-- Teachers Selection Area --&gt;
+          &lt;div class=&quot;border gold-border rounded-xl p-4 bg-black/30 mb-6&quot;&gt;
+            &lt;h3 class=&quot;text-amber-300 font-semibold mb-4 flex items-center gap-2&quot;&gt;
+              &lt;svg class=&quot;w-5 h-5&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z&quot;/&gt;&lt;/svg&gt;
+              Nama Guru (10 ruang)
+            &lt;/h3&gt;
+            &lt;div id=&quot;teacherSelectionArea&quot; class=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3&quot;&gt;
+              &lt;!-- Teacher dropdowns will be generated here --&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          
+          &lt;!-- Student Selection Area --&gt;
+          &lt;div class=&quot;border gold-border rounded-xl p-4 bg-black/30&quot;&gt;
+            &lt;h3 class=&quot;text-amber-300 font-semibold mb-4 flex items-center gap-2&quot;&gt;
+              &lt;svg class=&quot;w-5 h-5&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z&quot;/&gt;&lt;/svg&gt;
+              Nama Murid (10 ruang)
+            &lt;/h3&gt;
+            &lt;div id=&quot;studentSelectionArea&quot; class=&quot;grid grid-cols-1 lg:grid-cols-2 gap-4&quot;&gt;
+              &lt;!-- Student rows will be generated here --&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          
+          &lt;!-- Submit Button --&gt;
+          &lt;div class=&quot;flex justify-center pt-6&quot;&gt;
+            &lt;button type=&quot;submit&quot; id=&quot;submitBtn&quot; class=&quot;btn-gold px-10 py-3 rounded-xl text-lg font-cinzel tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-3&quot;&gt;
+              &lt;svg class=&quot;w-5 h-5&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z&quot;/&gt;&lt;/svg&gt;
+              Simpan Rekod
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/section&gt;
+      
+      &lt;!-- Records Table Section --&gt;
+      &lt;section class=&quot;dark-card rounded-xl p-6 border gold-border shadow-2xl&quot;&gt;
+        &lt;div class=&quot;flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4&quot;&gt;
+          &lt;h2 class=&quot;text-xl font-cinzel font-semibold gold-text flex items-center gap-3&quot;&gt;
+            &lt;svg class=&quot;w-6 h-6 text-amber-400&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z&quot;/&gt;&lt;/svg&gt;
+            Senarai Rekod Pencapaian
+          &lt;/h2&gt;
+          &lt;div id=&quot;recordCount&quot; class=&quot;text-amber-300 text-sm bg-black/50 px-4 py-2 rounded-lg border gold-border&quot;&gt;
+            Jumlah Rekod: &lt;span class=&quot;font-bold text-amber-400&quot;&gt;0&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div id=&quot;recordsContainer&quot; class=&quot;overflow-x-auto scrollbar-gold&quot;&gt;
+          &lt;div id=&quot;emptyState&quot; class=&quot;text-center py-12 text-amber-400/60&quot;&gt;
+            &lt;svg class=&quot;w-16 h-16 mx-auto mb-4 opacity-50&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z&quot;/&gt;&lt;/svg&gt;
+            &lt;p class=&quot;font-cinzel text-lg&quot;&gt;Tiada rekod pencapaian&lt;/p&gt;
+            &lt;p class=&quot;text-sm mt-2&quot;&gt;Sila tambah rekod menggunakan borang di atas&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div id=&quot;recordsList&quot; class=&quot;space-y-4 hidden&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+      
+    &lt;/main&gt;
+    
+    &lt;!-- Footer --&gt;
+    &lt;footer class=&quot;text-center py-6 border-t gold-border mt-8&quot;&gt;
+      &lt;p class=&quot;text-amber-400/60 text-sm font-cinzel&quot;&gt;© 2024 Rekod Pencapaian Murid | Sepakat Memperkasakan Kecemerlangan&lt;/p&gt;
+    &lt;/footer&gt;
+    
+  &lt;/div&gt;
+
+  &lt;!-- Delete Confirmation Modal --&gt;
+  &lt;div id=&quot;deleteModal&quot; class=&quot;fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden&quot;&gt;
+    &lt;div class=&quot;dark-card border gold-border rounded-xl p-6 max-w-md mx-4 shadow-2xl&quot;&gt;
+      &lt;h3 class=&quot;text-xl font-cinzel gold-text mb-4&quot;&gt;Sahkan Pemadaman&lt;/h3&gt;
+      &lt;p class=&quot;text-amber-200 mb-6&quot;&gt;Adakah anda pasti mahu memadam rekod ini? Tindakan ini tidak boleh dibatalkan.&lt;/p&gt;
+      &lt;div class=&quot;flex gap-4 justify-end&quot;&gt;
+        &lt;button id=&quot;cancelDelete&quot; class=&quot;px-6 py-2 rounded-lg border gold-border text-amber-300 hover:bg-amber-900/30 transition-colors&quot;&gt;Batal&lt;/button&gt;
+        &lt;button id=&quot;confirmDelete&quot; class=&quot;px-6 py-2 rounded-lg bg-red-900/50 border border-red-500 text-red-300 hover:bg-red-900/70 transition-colors&quot;&gt;Padam&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // Data Constants
+    const TEACHERS = [
+      &quot;A'in Fhatin Hanani binti Rijan&quot;, &quot;Abdul Rahim bin MD Lajim&quot;, &quot;Dzulfadly bin AG Anak&quot;,
+      &quot;Roslianah binti Roie&quot;, &quot;Abdul Rahman bin Taip&quot;, &quot;Ahmad Syazwan bin Saofi&quot;, &quot;Alice Dapith&quot;,
+      &quot;Antoni Riko Boling&quot;, &quot;Arbaena binti Nahang&quot;, &quot;Arfah bin Arase&quot;, &quot;Azmah binti Asha'ari&quot;,
+      &quot;Hjh. Palam binti Karim&quot;, &quot;Diana binti Darno&quot;, &quot;Baiduri binti Dullah&quot;, &quot;Darmin bin Ladiro&quot;,
+      &quot;Dyana Veronica Henry&quot;, &quot;Elly Massalo&quot;, &quot;Sutrawiya binti Malong&quot;, &quot;Fauziah binti Senen&quot;,
+      &quot;Halimahton Saadiah binti Mahamad&quot;, &quot;Hjh. Masni Juitah binti Tuda&quot;, &quot;Juliyana binti Yahya&quot;,
+      &quot;Herna binti Hussin&quot;, &quot;Mahfuzah binti Mohamed Desa&quot;, &quot;Rabiatun binti Rahman&quot;,
+      &quot;Marini binti Syed Ali&quot;, &quot;Marliyana binti Mohammed&quot;, &quot;Merhma binti Masugi&quot;, &quot;Merlyn Loyola&quot;,
+      &quot;Mohammad Farid bin Mohd Arbi&quot;, &quot;Mohd Hasrul bin Mohd Redzuan&quot;, &quot;Mohd Khairul Amir bin Ahmad&quot;,
+      &quot;Mohd Khuzaifah Bin Ismail&quot;, &quot;Mohd Sam bin Talip @ Mohd Isham&quot;, &quot;Azizah binti Haris&quot;,
+      &quot;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&quot;, &quot;Nor Asidah binti Kalbun&quot;,
+      &quot;Syahmie bin Syahrulhazni&quot;, &quot;Muhammad Admien bin Jasni&quot;, &quot;Mohamad Nurlhafizi bin Abdulnur&quot;,
+      &quot;Noorzalianah binti Insan&quot;, &quot;Nurasyipa binti Ridwan&quot;, &quot;Norhainie binti Herman&quot;,
+      &quot;Nur Anissa binti Roslan&quot;, &quot;Nur Azlin binti Zulkifli&quot;, &quot;Nurhasanah binti Roslan&quot;,
+      &quot;Nurul Aida binti Samsudin&quot;, &quot;Nur Izzah binti Jainudin&quot;, &quot;Auni Nurfarahin binti Aripai&quot;,
+      &quot;Rahman bin Soga&quot;, &quot;Ridhuan bin Arbin&quot;, &quot;Nordin bin Lagudan&quot;, &quot;Hj. Ramsah bin Burhan&quot;,
+      &quot;Misnah binti Miasin&quot;, &quot;Roshaida binti Yeop Ahmad&quot;, &quot;Norliewati Binti Hassan&quot;,
+      &quot;Suhana Binti Sumino&quot;, &quot;Rosharisa binti Herman&quot;, &quot;Hazari bin Hakim&quot;, &quot;Sharon Francis Chuan&quot;,
+      &quot;Mohammad bin Abdul Rajak&quot;, &quot;Rozaimi bin Arshad&quot;, &quot;Salbiah binti Karim&quot;,
+      &quot;Kamisah binti Mohammad&quot;, &quot;Sharif bin Hamdani&quot;, &quot;Siti Nur Syafiah binti Majid&quot;,
+      &quot;Siti Robasiah binti Hj.Rahamat&quot;, &quot;Stevon Luntid&quot;, &quot;Suraya binti Mat Yusop&quot;,
+      &quot;Ummu Nasyibah binti Mamma&quot;, &quot;Wirna binti Abd Hamid&quot;, &quot;Rozinah binti Amirul&quot;,
+      &quot;Junita binti Ajirul&quot;, &quot;Hasbullah bin Ali&quot;
+    ].sort();
+
+    // Sample students by class
+    const STUDENTS_BY_CLASS = {
+      &quot;Prasekolah Exora&quot;: [&quot;Adam bin Ahmad&quot;, &quot;Aisyah binti Ali&quot;, &quot;Amira binti Hassan&quot;, &quot;Danial bin Razak&quot;, &quot;Fatimah binti Yusof&quot;],
+      &quot;Prasekolah Alza&quot;: [&quot;Haikal bin Ismail&quot;, &quot;Irdina binti Kamal&quot;, &quot;Jazmin binti Latif&quot;, &quot;Khairul bin Musa&quot;, &quot;Liana binti Noor&quot;],
+      &quot;Prasekolah Inspira&quot;: [&quot;Mikhail bin Omar&quot;, &quot;Nadia binti Pauzi&quot;, &quot;Qaseh binti Rahman&quot;, &quot;Rayyan bin Samad&quot;, &quot;Sofia binti Tahir&quot;],
+      &quot;1 Inovatif&quot;: [&quot;Ahmad Danial&quot;, &quot;Nur Aisyah&quot;, &quot;Muhammad Aiman&quot;, &quot;Siti Nurhaliza&quot;, &quot;Irfan Hakimi&quot;],
+      &quot;1 Kreatif&quot;: [&quot;Nurul Ain&quot;, &quot;Hafiz Rahman&quot;, &quot;Amira Zulaikha&quot;, &quot;Danish Hakim&quot;, &quot;Puteri Balqis&quot;],
+      &quot;1 Kritis&quot;: [&quot;Arif Budiman&quot;, &quot;Nur Izzati&quot;, &quot;Farhan Imran&quot;, &quot;Aina Sofea&quot;, &quot;Haziq Danial&quot;],
+      &quot;1 Proaktif&quot;: [&quot;Qistina Amani&quot;, &quot;Luqman Hakim&quot;, &quot;Nur Adlina&quot;, &quot;Zafran Hakeem&quot;, &quot;Alya Batrisyia&quot;],
+      &quot;1 Patriotik&quot;: [&quot;Amirul Hakim&quot;, &quot;Nur Syifa&quot;, &quot;Danish Irfan&quot;, &quot;Maisarah Humaira&quot;, &quot;Harraz Darwisy&quot;],
+      &quot;2 Inovatif&quot;: [&quot;Ariana Sofea&quot;, &quot;Uwais Qhafiy&quot;, &quot;Nur Adriana&quot;, &quot;Aisy Danial&quot;, &quot;Qalesya Imani&quot;],
+      &quot;2 Kreatif&quot;: [&quot;Mikail Rayyan&quot;, &quot;Nur Batrisyia&quot;, &quot;Aqil Danish&quot;, &quot;Irdina Safiya&quot;, &quot;Harith Zafran&quot;],
+      &quot;2 Kritis&quot;: [&quot;Alisha Qaisara&quot;, &quot;Muhammad Wafiy&quot;, &quot;Nur Qhalesya&quot;, &quot;Danish Haikal&quot;, &quot;Amni Zahra&quot;],
+      &quot;2 Proaktif&quot;: [&quot;Qayyum Hakimi&quot;, &quot;Nur Aleeya&quot;, &quot;Harraz Mikhail&quot;, &quot;Safiya Adriana&quot;, &quot;Uwais Hadi&quot;],
+      &quot;2 Patriotik&quot;: [&quot;Aisyah Qhaisara&quot;, &quot;Luqman Hazim&quot;, &quot;Nur Irdina&quot;, &quot;Aisy Hakim&quot;, &quot;Qalesya Batrisyia&quot;],
+      &quot;3 Inovatif&quot;: [&quot;Haziq Irfan&quot;, &quot;Nur Amelia&quot;, &quot;Danish Aiman&quot;, &quot;Safiya Nur&quot;, &quot;Arif Danial&quot;],
+      &quot;3 Kreatif&quot;: [&quot;Qistina Nur&quot;, &quot;Muhammad Rayyan&quot;, &quot;Alya Irdina&quot;, &quot;Harith Danish&quot;, &quot;Nur Adriana&quot;],
+      &quot;3 Kritis&quot;: [&quot;Uwais Hakim&quot;, &quot;Batrisyia Amani&quot;, &quot;Aqil Haziq&quot;, &quot;Nur Qalesya&quot;, &quot;Mikail Danish&quot;],
+      &quot;3 Proaktif&quot;: [&quot;Alisha Safiya&quot;, &quot;Danial Wafiy&quot;, &quot;Nur Aisyah&quot;, &quot;Harraz Qayum&quot;, &quot;Irdina Humaira&quot;],
+      &quot;3 Patriotik&quot;: [&quot;Qayyum Danish&quot;, &quot;Nur Alya&quot;, &quot;Aisy Arif&quot;, &quot;Amelia Batrisyia&quot;, &quot;Hakimi Rayyan&quot;],
+      &quot;4 Inovatif&quot;: [&quot;Nur Haziqah&quot;, &quot;Danish Uwais&quot;, &quot;Safiya Irdina&quot;, &quot;Harith Aiman&quot;, &quot;Qalesya Amelia&quot;],
+      &quot;4 Kreatif&quot;: [&quot;Luqman Danish&quot;, &quot;Nur Batrisyia&quot;, &quot;Aqil Rayyan&quot;, &quot;Alisha Nur&quot;, &quot;Mikail Hakimi&quot;],
+      &quot;4 Kritis&quot;: [&quot;Uwais Danial&quot;, &quot;Aisyah Safiya&quot;, &quot;Harraz Irfan&quot;, &quot;Nur Qistina&quot;, &quot;Danish Wafiy&quot;],
+      &quot;4 Proaktif&quot;: [&quot;Qayyum Arif&quot;, &quot;Adriana Amani&quot;, &quot;Haziq Hadi&quot;, &quot;Nur Aleeya&quot;, &quot;Aisy Batrisyia&quot;],
+      &quot;4 Patriotik&quot;: [&quot;Alya Qalesya&quot;, &quot;Muhammad Hazim&quot;, &quot;Irdina Humaira&quot;, &quot;Harith Qayyum&quot;, &quot;Nur Amelia&quot;],
+      &quot;5 Inovatif&quot;: [&quot;Danish Haziq&quot;, &quot;Nur Safiya&quot;, &quot;Uwais Rayyan&quot;, &quot;Batrisyia Adriana&quot;, &quot;Aqil Danish&quot;],
+      &quot;5 Kreatif&quot;: [&quot;Qistina Aisyah&quot;, &quot;Luqman Hakim&quot;, &quot;Alisha Amelia&quot;, &quot;Harraz Danish&quot;, &quot;Nur Irdina&quot;],
+      &quot;5 Kritis&quot;: [&quot;Mikail Arif&quot;, &quot;Amani Qalesya&quot;, &quot;Danish Wafiy&quot;, &quot;Nur Alya&quot;, &quot;Haziq Hakimi&quot;],
+      &quot;5 Proaktif&quot;: [&quot;Uwais Danial&quot;, &quot;Batrisyia Nur&quot;, &quot;Qayyum Irfan&quot;, &quot;Adriana Safiya&quot;, &quot;Aqil Rayyan&quot;],
+      &quot;5 Patriotik&quot;: [&quot;Alisha Irdina&quot;, &quot;Harith Hazim&quot;, &quot;Nur Qistina&quot;, &quot;Danish Aisy&quot;, &quot;Amelia Humaira&quot;],
+      &quot;6 Inovatif&quot;: [&quot;Haziq Danish&quot;, &quot;Safiya Batrisyia&quot;, &quot;Luqman Uwais&quot;, &quot;Nur Adriana&quot;, &quot;Rayyan Hakimi&quot;],
+      &quot;6 Kreatif&quot;: [&quot;Qalesya Amani&quot;, &quot;Muhammad Arif&quot;, &quot;Alya Aisyah&quot;, &quot;Harraz Danial&quot;, &quot;Nur Aleeya&quot;],
+      &quot;6 Kritis&quot;: [&quot;Mikail Danish&quot;, &quot;Irdina Safiya&quot;, &quot;Aqil Haziq&quot;, &quot;Batrisyia Qistina&quot;, &quot;Uwais Wafiy&quot;],
+      &quot;6 Proaktif&quot;: [&quot;Qayyum Rayyan&quot;, &quot;Nur Amelia&quot;, &quot;Danish Hakimi&quot;, &quot;Adriana Alisha&quot;, &quot;Harith Irfan&quot;],
+      &quot;6 Patriotik&quot;: [&quot;Alya Humaira&quot;, &quot;Luqman Danial&quot;, &quot;Safiya Nur&quot;, &quot;Haziq Qayyum&quot;, &quot;Batrisyia Irdina&quot;],
+      &quot;PPKI Dinamik&quot;: [&quot;Ahmad Faris&quot;, &quot;Nur Syahira&quot;, &quot;Danial Hakim&quot;, &quot;Aisyah Amira&quot;, &quot;Irfan Hazim&quot;],
+      &quot;PPKI Fokus&quot;: [&quot;Sofea Adriana&quot;, &quot;Muhammad Rayyan&quot;, &quot;Alya Batrisyia&quot;, &quot;Harraz Danish&quot;, &quot;Qistina Nur&quot;],
+      &quot;PPKI Etika&quot;: [&quot;Uwais Hakimi&quot;, &quot;Nur Irdina&quot;, &quot;Danish Arif&quot;, &quot;Safiya Amelia&quot;, &quot;Qayyum Wafiy&quot;]
+    };
+
+    // State
+    let records = [];
+    let recordToDelete = null;
+    let currentYear = new Date().getFullYear();
+
+    // Default config
+    const defaultConfig = {
+      main_title: &quot;REKOD PENCAPAIAN MURID&quot;,
+      motto_text: &quot;SEPAKAT MEMPERKASAKAN KECEMERLANGAN&quot;,
+      background_color: &quot;#000000&quot;,
+      surface_color: &quot;#1a1a1a&quot;,
+      text_color: &quot;#fef3c7&quot;,
+      primary_action: &quot;#d4af37&quot;,
+      secondary_action: &quot;#b8962e&quot;
+    };
+
+    // Check and clean old records
+    async function checkAndCleanOldRecords() {
+      const today = new Date();
+      const currentYearValue = today.getFullYear();
+      
+      // Filter records from current year only
+      const oldRecords = records.filter(record =&gt; record.year !== currentYearValue.toString());
+      
+      // Delete old records
+      for (const record of oldRecords) {
+        await window.dataSdk.delete(record);
+      }
+      
+      if (oldRecords.length &gt; 0) {
+        showToast(`${oldRecords.length} rekod tahun lepas telah dipadamkan secara automatik.`, 'success');
+      }
+    }
+
+    // Generate teacher selection dropdowns (10 slots)
+    function generateTeacherDropdowns() {
+      const container = document.getElementById('teacherSelectionArea');
+      container.innerHTML = '';
+      
+      for (let i = 1; i &lt;= 10; i++) {
+        const div = document.createElement('div');
+        div.className = 'flex items-center gap-2 bg-black/20 p-2 rounded-lg';
+        
+        const label = document.createElement('label');
+        label.className = 'text-amber-400 text-xs font-semibold w-6 flex-shrink-0';
+        label.textContent = `${i}.`;
+        label.setAttribute('for', `guru${i}`);
+        
+        const select = document.createElement('select');
+        select.id = `guru${i}`;
+        select.name = `guru${i}`;
+        select.className = 'flex-1 input-style rounded-lg px-2 py-2 text-xs';
+        
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '-- Pilih Guru --';
+        select.appendChild(defaultOption);
+        
+        TEACHERS.forEach(teacher =&gt; {
+          const option = document.createElement('option');
+          option.value = teacher;
+          option.textContent = teacher;
+          select.appendChild(option);
+        });
+        
+        div.appendChild(label);
+        div.appendChild(select);
+        container.appendChild(div);
+      }
+    }
+
+    // Generate student selection rows with class dropdown and student name text input
+    function generateStudentRows() {
+      const container = document.getElementById('studentSelectionArea');
+      container.innerHTML = '';
+      
+      for (let i = 1; i &lt;= 10; i++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'flex items-center gap-3 bg-black/20 p-4 rounded-lg border border-amber-900/40';
+        
+        // Number label
+        const numLabel = document.createElement('span');
+        numLabel.className = 'text-amber-400 font-semibold text-lg w-6 flex-shrink-0';
+        numLabel.textContent = `${i}.`;
+        
+        // Container for class and student inputs
+        const selectContainer = document.createElement('div');
+        selectContainer.className = 'flex-1 grid grid-cols-2 gap-2';
+        
+        // Class selector
+        const classSelect = document.createElement('select');
+        classSelect.id = `kelas${i}`;
+        classSelect.name = `kelas${i}`;
+        classSelect.className = 'input-style rounded-lg px-3 py-2 text-sm';
+        
+        const classDefaultOption = document.createElement('option');
+        classDefaultOption.value = '';
+        classDefaultOption.textContent = '-- Kelas --';
+        classSelect.appendChild(classDefaultOption);
+        
+        // Populate class options
+        Object.keys(STUDENTS_BY_CLASS).forEach(kelas =&gt; {
+          const option = document.createElement('option');
+          option.value = kelas;
+          option.textContent = kelas;
+          classSelect.appendChild(option);
+        });
+        
+        // Student name text input
+        const studentInput = document.createElement('input');
+        studentInput.type = 'text';
+        studentInput.id = `murid${i}`;
+        studentInput.name = `murid${i}`;
+        studentInput.placeholder = 'Nama murid';
+        studentInput.className = 'input-style rounded-lg px-3 py-2 text-sm';
+        
+        selectContainer.appendChild(classSelect);
+        selectContainer.appendChild(studentInput);
+        
+        rowDiv.appendChild(numLabel);
+        rowDiv.appendChild(selectContainer);
+        container.appendChild(rowDiv);
+      }
+    }
+
+    // Format date to Malaysian format
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    // Render records
+    function renderRecords() {
+      const container = document.getElementById('recordsList');
+      const emptyState = document.getElementById('emptyState');
+      const countSpan = document.querySelector('#recordCount span');
+      
+      countSpan.textContent = records.length;
+      
+      if (records.length === 0) {
+        emptyState.classList.remove('hidden');
+        container.classList.add('hidden');
+        return;
+      }
+      
+      emptyState.classList.add('hidden');
+      container.classList.remove('hidden');
+      
+      container.innerHTML = '';
+      
+      records.forEach((record, index) =&gt; {
+        const teachers = [];
+        for (let i = 1; i &lt;= 10; i++) {
+          const teacher = record[`guru${i}`];
+          if (teacher &amp;&amp; teacher.trim() !== '') {
+            teachers.push(teacher);
+          }
+        }
+        
+        const students = [];
+        for (let i = 1; i &lt;= 10; i++) {
+          const student = record[`murid${i}`];
+          if (student &amp;&amp; student.trim() !== '') {
+            students.push(student);
+          }
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'bg-black/40 border gold-border rounded-xl p-4 hover:bg-black/60 transition-colors';
+        card.innerHTML = `
+          &lt;div class=&quot;flex flex-col lg:flex-row justify-between gap-4&quot;&gt;
+            &lt;div class=&quot;flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3&quot;&gt;
+              &lt;div&gt;
+                &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Tarikh&lt;/span&gt;
+                &lt;p class=&quot;text-amber-100&quot;&gt;${formatDate(record.tarikh)}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Penganjur&lt;/span&gt;
+                &lt;p class=&quot;text-amber-100&quot;&gt;${record.penganjur || '-'}&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Pencapaian&lt;/span&gt;
+                &lt;p class=&quot;text-amber-100 font-semibold&quot;&gt;
+                  &lt;span class=&quot;inline-block px-2 py-1 rounded text-xs ${record.pencapaian === 'Johan' ? 'bg-amber-500/30 text-amber-300' : 'bg-amber-900/30 text-amber-400'}&quot;&gt;${record.pencapaian || '-'}&lt;/span&gt;
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Peringkat&lt;/span&gt;
+                &lt;p class=&quot;text-amber-100&quot;&gt;${record.peringkat || '-'}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
+              &lt;button onclick=&quot;showDeleteModal('${record.__backendId}')&quot; class=&quot;btn-delete px-3 py-2 rounded-lg text-sm flex items-center gap-1 transition-colors&quot;&gt;
+                &lt;svg class=&quot;w-4 h-4&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z&quot;/&gt;&lt;/svg&gt;
+                Padam
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          ${teachers.length &gt; 0 ? `
+          &lt;div class=&quot;mt-3 pt-3 border-t border-amber-900/30&quot;&gt;
+            &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Guru&lt;/span&gt;
+            &lt;div class=&quot;flex flex-wrap gap-2 mt-1&quot;&gt;
+              ${teachers.map(t =&gt; `&lt;span class=&quot;px-2 py-1 bg-amber-900/20 rounded text-sm text-amber-200&quot;&gt;${t}&lt;/span&gt;`).join('')}
+            &lt;/div&gt;
+          &lt;/div&gt;
+          ` : ''}
+          ${students.length &gt; 0 ? `
+          &lt;div class=&quot;mt-2 pt-2 border-t border-amber-900/30&quot;&gt;
+            &lt;span class=&quot;text-amber-400/70 text-xs&quot;&gt;Murid&lt;/span&gt;
+            &lt;div class=&quot;flex flex-wrap gap-2 mt-1&quot;&gt;
+              ${students.map(s =&gt; `&lt;span class=&quot;px-2 py-1 bg-amber-900/20 rounded text-sm text-amber-200&quot;&gt;${s}&lt;/span&gt;`).join('')}
+            &lt;/div&gt;
+          &lt;/div&gt;
+          ` : ''}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Show delete modal
+    function showDeleteModal(id) {
+      recordToDelete = id;
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    // Hide delete modal
+    function hideDeleteModal() {
+      recordToDelete = null;
+      document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    // Delete record
+    async function deleteRecord() {
+      if (!recordToDelete) return;
+      
+      const record = records.find(r =&gt; r.__backendId === recordToDelete);
+      if (!record) {
+        hideDeleteModal();
+        return;
+      }
+      
+      const confirmBtn = document.getElementById('confirmDelete');
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Memadam...';
+      
+      const result = await window.dataSdk.delete(record);
+      
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = 'Padam';
+      hideDeleteModal();
+      
+      if (!result.isOk) {
+        showToast('Gagal memadam rekod. Sila cuba lagi.', 'error');
+      }
+    }
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300 ${type === 'success' ? 'bg-green-900 border border-green-500 text-green-200' : 'bg-red-900 border border-red-500 text-red-200'}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() =&gt; {
+        toast.style.opacity = '0';
+        setTimeout(() =&gt; toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Form submission
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (records.length &gt;= 999) {
+        showToast('Had maksimum 999 rekod telah dicapai. Sila padam rekod lama.', 'error');
+        return;
+      }
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '&lt;svg class=&quot;w-5 h-5 animate-spin&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;circle class=&quot;opacity-25&quot; cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;4&quot;&gt;&lt;/circle&gt;&lt;path class=&quot;opacity-75&quot; fill=&quot;currentColor&quot; d=&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;&gt;&lt;/path&gt;&lt;/svg&gt; Menyimpan...';
+      
+      const formData = {
+        id: Date.now().toString(),
+        tarikh: document.getElementById('tarikh').value,
+        penganjur: document.getElementById('penganjur').value,
+        pencapaian: document.getElementById('pencapaian').value,
+        peringkat: document.getElementById('peringkat').value,
+        guru1: document.getElementById('guru1')?.value || '',
+        guru2: document.getElementById('guru2')?.value || '',
+        guru3: document.getElementById('guru3')?.value || '',
+        guru4: document.getElementById('guru4')?.value || '',
+        guru5: document.getElementById('guru5')?.value || '',
+        guru6: document.getElementById('guru6')?.value || '',
+        guru7: document.getElementById('guru7')?.value || '',
+        guru8: document.getElementById('guru8')?.value || '',
+        guru9: document.getElementById('guru9')?.value || '',
+        guru10: document.getElementById('guru10')?.value || '',
+        murid1: document.getElementById('murid1')?.value || '',
+        murid2: document.getElementById('murid2')?.value || '',
+        murid3: document.getElementById('murid3')?.value || '',
+        murid4: document.getElementById('murid4')?.value || '',
+        murid5: document.getElementById('murid5')?.value || '',
+        murid6: document.getElementById('murid6')?.value || '',
+        murid7: document.getElementById('murid7')?.value || '',
+        murid8: document.getElementById('murid8')?.value || '',
+        murid9: document.getElementById('murid9')?.value || '',
+        murid10: document.getElementById('murid10')?.value || '',
+        createdAt: new Date().toISOString(),
+        year: currentYear.toString()
+      };
+      
+      const result = await window.dataSdk.create(formData);
+      
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '&lt;svg class=&quot;w-5 h-5&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z&quot;/&gt;&lt;/svg&gt; Simpan Rekod';
+      
+      if (result.isOk) {
+        showToast('Rekod berjaya disimpan!');
+        e.target.reset();
+        generateTeacherDropdowns();
+        generateStudentRows();
+      } else {
+        showToast('Gagal menyimpan rekod. Sila cuba lagi.', 'error');
+      }
+    }
+
+    // Data handler
+    const dataHandler = {
+      onDataChanged(data) {
+        records = data.sort((a, b) =&gt; new Date(b.createdAt) - new Date(a.createdAt));
+        renderRecords();
+      }
+    };
+
+    // Config change handler
+    async function onConfigChange(config) {
+      document.getElementById('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('mottoText').textContent = config.motto_text || defaultConfig.motto_text;
+    }
+
+    // Update year display
+    function updateYearDisplay() {
+      currentYear = new Date().getFullYear();
+      document.getElementById('currentYear').textContent = currentYear;
+    }
+
+    // Initialize
+    async function init() {
+      updateYearDisplay();
+      generateTeacherDropdowns();
+      generateStudentRows();
+      
+      document.getElementById('achievementForm').addEventListener('submit', handleSubmit);
+      document.getElementById('cancelDelete').addEventListener('click', hideDeleteModal);
+      document.getElementById('confirmDelete').addEventListener('click', deleteRecord);
+      
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) =&gt; ({
+            recolorables: [
+              { get: () =&gt; config.background_color || defaultConfig.background_color, set: (v) =&gt; window.elementSdk.setConfig({ background_color: v }) },
+              { get: () =&gt; config.surface_color || defaultConfig.surface_color, set: (v) =&gt; window.elementSdk.setConfig({ surface_color: v }) },
+              { get: () =&gt; config.text_color || defaultConfig.text_color, set: (v) =&gt; window.elementSdk.setConfig({ text_color: v }) },
+              { get: () =&gt; config.primary_action || defaultConfig.primary_action, set: (v) =&gt; window.elementSdk.setConfig({ primary_action: v }) },
+              { get: () =&gt; config.secondary_action || defaultConfig.secondary_action, set: (v) =&gt; window.elementSdk.setConfig({ secondary_action: v }) }
+            ],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) =&gt; new Map([
+            [&quot;main_title&quot;, config.main_title || defaultConfig.main_title],
+            [&quot;motto_text&quot;, config.motto_text || defaultConfig.motto_text]
+          ])
+        });
+      }
+      
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (result.isOk) {
+          // Check and clean old records after initialization
+          await checkAndCleanOldRecords();
+        } else {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+    }
+
+    init();
+  &lt;/script&gt;
+&lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26e8cab3a1a483',t:'MTc3MTg1MTY2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>

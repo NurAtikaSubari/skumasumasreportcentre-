@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!doctype html&gt;
+&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Rekod Kehadiran Harian Murid&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/data_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;amp;family=Poppins:wght@300;400;500;600&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;style&gt;
+    * { font-family: 'Poppins', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 50%, #D4AF37 100%); }
+    .gold-text { background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card-elegant { background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(212, 175, 55, 0.3); }
+    .input-elegant { background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(212, 175, 55, 0.4); transition: all 0.3s ease; }
+    .input-elegant:focus { border-color: #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+    .btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8960C 100%); transition: all 0.3s ease; }
+    .btn-gold:hover { background: linear-gradient(135deg, #F4E4BA 0%, #D4AF37 100%); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+    .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .table-row:hover { background: rgba(212, 175, 55, 0.05); }
+    .scrollbar-elegant::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scrollbar-elegant::-webkit-scrollbar-track { background: #1a1a1a; }
+    .scrollbar-elegant::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeIn 0.5s ease forwards; }
+    .stat-card { position: relative; overflow: hidden; }
+    .stat-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); }
+    .student-item { cursor: pointer; transition: all 0.3s ease; }
+    .student-item.present { background: rgba(34, 197, 94, 0.1); border-color: #22c55e; }
+    .student-item.absent { background: rgba(239, 68, 68, 0.1); border-color: #ef4444; }
+    .student-item:hover { transform: translateX(4px); }
+  &lt;/style&gt;
+  &lt;style&gt;body { box-sizing: border-box; }&lt;/style&gt;
+ &lt;/head&gt;
+ &lt;body class=&quot;h-full bg-black text-white overflow-auto&quot;&gt;
+  &lt;div id=&quot;app&quot; class=&quot;min-h-full w-full&quot;&gt;
+   &lt;div class=&quot;fixed inset-0 pointer-events-none overflow-hidden&quot;&gt;
+    &lt;div class=&quot;absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-yellow-900/10 to-transparent rounded-full blur-3xl&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-yellow-900/10 to-transparent rounded-full blur-3xl&quot;&gt;&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;relative z-10 p-4 md:p-8&quot;&gt;
+    &lt;header class=&quot;text-center mb-8 fade-in&quot;&gt;
+     &lt;div class=&quot;inline-block mb-4&quot;&gt;
+      &lt;div class=&quot;gold-gradient w-16 h-1 mx-auto mb-4 rounded-full&quot;&gt;&lt;/div&gt;
+      &lt;h1 id=&quot;main-title&quot; class=&quot;font-display text-3xl md:text-5xl font-bold gold-text mb-2&quot;&gt;Rekod Kehadiran Harian Murid&lt;/h1&gt;
+      &lt;p id=&quot;school-name&quot; class=&quot;text-gray-400 text-lg&quot;&gt;Sistem Pengurusan Kehadiran&lt;/p&gt;
+      &lt;div class=&quot;gold-gradient w-16 h-1 mx-auto mt-4 rounded-full&quot;&gt;&lt;/div&gt;
+     &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-4 mb-8&quot;&gt;
+     &lt;div class=&quot;stat-card card-elegant rounded-2xl p-4 md:p-6 fade-in&quot; style=&quot;animation-delay: 0.1s&quot;&gt;
+      &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;&lt;span class=&quot;text-gray-400 text-sm&quot;&gt;Jumlah Rekod&lt;/span&gt; &lt;span class=&quot;text-2xl&quot;&gt;📊&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p id=&quot;stat-total&quot; class=&quot;text-2xl md:text-3xl font-bold gold-text&quot;&gt;0&lt;/p&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;stat-card card-elegant rounded-2xl p-4 md:p-6 fade-in&quot; style=&quot;animation-delay: 0.2s&quot;&gt;
+      &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;&lt;span class=&quot;text-gray-400 text-sm&quot;&gt;Hadir Hari Ini&lt;/span&gt; &lt;span class=&quot;text-2xl&quot;&gt;✅&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p id=&quot;stat-present&quot; class=&quot;text-2xl md:text-3xl font-bold text-green-400&quot;&gt;0&lt;/p&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;stat-card card-elegant rounded-2xl p-4 md:p-6 fade-in&quot; style=&quot;animation-delay: 0.3s&quot;&gt;
+      &lt;div class=&quot;flex items-center justify-between mb-2&quot;&gt;&lt;span class=&quot;text-gray-400 text-sm&quot;&gt;Tidak Hadir&lt;/span&gt; &lt;span class=&quot;text-2xl&quot;&gt;❌&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p id=&quot;stat-absent&quot; class=&quot;text-2xl md:text-3xl font-bold text-red-400&quot;&gt;0&lt;/p&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;grid lg:grid-cols-3 gap-6 mb-8&quot;&gt;
+     &lt;div class=&quot;lg:col-span-1&quot;&gt;
+      &lt;div class=&quot;card-elegant rounded-2xl p-6 fade-in&quot; style=&quot;animation-delay: 0.5s&quot;&gt;
+       &lt;h2 class=&quot;font-display text-xl font-semibold gold-text mb-6 flex items-center gap-2&quot;&gt;&lt;span class=&quot;text-2xl&quot;&gt;📝&lt;/span&gt; Borang Kehadiran&lt;/h2&gt;
+       &lt;form id=&quot;murid-form&quot; class=&quot;space-y-4&quot; onsubmit=&quot;submitKehadiranMurid(event)&quot;&gt;
+        &lt;div&gt;&lt;label class=&quot;block text-gray-400 text-sm mb-2&quot;&gt;Nama Guru&lt;/label&gt; &lt;select id=&quot;teacher-select&quot; class=&quot;input-elegant w-full rounded-xl px-4 py-3 text-white focus:outline-none&quot; required&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Guru --&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div&gt;&lt;label class=&quot;block text-gray-400 text-sm mb-2&quot;&gt;Tarikh&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;date-input&quot; class=&quot;input-elegant w-full rounded-xl px-4 py-3 text-white focus:outline-none&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div&gt;&lt;label class=&quot;block text-gray-400 text-sm mb-2&quot;&gt;Kelas&lt;/label&gt; &lt;select id=&quot;class-select&quot; class=&quot;input-elegant w-full rounded-xl px-4 py-3 text-white focus:outline-none&quot; required&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Kelas --&lt;/option&gt; &lt;optgroup label=&quot;📚 Prasekolah&quot;&gt; &lt;option value=&quot;Prasekolah Exora&quot;&gt;Prasekolah Exora&lt;/option&gt; &lt;option value=&quot;Prasekolah Alza&quot;&gt;Prasekolah Alza&lt;/option&gt; &lt;option value=&quot;Prasekolah Inspira&quot;&gt;Prasekolah Inspira&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 1&quot;&gt; &lt;option value=&quot;1 Inovatif&quot;&gt;1 Inovatif&lt;/option&gt; &lt;option value=&quot;1 Kreatif&quot;&gt;1 Kreatif&lt;/option&gt; &lt;option value=&quot;1 Kritis&quot;&gt;1 Kritis&lt;/option&gt; &lt;option value=&quot;1 Proaktif&quot;&gt;1 Proaktif&lt;/option&gt; &lt;option value=&quot;1 Patriotik&quot;&gt;1 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 2&quot;&gt; &lt;option value=&quot;2 Inovatif&quot;&gt;2 Inovatif&lt;/option&gt; &lt;option value=&quot;2 Kreatif&quot;&gt;2 Kreatif&lt;/option&gt; &lt;option value=&quot;2 Kritis&quot;&gt;2 Kritis&lt;/option&gt; &lt;option value=&quot;2 Proaktif&quot;&gt;2 Proaktif&lt;/option&gt; &lt;option value=&quot;2 Patriotik&quot;&gt;2 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 3&quot;&gt; &lt;option value=&quot;3 Inovatif&quot;&gt;3 Inovatif&lt;/option&gt; &lt;option value=&quot;3 Kreatif&quot;&gt;3 Kreatif&lt;/option&gt; &lt;option value=&quot;3 Kritis&quot;&gt;3 Kritis&lt;/option&gt; &lt;option value=&quot;3 Proaktif&quot;&gt;3 Proaktif&lt;/option&gt; &lt;option value=&quot;3 Patriotik&quot;&gt;3 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 4&quot;&gt; &lt;option value=&quot;4 Inovatif&quot;&gt;4 Inovatif&lt;/option&gt; &lt;option value=&quot;4 Kreatif&quot;&gt;4 Kreatif&lt;/option&gt; &lt;option value=&quot;4 Kritis&quot;&gt;4 Kritis&lt;/option&gt; &lt;option value=&quot;4 Proaktif&quot;&gt;4 Proaktif&lt;/option&gt; &lt;option value=&quot;4 Patriotik&quot;&gt;4 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 5&quot;&gt; &lt;option value=&quot;5 Inovatif&quot;&gt;5 Inovatif&lt;/option&gt; &lt;option value=&quot;5 Kreatif&quot;&gt;5 Kreatif&lt;/option&gt; &lt;option value=&quot;5 Kritis&quot;&gt;5 Kritis&lt;/option&gt; &lt;option value=&quot;5 Proaktif&quot;&gt;5 Proaktif&lt;/option&gt; &lt;option value=&quot;5 Patriotik&quot;&gt;5 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 6&quot;&gt; &lt;option value=&quot;6 Inovatif&quot;&gt;6 Inovatif&lt;/option&gt; &lt;option value=&quot;6 Kreatif&quot;&gt;6 Kreatif&lt;/option&gt; &lt;option value=&quot;6 Kritis&quot;&gt;6 Kritis&lt;/option&gt; &lt;option value=&quot;6 Proaktif&quot;&gt;6 Proaktif&lt;/option&gt; &lt;option value=&quot;6 Patriotik&quot;&gt;6 Patriotik&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;🌟 PPKI&quot;&gt; &lt;option value=&quot;PPKI Dinamik&quot;&gt;PPKI Dinamik&lt;/option&gt; &lt;option value=&quot;PPKI Fokus&quot;&gt;PPKI Fokus&lt;/option&gt; &lt;option value=&quot;PPKI Etika&quot;&gt;PPKI Etika&lt;/option&gt; &lt;/optgroup&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div&gt;&lt;label class=&quot;block text-gray-400 text-sm mb-2&quot;&gt;Catatan&lt;/label&gt; &lt;textarea id=&quot;notes-input&quot; rows=&quot;2&quot; class=&quot;input-elegant w-full rounded-xl px-4 py-3 text-white focus:outline-none resize-none&quot; placeholder=&quot;Catatan tambahan...&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+		&lt;div id=&quot;laporan-container&quot;&gt;&lt;/div&gt;
+       &lt;/form&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;lg:col-span-2 space-y-6&quot;&gt;
+      &lt;div class=&quot;card-elegant rounded-2xl p-6 fade-in&quot; style=&quot;animation-delay: 0.6s&quot;&gt;
+       &lt;h2 class=&quot;font-display text-xl font-semibold gold-text mb-6 flex items-center gap-2&quot;&gt;&lt;span class=&quot;text-2xl&quot;&gt;👥&lt;/span&gt; Senarai Murid&lt;/h2&gt;
+       &lt;div id=&quot;no-class-message&quot; class=&quot;text-center py-12 text-gray-500&quot;&gt;
+        &lt;div class=&quot;flex flex-col items-center gap-2&quot;&gt;&lt;span class=&quot;text-4xl&quot;&gt;📚&lt;/span&gt;
+         &lt;p&gt;Sila pilih kelas untuk melihat senarai murid&lt;/p&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+       &lt;div id=&quot;students-container&quot; class=&quot;hidden&quot;&gt;
+        &lt;div class=&quot;flex justify-between items-center mb-4 flex-wrap gap-2&quot;&gt;
+         &lt;div class=&quot;text-sm text-gray-400&quot;&gt;&lt;span id=&quot;present-count&quot; class=&quot;text-green-400 font-semibold&quot;&gt;0&lt;/span&gt; / &lt;span id=&quot;total-students-count&quot;&gt;0&lt;/span&gt; hadir
+         &lt;/div&gt;
+         &lt;div class=&quot;space-x-2 flex flex-wrap&quot;&gt;&lt;button id=&quot;mark-all-present&quot; class=&quot;px-4 py-2 rounded-lg bg-green-900/30 hover:bg-green-900/50 text-green-400 text-sm transition-colors&quot;&gt;✅ Semua Hadir&lt;/button&gt; &lt;button id=&quot;mark-all-absent&quot; class=&quot;px-4 py-2 rounded-lg bg-red-900/30 hover:bg-red-900/50 text-red-400 text-sm transition-colors&quot;&gt;❌ Semua Tidak Hadir&lt;/button&gt;
+         &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scrollbar-elegant max-h-96 overflow-y-auto space-y-2&quot; id=&quot;students-list&quot;&gt;&lt;/div&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;card-elegant rounded-2xl p-6 fade-in&quot; style=&quot;animation-delay: 0.7s&quot;&gt;
+       &lt;div class=&quot;flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 flex-wrap&quot;&gt;
+        &lt;h2 class=&quot;font-display text-xl font-semibold gold-text flex items-center gap-2&quot;&gt;&lt;span class=&quot;text-2xl&quot;&gt;📋&lt;/span&gt; Senarai Rekod Kehadiran&lt;/h2&gt;
+        &lt;div class=&quot;flex gap-2 flex-wrap&quot;&gt;&lt;input type=&quot;text&quot; id=&quot;search-input&quot; class=&quot;input-elegant rounded-xl px-4 py-2 text-white focus:outline-none text-sm&quot; placeholder=&quot;🔍 Cari...&quot;&gt; &lt;select id=&quot;filter-class&quot; class=&quot;input-elegant rounded-xl px-4 py-2 text-white focus:outline-none text-sm&quot;&gt; &lt;option value=&quot;&quot;&gt;Semua Kelas&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;overflow-x-auto scrollbar-elegant rounded-xl&quot;&gt;
+        &lt;table class=&quot;w-full min-w-[800px]&quot;&gt;
+         &lt;thead&gt;
+          &lt;tr class=&quot;border-b border-yellow-900/30&quot;&gt;
+           &lt;th class=&quot;text-left py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Tarikh&lt;/th&gt;
+           &lt;th class=&quot;text-left py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Guru&lt;/th&gt;
+           &lt;th class=&quot;text-left py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Kelas&lt;/th&gt;
+           &lt;th class=&quot;text-center py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Jumlah&lt;/th&gt;
+           &lt;th class=&quot;text-center py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Hadir&lt;/th&gt;
+           &lt;th class=&quot;text-center py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;T.Hadir&lt;/th&gt;
+           &lt;th class=&quot;text-center py-4 px-3 text-gray-400 text-sm font-medium&quot;&gt;Tindakan&lt;/th&gt;
+          &lt;/tr&gt;
+         &lt;/thead&gt;
+         &lt;tbody id=&quot;records-table&quot;&gt;
+          &lt;tr&gt;
+           &lt;td colspan=&quot;7&quot; class=&quot;text-center py-12 text-gray-500&quot;&gt;
+            &lt;div class=&quot;flex flex-col items-center gap-2&quot;&gt;&lt;span class=&quot;text-4xl&quot;&gt;📭&lt;/span&gt;
+             &lt;p&gt;Tiada rekod kehadiran&lt;/p&gt;
+             &lt;p class=&quot;text-sm&quot;&gt;Sila tambah rekod baharu&lt;/p&gt;
+            &lt;/div&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+         &lt;/tbody&gt;
+        &lt;/table&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;mt-4 pt-4 border-t border-yellow-900/30 flex justify-between items-center flex-wrap gap-2&quot;&gt;
+        &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
+         &lt;p class=&quot;text-gray-400 text-sm&quot;&gt;&lt;span id=&quot;record-count&quot;&gt;0&lt;/span&gt; rekod dijumpai&lt;/p&gt;
+         &lt;p id=&quot;limit-warning&quot; class=&quot;text-yellow-400 text-sm hidden&quot;&gt;⚠️ Hampir mencapai had maksimum (999 rekod)&lt;/p&gt;
+        &lt;/div&gt;&lt;button id=&quot;export-csv&quot; class=&quot;px-4 py-2 rounded-lg bg-blue-900/30 hover:bg-blue-900/50 text-blue-400 text-sm transition-colors flex items-center gap-2&quot;&gt; 📥 Eksport CSV &lt;/button&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flex justify-center mb-8&quot;&gt;&lt;button type=&quot;submit&quot; id=&quot;submit-btn&quot; form=&quot;murid-form&quot; class=&quot;btn-gold rounded-xl py-4 px-16 text-black font-semibold text-lg shadow-lg&quot;&gt; &lt;span id=&quot;btn-text&quot;&gt;💾 Simpan Rekod&lt;/span&gt; &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;footer class=&quot;text-center pt-6 border-t border-yellow-900/20&quot;&gt;
+     &lt;p class=&quot;text-gray-500 text-sm&quot;&gt;© 2026 Sistem Rekod Kehadiran Harian Murid&lt;/p&gt;
+    &lt;/footer&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;delete-modal&quot; class=&quot;fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4&quot;&gt;
+   &lt;div class=&quot;card-elegant rounded-2xl p-6 max-w-md w-full&quot;&gt;
+    &lt;div class=&quot;text-center&quot;&gt;&lt;span class=&quot;text-5xl mb-4 block&quot;&gt;⚠️&lt;/span&gt;
+     &lt;h3 class=&quot;font-display text-xl font-semibold gold-text mb-2&quot;&gt;Padam Rekod?&lt;/h3&gt;
+     &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Adakah anda pasti untuk memadam rekod ini? Tindakan ini tidak boleh dibatalkan.&lt;/p&gt;
+     &lt;div class=&quot;flex gap-3&quot;&gt;&lt;button id=&quot;cancel-delete&quot; class=&quot;flex-1 input-elegant rounded-xl py-3 text-white font-medium hover:bg-gray-800 transition-colors&quot;&gt; Batal &lt;/button&gt; &lt;button id=&quot;confirm-delete&quot; class=&quot;flex-1 bg-red-600 hover:bg-red-700 rounded-xl py-3 text-white font-medium transition-colors&quot;&gt; Padam &lt;/button&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;export-modal&quot; class=&quot;fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4&quot;&gt;
+   &lt;div class=&quot;card-elegant rounded-2xl p-6 max-w-md w-full&quot;&gt;
+    &lt;div class=&quot;text-center&quot;&gt;&lt;span class=&quot;text-5xl mb-4 block&quot;&gt;📊&lt;/span&gt;
+     &lt;h3 class=&quot;font-display text-xl font-semibold gold-text mb-2&quot;&gt;Pilih Format Eksport&lt;/h3&gt;
+     &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Pilih format data yang anda mahukan&lt;/p&gt;
+     &lt;div class=&quot;flex flex-col gap-3&quot;&gt;&lt;button id=&quot;export-csv-btn&quot; class=&quot;w-full input-elegant rounded-xl py-3 text-white font-medium hover:bg-blue-900/50 transition-colors flex items-center justify-center gap-2&quot;&gt; 📄 Eksport sebagai CSV &lt;/button&gt; &lt;button id=&quot;export-json-btn&quot; class=&quot;w-full input-elegant rounded-xl py-3 text-white font-medium hover:bg-green-900/50 transition-colors flex items-center justify-center gap-2&quot;&gt; 📋 Eksport sebagai JSON &lt;/button&gt; &lt;button id=&quot;cancel-export&quot; class=&quot;w-full input-elegant rounded-xl py-3 text-white font-medium hover:bg-gray-800 transition-colors&quot;&gt; Batal &lt;/button&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;toast&quot; class=&quot;fixed bottom-4 right-4 card-elegant rounded-xl px-6 py-4 transform translate-y-20 opacity-0 transition-all duration-300 z-50&quot;&gt;
+   &lt;p id=&quot;toast-message&quot; class=&quot;text-white flex items-center gap-2&quot;&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    const teachers = [&quot;A'in Fhatin Hanani binti Rijan&quot;, &quot;Abdul Rahim bin MD Lajim&quot;, &quot;Dzulfadly bin AG Anak&quot;, &quot;Roslianah binti Roie&quot;, &quot;Abdul Rahman bin Taip&quot;, &quot;Ahmad Syazwan bin Saofi&quot;, &quot;Alice Dapith&quot;, &quot;antoni Riko Boling&quot;, &quot;Arbaena binti Nahang&quot;, &quot;Arfah bin Arase&quot;, &quot;Azmah binti Asha'ari&quot;, &quot;Hjh. Palam binti Karim&quot;, &quot;Diana binti Darno&quot;, &quot;Baiduri binti Dullah&quot;, &quot;Darmin bin Ladiro&quot;, &quot;Dyana Veronica Henry&quot;, &quot;Elly Massalo&quot;, &quot;Sutrawiya binti Malong&quot;, &quot;Fauziah binti Senen&quot;, &quot;Halimahton Saadiah binti Mahamad&quot;, &quot;Hjh. Masni Juitah binti Tuda&quot;, &quot;Juliyana binti Yahya&quot;, &quot;Herna binti Hussin&quot;, &quot;Mahfuzah binti Mohamed Desa&quot;, &quot;Rabiatun binti Rahman&quot;, &quot;Marini binti Syed Ali&quot;, &quot;Marliyana binti Mohammed&quot;, &quot;Merhma binti Masugi&quot;, &quot;Merlyn Loyola&quot;, &quot;Mohammad Farid bin Mohd Arbi&quot;, &quot;Mohd Hasrul bin Mohd Redzuan&quot;, &quot;Mohd Khairul Amir bin Ahmad&quot;, &quot;Mohd Khuzaifah Bin Ismail&quot;, &quot;Mohd Sam bin Talip @ Mohd Isham&quot;, &quot;Azizah binti Haris&quot;, &quot;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&quot;, &quot;Nor Asidah binti Kalbun&quot;, &quot;Syahmie bin Syahrulhazni&quot;, &quot;Muhammad Admien bin Jasni&quot;, &quot;Mohamad Nurlhafizi bin Abdulnur&quot;, &quot;Noorzalianah binti Insan&quot;, &quot;Nurasyipa binti Ridwan&quot;, &quot;Norhainie binti Herman&quot;, &quot;Nur Anissa binti Roslan&quot;, &quot;Nur Azlin binti Zulkifli&quot;, &quot;Nurhasanah binti Roslan&quot;, &quot;Nurul Aida binti Samsudin&quot;, &quot;Nur Izzah binti Jainudin&quot;, &quot;Auni Nurfarahin binti Aripai&quot;, &quot;Rahman bin Soga&quot;, &quot;Ridhuan bin Arbin&quot;, &quot;Nordin bin Lagudan&quot;, &quot;Hj. Ramsah bin Burhan&quot;, &quot;Misnah binti Miasin&quot;, &quot;Roshaida binti Yeop Ahmad&quot;, &quot;Norliewati Binti Hassan&quot;, &quot;Suhana Binti Sumino&quot;, &quot;Rosharisa binti Herman&quot;, &quot;Hazari bin Hakim&quot;, &quot;Sharon Francis Chuan&quot;, &quot;Mohammad bin Abdul Rajak&quot;, &quot;Rozaimi bin Arshad&quot;, &quot;Salbiah binti Karim&quot;, &quot;Kamisah binti Mohammad&quot;, &quot;Sharif bin Hamdani&quot;, &quot;Siti Nur Syafiah binti Majid&quot;, &quot;Siti Robasiah binti Hj.Rahamat&quot;, &quot;Stevon Luntid&quot;, &quot;Suraya binti Mat Yusop&quot;, &quot;Ummu Nasyibah binti Mamma&quot;, &quot;Wirna binti Abd Hamid&quot;, &quot;Rozinah binti Amirul&quot;, &quot;Junita binti Ajirul&quot;, &quot;Hasbullah bin Ali&quot;].sort();
+
+    const studentLists = {
+      &quot;Prasekolah Exora&quot;: [&quot;NUR FARISYAMIN ZARA BINTI MUHAMAD FARID&quot;, &quot;DAHLIA NADHIRA BINTI DZULFADLY&quot;, &quot;NURAFREENA MAISARAH BINTI ABDULLAH&quot;, &quot;NUR HANA FAEEZAH BINTI MOHD PAIZAL&quot;, &quot;NUR HANI HAFIZAH BINTI MOHD PAIZAL&quot;, &quot;NUR AALIYA CASSANDRA BINTI JOEHARI&quot;, &quot;NUR HAWATTUZZAHRA BINTI ASRIE NIZAM&quot;, &quot;NUR AISYAH BINTI ROSLIANSAH&quot;, &quot;NUR NADIRAH UMAIRAH BINTI HARIFUDIN&quot;, &quot;NUR RAZIAH BINTI HAMDAN&quot;, &quot;AZZIE EZZAHNUR IZZARAH BINTI AZMAN SHAM&quot;, &quot;NUR NADHA ALYEA BINTI MUHAMAD ASRULIZAM&quot;, &quot;CHELSEA ABIGAIL ANTHONY&quot;, &quot;RAYMAN RASMAN BIN ABDULLAH&quot;, &quot;MUHAMMAD IZZUL HAKEEM BIN ASRI&quot;, &quot;MUHAMAD EIDLAN WAFIY BIN RAMLAN&quot;, &quot;NATHANIEL HIMANUEL HARRY&quot;, &quot;MUHAMMAD AIDIL BIN MOHD ASRI&quot;, &quot;SHAMIRUL AZHAR BIN ABDULLAH&quot;, &quot;MUHAMMAD QARIZH SHAKEEL BIN ABDULLAH&quot;, &quot;MUHAMMAD AFIQ FAKHRI BIN JUMARI&quot;, &quot;MUHAMMAD ZAKRUL BIN MOHD ZAINUDDIN&quot;, &quot;MOHAMMAD YAZID BIN MOHD HAFIDZ&quot;, &quot;RAFIQ HAYDEN BIN RIZMAN&quot;, &quot;MOHAMAD FERHAD NOAH BIN MOHAMAD ROZEH&quot;],
+      &quot;Prasekolah Alza&quot;: [&quot;NURMAIDANI RADIAYAH BINTI ABDULLAH&quot;, &quot;AFRAH ALFIYYAH ZARRAZIYYA BINTI JUSTANG&quot;, &quot;NUR ALIYA ZAHIRAH BINTI JUMARDI&quot;, &quot;ASIYAH FALISHA BINTI HERMANSYA&quot;, &quot;SITI HAJAR BINTI MASDI&quot;, &quot;ZALIKHA&quot;, &quot;NUR ALFIRA AQEELA BINTI MAD JEBRA&quot;, &quot;NUR AAFIYAH BINTI ABDULLAH&quot;, &quot;NAVYA HAFLA BINTI MOHD NAEM&quot;, &quot;NUR IRA SYAKIRAH BINTI HERMAN&quot;, &quot;NUR AISYAHMIKAYLA KHAN BINTI MUHAMMAD ZAMIR KHAN&quot;, &quot;SITTI NUR AISYAH BINTI ABDULLAH&quot;, &quot;MUHAMMAD HAZRIL BIN AZWAN&quot;, &quot;MUHAMMAD AZRIL BIN ABDULLAH&quot;, &quot;KHAIRUL AZIM BIN SAIKULANI&quot;, &quot;MUHAMMAD ZIKRI RIZQI BIN MOHAMAD ZAKI&quot;, &quot;MUHAMMAD FARHAN AQIL BIN REDHUAN&quot;, &quot;MUHAMMAD FAZLIEY BIN ABDULLAH&quot;, &quot;IDRIS BIN ABDUL SYAKUR&quot;, &quot;HALIN DAMAI BIN ABDULLAH&quot;, &quot;MUHAMAD AZIZ FAIQ BIN MUHAMAD ISMAIL&quot;, &quot;FIKRI IHTISAM BIN JUNAIDI&quot;, &quot;NUR SYAH REHAN BIN ROSLEEY&quot;, &quot;MUHAMMAD MUHAIMIN KHALIQ BIN MAZLAN&quot;, &quot;MUHAMMAD HARITH HARRAZ BIN JAMAIN&quot;],
+      &quot;Prasekolah Inspira&quot;: [&quot;HAYFA MARDHIAH BINTI MOHAMMAD HAFIZUDDIN&quot;, &quot;NUR IRIS BELLA BINTI SAFAR&quot;, &quot;NUR AISYAH HUMAIRAH BINTI FINDI&quot;, &quot;NUR FALISHA BINTI ABDULLAH&quot;, &quot;NUR FARHEEN MARDINA BINTI MOHD FARDAUS&quot;, &quot;SYAFIAH ANTASAH BINTI ALIMAN&quot;, &quot;AINUL MARDHIAH BINTI AZMY&quot;, &quot;NUR IFRA MIKAYLA BINTI HAFIZUL&quot;, &quot;NUR QAISARA IRDINA BINTI MOHD SIDIK&quot;, &quot;HAZILA BINTI ABDULLAH&quot;, &quot;MARIEBELLE&quot;, &quot;NUR AISYAH BINTI SUHARTO&quot;, &quot;MUHAMMAD QAYYUM FAYYADH BIN MOHD RAZALI&quot;, &quot;MUHAMMAD SHAHER ASYRAF BIN ABDULLAH&quot;, &quot;IZZAR RAYYAN BIN MOHD KADI&quot;, &quot;MUHAMMAD FAYYAD HAIQAL BIN FAIZAL&quot;, &quot;MUHAMMAD SYAHRUL NAZIM BIN NOORAFIZAN&quot;, &quot;ADAM MUHAMMAF ALIF BIN HASSAN&quot;, &quot;AAKIF ARYAN ANAQY BIN RAZALI&quot;, &quot;MOHAMAD HARRIS RADZIL IKHWAN BIN RAZALI&quot;, &quot;MOHAMMAD RAMADANI NASSIR BIN KLEIN&quot;, &quot;MUHAMMAD ALHANAN KAHFI BIN MUHAMMAD AIMAN RAHMAN&quot;, &quot;ARFA MUQRI BIN AZMIL&quot;, &quot;MUHAMMAD FARISH AQEEF BIN ABDUL FATTA&quot;, &quot;MUHAMMAD DZULHAIZUDIN NIZAM BIN MOHD MAHALIDIN&quot;],
+      &quot;1 Inovatif&quot;: [&quot;AANDRA ARMAWAN BIN ASMAN WANDY&quot;, &quot;ADHA ANINA BATRISYIA BINTI IBRAHIM&quot;, &quot;ADLYAN FYRUZ BIN FRANDI&quot;, &quot;AFEEF HARIS BIN AHMAD NAUFAL&quot;, &quot;AINUR SYAZANI BINTI ABDULLAH&quot;, &quot;DAYANG MARYAM AFIAH BINTI DATU MOHD NAJIB&quot;, &quot;FAIM BIN FARMIN&quot;, &quot;FATIMAH AZZAHRA BINTI HERMANSYA&quot;, &quot;MOHAMAD IZZ RUZAIN FAKIH BIN ABDUL KARIM&quot;, &quot;MOHAMAD SYAHFIZ BIN ABDULLAH&quot;, &quot;MOHAMMAD ALIF RIZQI BIN HAMIZAN&quot;, &quot;MOHAMMAD ASRUL BIN ABDULLAH&quot;, &quot;MOHAMMAD AZIEZY SYAHRIEZAN BIN SHAMSUDDIN&quot;, &quot;MOHAMMAD NABEEL AZAD BIN MOHD ZAKUAN&quot;, &quot;MUHAMMAD NURIRFAN BIN BORHAN&quot;, &quot;MUHAMMAD RAIKAL BIN ABDULLAH&quot;, &quot;MUHAMMAD RIZQI SYAWAL BIN JUNAIDI&quot;, &quot;MUHAMMAD SYAHQIR HUZAIFAH BIN ABDULLAH&quot;, &quot;MUHAMMAD ZIYAD ILYAS BIN MOHD ZAID&quot;, &quot;NAAZNEEN HASYA BINTI MOHD NAEM&quot;, &quot;NABILAH AMIRA BINTI AMRI&quot;, &quot;NIA ZALESYA BINTI ABDULLAH&quot;, &quot;NOR AZIZAH BINTI TASIRUDIN&quot;, &quot;NUR AAFIYAH HADIJAH BINTI HADDY&quot;, &quot;NURUL JANNAH BINTI BASRI&quot;, &quot;NURUL MAYA SYUHADAH BINTI MUHAMMAD ASRI&quot;, &quot;SITI NUR ASWARINIE BINTI RIZMAN&quot;],
+      &quot;1 Kreatif&quot;: [&quot;AIMAN FAYYAD BIN ABD RIZAM&quot;, &quot;AISYAH QHAIRA AZZAHRA BINTI LAMJAD&quot;, &quot;ALISHA BINTI ARIPUDDIN&quot;, &quot;ANAS MALIK BIN SULTAN&quot;, &quot;AQMAL QUSHAIRY BIN AMIR HAMZAH&quot;, &quot;MOHAMAD HAFIDZ AIZAT BIN ABDUL FATAH&quot;, &quot;MOHAMMAD SHARMIZAN BIN MOD SAHARI&quot;, &quot;MUHAMAD AZIQRIE BIN SULAIMAN&quot;, &quot;MUHAMMAD AAZAT FAYYAD BIN ABDULLAH&quot;, &quot;MUHAMMAD ADIB AFEEF BIN MOHD ASRI&quot;, &quot;MUHAMMAD ADRIELL ADRIAN BIN SYAHRIZAL&quot;, &quot;MUHAMMAD AFEEF QUEZHAIRY BIN STEPHAN&quot;, &quot;MUHAMMAD AFFAN MIKAEL BIN HERMAN SHA&quot;, &quot;MUHAMMAD AKIF AFIZE BIN ABDUL KHMIS KHAN&quot;, &quot;NUR AAFIYAH IMANI BIINTI AWANG NAZRE&quot;, &quot;NUR ADAWIYAH BINTI ABDULLAH&quot;, &quot;NUR ASH SYAFIA AMANI BINTI SABRAN&quot;, &quot;NUR AYRA DELISHA BINTI MOHD RIZAL&quot;, &quot;NUR DILLANSARI BINTI ABDULLAH&quot;, &quot;NUR FADIYAH BINTI JAIDIL&quot;, &quot;NURUL SYAFIQAH BINTI MUHAMAD FAIRUDIN&quot;, &quot;RAMADHAN QUSHAIRIEL BIN FERANSISCO&quot;, &quot;RASHIQAH AQILAH BINTI MOHD ROZAIMI&quot;, &quot;RAYSHA HANNIS BINTI RUJI&quot;, &quot;SAFIYYAH BINTI MOHAMMAD&quot;, &quot;SHARUL ADHA BIN ABDULLAH&quot;, &quot;YAAQUB BIN MOHD RADZI&quot;],
+      &quot;1 Kritis&quot;: [&quot;AFEEF HARIS BIN ROMZEE&quot;, &quot;AIN AMERA ZAFIRAH BINTI AZLIROL&quot;, &quot;AIREEN MELISSA BINTI ASRUL&quot;, &quot;AISYAH ATIRAH BINTI MOHAMAD NASRI&quot;, &quot;EMERY ABIGHAEL DONNYSIUS&quot;, &quot;FLORA FELIX&quot;, &quot;HAFISDANIL BIN SIMBAR&quot;, &quot;HANAN FILZA BINTI RASHID&quot;, &quot;INSYIRAH QURRATU AYIEN BINTI ZULHAIDI&quot;, &quot;KHALIL ADRIEN BIN NUR AZMEL&quot;, &quot;LUTH DANISH ZAYNE LAJANTI&quot;, &quot;MAY QUINN MATIAS&quot;, &quot;MIKAYLA HANNABETH&quot;, &quot;MIRACLE ENOCH KELVIN&quot;, &quot;MOHAMMAD QAYYUM RIZQI BIN MOHD EZMAN&quot;, &quot;MOHAMMAD SHAFIQ AMMAR BIN RAMLAN&quot;, &quot;MUHAMMAD FAIZ AZWANSYAH BIN ABDULLAH&quot;, &quot;MUHAMMAD HAFIY RAYYAN BIN MOHD AMIN&quot;, &quot;NUR AQILAH HAFIYA BINTI NURDIN&quot;, &quot;NUR AQILAH HUMAIRA BINTI HADI&quot;, &quot;NUR HAFIZAH BINTI HASBIH&quot;, &quot;PUTRA RAYYAN BIN ABDUL SALAM&quot;, &quot;PUTRI AFIFAH BINTI MOHD SADDAM&quot;, &quot;QASH RAYYAN BIN MOHD NOR AZAMI&quot;, &quot;QUE HEEZRIEQ BIN HAIRUL&quot;, &quot;RAFIQNAUFAL BIN AZMI&quot;, &quot;SITI RAHMAH BINTI AHMADDI&quot;, &quot;SOFIYYAH BINTI MOHD KHUZAIFAH&quot;],
+      &quot;1 Patriotik&quot;: [&quot;ARYA SUMAYYAH BINTI ROBBY&quot;, &quot;ASH ASHREEF AZKA BIN ASLAN&quot;, &quot;ASRAN BIN RASLAN&quot;, &quot;AWLA LUBNA BINTI MOHAMMAD FARID&quot;, &quot;AYYAN FAIZ BIN MOHD AIDIL KIFLI&quot;, &quot;AZZREIL MIKAIL BIN MOHD FAZLEE&quot;, &quot;MUHAMMAD FAYYADH ARIQ BIN MOHAIMIN&quot;, &quot;MUHAMMAD HADIF ATTAR BIN FAISAL&quot;, &quot;MUHAMMAD HAFEZBILLAH BIN OMAR&quot;, &quot;MUHAMMAD HAKIM BIN MOHD SUGALA&quot;, &quot;MUHAMMAD HISYAM BIN ARDI&quot;, &quot;MUHAMMAD IZHAM ZIKRIE BIN MOHD SAFRIN&quot;, &quot;MUHAMMAD NADHIF BIN ABDULLAH&quot;, &quot;MUHAMMAD NAZMIZAN BIN NAZRED&quot;, &quot;NUR AMARIAH BINTI MOHD AMAN&quot;, &quot;NUR QURRATUL KHALEESHA BINTI IMRAN&quot;, &quot;NUR RAISHA AMANI BINTI RAHMAT&quot;, &quot;NUR RAMIZAH AAFIYAH BATRISYAH BINTI RAMSAH&quot;, &quot;NUR RANIA RANIQAH BINTI MOHAMMAD REEZUL&quot;, &quot;NUR RIDZYANTI BINTI ABDULLAH&quot;, &quot;NURHANA SYAZUREEN BINTI MUHAMMAT NOR&quot;, &quot;NURMAISARAH BINTI SUPIANSHAH&quot;, &quot;NURQAIREEN FARHANA BINTI MAZLAN&quot;, &quot;NURQALYSYAH QAHIRAH SAFFIYA BINTI SOFIAN&quot;, &quot;SYAHFIZAN BIN MOHD MASRI&quot;, &quot;VARISHA AILA UFAIRAH BINTI HASRIZAN&quot;, &quot;YASIR BIN AB HAMID&quot;, &quot;ZAMARULZAMAN BIN MOHAMMAD ZAMAN&quot;],
+      &quot;1 Proaktif&quot;: [&quot;AISYAH BELLA BINTI ARMAHDI JANSA&quot;, &quot;AISYAH INARA AMANDA BINTI MOHD NIZAM&quot;, &quot;KHAYRA NUR AISY BINTI ABDULLAH&quot;, &quot;MUAZZAM SHAH BIN ABDULLAH&quot;, &quot;MUHAMAD ZARIF AQEEFANAQI BIN SAIFUL&quot;, &quot;MUHAMMAD AIDIL WAIZ BIN MOHD SUKRI&quot;, &quot;MUHAMMAD AIMAN ZHAFRAN BIN HANAFI&quot;, &quot;MUHAMMAD AISH ARYAN BIN AMIR ZAHADI&quot;, &quot;MUHAMMAD ARIFPUDIN BIN JASKANA&quot;, &quot;MUHAMMAD ARMAN RIZKY BIN MOHAMMAD SAIFUL&quot;, &quot;MUHAMMAD AZRIL BIN NULHATI&quot;, &quot;MUHAMMAD FAAEQ BIN MUHD SHAH FADZIL&quot;, &quot;MUHAMMAD FAIQ RIZQI BIN ARDIANSHA&quot;, &quot;NOOR NASRULLA BIN NOR MAJID&quot;, &quot;NUR ARA FAHMY BIN HAZARIH&quot;, &quot;NUR FALISHAH BINTI MOHD NASRI&quot;, &quot;NUR FASHRIANA ROSE BINTI MOHAMAD ROZEH&quot;, &quot;NUR HAFIZATUL NAURA BINTI ABDULLAH&quot;, &quot;NUR HUD KAIFIYA BINTI HERMAN&quot;, &quot;NUR MEDINA MUHAYA BINTI MOH RIZAL&quot;, &quot;NUR QAISA QHALEESYAH BINTI HERWANSYAH&quot;, &quot;NUR SAIYIDAH SURFINA BINTI SAIFUL AZHAR&quot;, &quot;NUR SAMAIRA ATIKA BINTI ABDULLAH&quot;, &quot;NUR ZAHIRAH BINTI MAHADIR&quot;, &quot;NUR ZARA RANIA BINTI SURIANTO&quot;, &quot;YUSUF ANAQI BIN MOHD IZLAN&quot;, &quot;ZHAFRULABHRAQHA QHUZHAYRIE BIN ABDULLAH&quot;, &quot;ZULFIQRIE BIN AZHAR&quot;],
+      &quot;2 Inovatif&quot;: [&quot;AERI LINN BINTI AERONY&quot;, &quot;AHMAD MIRZA BIN ADAM MALIK&quot;, &quot;AIZUDIN BIN AZMAN&quot;, &quot;AKASHA BIN ZINNON&quot;, &quot;ALYANA SYAFINAH BINTI ALFIAN&quot;, &quot;ANNUR UMAIRAH ASSYIFAH BINTI ABDULLAH&quot;, &quot;AQIL NAUFAL BIN GELLIRY&quot;, &quot;ARIF SHAH BIN ABDULLASAH&quot;, &quot;AULIA IZZATUNNISA BINTI AZMAN&quot;, &quot;AZILAINI SOLEHAH BINTI RONZI&quot;, &quot;BATRISYIA AMANI BINTI MOHD SHAFRY&quot;, &quot;BELLA INARA ATILLA BINTI JAMILUL&quot;, &quot;DANIESHA IZZARRA BINTI MOHD. SHARIN SHAH&quot;, &quot;DURRATUL HASANAH BINTI SUDIRMAN&quot;, &quot;EIRSYAD FAWWAS BIN ASBUDI&quot;, &quot;FAHMI ZULHAIRI BIN FANDY&quot;, &quot;HADIF IRFAN BIN JUNAIDI&quot;, &quot;MOHAMAD SAPRI BIN HERMAN TINO&quot;, &quot;MUHAMMAD FARIS DANISH BIN ABDULLAH&quot;, &quot;MUHAMMAD HAFIZ BIN KAZRI&quot;, &quot;MUHAMMAD HAZRIEL HAQIMI BIN ABDULLAH&quot;, &quot;MUHAMMAD SYAHFIQ BIN MAD SAHUDAN&quot;, &quot;MUHAMMAD ZAHIDI BIN MUHAMMAD PAZRI&quot;, &quot;NUR ALFANISA BINTI MOHD AZIZUL&quot;, &quot;NUR ASSYIFATU HAIFA BINTI MOHD FITRI FIRDAUS&quot;, &quot;NUR ELLYIENA IDRYIEYANA BINTI HAJIM&quot;, &quot;NUR IZZAHTUL KHADIJAH BINTI FAZERUL&quot;],
+      &quot;2 Kreatif&quot;: [&quot;FARISHA BINTI ABDULLAH&quot;, &quot;FARISYA MEDINA LUTAM&quot;, &quot;FIONA ZAHIRA BINTI ROMMY&quot;, &quot;IFFA DALISHA BINTI HAZLAN&quot;, &quot;IZZUL HAQ BIN USMAN&quot;, &quot;KHALIL GIBRAN BIN HASSAN&quot;, &quot;MIAZATUL AZZAHRA BINTI SYAHIRAN&quot;, &quot;MOHAMAD SYUKRE AL FIAN BIN ABDULLAH&quot;, &quot;MOHAMAD WAFIQ WAJJA RAMADHAN BIN JULKARNAIN&quot;, &quot;MOHAMMAD AQIL BIN BASRI&quot;, &quot;MOHAMMAD ARFAH BIN MOHD YUSOF&quot;, &quot;MOHAMMAD MIRZAN BIN MOHD BASRI&quot;, &quot;MOHAMMAD SAADAN SYAH BIN ZULFIQA&quot;, &quot;MOHAMMAD SHAFWAN BIN MOHAMAD SOFIE&quot;, &quot;MUHAMAD AFIF SYAZWAN BIN ABDULLAH&quot;, &quot;MUHAMAD AFIQ HAIDAR BIN MOHD HASMAWI&quot;, &quot;MUHAMMAD ARIF BIN MOHD NOOR&quot;, &quot;MUHAMMAD ATHIF BIN HASBULLAH&quot;, &quot;MUHAMMAD ZAIRUL AKHMAL BIN ABDULLAH&quot;, &quot;MUHAMMAD ZUL HISYAM BIN ABDULLAH&quot;, &quot;NUR AFIAH AWLIYA BINTI SYARHAN&quot;, &quot;NUR KHADEEJA BINTI ABD AMIT&quot;, &quot;NUR NAURA IZHEA BINTI MUHAMAD ASRULIZAM&quot;, &quot;NUR SAFIYYAH AQILAH BINTI MUHAMMAD FAIZUL&quot;, &quot;NUR SUHAILA BINTI ABDULLAH&quot;],
+      &quot;2 Kritis&quot;: [&quot;ALVINNOAH BIN HERRICK&quot;, &quot;DARREL ALEXANDER LAWRENCE&quot;, &quot;ECALESIA ELIA&quot;, &quot;ELIZABETH JANE BINTI ROBERT&quot;, &quot;ETHAN DYLAN BIN BELLNEY&quot;, &quot;EVAN DARREN BIN BELLNEY&quot;, &quot;JASSANDRA JASMIN&quot;, &quot;MUHAMMAD DANISH WAIZ BIN AZMI&quot;, &quot;MUHAMMAD FAIREL BIN MOHD.HAFIZ&quot;, &quot;MUHAMMAD FAIYYADH HAFSAR BIN AZMI&quot;, &quot;MUHAMMAD FAIZ AKMIL BIN FAIZAL&quot;, &quot;MUHAMMAD FARIL BIN ABDULLAH&quot;, &quot;MUHAMMAD FIRDAUS BIN FAZIL&quot;, &quot;MUHAMMAD HAFFIEZ RAMADHANY BIN RUSLAN&quot;, &quot;MUHAMMAD HAIKAL BIN ABDULLAH&quot;, &quot;MUHAMMAD HAKIM BIN BIDDA SALEH&quot;, &quot;MUHAMMAD HARITH FITRIE BIN MUHD SHAH FADZIL&quot;, &quot;NAINA MIKAYLA IZZATUNNISA BINTI ABDULLAH&quot;, &quot;NATASIA BELLA HERRY&quot;, &quot;NIA HANA SOFIA BINTI MOHD FAUZI&quot;, &quot;NORSHAZLIANAH BINTI ABDULLAH&quot;, &quot;NUR AAFIYAH MAISARAH BINTI ABDULLAH&quot;, &quot;NUR AFIFAH ADAWIYAH BINTI MOHD.FAIJAL&quot;, &quot;NUR AIRA BATRISYA BINTI HABRIL&quot;, &quot;NUR ALIESHA DANIA AK JIVICE&quot;, &quot;NUR ANNISA ANSIDA BINTI ABDULLAH&quot;, &quot;NUR ARISHA BINTI MOHD ASRI&quot;, &quot;NUR ARISHA BINTI MOHD. AZHAR&quot;, &quot;NUR AZRIAH AFIAH AQILAH BINTI ASSIWEN&quot;, &quot;RYEKENDRICK BIN RICKE NELSON&quot;],
+      &quot;2 Patriotik&quot;: [&quot;MUHAMMAD IMRAN KHAN BIN MUHAMMAD ZAMIR KHAN&quot;, &quot;MUHAMMAD IRFAN BIN M RIZUAN&quot;, &quot;MUHAMMAD IZYAN RAMADHAN BIN MOHAMAD RAZI&quot;, &quot;MUHAMMAD KHAIRIL ANWAR BIN ROSLEEY&quot;, &quot;MUHAMMAD MUAZ AHNAF BIN MOHD RIZAL&quot;, &quot;MUHAMMAD NABIL NAWFAL BIN JASMI&quot;, &quot;MUHAMMAD NAUFAL NAZWAN BIN KHAIRULAZILA&quot;, &quot;MUHAMMAD NIK ANDRASHAH IMAN BIN MOHD SHAHRON&quot;, &quot;MUHAMMAD NIZAM BIN KERANAH @ ABDULLAH&quot;, &quot;MUHAMMAD RAIZ FURQAN BIN MASDI&quot;, &quot;MUHAMMAD SAHIDUL BIN MOHD RIZAL&quot;, &quot;MUHAMMAD SHAFIRAS BIN SHALAN&quot;, &quot;MUHAMMAD SHAHZWAN BIN HAMDAN&quot;, &quot;MUHAMMAD ZULFADLIE BIN MAZLAN&quot;, &quot;NUR EIQZIERA SYAHFATIHAH BINTI FAIZAL&quot;, &quot;NUR FARHANA ATHIRAH BINTI NUL HASIM&quot;, &quot;NUR FARIZAH BINTI MOHAIZAMMI&quot;, &quot;NUR HAFIZAH ILASARI BINTI DASIL @ DALMARUN&quot;, &quot;NUR HANIS QALESYA BINTI ASRI&quot;, &quot;NUR HAURA AULIYA BINTI ABDULLAH&quot;, &quot;NUR HAZIZAH BINTI ABDULLAH&quot;, &quot;NUR HAZLYNDA FATHLYNA BINTI HAZMI&quot;, &quot;NURALISYAH MEYDINA BINTI MOHD. HAMSAH&quot;, &quot;NURAYRA SUMAYYAH BINTI MAZWAN&quot;, &quot;NURHANAN UMAIRAH BINTI ABDULLAH&quot;, &quot;NURUL MAISARAH BINTI OMAR&quot;, &quot;NURUL MIAH FARISAH BINTI ABDULLAH&quot;, &quot;PUTRI AISYAH ALEENA BINTI DANNY&quot;],
+      &quot;2 Proaktif&quot;: [&quot;MUHAMAD IZAT MIKAIL BIN ABDULLAH&quot;, &quot;MUHAMAD SHAQEEL RAHMANI BIN RAMLAN&quot;, &quot;MUHAMMAD ADAM AMSYAR BIN ASMADEY&quot;, &quot;MUHAMMAD ADAM BIN MOHD FAZLY&quot;, &quot;MUHAMMAD AIDAN ADHA BIN MASLAN&quot;, &quot;MUHAMMAD AIMAN ZHAFRAN BIN KHOIRUL ANWAR&quot;, &quot;MUHAMMAD ALMINANSYAH BIN RAMLEE&quot;, &quot;MUHAMMAD AMSYAR BIN SAID&quot;, &quot;MUHAMMAD AQIL IMAN BIN ABBAS&quot;, &quot;MUHAMMAD HISYAMMUZZARIN BIN ZAIRIN&quot;, &quot;NUR IMAN AMIRA BINTI AHMAD&quot;, &quot;NUR SYAFIQAH AZ ZAHRA BINTI MOHD SYAFIEE&quot;, &quot;NUR ZAHIRAH BINTI MUHAMMAD RIZAN&quot;, &quot;NUR ZAHRA AISYAH BINTI MOHD MAHYUDIN&quot;, &quot;NUZHAH IZZARA BINTI JULAIDI&quot;, &quot;PRINCESSIA ZIEYCHEN TAN&quot;, &quot;RABIATUL QHAILA BINTI ABDULLAH&quot;, &quot;ROS HANA FALISHA BINTI ROSMAN&quot;, &quot;ROSYIZZAD BIN ROSMAIN&quot;, &quot;SITI HAMIDAH BINTI JAMIL&quot;, &quot;SITI JUMAZRIENAH BINTI MOHD AZMEER&quot;, &quot;SITI NAZIRAH BINTI EDIASMAWI&quot;, &quot;SITI ZULAIKHA AQILAH BINTI SAIFUL&quot;, &quot;SYAZWAN UWAIZ BIN FAHMI&quot;, &quot;SYEFIRA ASSYIFA BINTI SAHAR&quot;, &quot;THAQIF REZA BIN SUHAIMIE&quot;],
+      &quot;3 Inovatif&quot;: [&quot;ABDUL AZRIF BIN ABDUL SYARI&quot;, &quot;ADHWA ADAWIYAH BINTI MUHAMMAD SHARIN&quot;, &quot;ADINATA BIN ASRUL&quot;, &quot;AHMAD SYAH ARIFF BIN ABDULLAH&quot;, &quot;AINUL MARDHIAH BINTI ABDULLAH&quot;, &quot;AKHMAD FARIDZWAN BIN MOHD RUSTHAM&quot;, &quot;ARIQA NUR AAIRA BINTI MUSLIMIN&quot;, &quot;AYYID AL QAYYIM BIN AKMAL NIZAM&quot;, &quot;DZAKIRATUL MEDINAH BINTI AHMAD&quot;, &quot;JANNALI BIN AB MUIN&quot;, &quot;JULIE ARIANAH BINTI MOD SAHARI&quot;, &quot;MOHAMAD FARISH FAYYADH BIN ABDULLAH&quot;, &quot;MOHAMAD SYAHPUTRA BIN ZULKIFLI&quot;, &quot;MOHAMAD SYAHZAMIN MADARIN BIN SYAHAR ALLI&quot;, &quot;MOHAMMAD ZARIMIE ASYRAF BIN MUHD. HELMI&quot;, &quot;MUHAMMAD ADEED BIN SUHAIMI SAMAD&quot;, &quot;MUHAMMAD AIZAM BIN ABDUL HAMID&quot;, &quot;MUHAMMAD ALEEZAR HAFIEZ BIN JASZURAIDZAR&quot;, &quot;MUHAMMAD AQIEF AQIEM BIN FAISAL&quot;, &quot;MUHAMMAD AZZIZIE IZZUDIN BIN AZMAN SHAM&quot;, &quot;MUHAMMAD FAIZ ALFATEH BIN MOHD FAKHRAN&quot;, &quot;MUHAMMAD FATEH BIN MUHAMAD FAUZY&quot;, &quot;MUHAMMAD FATTAH BIN MUHAMAD FAUZY&quot;, &quot;MUHAMMAD KHALILULLAH BIN LUKMAN&quot;, &quot;MUHAMMAD ZAFRAN ZAHRAN BIN MOHD ZABAR&quot;, &quot;NUR AISHAH IZARRA BINTI RUSMIDI&quot;, &quot;NUR ALYA AZILAH BINTI MAD JEBRA&quot;, &quot;NUR FITRIANI SYAFIRA BINTI FINDI&quot;, &quot;NUR JANNAH AISYAH BINTI MOHD. JAKARIA&quot;, &quot;NUR QAYRA FARISYAH BINTI MOHD FAUZI&quot;, &quot;NUR SYAHIRA BINTI HUSRI&quot;, &quot;NUR UYYAINAH LAILA BINTI SUHAIMI&quot;, &quot;NURHAN IZZAN BIN JULAIDI&quot;, &quot;NURUL SHOFFWIAH BINTI WAN SHOFFIAN&quot;, &quot;NURZAHIRAH DANIA BINTI MOHD ZAID&quot;, &quot;PUTRI NUR ZULAIKHA BINTI HASSAN&quot;, &quot;SITTI ZULAIKHA BINTI RAJAN&quot;],
+      &quot;3 Kreatif&quot;: [&quot;AARON AZIZ BIN ABDULLAH&quot;, &quot;ADRYAN MUKHRISH BIN PAISAL&quot;, &quot;AINUR MARDHIYAH BINTI SRIGUNAWAN&quot;, &quot;ALIF RIDZWAN BIN IDRUS&quot;, &quot;AWANG FAIZ HAKIME BIN ESMARA&quot;, &quot;FATHIYA NURANIE BINTI JAMAIN&quot;, &quot;HAIRUL SAFWAN BIN SIMBAR&quot;, &quot;MIKAYLA FARHANNAH BINTI MALIK&quot;, &quot;MOHAMMAD AIRIL BIN MOHAMMAD KHADAFEE&quot;, &quot;MOHAMMAD SHAZWAN BIN TAUFIK&quot;, &quot;MUHAMMAD AZRYL RAYYAD BIN AZMY&quot;, &quot;MUHAMMAD FAHARUN BIN ABDULLAH&quot;, &quot;MUHAMMAD FIRDAUS BIN RANDDY RAFFIEZAN&quot;, &quot;MUHAMMAD HAFIZAN BIN MUHAMMAD ZAKI&quot;, &quot;MUHAMMAD HASYIM BIN MOHD SUGALA&quot;, &quot;MUHAMMAD HELMY BIN AMIR BAHAL&quot;, &quot;MUHAMMAD HILMAN AQIL ZUHAYR BIN MOHD HAZRI&quot;, &quot;MUHAMMAD MUZZAKIR KABIR BIN MAZLAN&quot;, &quot;MUHAMMAD RAMADHANY BIN HASIM&quot;, &quot;MUHAMMAD RIZQ AMSYAR BIN ABDULLAH&quot;, &quot;MUHAMMAD ZAYNE UMAR BIN MOHAMMAD HAFIZUDDIN&quot;, &quot;NOR ALYSYAH BINTI ABDULLAH&quot;, &quot;NUR AILA SYAHQILA BINTI ZULKIFLI&quot;, &quot;NUR AIRA SYAHQIRA BINTI ZULKIFLI&quot;, &quot;NUR AISYAH LIYANA BINTI JUMAAT&quot;, &quot;NUR AYRA ARIANA BINTI MOHAMAD HELMI&quot;, &quot;NUR IRDINA BATRISYIA BINTI MOHD HAFIZAN&quot;, &quot;NUR SYAHDU BINTI MOHD FAIZAL&quot;, &quot;NUR SYAZLIAH BINTI NORAZMI&quot;, &quot;NUR SYIFAA FARWIZAH BINTI ARAS&quot;, &quot;NURAISYAH NAWWARAH BINTI AMIR HASSAN&quot;, &quot;NURAMNI MARDHIYAH BINTI KENEDY&quot;, &quot;NURSHARIYANA BINTI RAZALI&quot;, &quot;RABIATUL ADAWIYAH BINTI MOHD MUHARAMSHAH&quot;, &quot;SYAZANI BINTI ABDUL HADI&quot;],
+      &quot;3 Kritis&quot;: [&quot;AALIESHA NAZIHA SHAKIRA BINTI RAZALE&quot;, &quot;ABID SOLEH BIN KHAIRIL ANUAR&quot;, &quot;AZLANSHAH BIN RASLAN&quot;, &quot;CAHAYA QAIESYA BINTI ADAM&quot;, &quot;DARWISY ARYAN BIN RENDRA ODDY&quot;, &quot;FATRAS AZZAHRA ALFATHUNISSA BINTI NORDIN&quot;, &quot;HARITH IKHWAN BIN FAIZUL HANAFI&quot;, &quot;HAZEL NAFTALLY HARRY&quot;, &quot;IZZATI BINTI ABD LASHID&quot;, &quot;MOHAMAD ASYRAF HAFIZ AIMAN BIN HABRIL&quot;, &quot;MOHAMAD FAZWAN ELIAS BIN MOHAMAD ROZEH&quot;, &quot;MOHAMMAD AIDIL FITRI BIN RAMLEE&quot;, &quot;MOHAMMAD ANIQ AZIZI BIN MOHD SAHAJI&quot;, &quot;MOHAMMAD AZAM BIN ABDULLAH&quot;, &quot;MOHAMMAD PUTRA SYAUFI BIN SUPIAN&quot;, &quot;MUHAMMAD FATHUDDIN BIN KAMSA&quot;, &quot;MUHAMMAD IMAN SHAH BIN ABDULLAH&quot;, &quot;MUHAMMAD NUH BIN MOHD ANUAR&quot;, &quot;MUHAMMAD RIZWAN BIN ROSLAN&quot;, &quot;MUHAMMAD WAFIY BIN ABDULLAH&quot;, &quot;NOAH NATHANAEL DONNYSIUS&quot;, &quot;NUR ARIANA BINTI ABDUL HAMID&quot;, &quot;NUR AZZAHRA BINTI SURIANTO&quot;, &quot;NUR FALISHA BINTI MOHAMMAD FAUZI&quot;, &quot;NUR FATHIYA HUMAIRA BINTI MOHD FADZRIN&quot;, &quot;NUR IZZARA AISYAH BINTI MOHD SAIRUL&quot;, &quot;NUR KHODIJAH BINTI SUDDIN&quot;, &quot;NUR RAHADATUL DIANDRA BINTI HANAPIAH&quot;, &quot;NUR SYAFIQA ARISSA BINTI JULKIFLI&quot;, &quot;NURAULIA IZZATUNNISA BINTI ROSMING&quot;, &quot;NURUMAIRA BINTI MARTIN&quot;, &quot;RANTIPFEL BIN SARAN&quot;, &quot;SYIFA NAFIATUL ADAWIYAH BINTI MOHAMMAD NORDINI FREZAILAH&quot;, &quot;VILLYUS BIN FARIDI&quot;, &quot;YUNUS BIN AB HAMID&quot;],
+      &quot;3 Patriotik&quot;: [&quot;ADIRATNA BAZILAH BINTI IBRAHIM&quot;, &quot;AFEEF NAWFAL BIN YUZRIZAM&quot;, &quot;AFIZA GHANIAH BINTI AZMIL&quot;, &quot;AHMAD FARIS ADEEN BIN AHMAD FARID&quot;, &quot;EMILYDEA BINTI ERWIN&quot;, &quot;KHAYLA NUR MASYITAH BINTI ABDULLAH&quot;, &quot;MOHAMMAD SHAZRUL FAIZ BIN ABDULLAH&quot;, &quot;MOHAMMAD YASSER AQIL BIN MOHAMMAD YASSIN&quot;, &quot;MUHAMAD SHAHFIQ BIN MISRAN&quot;, &quot;MUHAMMAD AFIQ NAUFAL BIN ABDULLAH&quot;, &quot;MUHAMMAD AMIRUL BIN MOHD NOOR&quot;, &quot;MUHAMMAD AQIL RAYQAL BIN HERMAN SHA&quot;, &quot;MUHAMMAD ASHRAF AZIZUL BIN ABDULLAH&quot;, &quot;MUHAMMAD FAYYADH IQBAL BIN ABDULLAH&quot;, &quot;MUHAMMAD IBNU HAFIZUDDIN BIN MAHIL&quot;, &quot;MUHAMMAD IKMAL AKIL BIN ABDUL&quot;, &quot;MUHAMMAD IQRAM QHUZHAIRI BIN A RAMLEE&quot;, &quot;MUHAMMAD NUR ZIKRIE BIN NUR AL-LATIEF&quot;, &quot;NUR ALINA INARA BINTI JUNAIDI&quot;, &quot;NUR AMIRUL ASYRAF BIN HAZARIH&quot;, &quot;NUR AUNI SYAFINAZ BINTI MOHAMMAD SYUKRI&quot;, &quot;NUR KHADIJAH AZZAHRA BINTI ABDUL ALIM&quot;, &quot;NUR LAILA MUNIRAH BINTI MUHAMMAD SAHFAI&quot;, &quot;NUR MUHAMMAD BIN MUHAMAD FAIZAL&quot;, &quot;NUR RAIQAH AYLA BINTI RINO&quot;, &quot;NURASLINAH BINTI UHAP&quot;, &quot;NURAZURA AZRIYANA BINTI AZRI&quot;, &quot;NURHANA SYAZUWEEN BINTI MUHAMMAT NOR&quot;, &quot;NURSYAFIYAH AHYA BINTI SULAIMAN&quot;, &quot;SAFFA MALAYEKA BINTI ROBBY&quot;, &quot;SARIMAINI BINTI HUSSIN&quot;, &quot;SITI LAILI NUR ALIMAH BINTI BADURUN&quot;, &quot;UQASYAH NIZAR ALKAUTHAR BIN RAZALI&quot;, &quot;YAZEED BIN MOHD RADZI&quot;, &quot;YUSUFF BIN MOHD RADZI&quot;],
+      &quot;3 Proaktif&quot;: [&quot;AAKIFA ANNAILA BINTI ASMAN WANDY&quot;, &quot;ADRIEN FYRUZ BIN FRANDI&quot;, &quot;AIDAN HAFIY BIN A. RAJIT&quot;, &quot;AIMAN ASYRAF BIN NAIN&quot;, &quot;DAYANG NURFARHANA DANIA BINTI SAMSUL&quot;, &quot;HAFIDH LUKMANUL HAKIM BIN ABDULLAH&quot;, &quot;HANNAH HUMAIRAH BINTI MOHD IZLAN&quot;, &quot;MOHAMAD KHAIRY BIN MOHAIZAMMI&quot;, &quot;MOHAMAD RIZARYLL SHAZRYLL BIN MD NAZIR&quot;, &quot;MUHAMAD FAIZ RIZKIY BIN MUHAMAD FAIRUDIN&quot;, &quot;MUHAMAD SYAHRUL NIZAM BIN NOORAFIZAN&quot;, &quot;MUHAMMAD ADAM ASYRAF BIN MASLAN&quot;, &quot;MUHAMMAD ASHRAFF QHUZAIRY BIN RAMLAN&quot;, &quot;MUHAMMAD AZHAR IDRUS BIN MOH RIZAL&quot;, &quot;MUHAMMAD BAZLEY SYAH BIN ROMAN&quot;, &quot;MUHAMMAD EMEER HANIF BIN ASMUNI @ ROSLI&quot;, &quot;MUHAMMAD HAFIY DHIYA'ULHAQ BIN MOHAMMAD DHIYA'UDDIN&quot;, &quot;MUHAMMAD HAZIQ IRSYAD BIN SUPIANSHAH&quot;, &quot;MUHAMMAD REZQIEZAMSYAH NIZAIMIE BIN MOHD NIZAM&quot;, &quot;NAFI BIN MOHAMMAD&quot;, &quot;NUR AFIQAH QAISARAH BINTI PATLIH&quot;, &quot;NUR AISYAH QISTINA BINTI JULKIFLI&quot;, &quot;NUR AISYAH SURAYA BINTI ABDULLAH&quot;, &quot;NUR ALYA AINA BINTI MOHD NOR AZAMI&quot;, &quot;NUR ANAH SYAIRAH BINTI ROSMIN&quot;, &quot;NUR ARIESYAH SYAFIEYAH BINTI ASRIL&quot;, &quot;NUR FATIHAH BINTI RONNY&quot;, &quot;NUR HIDAYAH UMAIRA BINTI ISKANDAR&quot;, &quot;NUR SYAHZANNAH BINTI ABDULLAH&quot;, &quot;NURAZAMUDDIN BIN DASIL @ DALMARUN&quot;, &quot;NURMILNAH BINTI ABDULLAH&quot;, &quot;PARSAH BINTI HAZRI&quot;, &quot;PUTRI NUR JUMRATULHASHIKIN BINTI ABDUL JALIL&quot;, &quot;SHA FARIL ALNUE BIN ABDULLAH&quot;, &quot;SITI KHADIJAH BINTI MASDI&quot;, &quot;UWAIS AL QARNI BIN HERU SETIAWAN&quot;, &quot;WADI ZHARIF BIN AHMAD SALLEH&quot;],
+      &quot;4 Inovatif&quot;: [&quot;ADIB HAKIM BIN ARDIANSHAH&quot;, &quot;ADWA NUR HUSNA BINTI RUSMAN&quot;, &quot;ARASH MIKAIL BIN DEDY OCTAVIA FIRMAN&quot;, &quot;DAYANG FALEESYA BINTI ABDULLAH&quot;, &quot;EVA NUR QALIESYAH BINTI ZULKIPPLI&quot;, &quot;INTAN SHARFINA BINTI ABDULLAH&quot;, &quot;JANNAHTUL ADAWIYAH BINTI ABDULLAH&quot;, &quot;KHAIRUL AZAM BIN SAIKULANI&quot;, &quot;MOHAMMAD SYUKURRAMADHAN BIN ABDULLAH&quot;, &quot;MUHAMMAD ARRAYAN NAUFAL BIN MOHAMMAD REDZA&quot;, &quot;MUHAMMAD FAIZ IZUWAN BIN KHAIRULAZILA&quot;, &quot;MUHAMMAD FIAZJIZAMSYAH NIZAIMIE BIN ABDULLAH&quot;, &quot;MUHAMMAD HANIEF NAUFAL BIN MUHAMMAD PAZRI&quot;, &quot;MUHAMMAD NASRUDDIN BIN MOHD YASSIM&quot;, &quot;MUHAMMAD QAYYIM NAUFAL BIN NIRWANZAH&quot;, &quot;MUHAMMAD SYAHIR ROSDI BIN MOHD SAFRIN&quot;, &quot;MUHAMMAD SYAZRUL FAHMI BIN KASSIM&quot;, &quot;MUHAMMAD ZULHAIKAL FAHMI BIN MOHD MAHALIDIN&quot;, &quot;NUR AISH SYAFIRAH BINTI MOHAMMAD SYUKRI&quot;, &quot;NUR ARIANA ALISHA BINTI SAMSUDDIN&quot;, &quot;NUR BATRISYAH BINTI EWANNOH&quot;, &quot;NUR FARAHANA MAISARAH BINTI HANAPIAH&quot;, &quot;NUR FATIHAH BINTI AHAMAT&quot;, &quot;NUR NADEERA ZAHIRAH BINTI ABDUL RASYID&quot;, &quot;NUR UMAIRA MIRZA BINTI MOHD REZA&quot;, &quot;NUR YURIQA JAUZA BINTI SASUDI&quot;, &quot;NUREEN ZAHRA IMAN BINTI MOHAMMAD FAIZAL&quot;, &quot;NURFITRIYAH BINTI JAIDIL&quot;, &quot;NURQASRINA FALISHA BINTI MAZLAN&quot;, &quot;NURSYAZNI LATISYAH BINTI ABDULLAH&quot;, &quot;NURZAHIRAH MAISARAH BINTI ABDULLAH&quot;, &quot;PUTRI BALQIS&quot;, &quot;SHARHAN KHUZAIRI BIN RAMLAN&quot;, &quot;SHAZZALEA QAIREEN BINTI SHAZLEE&quot;, &quot;SITI AMINAH BINTI JAMIL&quot;],
+      &quot;4 Kreatif&quot;: [&quot;ADIF NASRULLAH BIN NASIRUN&quot;, &quot;AFSHEEN MESYHA BINTI ASRUL&quot;, &quot;ARIYANA IZZATUL BINTI HAIRIE&quot;, &quot;AYRA NAJLA BINTI ABDULLAH&quot;, &quot;DAYANG FAREESYA BINTI ABDULLAH&quot;, &quot;HADWAN BAIHAKI BIN RASMAN&quot;, &quot;JUMAIYZA BINTI ABDULLAH&quot;, &quot;MOHAMAD ANIQ BIN MOHD FADLEE&quot;, &quot;MOHAMMAD AIRIL BIN MOHD SAIN&quot;, &quot;MOHAMMED A'LAA' BIN MOHAMMAD FARID&quot;, &quot;MUHAMMAD AFIQ ASYRAFF BIN SUJATI&quot;, &quot;MUHAMMAD FARIZ BIN ABDULLAH&quot;, &quot;MUHAMMAD FIRAZ RAYQAL BIN FAIZAL&quot;, &quot;MUHAMMAD HARRAZ NAUFAL BIN ABDULLAH&quot;, &quot;MUHAMMAD IZZUL AARIZ BIN MOHD. NASIR&quot;, &quot;MUHAMMAD NAUFFAL BIN JUMAING&quot;, &quot;MUHAMMAD RIDWANSYAH BIN MOHD SHAFRY&quot;, &quot;MUHAMMAD SYAHRUL ASWIN BIN ASMAN&quot;, &quot;MUHAMMAD YASIN BIN BIDDA SALEH&quot;, &quot;NOOR MUHAMMAD AZRIAN ARIFFIN BIN ASSIWEN&quot;, &quot;NUR AIRIA NAZIRA BINTI SAFAR&quot;, &quot;NUR ALESSA BINTI ANUAR&quot;, &quot;NUR DAHLIA NAFISATUL ILMI BINTI MOHD NAZRI&quot;, &quot;NUR HUDNATI KAYSA BINTI ABDULLAH&quot;, &quot;NUR NAILA WAFA BINTI MUHAMAD ASRULIZAM&quot;, &quot;NUR SYAHIRAH AZZAHRA BINTI JUNAIDI&quot;, &quot;NUR WAFA FAEZAH BINTI ABDULLAH&quot;, &quot;NURFAREHAH BADRISYAH BINTI MOHAMMAD AMRI&quot;, &quot;NURUL AFIFAH BINTI MUHAMMAD ZAKI&quot;, &quot;PUTRI NUR ALYSHAH MAISARAH BINTI ABDULLAH&quot;, &quot;RYAIDA FAKHIRAH BINTI ROSMAN&quot;, &quot;SITTI NURSHAMIRAH BINTI SHAMSUDDIN&quot;, &quot;SYAFIRA SYAHIRA BINTI ABDULLAH&quot;],
+      &quot;4 Kritis&quot;: [&quot;AHMAD SYAIF SHAKIL BIN BORHAN&quot;, &quot;ANDI FARIS IRFAN BIN ANDI HAIRUDDIN&quot;, &quot;CASTIEL ZANDER CHARLIE&quot;, &quot;CHRIS ROGER REBA&quot;, &quot;DAIYAN NADHIF BIN DZULFADLY&quot;, &quot;HADFAH ADZARIAAH HASMIN BINTI MOHD AMIN&quot;, &quot;IZAHRA BINTI ABD LASHID&quot;, &quot;LARA AISAH BINTI MOHD SALIANSAH&quot;, &quot;MOHAMAD HAIKAL QAYYUM BIN MOHD AZIZUL&quot;, &quot;MOHAMMAD FAHMI FARHAN BIN LA'ASARAH&quot;, &quot;MOHAMMAD IQZUWAN SYAH BIN ZULFIQA&quot;, &quot;MOHAMMAD SYAZWIEN BIN ABDULLAH&quot;, &quot;MUHAMMAD AIDIL EIKHWAN BIN EMRAN&quot;, &quot;MUHAMMAD FIRDAUS BIN ABDULLAH&quot;, &quot;MUHAMMAD HAIDER MUSTAQIM BIN MUHAMMAD ADAM&quot;, &quot;MUHAMMAD JAZRIEZZANSHAH BIN JASMIE&quot;, &quot;MUHAMMAD RIDZUAN BIN SAID&quot;, &quot;MUHAMMAD SYAHRUL NIZAM BIN MISRAN&quot;, &quot;MUHAMMAD ZAHRAN BIN MAHADIR&quot;, &quot;NATALIA HERRY&quot;, &quot;NORAZIB BIN NOR MAJID&quot;, &quot;NUR AMIERA NADIAH BINTI MOHD OMAR&quot;, &quot;NUR AQILAH BINTI ABDULLAH&quot;, &quot;NUR ASHIYFAH ATHIYRAH BINTI ABDULLAH&quot;, &quot;NUR EIQZAHRA FARIESYAH BINTI FAIZAL&quot;, &quot;NUR FATHIAH FARISAH BINTI MOHD NOOR HAFIZ&quot;, &quot;NUR HADIRAH ALISHA BINTI HARIFUDIN&quot;, &quot;NUR QISYA ADELIA BINTI ASRI&quot;, &quot;NURFITRIE SYUHADA BINTI ABDULLAH&quot;, &quot;PUTRI SYAFIQAH BINTI ABDULLAH&quot;, &quot;QUE HEEZRIEL BIN HAIRUL&quot;, &quot;RUT EKARISTI&quot;, &quot;SYUHAIRA BINTI RANO&quot;, &quot;ZAHRAH ANIS DELISHA BINTI ABDULLAH&quot;, &quot;ZUL FAHRIZ ADRIAN BIN ZAINAL&quot;],
+      &quot;4 Patriotik&quot;: [&quot;ADREENA MYIESHA BINTI PAISAL&quot;, &quot;ALIESYAH QAISARAH BINTI ABDULLAH&quot;, &quot;ANAS MIKAIL QAYYUM BIN ZULHAIDI&quot;, &quot;AZIDAINI BINTI RONZI&quot;, &quot;DAYANG NORIZZAHRA INSYIRAH BINTI ROSMAIN&quot;, &quot;HARRAZ NAUFAL BIN SUPIAN&quot;, &quot;IZZATUL DINIE BINTI OSMAN&quot;, &quot;MOHAMAD NAZRINSYAH BIN ABDULLAH&quot;, &quot;MOHAMMAD SYAHRULNIZAM BIN AHMAD&quot;, &quot;MUHAMMAAD RAZIF MUQRIZ BIN RAJALE&quot;, &quot;MUHAMMAD AQIL BIN ROSLIANSAH&quot;, &quot;MUHAMMAD FAYYAD HAKIM BIN ABDUL RAHIM&quot;, &quot;MUHAMMAD HAKIMI BIN ARDI&quot;, &quot;MUHAMMAD ISMAIL BIN ABDUL RIZAL&quot;, &quot;MUHAMMAD MURSYID BIN HASBULLAH&quot;, &quot;MUHAMMAD RAFI BIN ABDUL RAHMAN&quot;, &quot;MUHAMMAD RAZEEQ DANIELL BIN RAZIZAN&quot;, &quot;MUHAMMAD SYAFIQ BIN ABDULLAH&quot;, &quot;MUHAMMAD SYAZLAN FAHMI BIN KASSIM&quot;, &quot;MUHAMMAD ZIKRY UZMA BIN MOHAMMAD HAFIZUDDIN&quot;, &quot;NUR AFIFA ADAWIYAH BINTI SYARHAN&quot;, &quot;NUR AISYAH NUHA ZAHIRA BINTI ABDULLAH&quot;, &quot;NUR ARIYANA BINTI HASRIL&quot;, &quot;NUR AULIA IZZATUNNISA BINTI ABDUL RAHIM&quot;, &quot;NUR FASHA WANDA BINTI KASIL&quot;, &quot;NUR NABILA BINTI MOHAMMAD SHM&quot;, &quot;NUR RASYIQAH QAISARA BINTI MOHD SUKRI&quot;, &quot;NUR SYAHIRAH BINTI RAZIANSAH&quot;, &quot;NURHAWA SYAZLINA BINTI ABDULLAH&quot;, &quot;NURHAZIQAH BINTI HASBIH&quot;, &quot;NURUL MURSYIDAH BINTI OMAR&quot;, &quot;RIDHWAN BIN AZAMI&quot;, &quot;SAYYID NIYAZ BIN MOHD. SHUKRI&quot;, &quot;SHAMIL BIN SHAMDIN&quot;],
+      &quot;4 Proaktif&quot;: [&quot;ADAM SHAQIEF BIN GELLIRY&quot;, &quot;AINNUL BADRINA BINTI IBRAHIM&quot;, &quot;AL-BUKHARI BIN SULTAN&quot;, &quot;ATTIYYAH AZZARRAH BINTI ABDULLAH&quot;, &quot;DATU FURQAN ASHARI BIN DATU MOHD NAJIB&quot;, &quot;FIONA ZAHRA ULFA BINTI ROMMY&quot;, &quot;HAKIM BIN AZLAN&quot;, &quot;MAIZARA AKMAH BINTI ABDULLAH&quot;, &quot;MOHAMAD MUHAZRIN SYAZWI BIN MOHD MUHALID&quot;, &quot;MOHAMMAD SYAFIE BIN SALIATAIH&quot;, &quot;MUHAMMAD ALIF HAFIZ SHAH BIN MOHD ASRI&quot;, &quot;MUHAMMAD FAYYADH ANIQ BIN MOHAIMIN&quot;, &quot;MUHAMMAD HAKIM BIN SUDDIN&quot;, &quot;MUHAMMAD HATIM ILHAM BIN ABDULLAH&quot;, &quot;MUHAMMAD MUKHSIN KHAN BIN MUHAMMAD ZAMIR KHAN&quot;, &quot;MUHAMMAD QAYYEEM RAHMADFAZLEE BIN MOHD RAZALI&quot;, &quot;MUHAMMAD SYAQIF RIZQ BIN AZMAN&quot;, &quot;MUHAMMAD ZAIM IFWAT BIN MOHD PAIZAL&quot;, &quot;NUR AHMAD BIN NORDIN&quot;, &quot;NUR AISYA ADAWIYAH BINTI MAZWAN&quot;, &quot;NUR AREESA BINTI DARMANSJAH&quot;, &quot;NUR QESHA AMMARA BINTI AMIR MAHMUD&quot;, &quot;NUR QISYA HAZZALEA BINTI HARDI&quot;, &quot;NURAFISYAH BINTI HARIS&quot;, &quot;NURAQILAH HANASAFIYA BINTI HERWIN&quot;, &quot;NURSHAFIYA ALISYA BINTI SOFIAN&quot;, &quot;NURUL JANNAH BINTI FAIZAL&quot;, &quot;RAUDAH NURZULAIKA BINTI FAHMI&quot;, &quot;SHOFIYYAH BINTI MOHD KADI&quot;, &quot;SITI NURSYAHKILAH BINTI ABDULLAH&quot;, &quot;TAJUDIN BIN AHMADDI&quot;],
+      &quot;5 Inovatif&quot;: [&quot;ADAM BIN MOHAMMAD&quot;, &quot;AFFIQ HAKIMI BIN HERWIN&quot;, &quot;AHMAD AL AIDIL BIN AHMAD SHARIZAL&quot;, &quot;AHMAD AZHAR ZAFRAN BIN AZLIROL&quot;, &quot;AHMAD FATIR BIN ABDULLAH&quot;, &quot;AHMAD SYAH HAKIM BIN ABDULLAH&quot;, &quot;AHMAD TARMIZI BIN ABDULLAH&quot;, &quot;AL AFIF JAZIMIN BIN ABDULLAH&quot;, &quot;ALEXXEUS HERRICK&quot;, &quot;AMANEEKA BINTI AMANULLAH KHAN&quot;, &quot;AMY ELFIERAH SYUHADAH BINTI SHAMSUDDIN&quot;, &quot;AYDEN DANIEL BIN BELLNEY&quot;, &quot;FARAALISYA BINTI FARMIN&quot;, &quot;JASHLIAM JASMIN&quot;, &quot;JULIE MALINAH BINTI MOD SAHARI&quot;, &quot;MOHAMMAD ASYRAF ADAMSYAH BIN EDWIN&quot;, &quot;MUHAMMAD AFIQ AL AFIZ BIN ABDULLAH&quot;, &quot;MUHAMMAD KHAIRUL KHUSYAIRI BIN ABU BAKAR&quot;, &quot;MUHAMMAD SUFIAN BIN ABDULLAH&quot;, &quot;NOR MAHIR BIN ABDULLAH&quot;, &quot;NORAZLIEN UMAIRAH BINTI ROSTAM&quot;, &quot;NUR AFIFA FATIHA BINTI ROSLEEY&quot;, &quot;NUR DAMIA IZZATI BINTI SAMSUDDIN&quot;, &quot;NUR RANIA HIDAYAH BINTI RAMLAN&quot;, &quot;NUR SYAZLIANA BINTI MOHAMMAD FAUZI&quot;, &quot;NURFATIH AMINAH BINTI ARMIN&quot;, &quot;NURHIDAYAH AKMA BINTI ABDULLAH&quot;, &quot;NURUL SHOFWANA BINTI ABDULLAH&quot;, &quot;SHAHRUDIN MEGAT PUTRA BIN ABDULLAH&quot;, &quot;SHAZHANIESA ADILA BINTI MOHD NOOR&quot;, &quot;WAFA QURRATU AIN BINTI JULKARNAIN&quot;, &quot;ZULNIZWA BINTI AZHAR&quot;],
+      &quot;5 Kreatif&quot;: [&quot;ADAM MUKHRISH BIN ABDULLAH&quot;, &quot;AHZA FURQAN BIN AMIR HASSAN&quot;, &quot;AZIB AZMIER BIN AZMAN&quot;, &quot;EMILYA BINTI ERWIN&quot;, &quot;HADIRAH BINTI RAZALI&quot;, &quot;KHUZAIRI HAFIZUDIN BIN RUSMIDI&quot;, &quot;MARIAM FARAHEEM BINTI ABDUL KADIR&quot;, &quot;MOHAMAD SYAZRIN BIN SAIRAL&quot;, &quot;MOHAMMAD IRFAN SYAH BIN ROSLAN&quot;, &quot;MOHAMMAD JOHARI BIN JAHURI&quot;, &quot;MOHAMMAD SYAFIQ BIN ABDUL HADI&quot;, &quot;MUHAMMAD ANIQ HAZIZIE BIN AMIL HAMZAH&quot;, &quot;MUHAMMAD AZHAR BIN MASWAN&quot;, &quot;MUHAMMAD HAKIM QUSYAIRI BIN MOHAMMAD REDZA&quot;, &quot;MUHAMMAD QUE QHALYFAH QUESYAIRY BIN ABDULLAH&quot;, &quot;MUHAMMAD SYAFIQ RAYYAN BIN MAD JEBRA&quot;, &quot;NASRUDDIN BIN MOHD NASRI&quot;, &quot;NUR AFINAH BINTI SOLLY BROWN @ ERAHIM&quot;, &quot;NUR ALEESCHA QAISARA BINTI MOHD FAUZI&quot;, &quot;NUR ALFIENA BINTI AMIR BAHAL&quot;, &quot;NUR EIMA RAHIMAH BINTI ABDULLAH&quot;, &quot;NUR ERRYCA ARESHYA BINTI MAZLAN&quot;, &quot;NUR MARISYA NASUHA BINTI MASLAN&quot;, &quot;NUR SYAKIRA SYIFA UMAIRA BINTI HAMIDI&quot;, &quot;NURSYAZIEANNAH ANNATASYA BINTI ABDULLAH&quot;, &quot;NURSYUHADAH BINTI M RIZUAN&quot;, &quot;NURUL AIN SYAHIDA BINTI HUSRI&quot;, &quot;QHAERUL AZAM BIN ZAKARIA&quot;, &quot;RAFFIK ANAK RUSLAN&quot;, &quot;SHERINNE ANN BINTI ABDULLAH&quot;, &quot;ZAFIRAH BINTI ABDULLAH&quot;, &quot;ZULAIKA BINTI AB HAMID&quot;],
+      &quot;5 Kritis&quot;: [&quot;AFRAH NAIELA NAZHEIRAH BINTI ABDULLAH&quot;, &quot;AQIL HARITH BIN MAZLI HAIZAM&quot;, &quot;FARISHA NILA BINTI MAIDIN&quot;, &quot;IZANSYAH BIN MOHD MASRI&quot;, &quot;MOHAMMAD AZRIANSYAH BIN MOHD SADDAM&quot;, &quot;MOHAMMAD HAZIQ BIN NORMAN SHAH&quot;, &quot;MOHAMMAD SUHAIMAN BIN ADIS&quot;, &quot;MOHAMMAD ZAHER BIN ABDULLAH&quot;, &quot;MUHAMAD NAJWAN BIN MOHD RUSTHAM&quot;, &quot;MUHAMMAD AL FURQON BIN ABDULLAH&quot;, &quot;MUHAMMAD ANIQ BIN SIBILI&quot;, &quot;MUHAMMAD AQIF AFSYAR BIN MOHD SALLEH&quot;, &quot;MUHAMMAD DINAH BIN RANEY&quot;, &quot;MUHAMMAD HIZARIL BIN MOHD SUGALA&quot;, &quot;MUHAMMAD MUHARRAM ALNIZAM BIN ABDULLAH&quot;, &quot;MUHAMMAD QOIM FAYYAT BIN MAZLAN&quot;, &quot;MUHAMMAD SHAFIQ BIN SOFIAN&quot;, &quot;NUR ALEYA FITRIANA BINTI YAZID&quot;, &quot;NUR RAZINAH SUHAILI BINTI MUHAMMAD SAHFAI&quot;, &quot;NUR SAKINAH BINTI SYAZWAN&quot;, &quot;NUR SUAINA NATASA BINTI SAMSUALANG&quot;, &quot;NURFIRA AYUNI BINTI JASKANA&quot;, &quot;NURLAILAFATIYAH BINTI HERMAN&quot;, &quot;NURNAFIESHA UMAIRAH BINTI HANAPIAH&quot;, &quot;NURSHUHADA BINTI ABDULLAH&quot;, &quot;NURSYAFIKAH ZAHIRAH BINTI MOHD NURIZAM&quot;, &quot;NURSYAFIYYA ALESHA BINTI ABDULLAH&quot;, &quot;NURUL FARZANA BINTI ZAINUDDIN&quot;, &quot;PUTRA SYAHIR HAIKAL BIN SYARIFFNAHAR&quot;, &quot;RAUDHAHTUL AISYAH BINTI MOHD MUHARAMSHAH&quot;, &quot;SYAIDATUL FAIZWANI BINTI ABDULLAH&quot;, &quot;ZUL AIZAT BIN MUHAMMAD SAFRI&quot;],
+      &quot;5 Patriotik&quot;: [&quot;AHMAD FATIH BIN ABDUL RAHMAN&quot;, &quot;AISYAH MARDHIYAH BINTI SAMSUDDIN&quot;, &quot;ALEESYA AZZAHRAH BINTI MASRANI&quot;, &quot;AMIRUL HAZIQ BIN ARDIANSHAH&quot;, &quot;AMSYAR BIN ABDULLAH&quot;, &quot;ARSYFA SHAFIYYAH BINTI BURHAN&quot;, &quot;FARID IKHWAN BIN SARDI&quot;, &quot;FAZRIN BIN MOHD FAZLY&quot;, &quot;MOHAMMAD IQZAM SYAH BIN ZULFIQA&quot;, &quot;MOHAMMAD RASYAAD AZAD BIN MOHD RAZZI AKHMIL&quot;, &quot;MUHAMAD AIMAN ZIKRI BIN SRIGUNAWAN&quot;, &quot;MUHAMMAD ADAM MUKHRIZ BIN NASRUL&quot;, &quot;MUHAMMAD AKMAL ARSYAD BIN MOHD RASHIDY&quot;, &quot;MUHAMMAD FARIEL QUZAIMIE BIN ROMZIE&quot;, &quot;MUHAMMAD RAFIE SAAD BIN AHMAD&quot;, &quot;MUHAMMAD REYAN BIN JAYEN&quot;, &quot;MUHAMMAD RIDWAN BIN ABDULLAH&quot;, &quot;MUHAMMAD RIZAN BIN ROSLAN&quot;, &quot;NOOR MUHAMMAD ASRIAN AFFENDI BIN ASSIWEN&quot;, &quot;NUR AFIQAH HAZIRAH BINTI KHAIRUL FAHME&quot;, &quot;NUR ALYA SYAKILA BINTI MOHD. KHAIRULLIZAM&quot;, &quot;NUR AMIERA AMANI BINTI ABAS&quot;, &quot;NUR FATIN AISYAH BINTI MOHD YUSRI&quot;, &quot;NUR FITRISYAH BINTI HARIS&quot;, &quot;NUR SAZARATUL ADAWIYAH BINTI AZMAN&quot;, &quot;NUR SYAHIRAH BALQIS BINTI SAJALI&quot;, &quot;NUR SYAHIRAH NAZIRAH BINTI SUHAIMI&quot;, &quot;NUR WAFAA ARISSA BINTI SIZUAN&quot;, &quot;NURSYAZLINA BINTI ABDULLAH&quot;, &quot;NURSYAZRINA BINTI ABDULLAH&quot;, &quot;NURUL ARIEYQA SOFIA BINTI YASRY&quot;, &quot;NURUL FAZIRAH BINTI FAZIL&quot;, &quot;SITI AISYAH BATRISYA BINTI HASSAN BASREY&quot;],
+      &quot;5 Proaktif&quot;: [&quot;AATHIF NADHIF BIN AWANG NAZRE&quot;, &quot;ADAM MUSTHOFA BIN MOHD KHUZAIFAH&quot;, &quot;AIDIL HAKIM BIN ABDULLAH&quot;, &quot;DAFI BIN MOHAMMAD&quot;, &quot;DAYANG ARIANA BINTI ESMARA&quot;, &quot;FAIQ ZUHAILY BIN FANDY&quot;, &quot;MOHAMMAD JUMAZREEN BIN MOHD AZMEER&quot;, &quot;MOHAMMAD QAZEEM AQMAL BIN BASRI&quot;, &quot;MOHAMMAD ZARIEYANSYAH BIN MASRI&quot;, &quot;MUHAMAD HAZIQ HAKIMI BIN MOKLING&quot;, &quot;MUHAMMAD FAHMI AZIZI BIN MOHD FADZRIN&quot;, &quot;MUHAMMAD FAIQ BIN ZAWAWI&quot;, &quot;MUHAMMAD HARITH FAHMIE BIN MUHD SHAH FADZIL&quot;, &quot;MUHAMMAD HAZIQ AIMAN BIN ABDULLAH&quot;, &quot;MUHAMMAD IQHMAL FAZRIEG BIN HAMZAH&quot;, &quot;MUHAMMAD IRFAN BIN ABBAS&quot;, &quot;MUHAMMAD SHAHEEZY BIN MUHAMMAD&quot;, &quot;MUHAMMAD ZAFRI BIN MUNSIF&quot;, &quot;NAZZEITA EZARA EZRYNN BINTI MD NAZIR&quot;, &quot;NUR AINUL MARDHIAH BINTI JUNAEDY&quot;, &quot;NUR AULIYA BINTI ABDULLAH&quot;, &quot;NUR AZLEENA BINTI ABDULLAH&quot;, &quot;NUR EVVA HARLISYA BINTI HARDI&quot;, &quot;NUR FARAH SYAQIRA BINTI BORHAN&quot;, &quot;NURAISYAH BINTI HOSE&quot;, &quot;NURSYUHADA BINTI SUHAIMI&quot;, &quot;NURUL DAMIA ASYIQIN BINTI AZEZI&quot;, &quot;NURUL EIZRIEYNNA ELISYIA BINTI REY ADLAWAN&quot;, &quot;NURYSA DANIA BINTI ABDULLAH&quot;, &quot;QAISYAH UMAYIRAH BINTI NAIN&quot;, &quot;QISTINA BATRISYA BINTI LOKMAN&quot;, &quot;SHARIMAN BIN ABDULLAH&quot;, &quot;SITI ZAHRA ALYAH BINTI ABDULLAH&quot;],
+      &quot;6 Inovatif&quot;: [&quot;DANYSH ZULHUSNI BIN BACHOTANG&quot;, &quot;FAHMI BIN ZAMREE&quot;, &quot;MOHAMMAD FAZRIN BIN ABDULLAH&quot;, &quot;MOHAMMAD NASHARUDIN BIN JASKANA&quot;, &quot;MUHAMMAD AISY NAZHAN BIN MOHD NAZRI&quot;, &quot;MUHAMMAD AKBARRULLAH BIN ANUAR&quot;, &quot;MUHAMMAD AL HAFIZ BIN ABDULLAH&quot;, &quot;MUHAMMAD ALIF JULQAIRI BIN JULKIFLI&quot;, &quot;MUHAMMAD NUR FAKHRUL BIN HADDY&quot;, &quot;MUHAMMAD RIEZAIMY BIN AZMAN&quot;, &quot;MUHAMMAD SUQIMAN BIN ARIFIN&quot;, &quot;MUHAMMAD SYAHZIQRI BIN ABDULLAH&quot;, &quot;MUHAMMAD SYAWAL ALIM BIN BADURUN&quot;, &quot;MUHAMMAD ZAFRIL ZAKWAN BIN MOHD ROSLI&quot;, &quot;NORAINNIE BINTI IDRUS&quot;, &quot;NUR AINUN NAFEESYAH BINTI HAMID&quot;, &quot;NUR ANISAH ZAHRAH BINTI MOHD SUKRI&quot;, &quot;NUR AZZRINA BINTI SURIANTO&quot;, &quot;NUR IZZ ZAFIRAH ATIRAH&quot;, &quot;NUR QAISARA HUSNA BINTI SYARIFFNAHAR&quot;, &quot;NURHAIMAN BIN SUHARTO&quot;, &quot;NURUL AIN FARIHA BINTI MOHAMMAD YASSIN&quot;, &quot;NURUL JANNAH BINTI ABDULLAH&quot;, &quot;QUE HEEZRIN BIN HAIRUL&quot;, &quot;SHARIL AIMAN BIN ABDULLAH&quot;, &quot;SITI NURHIZRATULL BINTI ABDULLAH&quot;, &quot;SITI NURSYAHFIRAH BINTI ABDULLAH&quot;, &quot;WARDAH NUR ALISYA BINTI RAMSAH&quot;],
+      &quot;6 Kreatif&quot;: [&quot;AFGAN SHAH BIN RANO&quot;, &quot;ASHSYAHRIZI ANAK RISTEYER&quot;, &quot;IMTIYAZ AISY RIZQY BIN RAZALI&quot;, &quot;ISYRAF AL ZIQRI BIN IDRUS&quot;, &quot;JEZY FARRIEZ BIN JEFFERI&quot;, &quot;MOHAMMAD SHARUDIN BIN MOD SAHARI&quot;, &quot;MUHAMMAD ADAM HABIBULLAH BIN JAFAR&quot;, &quot;MUHAMMAD ALHAFIZ BIN MUHAMMAD ZAKI&quot;, &quot;MUHAMMAD AZRIDWAN FIRDAUS BIN ABDULLAH&quot;, &quot;MUHAMMAD DANIEL BIN MASDAN&quot;, &quot;MUHAMMAD DARWIS BIN ABDULLAH&quot;, &quot;MUHAMMAD FADIL AIDIL BIN ABDULLAH&quot;, &quot;MUHAMMAD HANIF BIN HADJLMAN&quot;, &quot;MUHAMMAD IRFAN BIN ABDULLAH&quot;, &quot;MUHAMMAD RAMZAH QUE REZQY BIN RAMSAH&quot;, &quot;MUHAMMAD SYUKUR BIN BIDDA SALEH&quot;, &quot;NASRIDAH BINTI MOHD.NASRI&quot;, &quot;NUR AMEERA UMAIRA BINTI KAZRI&quot;, &quot;NUR FATIHAH BINTI MOHAIZAMMI&quot;, &quot;NUR FATIN ATIRAH BINTI ABDULLAH&quot;, &quot;NUR FIRZANAH NAMIRA BINTI MOHD FIRDAUS&quot;, &quot;NUR QASEH DAYANA BINTI ARMANSYAH&quot;, &quot;NUR QHAZRIENA MYA ZAARA BINTI HAJIM&quot;, &quot;NUR SCHAZRIEN QALIESYA BINTI RAZIZAN&quot;, &quot;NUR SYAHADAH BINTI AB RAZAK&quot;, &quot;NUR SYUHADAH BINTI AB RAZAK&quot;, &quot;NURASLIZAH BINTI UHAP&quot;, &quot;NURATIRA ALIYA BINTI AHMAD FIRDAUSI&quot;, &quot;NURUL ALEYA ALEYSA BINTI FAIZUL&quot;, &quot;RANIA SYAQILA BINTI MOHD ROZAIMI&quot;, &quot;ROZITA DEWI BINTI ROZAIMI&quot;, &quot;SITI NUR ADILA BINTI MOHAMMAD KHADAFEE&quot;, &quot;SRI RAHMAH BINTI ROSBAN&quot;],
+      &quot;6 Kritis&quot;: [&quot;AFIIFAH TAQIYYAH BINTI MOHD RASHIDY&quot;, &quot;ANIQ QUSHAIRY BIN AMIR HAMZAH&quot;, &quot;ANNABELLA VICTORIA ADRIAN&quot;, &quot;CHRISTABELLE JANE CHARLIE&quot;, &quot;DANIEL BRAIEN LAJAR&quot;, &quot;DAYANG AINUL MARDHIA BINTI DATU MOHD NAJIB&quot;, &quot;EINSYIRAH ASBINAH BINTI ASBUDI&quot;, &quot;HADIEF HAKIEM BIN ABDULLAH&quot;, &quot;HARRAZ ISKANDAR BIN SUPIAN&quot;, &quot;IFFA QALISHA BINTI HAZLAN&quot;, &quot;JAYNICHI SHIN&quot;, &quot;MOHAMAD FIRASH AIMAN BIN ROMZIE&quot;, &quot;MOHAMMAD AMIRUL BIN AHMAD&quot;, &quot;MOHAMMAD AQASHAH AMIRUL BIN AMIR MAHMUD&quot;, &quot;MOHAMMAD SHAHIZUE ADLI BIN MOHD NOOR&quot;, &quot;MOHAMMAD SOLLEH BIN SALIATAIH&quot;, &quot;MOHAMMAD ZAKRISALAM BIN ABDUL HARIS&quot;, &quot;MUHAMAD DHABIT YUSUF BIN SUHAIMIE&quot;, &quot;MUHAMMAD ANIQ ZUHYLEE BIN MASRANI&quot;, &quot;MUHAMMAD ARIF SOFIAN BIN ABDULLAH&quot;, &quot;MUHAMMAD NAZMIE KHUZAIRIE BIN ASMININ&quot;, &quot;MUHAMMAD NAZRIEL DAEMIEY BIN MANSUR&quot;, &quot;MUHAMMAD RAYYAN FURQAN BIN RUSMAN&quot;, &quot;MUHAMMAD RAZMIE BIN HASSAN&quot;, &quot;NUR AIRA DHIYA BINTI SUHAIMIE&quot;, &quot;NUR FATIHAH NADHRAH BINTI ARAS&quot;, &quot;NUR HIDAYAH BINTI MOHD HASMAWI&quot;, &quot;NURFATIHA UMI SARAH BINTI ABDULLAH&quot;, &quot;PUTRY HANA NASUHA BINTI DEDY OCTAVIA FIRMAN&quot;, &quot;QAISH RYQARL BIN MUHAMAD KAMARULAH&quot;, &quot;RABIATUL ADAWIYAH BINTI HERU SETIAWAN&quot;, &quot;SAIFUL AZMI BIN SHAMDIN&quot;, &quot;SITI AISYAH FARHANA BINTI ROSDIANSYAH&quot;, &quot;TIMOTHY ISSAC BIN HERRY&quot;],
+      &quot;6 Patriotik&quot;: [&quot;ABDUL AZRIN BIN ABDUL SYARI&quot;, &quot;AFIQAH NUR QHAIRIESHA BINTI MOHD SUDIR&quot;, &quot;AHMAD BURHANURDDIN BIN ABDULLAH&quot;, &quot;AHMAD SHAH BIN ABDULLASAH&quot;, &quot;AIMAN FAHMI BIN NORLEE&quot;, &quot;ANDI SYAHMI RAZIQ BIN ABDULLAH&quot;, &quot;ANNUR RAUDHATUL JANNAH BINTI ABDULLAH&quot;, &quot;AURALIA AQISHAH BINTI ALFAIZZE&quot;, &quot;AZMI BIN ZULFIKER&quot;, &quot;DANIEL ASHRAF BIN MOHD. SHARIN SHAH&quot;, &quot;FARIESYAH BINTI ALI&quot;, &quot;MOHAMMAD ZULHELMISYAH BIN HERMAN&quot;, &quot;MUHAMMAD KAZIM BIN ABDUL RIZAL&quot;, &quot;MUHAMMAD NIYAZ BIN ABDULLAH&quot;, &quot;MUHAMMAD NURIZWAN BIN BORHAN&quot;, &quot;MUHAMMAD QHAIRUL AKHILLSHAH BIN KHAIRUL EDZWAN&quot;, &quot;MUHAMMAD SUHZAIMI BIN HASAN SANI&quot;, &quot;NUR AINA ALEESYAH BINTI UMAHIL&quot;, &quot;NUR ALESYAH ZAFIRAH BINTI MOHD ZABAR&quot;, &quot;NUR ALYSYAH ISABELLA BINTI JUMAAT&quot;, &quot;NUR AQILAH ARISSA BINTI MOHAMAD HELMI&quot;, &quot;NUR ARARAH ARIESYAH BINTI SYAHRIN&quot;, &quot;NUR DHIA BINTI ABDULLAH&quot;, &quot;NUR FITRI BINTI MOHAMAD SOFIE&quot;, &quot;NUR KAYYISAH IFFAH BINTI AZMAN&quot;, &quot;NUR RABIAHTUL BINTI SUHAIMI&quot;, &quot;NUR RAUDHATUL NADIA BINTI JUMAING&quot;, &quot;NURTASHA NABIELA BINTI ABDULLAH&quot;, &quot;NURUL FARHANA ALESYA BINTI AHMAD SAKIL&quot;, &quot;PUTRI NUR UMMU AIMAN BINTI ABDULLAH&quot;, &quot;PUTRI QASEH BINTI MUHAMMAD SAFRI&quot;, &quot;ROHAIZAD BIN ROSLIN&quot;, &quot;ROSYIZZAN BIN ROSMAIN&quot;, &quot;UMMULL UMAYRAHH BINTI MUHAMAD FAIZAL&quot;, &quot;ZAKIAH BINTI AB HAMID&quot;],
+      &quot;6 Proaktif&quot;: [&quot;AISYAH HUMAIRAH QAMILA BINTI BASRI&quot;, &quot;FAREEZA NURAIN BINTI JAMAIN&quot;, &quot;FATRAS MASDIEYANA BINTI ABDULLAH&quot;, &quot;MOHAMAD HAFIQ ASYRAF BIN ABDUL FATAH&quot;, &quot;MOHAMMAD HAFIZ BIN MOHD PAIZAL&quot;, &quot;MOHAMMAD IZZ HAKIMI BIN ABDUL ZAHIR&quot;, &quot;MOHAMMAD SYAHNIZAM BIN ABDULLAH&quot;, &quot;MUHAMMAD AL-IZZ BIN SULTAN&quot;, &quot;MUHAMMAD ANIQ FIRAS BIN AZMI&quot;, &quot;MUHAMMAD ASYAFIQ HAZIQ BIN MOHD AZLYEN&quot;, &quot;MUHAMMAD FADIL BIN ALI&quot;, &quot;MUHAMMAD FAKHRUL HAKIM BIN MUHAMAD FAIZUL&quot;, &quot;MUHAMMAD FIRASH ARSHAD BIN ABDULLAH&quot;, &quot;MUHAMMAD IRFAN BIN ABDULLAH&quot;, &quot;MUHAMMAD MIKHAIL BIN SANIN&quot;, &quot;MUHAMMAD NUR RAFIQ BIN ROSLEEY&quot;, &quot;MUHAMMAD YUSMIZAM BIN ABDULLAH&quot;, &quot;NAWFAL RIDHWAN BIN EPIN&quot;, &quot;NOR AIN BINTI ABDULLAH&quot;, &quot;NUR AINA SYAHFINA BINTI ZULKIFLI&quot;, &quot;NUR AZRIEYANA SYAFFIA BINTI MOHD.NURIN&quot;, &quot;NUR HADI ARSYAD BIN HADI&quot;, &quot;NUR IFFAH RAFIQAH BINTI HASBULLAH&quot;, &quot;NUR IZZATI MAWADDAH BINTI MOHD IZLAN&quot;, &quot;NUR PUTRI SUMAYYAH BINTI FAIZAL&quot;, &quot;NUR QYSTINA FATHIYYAH BINTI MAHDIJAL&quot;, &quot;NUR RAQIQAH ATIRAH BINTI RINO&quot;, &quot;NUR UMAIRAH QISYA BINTI ASRI&quot;, &quot;NURAMNI ADAWIYAH BINTI MOHD SALLEH&quot;, &quot;NURFASIHAH BADRISYAH BINTI MOHAMMAD AMRI&quot;, &quot;ROS ATIRA ZAHIRAH BINTI ROSMAN&quot;, &quot;SAKEENA QISYA AQEELA BINTI RANDDY RAFFIEZAN&quot;, &quot;SITI QADIJAH NASIDA BINTI KLEIN&quot;],
+      &quot;PPKI Dinamik&quot;: [&quot;AZLEE IZHAR BIN RONZI&quot;, &quot;AZRAN SYAHQIMIE BIN MOHD MASRAN SAH&quot;, &quot;MUHAMMAD AZAMUDDIN HAKIM BIN SASUDI&quot;, &quot;MUHAMMAD IZZHAR BIN AZMI&quot;, &quot;MUHAMMAD SHAHMI BIN MUHAMMAD FAIZUL&quot;, &quot;MUHAMMAD QAZIM YAHYA BIN AHMAD SALLEH&quot;, &quot;MUHAMMAD YUJIZI BIN MUHAMAD IZZAM&quot;, &quot;SYIFA UMAIYAH BINTI RIMANSYAH&quot;, &quot;MUHAMMAD AFIQ IKHRAF BIN KAMARUDDIN&quot;, &quot;MUHAMMAD IMANSYAH BIN RAMLEE&quot;],
+      &quot;PPKI Fokus&quot;: [&quot;DANIAL IZZ ZUHAYR DLYA BIN SURADI&quot;, &quot;MUHAMMAD NAZMI BIN NULHATI&quot;, &quot;MUHAMMAD SHAHFIQ BIN ABDUL SHAH&quot;, &quot;MUHAMMAD KHAIRUL ASYRAF BIN JAMILUL&quot;, &quot;NUR ALEESYAH BINTI MOHD BASRI&quot;, &quot;ARISSA UMAIRAH BINTI MASRAN&quot;],
+      &quot;PPKI Etika&quot;: [&quot;AIZUDIN BIN AZMAN&quot;, &quot;ELESTER LASIUS&quot;, &quot;EMERY ABIGHAEL DONNYSIUS&quot;, &quot;MOHAMMAD RAFIQ BIN IDRUS&quot;, &quot;MUHAMMAD AZRI BIN MUNSIF&quot;, &quot;NUR JANNAH FATIHAH BINTI MOHD SHAHRULIZAN&quot;, &quot;RIZQIANSYAH BIN MOHD ASROY&quot;]
+    };
+
+    let records = [];
+    let deleteTarget = null;
+    let isLoading = false;
+    let currentAttendance = {};
+
+    const defaultConfig = {
+      main_title: &quot;Rekod Kehadiran Harian Murid&quot;,
+      school_name: &quot;Sistem Pengurusan Kehadiran&quot;
+    };
+
+    function initTeacherDropdown() {
+      const select = document.getElementById('teacher-select');
+      teachers.forEach(teacher =&gt; {
+        const option = document.createElement('option');
+        option.value = teacher;
+        option.textContent = teacher;
+        select.appendChild(option);
+      });
+    }
+
+    function initClassFilter() {
+      const select = document.getElementById('filter-class');
+      const allClasses = Object.keys(studentLists);
+      allClasses.forEach(className =&gt; {
+        const option = document.createElement('option');
+        option.value = className;
+        option.textContent = className;
+        select.appendChild(option);
+      });
+    }
+
+    function setTodayDate() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('date-input').value = today;
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      const icons = { success: '✅', error: '❌', warning: '⚠️' };
+      toastMessage.innerHTML = `${icons[type]} ${message}`;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() =&gt; {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    function updateStats() {
+      const today = new Date().toISOString().split('T')[0];
+      const todayRecords = records.filter(r =&gt; r.date === today);
+      
+      document.getElementById('stat-total').textContent = records.length;
+      document.getElementById('stat-present').textContent = todayRecords.reduce((sum, r) =&gt; sum + (r.present || 0), 0);
+      document.getElementById('stat-absent').textContent = todayRecords.reduce((sum, r) =&gt; sum + (r.absent || 0), 0);
+      
+      const limitWarning = document.getElementById('limit-warning');
+      if (records.length &gt;= 900) {
+        limitWarning.classList.remove('hidden');
+      } else {
+        limitWarning.classList.add('hidden');
+      }
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('ms-MY', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function renderRecords() {
+      const tbody = document.getElementById('records-table');
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const filterClass = document.getElementById('filter-class').value;
+      
+      let filtered = records.filter(r =&gt; {
+        const matchSearch = r.teacher_name.toLowerCase().includes(searchTerm) || 
+                           r.class_name.toLowerCase().includes(searchTerm) ||
+                           r.date.includes(searchTerm);
+        const matchClass = !filterClass || r.class_name === filterClass;
+        return matchSearch &amp;&amp; matchClass;
+      });
+
+      filtered.sort((a, b) =&gt; new Date(b.date) - new Date(a.date));
+
+      document.getElementById('record-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `&lt;tr&gt;&lt;td colspan=&quot;7&quot; class=&quot;text-center py-12 text-gray-500&quot;&gt;&lt;div class=&quot;flex flex-col items-center gap-2&quot;&gt;&lt;span class=&quot;text-4xl&quot;&gt;📭&lt;/span&gt;&lt;p&gt;Tiada rekod kehadiran&lt;/p&gt;&lt;p class=&quot;text-sm&quot;&gt;Sila tambah rekod baharu&lt;/p&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(record =&gt; `
+        &lt;tr class=&quot;table-row border-b border-yellow-900/10 transition-colors&quot; data-id=&quot;${record.__backendId}&quot;&gt;
+          &lt;td class=&quot;py-4 px-3&quot;&gt;&lt;span class=&quot;text-yellow-400 text-sm&quot;&gt;${formatDate(record.date)}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3&quot;&gt;&lt;span class=&quot;text-white text-sm&quot;&gt;${record.teacher_name}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3&quot;&gt;&lt;span class=&quot;inline-block px-3 py-1 rounded-full text-xs font-medium gold-gradient text-black&quot;&gt;${record.class_name}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3 text-center&quot;&gt;&lt;span class=&quot;text-white font-medium&quot;&gt;${record.total_students}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3 text-center&quot;&gt;&lt;span class=&quot;text-green-400 font-medium&quot;&gt;${record.present}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3 text-center&quot;&gt;&lt;span class=&quot;text-red-400 font-medium&quot;&gt;${record.absent}&lt;/span&gt;&lt;/td&gt;
+          &lt;td class=&quot;py-4 px-3 text-center&quot;&gt;&lt;button onclick=&quot;showDeleteModal('${record.__backendId}')&quot; class=&quot;text-red-400 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-red-900/20&quot; title=&quot;Padam&quot;&gt;🗑️&lt;/button&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+      `).join('');
+    }
+
+    function renderStudents() {
+      const selectedClass = document.getElementById('class-select').value;
+      const container = document.getElementById('students-container');
+      const noClassMessage = document.getElementById('no-class-message');
+      const studentsList = document.getElementById('students-list');
+
+      if (!selectedClass) {
+        container.classList.add('hidden');
+        noClassMessage.classList.remove('hidden');
+        currentAttendance = {};
+        return;
+      }
+
+      noClassMessage.classList.add('hidden');
+      container.classList.remove('hidden');
+
+      const students = studentLists[selectedClass] || [];
+      
+      if (students.length === 0) {
+        studentsList.innerHTML = '&lt;div class=&quot;text-center py-8 text-gray-500&quot;&gt;Tiada data murid untuk kelas ini&lt;/div&gt;';
+        return;
+      }
+
+      studentsList.innerHTML = students.map((student, idx) =&gt; {
+        const status = currentAttendance[idx] || 'unmarked';
+        const statusClass = status === 'present' ? 'present' : status === 'absent' ? 'absent' : '';
+        const statusEmoji = status === 'present' ? '✅' : status === 'absent' ? '❌' : '⭕';
+        
+        return `
+          &lt;div class=&quot;student-item ${statusClass} border rounded-lg p-3 flex items-center justify-between cursor-pointer hover:border-yellow-400/50&quot; onclick=&quot;toggleAttendance(${idx})&quot;&gt;
+            &lt;div class=&quot;flex-1 text-sm&quot;&gt;&lt;span&gt;${student}&lt;/span&gt;&lt;/div&gt;
+            &lt;span class=&quot;text-xl&quot;&gt;${statusEmoji}&lt;/span&gt;
+          &lt;/div&gt;
+        `;
+      }).join('');
+
+      updateStudentStats(students.length);
+    }
+
+    function toggleAttendance(idx) {
+      const status = currentAttendance[idx] || 'unmarked';
+      const statuses = ['unmarked', 'present', 'absent'];
+      const nextStatusIdx = (statuses.indexOf(status) + 1) % statuses.length;
+      currentAttendance[idx] = statuses[nextStatusIdx];
+      renderStudents();
+    }
+
+    function updateStudentStats(total) {
+      const presentCount = Object.values(currentAttendance).filter(s =&gt; s === 'present').length;
+      document.getElementById('present-count').textContent = presentCount;
+      document.getElementById('total-students-count').textContent = total;
+    }
+
+    function markAllPresent() {
+      const selectedClass = document.getElementById('class-select').value;
+      const students = studentLists[selectedClass] || [];
+      currentAttendance = {};
+      students.forEach((_, idx) =&gt; {
+        currentAttendance[idx] = 'present';
+      });
+      renderStudents();
+    }
+
+    function markAllAbsent() {
+      const selectedClass = document.getElementById('class-select').value;
+      const students = studentLists[selectedClass] || [];
+      currentAttendance = {};
+      students.forEach((_, idx) =&gt; {
+        currentAttendance[idx] = 'absent';
+      });
+      renderStudents();
+    }
+
+    function showDeleteModal(id) {
+      deleteTarget = id;
+      document.getElementById('delete-modal').classList.remove('hidden');
+      document.getElementById('delete-modal').classList.add('flex');
+    }
+
+    function hideDeleteModal() {
+      deleteTarget = null;
+      document.getElementById('delete-modal').classList.add('hidden');
+      document.getElementById('delete-modal').classList.remove('flex');
+    }
+
+    function showExportModal() {
+      document.getElementById('export-modal').classList.remove('hidden');
+      document.getElementById('export-modal').classList.add('flex');
+    }
+
+    function hideExportModal() {
+      document.getElementById('export-modal').classList.add('hidden');
+      document.getElementById('export-modal').classList.remove('flex');
+    }
+
+    function exportToCSV() {
+      if (records.length === 0) {
+        showToast('Tiada rekod untuk dieksport', 'warning');
+        return;
+      }
+
+      const headers = ['Tarikh', 'Nama Guru', 'Nama Kelas', 'Jumlah Murid', 'Hadir', 'Tidak Hadir', 'Catatan'];
+      const rows = records.map(r =&gt; [
+        formatDate(r.date),
+        r.teacher_name,
+        r.class_name,
+        r.total_students,
+        r.present,
+        r.absent,
+        r.notes || ''
+      ]);
+
+      let csv = headers.join(',') + '\n';
+      rows.forEach(row =&gt; {
+        csv += row.map(cell =&gt; `&quot;${cell}&quot;`).join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      const filename = `Kehadiran_${new Date().toISOString().split('T')[0]}.csv`;
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast(`✅ Fail CSV berjaya dimuat turun! (${filename})`);
+      hideExportModal();
+    }
+
+    function exportToJSON() {
+      if (records.length === 0) {
+        showToast('Tiada rekod untuk dieksport', 'warning');
+        return;
+      }
+
+      const exportData = {
+        tarikh_ekspor: new Date().toISOString(),
+        jumlah_rekod: records.length,
+        data: records.map(r =&gt; ({
+          tarikh: r.date,
+          guru: r.teacher_name,
+          kelas: r.class_name,
+          jumlah_murid: r.total_students,
+          hadir: r.present,
+          tidak_hadir: r.absent,
+          catatan: r.notes || ''
+        }))
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      const filename = `Kehadiran_${new Date().toISOString().split('T')[0]}.json`;
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast(`✅ Fail JSON berjaya dimuat turun! (${filename})`);
+      hideExportModal();
+    }
+
+    async function deleteRecord() {
+      if (!deleteTarget || isLoading) return;
+      
+      const record = records.find(r =&gt; r.__backendId === deleteTarget);
+      if (!record) {
+        hideDeleteModal();
+        return;
+      }
+
+      isLoading = true;
+      document.getElementById('confirm-delete').disabled = true;
+      document.getElementById('confirm-delete').textContent = 'Memadam...';
+
+      const result = await window.dataSdk.delete(record);
+      
+      isLoading = false;
+      document.getElementById('confirm-delete').disabled = false;
+      document.getElementById('confirm-delete').textContent = 'Padam';
+      
+      if (result.isOk) {
+        showToast('Rekod berjaya dipadam!');
+      } else {
+        showToast('Gagal memadam rekod', 'error');
+      }
+      
+      hideDeleteModal();
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (isLoading) return;
+      
+      if (records.length &gt;= 999) {
+        showToast('Had maksimum 999 rekod telah dicapai. Sila padam rekod lama.', 'warning');
+        return;
+      }
+
+      const teacher = document.getElementById('teacher-select').value;
+      const date = document.getElementById('date-input').value;
+      const className = document.getElementById('class-select').value;
+      const notes = document.getElementById('notes-input').value;
+
+      if (!teacher || !date || !className) {
+        showToast('Sila lengkapkan semua maklumat yang diperlukan', 'warning');
+        return;
+      }
+
+      const presentCount = Object.values(currentAttendance).filter(s =&gt; s === 'present').length;
+      const absentCount = Object.values(currentAttendance).filter(s =&gt; s === 'absent').length;
+      const total = presentCount + absentCount;
+
+      if (total === 0) {
+        showToast('Sila tandakan sekurang-kurangnya seorang murid', 'warning');
+        return;
+      }
+
+      isLoading = true;
+      const btn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      btn.disabled = true;
+      btnText.textContent = '⏳ Menyimpan...';
+
+      const newRecord = {
+        id: Date.now().toString(),
+        teacher_name: teacher,
+        date: date,
+        class_name: className,
+        total_students: total,
+        present: presentCount,
+        absent: absentCount,
+        notes: notes,
+        attendance_data: JSON.stringify(currentAttendance),
+        created_at: new Date().toISOString()
+      };
+
+      const result = await window.dataSdk.create(newRecord);
+
+      isLoading = false;
+      btn.disabled = false;
+      btnText.textContent = '💾 Simpan Rekod';
+
+      if (result.isOk) {
+        showToast('Rekod kehadiran berjaya disimpan!');
+        currentAttendance = {};
+        document.getElementById('teacher-select').value = '';
+        document.getElementById('class-select').value = '';
+        document.getElementById('notes-input').value = '';
+        renderStudents();
+      } else {
+        showToast('Gagal menyimpan rekod', 'error');
+      }
+    }
+
+    const dataHandler = {
+      onDataChanged(data) {
+        records = data || [];
+        updateStats();
+        renderRecords();
+      }
+    };
+
+    async function onConfigChange(config) {
+      const title = config.main_title || defaultConfig.main_title;
+      const school = config.school_name || defaultConfig.school_name;
+      
+      document.getElementById('main-title').textContent = title;
+      document.getElementById('school-name').textContent = school;
+    }
+
+    async function init() {
+      initTeacherDropdown();
+      initClassFilter();
+      setTodayDate();
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) =&gt; ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) =&gt; new Map([
+            ['main_title', config.main_title || defaultConfig.main_title],
+            ['school_name', config.school_name || defaultConfig.school_name]
+          ])
+        });
+      }
+
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize data SDK');
+        }
+      }
+
+      document.getElementById('murid-form').addEventListener('submit', handleSubmit);
+      document.getElementById('class-select').addEventListener('change', renderStudents);
+      document.getElementById('search-input').addEventListener('input', renderRecords);
+      document.getElementById('filter-class').addEventListener('change', renderRecords);
+      document.getElementById('cancel-delete').addEventListener('click', hideDeleteModal);
+      document.getElementById('confirm-delete').addEventListener('click', deleteRecord);
+      document.getElementById('mark-all-present').addEventListener('click', markAllPresent);
+      document.getElementById('mark-all-absent').addEventListener('click', markAllAbsent);
+      document.getElementById('export-csv').addEventListener('click', showExportModal);
+      document.getElementById('export-csv-btn').addEventListener('click', exportToCSV);
+      document.getElementById('export-json-btn').addEventListener('click', exportToJSON);
+      document.getElementById('cancel-export').addEventListener('click', hideExportModal);
+      document.getElementById('delete-modal').addEventListener('click', (e) =&gt; {
+        if (e.target === e.currentTarget) hideDeleteModal();
+      });
+      document.getElementById('export-modal').addEventListener('click', (e) =&gt; {
+        if (e.target === e.currentTarget) hideExportModal();
+      });
+    }
+
+    init();
+  &lt;/script&gt;
+ &lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26e55d932da483',t:'MTc3MTg1MTUxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;
+ 
+ 
+ &lt;!-- ================= FIREBASE + KEHADIRAN MURID ================= --&gt;
+&lt;script type=&quot;module&quot;&gt;
+
+import { initializeApp } from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js&quot;;
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  serverTimestamp
+} from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js&quot;;
+
+const firebaseConfig = {
+  apiKey: &quot;YOUR_API_KEY&quot;,
+  authDomain: &quot;YOUR_PROJECT.firebaseapp.com&quot;,
+  projectId: &quot;YOUR_PROJECT_ID&quot;,
+  storageBucket: &quot;YOUR_BUCKET&quot;,
+  messagingSenderId: &quot;XXXX&quot;,
+  appId: &quot;XXXX&quot;
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+// ======================
+// SIMPAN KEHADIRAN MURID
+// ======================
+window.submitKehadiranMurid = async function(event) {
+  event.preventDefault();
+
+  const tarikh = document.getElementById(&quot;murid-tarikh&quot;).value;
+  const guru = document.getElementById(&quot;murid-guru&quot;).value;
+  const kelas = document.getElementById(&quot;murid-kelas&quot;).value;
+  const hadir = parseInt(document.getElementById(&quot;murid-hadir&quot;).value) || 0;
+  const tidakHadir = parseInt(document.getElementById(&quot;murid-tidakhadir&quot;).value) || 0;
+  const ulasan = document.getElementById(&quot;murid-ulasan&quot;).value || &quot;&quot;;
+
+  if (!tarikh || !guru || !kelas) {
+    alert(&quot;Sila lengkapkan semua maklumat.&quot;);
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, &quot;laporan&quot;), {
+      type: &quot;kehadiran-murid&quot;,
+      tarikh,
+      nama: guru,
+      kelas,
+      hadir,
+      tidak_hadir: tidakHadir,
+      ulasan,
+      createdAt: serverTimestamp()
+    });
+
+    document.getElementById(&quot;murid-form&quot;).reset();
+    loadLaporan();
+    alert(&quot;✅ Laporan kehadiran berjaya disimpan.&quot;);
+
+  } catch (error) {
+    console.error(error);
+    alert(&quot;❌ Ralat semasa menyimpan data.&quot;);
+  }
+};
+
+
+// ======================
+// LOAD SEMUA LAPORAN
+// ======================
+window.loadLaporan = async function() {
+
+  const container = document.getElementById(&quot;laporan-container&quot;);
+  container.innerHTML = &quot;&quot;;
+
+  const snapshot = await getDocs(collection(db, &quot;laporan&quot;));
+
+  if (snapshot.empty) {
+    container.innerHTML = `
+      &lt;div class=&quot;text-center py-12 text-gray-400&quot;&gt;
+        &lt;p&gt;📭 Tiada laporan tersimpan&lt;/p&gt;
+      &lt;/div&gt;
+    `;
+    return;
+  }
+
+  snapshot.forEach((docSnap) =&gt; {
+
+    const data = docSnap.data();
+    const docId = docSnap.id;
+
+    if (data.type === &quot;kehadiran-murid&quot;) {
+
+      container.innerHTML += `
+        &lt;div class=&quot;glass-card rounded-xl p-6 laporan-item&quot;&gt;
+
+          &lt;p&gt;&lt;strong&gt;📅 Tarikh:&lt;/strong&gt; ${data.tarikh}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;👤 Guru:&lt;/strong&gt; ${data.nama}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;🎓 Kelas:&lt;/strong&gt; ${data.kelas}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;✅ Hadir:&lt;/strong&gt; ${data.hadir}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;❌ Tidak Hadir:&lt;/strong&gt; ${data.tidak_hadir}&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;💭 Ulasan:&lt;/strong&gt; ${data.ulasan || &quot;-&quot;}&lt;/p&gt;
+
+          &lt;div class=&quot;flex gap-3 mt-4&quot;&gt;
+
+            &lt;button onclick=&quot;printKehadiranPDF(
+              '${data.tarikh}',
+              '${data.nama}',
+              '${data.kelas}',
+              '${data.hadir}',
+              '${data.tidak_hadir}',
+              '${data.ulasan || &quot;&quot;}'
+            )&quot;
+            class=&quot;bg-blue-500 text-white px-4 py-2 rounded-lg text-sm&quot;&gt;
+            📄 Cetak
+            &lt;/button&gt;
+
+            &lt;button onclick=&quot;padamLaporan('${docId}')&quot;
+            class=&quot;bg-red-500 text-white px-4 py-2 rounded-lg text-sm&quot;&gt;
+            🗑️ Padam
+            &lt;/button&gt;
+
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `;
+    }
+
+  });
+};
+
+
+// ======================
+// PADAM LAPORAN
+// ======================
+window.padamLaporan = async function(docId) {
+
+  if (!confirm(&quot;Adakah anda pasti mahu padam laporan ini?&quot;)) return;
+
+  await deleteDoc(doc(db, &quot;laporan&quot;, docId));
+  loadLaporan();
+};
+
+
+// AUTO LOAD
+window.onload = function() {
+  loadLaporan();
+};
+
+&lt;/script&gt;
+
+
+
+&lt;!-- ================= PDF LIBRARY ================= --&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js&quot;&gt;&lt;/script&gt;
+
+
+
+&lt;!-- ================= PRINT PDF ================= --&gt;
+&lt;script&gt;
+function printKehadiranPDF(tarikh, guru, kelas, hadir, tidakHadir, ulasan) {
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const today = new Date().toLocaleDateString(&quot;ms-MY&quot;);
+
+  doc.setFontSize(16);
+  doc.text(&quot;SEKOLAH KEBANGSAAN UMAS-UMAS&quot;, 105, 20, { align: &quot;center&quot; });
+
+  doc.setFontSize(13);
+  doc.text(&quot;LAPORAN KEHADIRAN MURID&quot;, 105, 30, { align: &quot;center&quot; });
+
+  doc.line(20, 35, 190, 35);
+
+  doc.setFontSize(11);
+  doc.text(&quot;Tarikh         : &quot; + tarikh, 20, 50);
+  doc.text(&quot;Nama Guru      : &quot; + guru, 20, 60);
+  doc.text(&quot;Kelas          : &quot; + kelas, 20, 70);
+  doc.text(&quot;Jumlah Hadir   : &quot; + hadir, 20, 80);
+  doc.text(&quot;Tidak Hadir    : &quot; + tidakHadir, 20, 90);
+
+  doc.text(&quot;Ulasan:&quot;, 20, 110);
+  doc.text(ulasan || &quot;-&quot;, 20, 120, { maxWidth: 170 });
+
+  doc.text(&quot;__________________________&quot;, 20, 230);
+  doc.text(&quot;Guru Bertugas&quot;, 20, 240);
+
+  doc.text(&quot;__________________________&quot;, 120, 230);
+  doc.text(&quot;PK Hal Ehwal Murid&quot;, 120, 240);
+
+  doc.text(&quot;Dicetak pada: &quot; + today, 20, 280);
+
+  doc.save(&quot;Laporan_Kehadiran_&quot; + tarikh + &quot;.pdf&quot;);
+}
+    &lt;/script&gt;
+ 
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>

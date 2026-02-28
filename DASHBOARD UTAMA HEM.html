@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!doctype html&gt;
+&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Dashboard Hal Ehwal Murid&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;amp;family=Space+Grotesk:wght@400;500;600;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;style&gt;
+    * { box-sizing: border-box; }
+    
+    html, body { height: 100%; }
+    
+    .font-heading { font-family: 'Space Grotesk', sans-serif; }
+    .font-body { font-family: 'Outfit', sans-serif; }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+      50% { box-shadow: 0 0 30px 8px rgba(212, 175, 55, 0.2); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .animate-fade-in { animation: fadeIn 0.7s ease-out forwards; }
+    .animate-slide-up { animation: slideInUp 0.6s ease-out forwards; }
+    .animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; }
+    .animate-slide-right { animation: slideInRight 0.6s ease-out forwards; }
+    .animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
+    .pulse-gold { animation: pulse-gold 2.5s infinite; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    
+    .bg-animated {
+      background: linear-gradient(-45deg, #0a0e27, #1a1f3a, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.1);
+      transform: translateY(-5px);
+    }
+    
+    .gold-gradient {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 50%, #D4AF37 100%);
+    }
+    
+    .gold-glow {
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+    
+    .nav-item {
+      position: relative;
+      padding: 10px 16px;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .nav-item:hover::before {
+      left: 100%;
+    }
+    
+    .nav-item.active {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #F4E4BA;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+    
+    input, select, textarea {
+      transition: all 0.3s ease;
+      background: rgba(10, 14, 39, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #F4E4BA;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      background: rgba(10, 14, 39, 0.9);
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: rgba(244, 228, 186, 0.5);
+    }
+
+    select option {
+      background: #0a0e27;
+      color: #F4E4BA;
+    }
+
+    select option:hover {
+      background: rgba(212, 175, 55, 0.2);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 100%);
+      color: #0a0e27;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: left 0.4s ease;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+    }
+    
+    .btn-primary:hover:not(:disabled)::before {
+      left: 100%;
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #F4E4BA;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(212, 175, 55, 0.1);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .unit-btn {
+      cursor: pointer;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .unit-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: rgba(212, 175, 55, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .unit-btn.active {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 100%);
+      color: #0a0e27;
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    }
+    
+    .success-toast {
+      animation: slideInUp 0.4s ease-out;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      backdrop-filter: blur(10px);
+    }
+    
+    .form-group {
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+    
+    .scrollbar-custom::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .scrollbar-custom::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #D4AF37, #F4E4BA);
+      border-radius: 4px;
+    }
+    
+    .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #F4E4BA, #D4AF37);
+    }
+    
+    .tab-kehadiran { --tab-color: #10B981; }
+    .tab-rmt { --tab-color: #F59E0B; }
+    .tab-guru { --tab-color: #8B5CF6; }
+    .tab-hem { --tab-color: #06B6D4; }
+    .tab-laporan { --tab-color: #3B82F6; }
+    .tab-pekeliling { --tab-color: #EF4444; }
+    
+    .section-content {
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #F4E4BA;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: rgba(212, 175, 55, 0.6);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4E4BA 100%);
+      color: #0a0e27;
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    }
+
+    .laporan-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.3s ease;
+      animation: slideInUp 0.5s ease-out forwards;
+    }
+
+    .laporan-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .laporan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .laporan-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #F4E4BA;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .laporan-delete-btn {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #FCA5A5;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .laporan-delete-btn:hover {
+      background: rgba(239, 68, 68, 0.4);
+      border-color: rgba(239, 68, 68, 0.6);
+      color: #FEE2E2;
+    }
+  &lt;/style&gt;
+  &lt;style&gt;body { box-sizing: border-box; }&lt;/style&gt;
+  &lt;script src=&quot;/_sdk/data_sdk.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body class=&quot;h-full bg-animated text-white font-body&quot;&gt;
+  &lt;div id=&quot;app&quot; class=&quot;h-full w-full flex flex-col overflow-auto scrollbar-custom&quot;&gt;
+   &lt;header class=&quot;w-full bg-gradient-to-b from-rgba(10,14,39,0.8) to-transparent border-b border-yellow-600/20 px-6 py-6 sticky top-0 z-50 backdrop-blur-md animate-fade-in&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+     &lt;div class=&quot;flex items-center justify-between mb-6&quot;&gt;
+      &lt;div class=&quot;flex items-center gap-5 animate-slide-left&quot;&gt;
+       &lt;div class=&quot;w-16 h-16 rounded-2xl gold-gradient flex items-center justify-center pulse-gold shadow-2xl&quot;&gt;
+        &lt;span class=&quot;text-3xl animate-float&quot;&gt;📋&lt;/span&gt;
+       &lt;/div&gt;
+       &lt;div&gt;
+        &lt;h1 id=&quot;school-name&quot; class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-100 to-yellow-400 bg-clip-text text-transparent&quot;&gt;SK Umas-Umas&lt;/h1&gt;
+        &lt;p id=&quot;form-title&quot; class=&quot;text-yellow-600/90 text-sm tracking-widest uppercase font-medium&quot;&gt;Dashboard Hal Ehwal Murid&lt;/p&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;flex items-center gap-4 animate-slide-right&quot;&gt;
+       &lt;div class=&quot;glass-card px-4 py-2 rounded-lg&quot;&gt;
+        &lt;div class=&quot;flex items-center gap-2 text-green-400&quot;&gt;
+         &lt;span class=&quot;w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse&quot;&gt;&lt;/span&gt; &lt;span class=&quot;text-sm font-medium&quot;&gt;Siap&lt;/span&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;w-12 h-12 rounded-full gold-gradient flex items-center justify-center text-xl shadow-lg&quot;&gt;
+        👤
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+   &lt;/header&gt;
+   &lt;nav class=&quot;w-full bg-gradient-to-r from-rgba(10,14,39,0.6) to-transparent border-b border-yellow-600/10 px-6 py-4 backdrop-blur-sm sticky top-20 z-40&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto flex gap-2 overflow-x-auto scrollbar-custom pb-2&quot;&gt;
+     &lt;button onclick=&quot;showSection('kehadiran')&quot; class=&quot;nav-btn nav-item active tab-kehadiran px-5 py-2.5 text-sm font-semibold text-yellow-400 whitespace-nowrap rounded-lg&quot; data-section=&quot;kehadiran&quot;&gt;📋 Kehadiran&lt;/button&gt; &lt;button onclick=&quot;showSection('rmt')&quot; class=&quot;nav-btn nav-item tab-rmt px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-yellow-300 whitespace-nowrap rounded-lg transition-colors&quot; data-section=&quot;rmt&quot;&gt;🍽️ RMT Murid&lt;/button&gt; &lt;button onclick=&quot;showSection('rmt-guru')&quot; class=&quot;nav-btn nav-item tab-guru px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-yellow-300 whitespace-nowrap rounded-lg transition-colors&quot; data-section=&quot;rmt-guru&quot;&gt;👨‍🏫 RMT Guru&lt;/button&gt; &lt;button onclick=&quot;showSection('laporan')&quot; class=&quot;nav-btn nav-item tab-laporan px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-yellow-300 whitespace-nowrap rounded-lg transition-colors&quot; data-section=&quot;laporan&quot;&gt;📊 Laporan&lt;/button&gt; &lt;button onclick=&quot;showSection('unit-hem')&quot; class=&quot;nav-btn nav-item tab-hem px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-yellow-300 whitespace-nowrap rounded-lg transition-colors&quot; data-section=&quot;unit-hem&quot;&gt;🏛️ Unit HEM&lt;/button&gt; &lt;button onclick=&quot;showSection('pekeliling')&quot; class=&quot;nav-btn nav-item tab-pekeliling px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-yellow-300 whitespace-nowrap rounded-lg transition-colors&quot; data-section=&quot;pekeliling&quot;&gt;📜 Pekeliling&lt;/button&gt;
+    &lt;/div&gt;
+   &lt;/nav&gt;
+   &lt;main class=&quot;flex-1 w-full p-6&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+     &lt;section id=&quot;section-kehadiran&quot; class=&quot;section-content animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;📋&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Laporan Kehadiran Murid&lt;/h2&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;flex justify-center pt-8&quot;&gt;
+        &lt;a href=&quot;https://skumasumasreportcentre.my.canva.site/c1spsy3panh6p60f&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;btn-primary px-8 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition-transform shadow-lg&quot;&gt;🔗 Pusat Laporan&lt;/a&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;section-rmt&quot; class=&quot;section-content hidden animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;🍽️&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Laporan RMT Murid&lt;/h2&gt;
+       &lt;/div&gt;
+       &lt;form id=&quot;rmt-form&quot; onsubmit=&quot;submitRMT(event)&quot; class=&quot;space-y-6&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;rmt-tarikh&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;📅 Tarikh Pengisian&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;rmt-tarikh&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;rmt-guru&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;👨‍🏫 Nama Guru&lt;/label&gt; &lt;select id=&quot;rmt-guru&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Nama Guru --&lt;/option&gt; &lt;option&gt;A'in Fhatin Hanani binti Rijan&lt;/option&gt; &lt;option&gt;Abdul Rahim bin MD Lajim&lt;/option&gt; &lt;option&gt;Dzulfadly bin AG Anak&lt;/option&gt; &lt;option&gt;Roslianah binti Roie&lt;/option&gt; &lt;option&gt;Abdul Rahman bin Taip&lt;/option&gt; &lt;option&gt;Ahmad Syazwan bin Saofi&lt;/option&gt; &lt;option&gt;Alice Dapith&lt;/option&gt; &lt;option&gt;Antoni Riko Boling&lt;/option&gt; &lt;option&gt;Arbaena binti Nahang&lt;/option&gt; &lt;option&gt;Arfah bin Arase&lt;/option&gt; &lt;option&gt;Azmah binti Asha'ari&lt;/option&gt; &lt;option&gt;Hjh. Palam binti Karim&lt;/option&gt; &lt;option&gt;Diana binti Darno&lt;/option&gt; &lt;option&gt;Baiduri binti Dullah&lt;/option&gt; &lt;option&gt;Darmin bin Ladiro&lt;/option&gt; &lt;option&gt;Dyana Veronica Henry&lt;/option&gt; &lt;option&gt;Elly Massalo&lt;/option&gt; &lt;option&gt;Sutrawiya binti Malong&lt;/option&gt; &lt;option&gt;Fauziah binti Senen&lt;/option&gt; &lt;option&gt;Halimahton Saadiah binti Mahamad&lt;/option&gt; &lt;option&gt;Hjh. Masni Juitah binti Tuda&lt;/option&gt; &lt;option&gt;Juliyana binti Yahya&lt;/option&gt; &lt;option&gt;Herna binti Hussin&lt;/option&gt; &lt;option&gt;Mahfuzah binti Mohamed Desa&lt;/option&gt; &lt;option&gt;Rabiatun binti Rahman&lt;/option&gt; &lt;option&gt;Marini binti Syed Ali&lt;/option&gt; &lt;option&gt;Marliyana binti Mohammed&lt;/option&gt; &lt;option&gt;Merhma binti Masugi&lt;/option&gt; &lt;option&gt;Merlyn Loyola&lt;/option&gt; &lt;option&gt;Mohammad Farid bin Mohd Arbi&lt;/option&gt; &lt;option&gt;Mohd Hasrul bin Mohd Redzuan&lt;/option&gt; &lt;option&gt;Mohd Khairul Amir bin Ahmad&lt;/option&gt; &lt;option&gt;Mohd Khuzaifah Bin Ismail&lt;/option&gt; &lt;option&gt;Mohd Sam bin Talip @ Mohd Isham&lt;/option&gt; &lt;option&gt;Azizah binti Haris&lt;/option&gt; &lt;option&gt;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&lt;/option&gt; &lt;option&gt;Nor Asidah binti Kalbun&lt;/option&gt; &lt;option&gt;Syahmie bin Syahrulhazni&lt;/option&gt; &lt;option&gt;Muhammad Admien bin Jasni&lt;/option&gt; &lt;option&gt;Mohamad Nurlhafizi bin Abdulnur&lt;/option&gt; &lt;option&gt;Noorzalianah binti Insan&lt;/option&gt; &lt;option&gt;Nurasyipa binti Ridwan&lt;/option&gt; &lt;option&gt;Norhainie binti Herman&lt;/option&gt; &lt;option&gt;Nur Anissa binti Roslan&lt;/option&gt; &lt;option&gt;Nur Azlin binti Zulkifli&lt;/option&gt; &lt;option&gt;Nurhasanah binti Roslan&lt;/option&gt; &lt;option&gt;Nurul Aida binti Samsudin&lt;/option&gt; &lt;option&gt;Nur Izzah binti Jainudin&lt;/option&gt; &lt;option&gt;Auni Nurfarahin binti Aripai&lt;/option&gt; &lt;option&gt;Rahman bin Soga&lt;/option&gt; &lt;option&gt;Ridhuan bin Arbin&lt;/option&gt; &lt;option&gt;Nordin bin Lagudan&lt;/option&gt; &lt;option&gt;Hj. Ramsah bin Burhan&lt;/option&gt; &lt;option&gt;Misnah binti Miasin&lt;/option&gt; &lt;option&gt;Roshaida binti Yeop Ahmad&lt;/option&gt; &lt;option&gt;Norliewati Binti Hassan&lt;/option&gt; &lt;option&gt;Suhana Binti Sumino&lt;/option&gt; &lt;option&gt;Rosharisa binti Herman&lt;/option&gt; &lt;option&gt;Hazari bin Hakim&lt;/option&gt; &lt;option&gt;Sharon Francis Chuan&lt;/option&gt; &lt;option&gt;Mohammad bin Abdul Rajak&lt;/option&gt; &lt;option&gt;Rozaimi bin Arshad&lt;/option&gt; &lt;option&gt;Salbiah binti Karim&lt;/option&gt; &lt;option&gt;Kamisah binti Mohammad&lt;/option&gt; &lt;option&gt;Sharif bin Hamdani&lt;/option&gt; &lt;option&gt;Siti Nur Syafiah binti Majid&lt;/option&gt; &lt;option&gt;Siti Robasiah binti Hj.Rahamat&lt;/option&gt; &lt;option&gt;Stevon Luntid&lt;/option&gt; &lt;option&gt;Suraya binti Mat Yusop&lt;/option&gt; &lt;option&gt;Ummu Nasyibah binti Mamma&lt;/option&gt; &lt;option&gt;Wirna binti Abd Hamid&lt;/option&gt; &lt;option&gt;Rozinah binti Amirul&lt;/option&gt; &lt;option&gt;Junita binti Ajirul&lt;/option&gt; &lt;option&gt;Hasbullah bin Ali&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;rmt-menu&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;🍚 Menu Utama&lt;/label&gt; &lt;select id=&quot;rmt-menu&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Menu --&lt;/option&gt; &lt;option value=&quot;Nasi Ayam&quot;&gt;🍗 Nasi Ayam&lt;/option&gt; &lt;option value=&quot;Nasi Goreng Cina&quot;&gt;🥢 Nasi Goreng Cina&lt;/option&gt; &lt;option value=&quot;Nasi Paprik&quot;&gt;🌶️ Nasi Paprik&lt;/option&gt; &lt;option value=&quot;Nasi Lemak&quot;&gt;🥥 Nasi Lemak&lt;/option&gt; &lt;option value=&quot;Nasi Dengan Kari Ayam&quot;&gt;🍛 Nasi Dengan Kari Ayam&lt;/option&gt; &lt;option value=&quot;Nasi Goreng Kampung&quot;&gt;🌾 Nasi Goreng Kampung&lt;/option&gt; &lt;option value=&quot;Bihun Goreng&quot;&gt;🍜 Bihun Goreng&lt;/option&gt; &lt;option value=&quot;Mi Goreng&quot;&gt;🍝 Mi Goreng&lt;/option&gt; &lt;option value=&quot;Soto&quot;&gt;🍲 Soto&lt;/option&gt; &lt;option value=&quot;Bubur Ayam&quot;&gt;🍚 Bubur Ayam&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;rmt-buah&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;🍎 Buah-Buahan&lt;/label&gt; &lt;select id=&quot;rmt-buah&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Buah --&lt;/option&gt; &lt;option value=&quot;Betik&quot;&gt;🧡 Betik&lt;/option&gt; &lt;option value=&quot;Epal&quot;&gt;❤️ Epal&lt;/option&gt; &lt;option value=&quot;Pisang&quot;&gt;💛 Pisang&lt;/option&gt; &lt;option value=&quot;Oren&quot;&gt;🧡 Oren&lt;/option&gt; &lt;option value=&quot;Tembikai&quot;&gt;🍉 Tembikai&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;rmt-ulasan&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;💭 Ulasan Guru&lt;/label&gt; &lt;textarea id=&quot;rmt-ulasan&quot; rows=&quot;4&quot; placeholder=&quot;Masukkan ulasan...&quot; class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none resize-none&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex gap-4 pt-4&quot;&gt;
+         &lt;button type=&quot;submit&quot; class=&quot;flex-1 btn-primary py-3 rounded-xl&quot;&gt;💾 Simpan&lt;/button&gt; &lt;button type=&quot;reset&quot; class=&quot;flex-1 btn-secondary py-3 rounded-xl&quot;&gt;🔄 Kosongkan&lt;/button&gt;
+        &lt;/div&gt;
+       &lt;/form&gt;
+       &lt;div id=&quot;rmt-success&quot; class=&quot;hidden success-toast mt-6 rounded-xl p-4 flex items-center gap-3&quot;&gt;
+        &lt;span class=&quot;text-2xl&quot;&gt;✅&lt;/span&gt;
+        &lt;div&gt;
+         &lt;p class=&quot;font-semibold text-green-300&quot;&gt;Laporan RMT Tersimpan!&lt;/p&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;section-rmt-guru&quot; class=&quot;section-content hidden animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;👨‍🏫&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Laporan RMT - Guru&lt;/h2&gt;
+       &lt;/div&gt;
+       &lt;form id=&quot;guru-form&quot; onsubmit=&quot;submitRMTGuru(event)&quot; class=&quot;space-y-6&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;guru-tarikh&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;📅 Tarikh&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;guru-tarikh&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;guru-nama&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;👨‍🏫 Nama Guru Bertugas&lt;/label&gt; &lt;select id=&quot;guru-nama&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Nama Guru --&lt;/option&gt; &lt;option&gt;A'in Fhatin Hanani binti Rijan&lt;/option&gt; &lt;option&gt;Abdul Rahim bin MD Lajim&lt;/option&gt; &lt;option&gt;Dzulfadly bin AG Anak&lt;/option&gt; &lt;option&gt;Roslianah binti Roie&lt;/option&gt; &lt;option&gt;Abdul Rahman bin Taip&lt;/option&gt; &lt;option&gt;Ahmad Syazwan bin Saofi&lt;/option&gt; &lt;option&gt;Alice Dapith&lt;/option&gt; &lt;option&gt;Antoni Riko Boling&lt;/option&gt; &lt;option&gt;Arbaena binti Nahang&lt;/option&gt; &lt;option&gt;Arfah bin Arase&lt;/option&gt; &lt;option&gt;Azmah binti Asha'ari&lt;/option&gt; &lt;option&gt;Hjh. Palam binti Karim&lt;/option&gt; &lt;option&gt;Diana binti Darno&lt;/option&gt; &lt;option&gt;Baiduri binti Dullah&lt;/option&gt; &lt;option&gt;Darmin bin Ladiro&lt;/option&gt; &lt;option&gt;Dyana Veronica Henry&lt;/option&gt; &lt;option&gt;Elly Massalo&lt;/option&gt; &lt;option&gt;Sutrawiya binti Malong&lt;/option&gt; &lt;option&gt;Fauziah binti Senen&lt;/option&gt; &lt;option&gt;Halimahton Saadiah binti Mahamad&lt;/option&gt; &lt;option&gt;Hjh. Masni Juitah binti Tuda&lt;/option&gt; &lt;option&gt;Juliyana binti Yahya&lt;/option&gt; &lt;option&gt;Herna binti Hussin&lt;/option&gt; &lt;option&gt;Mahfuzah binti Mohamed Desa&lt;/option&gt; &lt;option&gt;Rabiatun binti Rahman&lt;/option&gt; &lt;option&gt;Marini binti Syed Ali&lt;/option&gt; &lt;option&gt;Marliyana binti Mohammed&lt;/option&gt; &lt;option&gt;Merhma binti Masugi&lt;/option&gt; &lt;option&gt;Merlyn Loyola&lt;/option&gt; &lt;option&gt;Mohammad Farid bin Mohd Arbi&lt;/option&gt; &lt;option&gt;Mohd Hasrul bin Mohd Redzuan&lt;/option&gt; &lt;option&gt;Mohd Khairul Amir bin Ahmad&lt;/option&gt; &lt;option&gt;Mohd Khuzaifah Bin Ismail&lt;/option&gt; &lt;option&gt;Mohd Sam bin Talip @ Mohd Isham&lt;/option&gt; &lt;option&gt;Azizah binti Haris&lt;/option&gt; &lt;option&gt;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&lt;/option&gt; &lt;option&gt;Nor Asidah binti Kalbun&lt;/option&gt; &lt;option&gt;Syahmie bin Syahrulhazni&lt;/option&gt; &lt;option&gt;Muhammad Admien bin Jasni&lt;/option&gt; &lt;option&gt;Mohamad Nurlhafizi bin Abdulnur&lt;/option&gt; &lt;option&gt;Noorzalianah binti Insan&lt;/option&gt; &lt;option&gt;Nurasyipa binti Ridwan&lt;/option&gt; &lt;option&gt;Norhainie binti Herman&lt;/option&gt; &lt;option&gt;Nur Anissa binti Roslan&lt;/option&gt; &lt;option&gt;Nur Azlin binti Zulkifli&lt;/option&gt; &lt;option&gt;Nurhasanah binti Roslan&lt;/option&gt; &lt;option&gt;Nurul Aida binti Samsudin&lt;/option&gt; &lt;option&gt;Nur Izzah binti Jainudin&lt;/option&gt; &lt;option&gt;Auni Nurfarahin binti Aripai&lt;/option&gt; &lt;option&gt;Rahman bin Soga&lt;/option&gt; &lt;option&gt;Ridhuan bin Arbin&lt;/option&gt; &lt;option&gt;Nordin bin Lagudan&lt;/option&gt; &lt;option&gt;Hj. Ramsah bin Burhan&lt;/option&gt; &lt;option&gt;Misnah binti Miasin&lt;/option&gt; &lt;option&gt;Roshaida binti Yeop Ahmad&lt;/option&gt; &lt;option&gt;Norliewati Binti Hassan&lt;/option&gt; &lt;option&gt;Suhana Binti Sumino&lt;/option&gt; &lt;option&gt;Rosharisa binti Herman&lt;/option&gt; &lt;option&gt;Hazari bin Hakim&lt;/option&gt; &lt;option&gt;Sharon Francis Chuan&lt;/option&gt; &lt;option&gt;Mohammad bin Abdul Rajak&lt;/option&gt; &lt;option&gt;Rozaimi bin Arshad&lt;/option&gt; &lt;option&gt;Salbiah binti Karim&lt;/option&gt; &lt;option&gt;Kamisah binti Mohammad&lt;/option&gt; &lt;option&gt;Sharif bin Hamdani&lt;/option&gt; &lt;option&gt;Siti Nur Syafiah binti Majid&lt;/option&gt; &lt;option&gt;Siti Robasiah binti Hj.Rahamat&lt;/option&gt; &lt;option&gt;Stevon Luntid&lt;/option&gt; &lt;option&gt;Suraya binti Mat Yusop&lt;/option&gt; &lt;option&gt;Ummu Nasyibah binti Mamma&lt;/option&gt; &lt;option&gt;Wirna binti Abd Hamid&lt;/option&gt; &lt;option&gt;Rozinah binti Amirul&lt;/option&gt; &lt;option&gt;Junita binti Ajirul&lt;/option&gt; &lt;option&gt;Hasbullah bin Ali&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;guru-jumlah&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;👥 Jumlah Murid&lt;/label&gt; &lt;input type=&quot;number&quot; id=&quot;guru-jumlah&quot; min=&quot;0&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;guru-kelas&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;🎓 Pilih Kelas &amp;amp; Kompetensi&lt;/label&gt; &lt;select id=&quot;guru-kelas&quot; required class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Kelas &amp;amp; Kompetensi --&lt;/option&gt; &lt;option&gt;Tahun 1 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 1 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 1 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 1 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 1 - Patriotik&lt;/option&gt; &lt;option&gt;Tahun 2 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 2 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 2 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 2 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 2 - Patriotik&lt;/option&gt; &lt;option&gt;Tahun 3 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 3 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 3 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 3 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 3 - Patriotik&lt;/option&gt; &lt;option&gt;Tahun 4 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 4 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 4 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 4 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 4 - Patriotik&lt;/option&gt; &lt;option&gt;Tahun 5 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 5 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 5 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 5 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 5 - Patriotik&lt;/option&gt; &lt;option&gt;Tahun 6 - Inovatif&lt;/option&gt; &lt;option&gt;Tahun 6 - Kreatif&lt;/option&gt; &lt;option&gt;Tahun 6 - Kritis&lt;/option&gt; &lt;option&gt;Tahun 6 - Proaktif&lt;/option&gt; &lt;option&gt;Tahun 6 - Patriotik&lt;/option&gt; &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;guru-ulasan&quot; class=&quot;block text-sm font-semibold text-yellow-300 mb-3 uppercase tracking-wider&quot;&gt;💭 Ulasan Guru Bertugas&lt;/label&gt; &lt;textarea id=&quot;guru-ulasan&quot; rows=&quot;4&quot; placeholder=&quot;Masukkan ulasan tentang pelaksanaan RMT...&quot; class=&quot;w-full rounded-xl px-4 py-3 focus:outline-none resize-none&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex gap-4 pt-4&quot;&gt;
+         &lt;button type=&quot;submit&quot; class=&quot;flex-1 btn-primary py-3 rounded-xl&quot;&gt;💾 Simpan&lt;/button&gt; &lt;button type=&quot;reset&quot; class=&quot;flex-1 btn-secondary py-3 rounded-xl&quot;&gt;🔄 Kosongkan&lt;/button&gt;
+        &lt;/div&gt;
+       &lt;/form&gt;
+       &lt;div id=&quot;guru-success&quot; class=&quot;hidden success-toast mt-6 rounded-xl p-4 flex items-center gap-3&quot;&gt;
+        &lt;span class=&quot;text-2xl&quot;&gt;✅&lt;/span&gt;
+        &lt;div&gt;
+         &lt;p class=&quot;font-semibold text-green-300&quot;&gt;Laporan RMT Guru Tersimpan!&lt;/p&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;section-laporan&quot; class=&quot;section-content hidden animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;📊&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Laporan Tersimpan&lt;/h2&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;mb-6 flex gap-3&quot;&gt;&lt;button onclick=&quot;filterLaporanBy('semua')&quot; class=&quot;filter-btn px-4 py-2 rounded-lg text-sm font-semibold active&quot; data-filter=&quot;semua&quot;&gt;📋 Semua&lt;/button&gt; &lt;button onclick=&quot;filterLaporanBy('rmt-murid')&quot; class=&quot;filter-btn px-4 py-2 rounded-lg text-sm font-semibold&quot; data-filter=&quot;rmt-murid&quot;&gt;🍽️ RMT Murid&lt;/button&gt; &lt;button onclick=&quot;filterLaporanBy('rmt-guru')&quot; class=&quot;filter-btn px-4 py-2 rounded-lg text-sm font-semibold&quot; data-filter=&quot;rmt-guru&quot;&gt;👨‍🏫 RMT Guru&lt;/button&gt;
+       &lt;/div&gt;
+       &lt;div id=&quot;laporan-container&quot; class=&quot;space-y-4&quot;&gt;
+        &lt;div class=&quot;text-center py-12 text-gray-400&quot;&gt;
+         &lt;p class=&quot;text-lg&quot;&gt;📭 Tiada laporan tersimpan&lt;/p&gt;
+         &lt;p class=&quot;text-sm mt-2&quot;&gt;Laporan akan muncul di sini setelah anda menyimpan data&lt;/p&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;section-unit-hem&quot; class=&quot;section-content hidden animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;🏛️&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Laporan Unit HEM&lt;/h2&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;mb-8&quot;&gt;
+        &lt;label class=&quot;block text-sm font-semibold text-yellow-300 mb-6 uppercase tracking-wider&quot;&gt;🏛️ Pilih Unit HEM&lt;/label&gt;
+        &lt;div class=&quot;grid grid-cols-2 gap-3&quot;&gt;
+         &lt;button type=&quot;button&quot; class=&quot;hem-unit-btn unit-btn px-4 py-3 rounded-xl font-semibold text-sm&quot; data-unit=&quot;Bimbingan &amp;amp; Kaunseling&quot;&gt;💬 Bimbingan &amp;amp; Kaunseling&lt;/button&gt; &lt;button type=&quot;button&quot; class=&quot;hem-unit-btn unit-btn px-4 py-3 rounded-xl font-semibold text-sm&quot; data-unit=&quot;Disiplin&quot;&gt;⚖️ Disiplin&lt;/button&gt; &lt;button type=&quot;button&quot; class=&quot;hem-unit-btn unit-btn px-4 py-3 rounded-xl font-semibold text-sm&quot; data-unit=&quot;3K&quot;&gt;🌿 3K (Kebersihan, Kesihatan, Keselamatan)&lt;/button&gt; &lt;button type=&quot;button&quot; class=&quot;hem-unit-btn unit-btn px-4 py-3 rounded-xl font-semibold text-sm&quot; data-unit=&quot;Pusat Sumber Sekolah&quot;&gt;📚 PSS&lt;/button&gt; &lt;button type=&quot;button&quot; class=&quot;hem-unit-btn unit-btn px-4 py-3 rounded-xl font-semibold text-sm&quot; data-unit=&quot;SPBT&quot;&gt;📖 SPBT&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;hem-success&quot; class=&quot;hidden success-toast mt-6 rounded-xl p-4 flex items-center gap-3&quot;&gt;
+         &lt;span class=&quot;text-2xl&quot;&gt;✅&lt;/span&gt;
+         &lt;div&gt;
+          &lt;p class=&quot;font-semibold text-green-300&quot;&gt;Unit HEM Dipilih!&lt;/p&gt;
+         &lt;/div&gt;
+        &lt;/div&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+     &lt;section id=&quot;section-pekeliling&quot; class=&quot;section-content hidden animate-slide-up&quot;&gt;
+      &lt;div class=&quot;glass-card rounded-2xl p-8 mb-8 gold-glow&quot;&gt;
+       &lt;div class=&quot;flex items-center gap-3 mb-8&quot;&gt;
+        &lt;span class=&quot;text-4xl&quot;&gt;📜&lt;/span&gt;
+        &lt;h2 class=&quot;font-heading text-3xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent&quot;&gt;Pekeliling&lt;/h2&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;
+     &lt;/section&gt;
+    &lt;/div&gt;
+   &lt;/main&gt;
+   &lt;footer class=&quot;w-full bg-gradient-to-t from-rgba(10,14,39,0.6) to-transparent border-t border-yellow-600/10 px-6 py-6 mt-12&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto text-center&quot;&gt;
+     &lt;p class=&quot;text-gray-500 text-sm font-medium&quot;&gt;© 2024 Dashboard Hal Ehwal Murid | SK Umas-Umas&lt;/p&gt;
+     &lt;p class=&quot;text-gray-600 text-xs mt-2&quot;&gt;Sistem Pengurusan Laporan Hal Ehwal Murid&lt;/p&gt;
+    &lt;/div&gt;
+   &lt;/footer&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    const defaultConfig = {
+      school_name: 'SK Umas-Umas',
+      form_title: 'Dashboard Hal Ehwal Murid'
+    };
+
+    let config = { ...defaultConfig };
+    let allReports = [];
+    let currentFilter = 'semua';
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allReports = data || [];
+        renderLaporanList();
+        checkYearReset();
+      }
+    };
+
+    // Initialize Data SDK
+    async function initDataSDK() {
+      if (!window.dataSdk) return;
+      
+      const result = await window.dataSdk.init(dataHandler);
+      if (!result.isOk) {
+        console.error('Failed to initialize Data SDK');
+      }
+    }
+
+    // Check and reset data on new year
+    function checkYearReset() {
+      const lastResetDate = localStorage.getItem('lastResetDate') || '0';
+      const today = new Date();
+      const currentDate = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      
+      if (lastResetDate !== currentDate &amp;&amp; today.getMonth() === 0 &amp;&amp; today.getDate() === 1) {
+        // Delete all reports on January 1st
+        allReports.forEach(async (report) =&gt; {
+          if (window.dataSdk) {
+            await window.dataSdk.delete(report);
+          }
+        });
+        localStorage.setItem('lastResetDate', currentDate);
+      }
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) =&gt; {
+          config = { ...defaultConfig, ...newConfig };
+          applyConfig();
+        },
+        mapToCapabilities: (cfg) =&gt; ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) =&gt; new Map([
+          ['school_name', cfg.school_name || defaultConfig.school_name],
+          ['form_title', cfg.form_title || defaultConfig.form_title]
+        ])
+      });
+    }
+
+    function applyConfig() {
+      document.getElementById('school-name').textContent = config.school_name;
+      document.getElementById('form-title').textContent = config.form_title;
+    }
+
+    async function submitRMT(event) {
+      event.preventDefault();
+      const tarikh = document.getElementById('rmt-tarikh').value;
+      const guru = document.getElementById('rmt-guru').value;
+      const menu = document.getElementById('rmt-menu').value;
+      const buah = document.getElementById('rmt-buah').value;
+      const ulasan = document.getElementById('rmt-ulasan').value;
+
+      if (!window.dataSdk) return;
+
+      const result = await window.dataSdk.create({
+        type: 'rmt-murid',
+        tarikh,
+        guru,
+        menu,
+        buah,
+        ulasan,
+        jumlah_murid: '',
+        kelas: ''
+      });
+
+      if (result.isOk) {
+        document.getElementById('rmt-success').classList.remove('hidden');
+        setTimeout(() =&gt; document.getElementById('rmt-success').classList.add('hidden'), 3000);
+        document.getElementById('rmt-form').reset();
+        setDefaultDate('rmt-tarikh');
+      }
+    }
+
+    async function submitRMTGuru(event) {
+      event.preventDefault();
+      const tarikh = document.getElementById('guru-tarikh').value;
+      const guru = document.getElementById('guru-nama').value;
+      const jumlah_murid = document.getElementById('guru-jumlah').value;
+      const kelas = document.getElementById('guru-kelas').value;
+      const ulasan = document.getElementById('guru-ulasan').value;
+
+      if (!window.dataSdk) return;
+
+      const result = await window.dataSdk.create({
+        type: 'rmt-guru',
+        tarikh,
+        guru,
+        menu: '',
+        buah: '',
+        ulasan,
+        jumlah_murid,
+        kelas
+      });
+
+      if (result.isOk) {
+        document.getElementById('guru-success').classList.remove('hidden');
+        setTimeout(() =&gt; document.getElementById('guru-success').classList.add('hidden'), 3000);
+        document.getElementById('guru-form').reset();
+        setDefaultDate('guru-tarikh');
+      }
+    }
+
+  
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section-content').forEach(el =&gt; el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(el =&gt; {
+        el.classList.remove('active', 'text-yellow-400');
+        el.classList.add('text-gray-300');
+      });
+      
+      const section = document.getElementById('section-' + sectionId);
+      if (section) {
+        section.classList.remove('hidden');
+        section.classList.add('animate-slide-up');
+      }
+      
+      const navBtn = document.querySelector(`[data-section=&quot;${sectionId}&quot;]`);
+      if (navBtn) {
+        navBtn.classList.add('active', 'text-yellow-400');
+        navBtn.classList.remove('text-gray-300');
+      }
+    }
+
+    function setDefaultDate(id) {
+      const today = new Date().toISOString().split('T')[0];
+      const el = document.getElementById(id);
+      if (el) el.value = today;
+    }
+
+    function filterLaporanBy(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn =&gt; {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`[data-filter=&quot;${filter}&quot;]`).classList.add('active');
+      renderLaporanList();
+    }
+
+    function renderLaporanList() {
+      const container = document.getElementById('laporan-container');
+      
+      const filtered = currentFilter === 'semua' 
+        ? allReports 
+        : allReports.filter(r =&gt; r.type === currentFilter);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          &lt;div class=&quot;text-center py-12 text-gray-400&quot;&gt;
+            &lt;p class=&quot;text-lg&quot;&gt;📭 Tiada laporan tersimpan&lt;/p&gt;
+            &lt;p class=&quot;text-sm mt-2&quot;&gt;Laporan akan muncul di sini setelah anda menyimpan data&lt;/p&gt;
+          &lt;/div&gt;
+        `;
+        return;
+      }
+
+      // Group by type and sort by date
+      const sorted = [...filtered].sort((a, b) =&gt; new Date(b.tarikh) - new Date(a.tarikh));
+
+      container.innerHTML = sorted.map((report, idx) =&gt; {
+        const date = new Date(report.tarikh);
+        const formattedDate = date.toLocaleDateString('ms-MY', { year: 'numeric', month: 'long', day: 'numeric' });
+        const typeLabel = report.type === 'rmt-murid' ? '🍽️ RMT Murid' : '👨‍🏫 RMT Guru';
+        
+        return `
+          &lt;div class=&quot;laporan-card&quot; data-report-id=&quot;${report.__backendId}&quot;&gt;
+            &lt;div class=&quot;laporan-header&quot;&gt;
+              &lt;div&gt;
+                &lt;div class=&quot;flex items-center gap-2 mb-2&quot;&gt;
+                  &lt;span class=&quot;laporan-badge&quot;&gt;${typeLabel}&lt;/span&gt;
+                  &lt;span class=&quot;text-xs text-gray-400&quot;&gt;📅 ${formattedDate}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-sm text-yellow-300 font-semibold&quot;&gt;${report.guru || 'Tidak ditentukan'}&lt;/p&gt;
+                ${report.kelas ? `&lt;p class=&quot;text-xs text-gray-400 mt-1&quot;&gt;🎓 ${report.kelas}&lt;/p&gt;` : ''}
+              &lt;/div&gt;
+              &lt;button onclick=&quot;deleteLaporan('${report.__backendId}')&quot; class=&quot;laporan-delete-btn&quot;&gt;🗑️ Padam&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;text-sm text-gray-300 space-y-1&quot;&gt;
+              ${report.menu ? `&lt;p&gt;🍚 Menu: &lt;span class=&quot;text-yellow-200&quot;&gt;${report.menu}&lt;/span&gt;&lt;/p&gt;` : ''}
+              ${report.buah ? `&lt;p&gt;🍎 Buah: &lt;span class=&quot;text-yellow-200&quot;&gt;${report.buah}&lt;/span&gt;&lt;/p&gt;` : ''}
+              ${report.jumlah_murid ? `&lt;p&gt;👥 Jumlah Murid: &lt;span class=&quot;text-yellow-200&quot;&gt;${report.jumlah_murid}&lt;/span&gt;&lt;/p&gt;` : ''}
+              ${report.ulasan ? `&lt;p&gt;💭 Ulasan: &lt;span class=&quot;text-yellow-200&quot;&gt;${report.ulasan}&lt;/span&gt;&lt;/p&gt;` : ''}
+            &lt;/div&gt;
+          &lt;/div&gt;
+        `;
+      }).join('');
+    }
+
+    async function deleteLaporan(reportId) {
+      const report = allReports.find(r =&gt; r.__backendId === reportId);
+      if (!report || !window.dataSdk) return;
+
+      const result = await window.dataSdk.delete(report);
+      if (result.isOk) {
+        // Report will be removed via onDataChanged callback
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('hem-unit-btn')) {
+        const button = e.target;
+        document.querySelectorAll('.hem-unit-btn').forEach(btn =&gt; btn.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById('hem-success').classList.remove('hidden');
+        setTimeout(() =&gt; document.getElementById('hem-success').classList.add('hidden'), 2000);
+      }
+    });
+
+    window.addEventListener('load', () =&gt; {
+      setDefaultDate('rmt-tarikh');
+      setDefaultDate('guru-tarikh');
+      setDefaultDate('pek-tarikh');
+      applyConfig();
+      initDataSDK();
+      checkYearReset();
+    });
+  &lt;/script&gt;
+ &lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26e8fb13d9a483',t:'MTc3MTg1MTY2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;
+    `;
+  });
+};
+
+&lt;!-- ================= FIREBASE ================= --&gt;
+&lt;script type=&quot;module&quot;&gt;
+import { initializeApp } from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js&quot;;
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  serverTimestamp
+} from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js&quot;;
+
+const firebaseConfig = {
+  apiKey: &quot;YOUR_API_KEY&quot;,
+  authDomain: &quot;YOUR_PROJECT.firebaseapp.com&quot;,
+  projectId: &quot;YOUR_PROJECT_ID&quot;,
+  storageBucket: &quot;YOUR_BUCKET&quot;,
+  messagingSenderId: &quot;XXXX&quot;,
+  appId: &quot;XXXX&quot;
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+
+// ======================
+// SIMPAN RMT GURU (KEKAL)
+// ======================
+window.submitRMTGuru = async function(event) {
+  event.preventDefault();
+
+  const tarikh = document.getElementById(&quot;guru-tarikh&quot;).value;
+  const guru = document.getElementById(&quot;guru-nama&quot;).value;
+  const jumlah = document.getElementById(&quot;guru-jumlah&quot;).value;
+  const kelas = document.getElementById(&quot;guru-kelas&quot;).value;
+  const ulasan = document.getElementById(&quot;guru-ulasan&quot;).value;
+
+  try {
+    await addDoc(collection(db, &quot;laporan&quot;), {
+      type: &quot;rmt-guru&quot;,
+      nama: guru,
+      tarikh,
+      jumlah,
+      kelas,
+      ulasan,
+      createdAt: serverTimestamp()
+    });
+
+    document.getElementById(&quot;guru-form&quot;).reset();
+    document.getElementById(&quot;guru-success&quot;).classList.remove(&quot;hidden&quot;);
+
+    loadLaporan();
+
+    setTimeout(() =&gt; {
+      document.getElementById(&quot;guru-success&quot;).classList.add(&quot;hidden&quot;);
+    }, 3000);
+
+  } catch (error) {
+    alert(&quot;Ralat semasa menyimpan laporan.&quot;);
+  }
+};
+
+
+
+// ======================
+// LOAD SEMUA LAPORAN
+// ======================
+window.loadLaporan = async function() {
+
+  const container = document.getElementById(&quot;laporan-container&quot;);
+  container.innerHTML = &quot;&quot;;
+
+  const snapshot = await getDocs(collection(db, &quot;laporan&quot;));
+
+  if (snapshot.empty) {
+    container.innerHTML = `
+      &lt;div class=&quot;text-center py-12 text-gray-400&quot;&gt;
+        &lt;p class=&quot;text-lg&quot;&gt;📭 Tiada laporan tersimpan&lt;/p&gt;
+        &lt;p class=&quot;text-sm mt-2&quot;&gt;Laporan akan muncul di sini setelah anda menyimpan data&lt;/p&gt;
+      &lt;/div&gt;
+    `;
+    return;
+  }
+
+  snapshot.forEach((docSnap) =&gt; {
+
+    const data = docSnap.data();
+    const docId = docSnap.id;
+
+    container.innerHTML += `
+      &lt;div class=&quot;glass-card rounded-xl p-6 laporan-item&quot;
+           data-type=&quot;${data.type}&quot;&gt;
+
+        &lt;p&gt;&lt;strong&gt;📅 Tarikh:&lt;/strong&gt; ${data.tarikh}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;👤 Nama:&lt;/strong&gt; ${data.nama}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;👥 Jumlah:&lt;/strong&gt; ${data.jumlah}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;🎓 Kelas:&lt;/strong&gt; ${data.kelas}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;💭 Ulasan:&lt;/strong&gt; ${data.ulasan || &quot;-&quot;}&lt;/p&gt;
+
+        &lt;div class=&quot;flex gap-3 mt-4&quot;&gt;
+
+          &lt;!-- PRINT BUTTON (SEBELAH PADAM) --&gt;
+          &lt;button onclick=&quot;printLaporan('${data.type}','${data.tarikh}','${data.nama}','${data.jumlah}','${data.kelas}','${data.ulasan || &quot;&quot;}')&quot;
+          class=&quot;btn-secondary px-4 py-2 rounded-lg text-sm&quot;&gt;
+          📄 Cetak
+          &lt;/button&gt;
+
+          &lt;!-- PADAM BUTTON --&gt;
+          &lt;button onclick=&quot;padamLaporan('${docId}')&quot;
+          class=&quot;bg-red-500 text-white px-4 py-2 rounded-lg text-sm&quot;&gt;
+          🗑️ Padam
+          &lt;/button&gt;
+
+        &lt;/div&gt;
+      &lt;/div&gt;
+    `;
+  });
+};
+
+
+
+// ======================
+// PADAM LAPORAN
+// ======================
+window.padamLaporan = async function(docId) {
+
+  if (!confirm(&quot;Adakah anda pasti mahu padam laporan ini?&quot;)) return;
+
+  await deleteDoc(doc(db, &quot;laporan&quot;, docId));
+  loadLaporan();
+};
+
+
+
+// ======================
+// FILTER BUTTON
+// ======================
+window.filterLaporanBy = function(type) {
+
+  const buttons = document.querySelectorAll(&quot;.filter-btn&quot;);
+  buttons.forEach(btn =&gt; btn.classList.remove(&quot;active&quot;));
+  document.querySelector(`[data-filter=&quot;${type}&quot;]`).classList.add(&quot;active&quot;);
+
+  const items = document.querySelectorAll(&quot;.laporan-item&quot;);
+
+  items.forEach(item =&gt; {
+    if (type === &quot;semua&quot;) {
+      item.style.display = &quot;block&quot;;
+    } else {
+      item.style.display =
+        item.getAttribute(&quot;data-type&quot;) === type
+          ? &quot;block&quot;
+          : &quot;none&quot;;
+    }
+  });
+};
+
+
+
+// AUTO LOAD
+window.onload = function() {
+  loadLaporan();
+};
+
+&lt;/script&gt;
+
+
+
+&lt;!-- ================= PDF LIBRARY ================= --&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js&quot;&gt;&lt;/script&gt;
+
+
+
+&lt;!-- ================= PRINT FUNCTION ================= --&gt;
+&lt;script&gt;
+function printLaporan(type, tarikh, nama, jumlah, kelas, ulasan) {
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const today = new Date().toLocaleDateString(&quot;ms-MY&quot;);
+
+  doc.setFontSize(14);
+  doc.text(&quot;SEKOLAH KEBANGSAAN UMAS-UMAS&quot;, 105, 20, { align: &quot;center&quot; });
+
+  if (type === &quot;rmt-guru&quot;) {
+    doc.text(&quot;LAPORAN RMT GURU&quot;, 105, 30, { align: &quot;center&quot; });
+  } else {
+    doc.text(&quot;LAPORAN RMT MURID&quot;, 105, 30, { align: &quot;center&quot; });
+  }
+
+  doc.setFontSize(11);
+  doc.text(&quot;Tarikh: &quot; + tarikh, 20, 50);
+  doc.text(&quot;Nama: &quot; + nama, 20, 60);
+  doc.text(&quot;Jumlah: &quot; + jumlah, 20, 70);
+  doc.text(&quot;Kelas: &quot; + kelas, 20, 80);
+
+  doc.text(&quot;Ulasan:&quot;, 20, 95);
+  doc.text(ulasan || &quot;-&quot;, 20, 105, { maxWidth: 170 });
+
+  doc.text(&quot;Dicetak pada: &quot; + today, 20, 280);
+
+  doc.save(&quot;Laporan_&quot; + tarikh + &quot;.pdf&quot;);
+}
+&lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>

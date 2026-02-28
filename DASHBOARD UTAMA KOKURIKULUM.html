@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!doctype html&gt;
+&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Dashboard Kokurikulum&lt;/title&gt;
+  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&amp;amp;family=Poppins:wght@400;600;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;style&gt;
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    .luxury-bg {
+      background: #0a0a0a;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+      position: relative;
+    }
+
+    .luxury-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(218, 165, 32, 0.03) 2px, rgba(218, 165, 32, 0.03) 4px);
+      pointer-events: none;
+    }
+
+    .gold-gradient {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 50%, #1a1410 100%);
+    }
+
+    .gold-text {
+      color: #DAA520;
+      text-shadow: 0 0 20px rgba(218, 165, 32, 0.4), 0 0 40px rgba(218, 165, 32, 0.2);
+    }
+
+    .section-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      border: 2px solid rgba(218, 165, 32, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .section-card:hover::before {
+      left: 100%;
+    }
+
+    .section-card:hover {
+      border-color: rgba(218, 165, 32, 0.8);
+      transform: translateY(-8px);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(218, 165, 32, 0.3),
+        inset 0 0 20px rgba(218, 165, 32, 0.05);
+    }
+
+    .icon-circle {
+      background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+      box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .section-card:hover .icon-circle {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 6px 25px rgba(218, 165, 32, 0.6);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+      color: #000;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .btn-gold:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(218, 165, 32, 0.5);
+    }
+
+    .abstract-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .decorative-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #DAA520, transparent);
+      margin: 30px 0;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+      background-size: 1000px 100%;
+      animation: shimmer 3s infinite;
+    }
+  &lt;/style&gt;
+  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/_sdk/data_sdk.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body class=&quot;h-full luxury-bg font-['Poppins']&quot;&gt;
+  &lt;div class=&quot;w-full h-full overflow-auto&quot;&gt;
+   &lt;div class=&quot;min-h-full p-8&quot;&gt;
+    &lt;!-- Header Mewah --&gt;
+    &lt;header class=&quot;relative mb-12 p-10 rounded-3xl overflow-hidden gold-gradient border-2 border-yellow-600 shadow-2xl&quot;&gt;
+     &lt;svg class=&quot;abstract-pattern&quot; viewbox=&quot;0 0 1200 300&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+      &lt;defs&gt;
+       &lt;lineargradient id=&quot;goldGrad&quot; x1=&quot;0%&quot; y1=&quot;0%&quot; x2=&quot;100%&quot; y2=&quot;100%&quot;&gt;
+        &lt;stop offset=&quot;0%&quot; style=&quot;stop-color:#DAA520;stop-opacity:0.8&quot; /&gt;
+        &lt;stop offset=&quot;50%&quot; style=&quot;stop-color:#FFD700;stop-opacity:0.6&quot; /&gt;
+        &lt;stop offset=&quot;100%&quot; style=&quot;stop-color:#B8860B;stop-opacity:0.8&quot; /&gt;
+       &lt;/lineargradient&gt;
+       &lt;pattern id=&quot;batikGold&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;120&quot; height=&quot;120&quot; patternunits=&quot;userSpaceOnUse&quot;&gt;
+        &lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;25&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;1.5&quot; opacity=&quot;0.5&quot; /&gt;
+        &lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;18&quot; fill=&quot;none&quot; stroke=&quot;#DAA520&quot; stroke-width=&quot;1&quot; opacity=&quot;0.4&quot; /&gt;
+        &lt;path d=&quot;M60,35 L68,48 L60,60 L52,48 Z&quot; fill=&quot;#DAA520&quot; opacity=&quot;0.3&quot; /&gt;
+        &lt;path d=&quot;M60,60 L68,72 L60,85 L52,72 Z&quot; fill=&quot;#DAA520&quot; opacity=&quot;0.3&quot; /&gt;
+        &lt;path d=&quot;M35,60 L48,68 L60,60 L48,52 Z&quot; fill=&quot;#DAA520&quot; opacity=&quot;0.3&quot; /&gt;
+        &lt;path d=&quot;M60,60 L72,68 L85,60 L72,52 Z&quot; fill=&quot;#DAA520&quot; opacity=&quot;0.3&quot; /&gt;
+       &lt;/pattern&gt;
+       &lt;filter id=&quot;glow&quot;&gt;
+        &lt;fegaussianblur stddeviation=&quot;4&quot; result=&quot;coloredBlur&quot; /&gt;
+        &lt;femerge&gt;
+         &lt;femergenode in=&quot;coloredBlur&quot; /&gt;
+         &lt;femergenode in=&quot;SourceGraphic&quot; /&gt;
+        &lt;/femerge&gt;
+       &lt;/filter&gt;
+      &lt;/defs&gt; &lt;rect width=&quot;1200&quot; height=&quot;300&quot; fill=&quot;url(#batikGold)&quot; /&gt; &lt;!-- Bunga Raya Emas Kiri --&gt; &lt;g transform=&quot;translate(180, 150)&quot; filter=&quot;url(#glow)&quot;&gt;
+       &lt;circle cx=&quot;0&quot; cy=&quot;0&quot; r=&quot;50&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;2.5&quot; opacity=&quot;0.7&quot; /&gt;
+       &lt;path d=&quot;M0,-50 Q18,-32 0,-15 Q-18,-32 0,-50 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(72)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(144)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(216)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(288)&quot; /&gt;
+       &lt;circle cx=&quot;0&quot; cy=&quot;0&quot; r=&quot;15&quot; fill=&quot;#FFD700&quot; opacity=&quot;0.6&quot; /&gt;
+      &lt;/g&gt; &lt;!-- Bunga Raya Emas Kanan --&gt; &lt;g transform=&quot;translate(1020, 150)&quot; filter=&quot;url(#glow)&quot;&gt;
+       &lt;circle cx=&quot;0&quot; cy=&quot;0&quot; r=&quot;50&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;2.5&quot; opacity=&quot;0.7&quot; /&gt;
+       &lt;path d=&quot;M0,-50 Q18,-32 0,-15 Q-18,-32 0,-50 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(72)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(144)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(216)&quot; /&gt;
+       &lt;path d=&quot;M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z&quot; fill=&quot;url(#goldGrad)&quot; opacity=&quot;0.4&quot; transform=&quot;rotate(288)&quot; /&gt;
+       &lt;circle cx=&quot;0&quot; cy=&quot;0&quot; r=&quot;15&quot; fill=&quot;#FFD700&quot; opacity=&quot;0.6&quot; /&gt;
+      &lt;/g&gt; &lt;!-- Motif Geometri Songket --&gt; &lt;g transform=&quot;translate(600, 220)&quot; opacity=&quot;0.6&quot;&gt;
+       &lt;path d=&quot;M-100,0 L-50,-25 L0,0 L50,-25 L100,0&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;2.5&quot; /&gt;
+       &lt;path d=&quot;M-75,0 L-50,20 L-25,0 L0,20 L25,0 L50,20 L75,0&quot; fill=&quot;none&quot; stroke=&quot;#FFD700&quot; stroke-width=&quot;2&quot; /&gt;
+       &lt;circle cx=&quot;-50&quot; cy=&quot;-25&quot; r=&quot;6&quot; fill=&quot;#FFD700&quot; opacity=&quot;0.8&quot; /&gt;
+       &lt;circle cx=&quot;0&quot; cy=&quot;0&quot; r=&quot;6&quot; fill=&quot;#FFD700&quot; opacity=&quot;0.8&quot; /&gt;
+       &lt;circle cx=&quot;50&quot; cy=&quot;-25&quot; r=&quot;6&quot; fill=&quot;#FFD700&quot; opacity=&quot;0.8&quot; /&gt;
+      &lt;/g&gt; &lt;!-- Garisan Dekoratif Berkurva --&gt; &lt;path d=&quot;M80,150 Q250,110 420,150 T740,150&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;2&quot; opacity=&quot;0.5&quot; /&gt; &lt;path d=&quot;M460,150 Q630,190 800,150 T1120,150&quot; fill=&quot;none&quot; stroke=&quot;url(#goldGrad)&quot; stroke-width=&quot;2&quot; opacity=&quot;0.5&quot; /&gt;
+     &lt;/svg&gt;
+     &lt;div class=&quot;relative z-10 text-center&quot;&gt;
+      &lt;h1 id=&quot;dashboard-title&quot; class=&quot;font-['Cinzel_Decorative'] text-6xl font-black mb-3 gold-text tracking-wider&quot;&gt;KOKURIKULUM&lt;/h1&gt;
+      &lt;div class=&quot;decorative-line w-64 mx-auto&quot;&gt;&lt;/div&gt;
+      &lt;p class=&quot;text-yellow-100 text-xl mt-3 font-light tracking-wide&quot;&gt;Sistem Pengurusan Aktiviti Sekolah&lt;/p&gt;
+     &lt;/div&gt;
+    &lt;/header&gt;&lt;!-- Grid Bahagian Premium --&gt;
+    &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto&quot;&gt;
+     &lt;!-- Laporan Perjumpaan Mingguan --&gt;
+     &lt;div class=&quot;section-card rounded-2xl p-8 shimmer&quot;&gt;
+      &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+       &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+        &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewbox=&quot;0 0 24 24&quot;&gt;
+         &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z&quot; /&gt;
+        &lt;/svg&gt;
+       &lt;/div&gt;
+       &lt;h2 id=&quot;meeting-title&quot; class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;Laporan Perjumpaan Mingguan&lt;/h2&gt;
+       &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Pantau dan rekod mesyuarat serta perjumpaan aktiviti kokurikulum&lt;/p&gt;&lt;button onclick=&quot;showMeetingForm()&quot; class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt; Lihat Laporan → &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+	 
+	 &lt;!-- Borang Rekod Kehadiran Murid --&gt;
+&lt;div class=&quot;section-card rounded-2xl p-8 shimmer md:col-span-2 lg:col-span-1&quot;&gt;
+  &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+    &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+      &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+        &lt;path d=&quot;M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z&quot;/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;h2 class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;Borang Rekod Kehadiran Murid&lt;/h2&gt;
+    &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Rekod kehadiran murid untuk aktiviti kokurikulum&lt;/p&gt;
+    &lt;button id=&quot;rekodKehadiranMurBtn&quot; class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt;
+      Lihat Borang → 
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+	 
+	 &lt;!-- Laporan 1 Murid 1 Sukan --&gt;
+     &lt;div class=&quot;section-card rounded-2xl p-8 shimmer&quot;&gt;
+      &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+       &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+        &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewbox=&quot;0 0 24 24&quot;&gt;
+         &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M13 10V3L4 14h7v7l9-11h-7z&quot; /&gt;
+        &lt;/svg&gt;
+       &lt;/div&gt;
+       &lt;h2 id=&quot;sports-title&quot; class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;Laporan 1 Murid 1 Sukan&lt;/h2&gt;
+       &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Jejak penyertaan murid dalam program 1 Murid 1 Sukan&lt;/p&gt;&lt;button class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt; Lihat Laporan → &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;&lt;!-- Rekod Pencapaian --&gt;
+     &lt;div class=&quot;section-card rounded-2xl p-8 shimmer&quot;&gt;
+      &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+       &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+        &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewbox=&quot;0 0 24 24&quot;&gt;
+         &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z&quot; /&gt;
+        &lt;/svg&gt;
+       &lt;/div&gt;
+       &lt;h2 id=&quot;achievement-title&quot; class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;Rekod Pencapaian&lt;/h2&gt;
+       &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Dokumentasi pencapaian dan kejayaan murid dalam aktiviti&lt;/p&gt;&lt;button class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt; Lihat Laporan → &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;&lt;!-- One Page Report --&gt;
+     &lt;div class=&quot;section-card rounded-2xl p-8 shimmer&quot;&gt;
+      &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+       &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+        &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewbox=&quot;0 0 24 24&quot;&gt;
+         &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z&quot; /&gt;
+        &lt;/svg&gt;
+       &lt;/div&gt;
+       &lt;h2 id=&quot;report-title&quot; class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;One Page Report&lt;/h2&gt;
+       &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Ringkasan laporan menyeluruh dalam satu halaman&lt;/p&gt;&lt;button class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt; Lihat Laporan → &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;&lt;!-- Gambar Perjumpaan Mingguan --&gt;
+     &lt;div class=&quot;section-card rounded-2xl p-8 shimmer md:col-span-2 lg:col-span-1&quot;&gt;
+      &lt;div class=&quot;flex flex-col items-center text-center&quot;&gt;
+       &lt;div class=&quot;icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6&quot;&gt;
+        &lt;svg class=&quot;w-10 h-10 text-black&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewbox=&quot;0 0 24 24&quot;&gt;
+         &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2.5&quot; d=&quot;M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z&quot; /&gt;
+        &lt;/svg&gt;
+       &lt;/div&gt;
+       &lt;h2 id=&quot;photos-title&quot; class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4&quot;&gt;Gambar Perjumpaan Mingguan&lt;/h2&gt;
+       &lt;p class=&quot;text-gray-300 mb-6 leading-relaxed&quot;&gt;Galeri foto dokumentasi aktiviti perjumpaan mingguan&lt;/p&gt;&lt;button class=&quot;btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg&quot;&gt; Lihat Gambar → &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;&lt;!-- Footer Dekoratif --&gt;
+    &lt;div class=&quot;decorative-line mt-16 mb-8&quot;&gt;&lt;/div&gt;
+    &lt;footer class=&quot;text-center text-yellow-600 text-sm&quot;&gt;
+     &lt;p&gt;© 2026 Sistem Pengurusan Kokurikulum&lt;/p&gt;
+    &lt;/footer&gt;
+   &lt;/div&gt;&lt;!-- Modal Borang Perjumpaan --&gt;
+   &lt;div id=&quot;meetingModal&quot; class=&quot;fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-50 overflow-auto p-4&quot;&gt;
+    &lt;div class=&quot;bg-gradient-to-br from-gray-900 to-black rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-auto border-2 border-yellow-600 shadow-2xl&quot;&gt;
+     &lt;div class=&quot;sticky top-0 bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 rounded-t-3xl flex justify-between items-center z-10&quot;&gt;
+      &lt;h2 class=&quot;font-['Cinzel_Decorative'] text-3xl font-bold text-black&quot;&gt;Borang Perjumpaan Mingguan&lt;/h2&gt;&lt;button onclick=&quot;closeMeetingForm()&quot; class=&quot;text-black hover:text-gray-800 text-3xl font-bold transition-colors&quot;&gt;×&lt;/button&gt;
+     &lt;/div&gt;
+     &lt;form id=&quot;meetingForm&quot; class=&quot;p-8 space-y-6&quot;&gt;
+      &lt;!-- Perjumpaan Ke &amp; Tarikh --&gt;
+      &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;meetingNumber&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Perjumpaan Ke&lt;/label&gt; &lt;select id=&quot;meetingNumber&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih...&lt;/option&gt; &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt; &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt; &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt; &lt;option value=&quot;4&quot;&gt;4&lt;/option&gt; &lt;option value=&quot;5&quot;&gt;5&lt;/option&gt; &lt;option value=&quot;6&quot;&gt;6&lt;/option&gt; &lt;option value=&quot;7&quot;&gt;7&lt;/option&gt; &lt;option value=&quot;8&quot;&gt;8&lt;/option&gt; &lt;option value=&quot;9&quot;&gt;9&lt;/option&gt; &lt;option value=&quot;10&quot;&gt;10&lt;/option&gt; &lt;option value=&quot;11&quot;&gt;11&lt;/option&gt; &lt;option value=&quot;12&quot;&gt;12&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;meetingDate&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Tarikh&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;meetingDate&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Tempat --&gt;
+      &lt;div&gt;
+       &lt;label for=&quot;meetingPlace&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Tempat&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;meetingPlace&quot; required placeholder=&quot;Masukkan tempat perjumpaan&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+      &lt;/div&gt;&lt;!-- Kategori Aktiviti --&gt;
+      &lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-6&quot;&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;uniformBody&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Badan Beruniform&lt;/label&gt; &lt;select id=&quot;uniformBody&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih...&lt;/option&gt; &lt;option value=&quot;Pengakap&quot;&gt;Pengakap&lt;/option&gt; &lt;option value=&quot;BSMM&quot;&gt;BSMM&lt;/option&gt; &lt;option value=&quot;TKRS&quot;&gt;TKRS&lt;/option&gt; &lt;option value=&quot;PPIM&quot;&gt;PPIM&lt;/option&gt; &lt;option value=&quot;Pandu Puteri Tunas&quot;&gt;Pandu Puteri Tunas&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;clubAssociation&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Kelab &amp;amp; Persatuan&lt;/label&gt; &lt;select id=&quot;clubAssociation&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih...&lt;/option&gt; &lt;option value=&quot;Bahasa Melayu&quot;&gt;Bahasa Melayu&lt;/option&gt; &lt;option value=&quot;Bahasa Inggeris&quot;&gt;Bahasa Inggeris&lt;/option&gt; &lt;option value=&quot;STEM&quot;&gt;STEM&lt;/option&gt; &lt;option value=&quot;Agama Islam&quot;&gt;Agama Islam&lt;/option&gt; &lt;option value=&quot;Kerjaya&quot;&gt;Kerjaya&lt;/option&gt; &lt;option value=&quot;Rukun Negara&quot;&gt;Rukun Negara&lt;/option&gt; &lt;option value=&quot;SPBT&quot;&gt;SPBT&lt;/option&gt; &lt;option value=&quot;Doktor Muda&quot;&gt;Doktor Muda&lt;/option&gt; &lt;option value=&quot;Kesenian&quot;&gt;Kesenian&lt;/option&gt; &lt;option value=&quot;Robotik&quot;&gt;Robotik&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;sportsGames&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Sukan &amp;amp; Permainan&lt;/label&gt; &lt;select id=&quot;sportsGames&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih...&lt;/option&gt; &lt;option value=&quot;Olahraga&quot;&gt;Olahraga&lt;/option&gt; &lt;option value=&quot;Hoki&quot;&gt;Hoki&lt;/option&gt; &lt;option value=&quot;Bola Jaring&quot;&gt;Bola Jaring&lt;/option&gt; &lt;option value=&quot;Bola Tampar&quot;&gt;Bola Tampar&lt;/option&gt; &lt;option value=&quot;Bola Sepak&quot;&gt;Bola Sepak&lt;/option&gt; &lt;option value=&quot;Sepak Takraw&quot;&gt;Sepak Takraw&lt;/option&gt; &lt;option value=&quot;Badminton&quot;&gt;Badminton&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Masa &amp; Kehadiran --&gt;
+      &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;meetingTime&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Masa&lt;/label&gt; &lt;select id=&quot;meetingTime&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih...&lt;/option&gt; &lt;option value=&quot;6.45-8.45 pagi&quot;&gt;6.45-8.45 pagi&lt;/option&gt; &lt;option value=&quot;8.45-10.45 pagi&quot;&gt;8.45-10.45 pagi&lt;/option&gt; &lt;option value=&quot;11.00-1.00 petang&quot;&gt;11.00-1.00 petang&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;studentAttendance&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Jumlah Kehadiran Murid&lt;/label&gt; &lt;input type=&quot;number&quot; id=&quot;studentAttendance&quot; required min=&quot;0&quot; placeholder=&quot;0&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Kehadiran Guru (10 ruang) --&gt;
+      &lt;div&gt;
+       &lt;label class=&quot;block text-yellow-400 font-semibold mb-4&quot;&gt;Kehadiran Guru (Sila pilih sehingga 10 guru)&lt;/label&gt;
+       &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot; id=&quot;teacherContainer&quot;&gt;
+        &lt;!-- Teacher dropdowns will be added here by JavaScript --&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Tajuk --&gt;
+      &lt;div&gt;
+       &lt;label for=&quot;meetingTitle&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Tajuk&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;meetingTitle&quot; required placeholder=&quot;Masukkan tajuk perjumpaan&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+      &lt;/div&gt;&lt;!-- Nilai --&gt;
+      &lt;div&gt;
+       &lt;label for=&quot;meetingValues&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Nilai&lt;/label&gt; &lt;select id=&quot;meetingValues&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih nilai...&lt;/option&gt; &lt;option value=&quot;Kasih Sayang&quot;&gt;Kasih Sayang&lt;/option&gt; &lt;option value=&quot;Tanggungjawab&quot;&gt;Tanggungjawab&lt;/option&gt; &lt;option value=&quot;Hemah Tinggi&quot;&gt;Hemah Tinggi&lt;/option&gt; &lt;option value=&quot;Keadilan&quot;&gt;Keadilan&lt;/option&gt; &lt;option value=&quot;Kebebasan&quot;&gt;Kebebasan&lt;/option&gt; &lt;option value=&quot;Keberanian&quot;&gt;Keberanian&lt;/option&gt; &lt;option value=&quot;Kejujuran&quot;&gt;Kejujuran&lt;/option&gt; &lt;option value=&quot;Kerajinan&quot;&gt;Kerajinan&lt;/option&gt; &lt;option value=&quot;Kerjasama&quot;&gt;Kerjasama&lt;/option&gt; &lt;option value=&quot;Kesederhanaan&quot;&gt;Kesederhanaan&lt;/option&gt; &lt;option value=&quot;Berdikari&quot;&gt;Berdikari&lt;/option&gt; &lt;option value=&quot;Bersyukur&quot;&gt;Bersyukur&lt;/option&gt; &lt;option value=&quot;Rasional&quot;&gt;Rasional&lt;/option&gt; &lt;option value=&quot;Amanah&quot;&gt;Amanah&lt;/option&gt; &lt;/select&gt;
+      &lt;/div&gt;&lt;!-- Aktiviti --&gt;
+      &lt;div&gt;
+       &lt;label for=&quot;meetingActivity&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Aktiviti&lt;/label&gt; &lt;textarea id=&quot;meetingActivity&quot; required rows=&quot;4&quot; placeholder=&quot;Huraikan aktiviti yang dijalankan...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;&lt;!-- Refleksi/Ulasan --&gt;
+      &lt;div&gt;
+       &lt;label for=&quot;meetingReflection&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Refleksi/Ulasan&lt;/label&gt; &lt;textarea id=&quot;meetingReflection&quot; required rows=&quot;3&quot; placeholder=&quot;Refleksi atau ulasan tentang perjumpaan...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+      &lt;/div&gt;&lt;!-- Decorative Divider --&gt;
+      &lt;div class=&quot;py-4&quot;&gt;
+       &lt;div class=&quot;h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent&quot;&gt;&lt;/div&gt;
+       &lt;h3 class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 text-center mt-6 mb-2&quot;&gt;Sisipan PIKeBM dalam Aktiviti Kokurikulum&lt;/h3&gt;
+       &lt;div class=&quot;h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent mt-2&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;&lt;!-- PIKeBM Section --&gt;
+      &lt;div class=&quot;bg-gray-900 bg-opacity-50 p-6 rounded-xl border border-yellow-700 space-y-6&quot;&gt;
+       &lt;!-- Waktu Laksana --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmTiming&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Waktu Laksana&lt;/label&gt; &lt;select id=&quot;pikebmTiming&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih waktu...&lt;/option&gt; &lt;option value=&quot;Permulaan Aktiviti&quot;&gt;Permulaan Aktiviti&lt;/option&gt; &lt;option value=&quot;Pertengahan Aktiviti&quot;&gt;Pertengahan Aktiviti&lt;/option&gt; &lt;option value=&quot;Penghujung Aktiviti&quot;&gt;Penghujung Aktiviti&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;&lt;!-- Tajuk PIKeBM --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmTitle&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Tajuk&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;pikebmTitle&quot; required placeholder=&quot;Tajuk PIKeBM&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+       &lt;/div&gt;&lt;!-- Bahan Bantu Mengajar --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmTeachingAids&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Bahan Bantu Mengajar&lt;/label&gt; &lt;select id=&quot;pikebmTeachingAids&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih bahan bantu...&lt;/option&gt; &lt;option value=&quot;Carta&quot;&gt;Carta&lt;/option&gt; &lt;option value=&quot;Model&quot;&gt;Model&lt;/option&gt; &lt;option value=&quot;Video&quot;&gt;Video&lt;/option&gt; &lt;option value=&quot;Slaid Pembentangan&quot;&gt;Slaid Pembentangan&lt;/option&gt; &lt;option value=&quot;Buku Teks&quot;&gt;Buku Teks&lt;/option&gt; &lt;option value=&quot;Lembaran Kerja&quot;&gt;Lembaran Kerja&lt;/option&gt; &lt;option value=&quot;Alat Permainan&quot;&gt;Alat Permainan&lt;/option&gt; &lt;option value=&quot;Papan Putih&quot;&gt;Papan Putih&lt;/option&gt; &lt;option value=&quot;Komputer/Tablet&quot;&gt;Komputer/Tablet&lt;/option&gt; &lt;option value=&quot;Bahan Kitar Semula&quot;&gt;Bahan Kitar Semula&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;&lt;!-- Objektif PIKeBM --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmObjective&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Objektif&lt;/label&gt; &lt;textarea id=&quot;pikebmObjective&quot; required rows=&quot;3&quot; placeholder=&quot;Nyatakan objektif PIKeBM...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;&lt;!-- Langkah Aktiviti --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmSteps&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Langkah Aktiviti&lt;/label&gt; &lt;textarea id=&quot;pikebmSteps&quot; required rows=&quot;4&quot; placeholder=&quot;Huraikan langkah-langkah aktiviti PIKeBM...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;&lt;!-- Refleksi/Impak dan Ulasan Guru --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;pikebmReflection&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Refleksi/Impak dan Ulasan Guru&lt;/label&gt; &lt;textarea id=&quot;pikebmReflection&quot; required rows=&quot;3&quot; placeholder=&quot;Refleksi, impak dan ulasan guru...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Decorative Divider --&gt;
+      &lt;div class=&quot;py-4&quot;&gt;
+       &lt;div class=&quot;h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent&quot;&gt;&lt;/div&gt;
+       &lt;h3 class=&quot;font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 text-center mt-6 mb-2&quot;&gt;Penerapan Amalan Sivik dalam Kokurikulum&lt;/h3&gt;
+       &lt;p class=&quot;text-yellow-200 text-center text-sm&quot;&gt;(4 Nilai Teras - 20 Minit)&lt;/p&gt;
+       &lt;div class=&quot;h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent mt-2&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Penerapan Amalan Sivik Section --&gt;
+      &lt;div class=&quot;bg-gray-900 bg-opacity-50 p-6 rounded-xl border border-yellow-700 space-y-6&quot;&gt;
+       &lt;!-- Nilai --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;civicValue&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Nilai&lt;/label&gt; &lt;select id=&quot;civicValue&quot; required class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt; &lt;option value=&quot;&quot;&gt;Pilih nilai...&lt;/option&gt; &lt;option value=&quot;Kasih Sayang&quot;&gt;Kasih Sayang&lt;/option&gt; &lt;option value=&quot;Hormat-Menghormati&quot;&gt;Hormat-Menghormati&lt;/option&gt; &lt;option value=&quot;Bertanggungjawab&quot;&gt;Bertanggungjawab&lt;/option&gt; &lt;option value=&quot;Kegembiraan&quot;&gt;Kegembiraan&lt;/option&gt; &lt;/select&gt;
+       &lt;/div&gt;&lt;!-- Tema Khusus --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;civicTheme&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Tema Khusus&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;civicTheme&quot; required placeholder=&quot;Tema khusus untuk amalan sivik&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+       &lt;/div&gt;&lt;!-- Matlamat --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;civicGoal&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Matlamat&lt;/label&gt; &lt;textarea id=&quot;civicGoal&quot; required rows=&quot;3&quot; placeholder=&quot;Nyatakan matlamat penerapan amalan sivik...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;&lt;!-- Aktiviti Sivik --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;civicActivity&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Aktiviti&lt;/label&gt; &lt;textarea id=&quot;civicActivity&quot; required rows=&quot;4&quot; placeholder=&quot;Huraikan aktiviti amalan sivik yang dilaksanakan...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;&lt;!-- Saranan --&gt;
+       &lt;div&gt;
+        &lt;label for=&quot;civicSuggestion&quot; class=&quot;block text-yellow-400 font-semibold mb-2&quot;&gt;Saranan&lt;/label&gt; &lt;textarea id=&quot;civicSuggestion&quot; required rows=&quot;3&quot; placeholder=&quot;Saranan untuk penambahbaikan...&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;&lt;/textarea&gt;
+       &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- Buttons --&gt;
+      &lt;div class=&quot;flex gap-4 pt-4&quot;&gt;
+       &lt;button type=&quot;submit&quot; class=&quot;flex-1 btn-gold py-4 px-6 rounded-xl text-lg font-bold&quot;&gt; Simpan Laporan &lt;/button&gt; &lt;button type=&quot;button&quot; onclick=&quot;closeMeetingForm()&quot; class=&quot;flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-4 px-6 rounded-xl transition-colors&quot;&gt; Batal &lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/form&gt;
+    &lt;/div&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    const teacherList = [
+      &quot;Salbiah binti Karim&quot;,
+      &quot;Kamisah binti Mohammad&quot;,
+      &quot;Mohd Sam bin Talip @ Mohd Isham&quot;,
+      &quot;Azizah binti Haris&quot;,
+      &quot;Siti Robasiah binti Hj.Rahamat&quot;,
+      &quot;Norhainie binti Herman&quot;,
+      &quot;Noorzalianah binti Insan&quot;,
+      &quot;Nurasyipa binti Ridwan&quot;,
+      &quot;Mohd Khairul Amir bin Ahmad&quot;,
+      &quot;Stevon Luntid&quot;,
+      &quot;Hjh. Masni Juitah binti Tuda&quot;,
+      &quot;Ridhuan bin Arbin&quot;,
+      &quot;Nordin bin Lagudan&quot;,
+      &quot;Hj. Ramsah bin Burhan&quot;,
+      &quot;Misnah binti Miasin&quot;,
+      &quot;Azmah binti Asha'ari&quot;,
+      &quot;Hjh. Palam binti Karim&quot;,
+      &quot;Diana binti Darno&quot;,
+      &quot;Mohd Hasrul bin Mohd Redzuan&quot;,
+      &quot;Antoni Riko Boling&quot;,
+      &quot;Arbaena binti Nahang&quot;,
+      &quot;Mohammad Farid bin Mohd Arbi&quot;,
+      &quot;Alice Dapith&quot;,
+      &quot;A'in Fhatin Hanani binti Rijan&quot;,
+      &quot;Mohd Khuzaifah Bin Ismail&quot;,
+      &quot;Rahman bin Soga&quot;,
+      &quot;Darmin bin Ladiro&quot;,
+      &quot;Halimahton Saadiah binti Mahamad&quot;,
+      &quot;Siti Nur Syafiah binti Majid&quot;,
+      &quot;Abdul Rahim bin MD Lajim&quot;,
+      &quot;Dzulfadly bin AG Anak&quot;,
+      &quot;Roslianah binti Roie&quot;,
+      &quot;Sharif bin Hamdani&quot;,
+      &quot;Marini binti Syed Ali&quot;,
+      &quot;Nurhasanah binti Roslan&quot;,
+      &quot;Abdul Rahman bin Taip&quot;,
+      &quot;Rozaimi bin Arshad&quot;,
+      &quot;Wirna binti Abd Hamid&quot;,
+      &quot;Rozinah binti Amirul&quot;,
+      &quot;Junita binti Ajirul&quot;,
+      &quot;Hasbullah bin Ali&quot;,
+      &quot;Rosharisa binti Herman&quot;,
+      &quot;Hazari bin Hakim&quot;,
+      &quot;Sharon Francis Chuan&quot;,
+      &quot;Mohammad bin Abdul Rajak&quot;,
+      &quot;Dyana Veronica Henry&quot;,
+      &quot;Marliyana binti Mohammed&quot;,
+      &quot;Merlyn Loyola&quot;,
+      &quot;Arfah bin Arase&quot;,
+      &quot;Mahfuzah binti Mohamed Desa&quot;,
+      &quot;Rabiatun binti Rahman&quot;,
+      &quot;Elly Massalo&quot;,
+      &quot;Sutrawiya binti Malong&quot;,
+      &quot;Juliyana binti Yahya&quot;,
+      &quot;Herna binti Hussin&quot;,
+      &quot;Ummu Nasyibah binti Mamma&quot;,
+      &quot;Nur Azlin binti Zulkifli&quot;,
+      &quot;Nurul Aida binti Samsudin&quot;,
+      &quot;Nur Izzah binti Jainudin&quot;,
+      &quot;Auni Nurfarahin binti Aripai&quot;,
+      &quot;Baiduri binti Dullah&quot;,
+      &quot;Suraya binti Mat Yusop&quot;,
+      &quot;Nur Anissa binti Roslan&quot;,
+      &quot;Fauziah binti Senen&quot;,
+      &quot;Merhma binti Masugi&quot;,
+      &quot;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&quot;,
+      &quot;Nor Asidah binti Kalbun&quot;,
+      &quot;Syahmie bin Syahrulhazni&quot;,
+      &quot;Muhammad Admien bin Jasni&quot;,
+      &quot;Mohamad Nurlhafizi bin Abdulnur&quot;,
+      &quot;Ahmad Syazwan bin Saofi&quot;,
+      &quot;Roshaida binti Yeop Ahmad&quot;,
+      &quot;Norliewati Binti Hassan&quot;,
+      &quot;Suhana Binti Sumino&quot;
+    ];
+
+    function showMeetingForm() {
+      const modal = document.getElementById('meetingModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMeetingForm() {
+      const modal = document.getElementById('meetingModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = 'auto';
+      document.getElementById('meetingForm').reset();
+    }
+
+    // Initialize teacher dropdowns
+    function initializeTeacherDropdowns() {
+      const container = document.getElementById('teacherContainer');
+      for (let i = 1; i &lt;= 10; i++) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          &lt;label for=&quot;teacher${i}&quot; class=&quot;block text-yellow-300 text-sm mb-1&quot;&gt;Guru ${i}&lt;/label&gt;
+          &lt;select id=&quot;teacher${i}&quot; class=&quot;w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500&quot;&gt;
+            &lt;option value=&quot;&quot;&gt;Pilih guru...&lt;/option&gt;
+            ${teacherList.map(teacher =&gt; `&lt;option value=&quot;${teacher}&quot;&gt;${teacher}&lt;/option&gt;`).join('')}
+          &lt;/select&gt;
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    // Form submission handler
+    document.addEventListener('DOMContentLoaded', () =&gt; {
+      initializeTeacherDropdowns();
+
+      document.getElementById('meetingForm').addEventListener('submit', (e) =&gt; {
+        e.preventDefault();
+        
+        // Collect selected teachers
+        const selectedTeachers = [];
+        for (let i = 1; i &lt;= 10; i++) {
+          const teacher = document.getElementById(`teacher${i}`).value;
+          if (teacher) selectedTeachers.push(teacher);
+        }
+
+        // Prepare data
+        const formData = {
+          meetingNumber: document.getElementById('meetingNumber').value,
+          date: document.getElementById('meetingDate').value,
+          place: document.getElementById('meetingPlace').value,
+          uniformBody: document.getElementById('uniformBody').value,
+          clubAssociation: document.getElementById('clubAssociation').value,
+          sportsGames: document.getElementById('sportsGames').value,
+          time: document.getElementById('meetingTime').value,
+          studentAttendance: document.getElementById('studentAttendance').value,
+          teachers: selectedTeachers,
+          title: document.getElementById('meetingTitle').value,
+          values: document.getElementById('meetingValues').value,
+          activity: document.getElementById('meetingActivity').value,
+          reflection: document.getElementById('meetingReflection').value,
+          pikebm: {
+            timing: document.getElementById('pikebmTiming').value,
+            title: document.getElementById('pikebmTitle').value,
+            teachingAids: document.getElementById('pikebmTeachingAids').value,
+            objective: document.getElementById('pikebmObjective').value,
+            steps: document.getElementById('pikebmSteps').value,
+            reflection: document.getElementById('pikebmReflection').value
+          },
+          civic: {
+            value: document.getElementById('civicValue').value,
+            theme: document.getElementById('civicTheme').value,
+            goal: document.getElementById('civicGoal').value,
+            activity: document.getElementById('civicActivity').value,
+            suggestion: document.getElementById('civicSuggestion').value
+          }
+        };
+
+        console.log('Form Data:', formData);
+
+        // Show success message
+        const successDiv = document.createElement('div');
+        successDiv.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-4 rounded-xl shadow-2xl z-[60] font-bold border-2 border-yellow-700';
+        successDiv.textContent = '✓ Laporan berjaya disimpan!';
+        document.body.appendChild(successDiv);
+
+        setTimeout(() =&gt; {
+          successDiv.remove();
+          closeMeetingForm();
+        }, 2000);
+      });
+    });
+
+    const defaultConfig = {
+      dashboard_title: &quot;KOKURIKULUM&quot;,
+      meeting_title: &quot;Laporan Perjumpaan Mingguan&quot;,
+      sports_title: &quot;Laporan 1 Murid 1 Sukan&quot;,
+      achievement_title: &quot;Rekod Pencapaian&quot;,
+      report_title: &quot;One Page Report&quot;,
+      photos_title: &quot;Gambar Perjumpaan Mingguan&quot;
+    };
+
+    async function onConfigChange(config) {
+      document.getElementById('dashboard-title').textContent = config.dashboard_title || defaultConfig.dashboard_title;
+      document.getElementById('meeting-title').textContent = config.meeting_title || defaultConfig.meeting_title;
+      document.getElementById('sports-title').textContent = config.sports_title || defaultConfig.sports_title;
+      document.getElementById('achievement-title').textContent = config.achievement_title || defaultConfig.achievement_title;
+      document.getElementById('report-title').textContent = config.report_title || defaultConfig.report_title;
+      document.getElementById('photos-title').textContent = config.photos_title || defaultConfig.photos_title;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        [&quot;dashboard_title&quot;, config.dashboard_title || defaultConfig.dashboard_title],
+        [&quot;meeting_title&quot;, config.meeting_title || defaultConfig.meeting_title],
+        [&quot;sports_title&quot;, config.sports_title || defaultConfig.sports_title],
+        [&quot;achievement_title&quot;, config.achievement_title || defaultConfig.achievement_title],
+        [&quot;report_title&quot;, config.report_title || defaultConfig.report_title],
+        [&quot;photos_title&quot;, config.photos_title || defaultConfig.photos_title]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  &lt;/script&gt;
+ &lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26fd1c30fda483',t:'MTc3MTg1MjQ5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;
+ 
+ &lt;script type=&quot;module&quot;&gt;
+
+import { getFirestore, collection, addDoc, serverTimestamp } 
+from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js&quot;;
+import { getApp } 
+from &quot;https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js&quot;;
+
+const app = getApp();
+const db = getFirestore(app);
+
+/* ================= SAVE TO FIREBASE ================= */
+
+document.addEventListener('DOMContentLoaded', () =&gt; {
+
+  const form = document.getElementById('meetingForm');
+
+  form.addEventListener('submit', async (e) =&gt; {
+    e.preventDefault();
+
+    // Collect selected teachers
+    const selectedTeachers = [];
+    for (let i = 1; i &lt;= 10; i++) {
+      const teacher = document.getElementById(`teacher${i}`).value;
+      if (teacher) selectedTeachers.push(teacher);
+    }
+
+    const formData = {
+      meetingNumber: meetingNumber.value,
+      meetingDate: meetingDate.value,
+      meetingPlace: meetingPlace.value,
+      uniformBody: uniformBody.value,
+      clubAssociation: clubAssociation.value,
+      sportsGames: sportsGames.value,
+      meetingTime: meetingTime.value,
+      studentAttendance: studentAttendance.value,
+      teachers: selectedTeachers,
+      meetingTitle: meetingTitle.value,
+      meetingValues: meetingValues.value,
+      meetingActivity: meetingActivity.value,
+      meetingReflection: meetingReflection.value,
+      pikebm: {
+        timing: pikebmTiming.value,
+        title: pikebmTitle.value,
+        teachingAids: pikebmTeachingAids.value,
+        objective: pikebmObjective.value,
+        steps: pikebmSteps.value,
+        reflection: pikebmReflection.value
+      },
+      civic: {
+        value: civicValue.value,
+        theme: civicTheme.value,
+        goal: civicGoal.value,
+        activity: civicActivity.value,
+        suggestion: civicSuggestion.value
+      },
+      createdAt: serverTimestamp()
+    };
+
+    try {
+      await addDoc(collection(db, &quot;kokurikulum_perjumpaan_mingguan&quot;), formData);
+
+      showSuccessMessage();
+      closeMeetingForm();
+
+    } catch (error) {
+      console.error(&quot;Firebase Error:&quot;, error);
+      alert(&quot;Gagal simpan ke Firebase.&quot;);
+    }
+
+  });
+
+});
+
+/* ================= SUCCESS POPUP ================= */
+
+function showSuccessMessage() {
+  const successDiv = document.createElement('div');
+  successDiv.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-4 rounded-xl shadow-2xl z-[60] font-bold border-2 border-yellow-700';
+  successDiv.textContent = '✓ Laporan berjaya disimpan ke Firebase!';
+  document.body.appendChild(successDiv);
+
+  setTimeout(() =&gt; {
+    successDiv.remove();
+  }, 2500);
+}
+
+/* ================= PDF DOWNLOAD ================= */
+
+window.downloadMeetingPDF = function(data) {
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(16);
+  doc.text(&quot;LAPORAN PERJUMPAAN MINGGUAN&quot;, 105, 15, { align: &quot;center&quot; });
+
+  let y = 25;
+
+  Object.entries(data).forEach(([key, value]) =&gt; {
+    if (typeof value !== &quot;object&quot;) {
+      doc.text(`${key}: ${value}`, 20, y);
+      y += 8;
+    }
+  });
+
+  doc.save(&quot;Laporan_Perjumpaan_Mingguan.pdf&quot;);
+};
+
+/* ================= PRINT ================= */
+
+window.printMeetingReport = function(data) {
+
+  let content = `&lt;h2&gt;Laporan Perjumpaan Mingguan&lt;/h2&gt;&lt;hr/&gt;`;
+
+  Object.entries(data).forEach(([key, value]) =&gt; {
+    if (typeof value !== &quot;object&quot;) {
+      content += `&lt;p&gt;&lt;b&gt;${key}&lt;/b&gt;: ${value}&lt;/p&gt;`;
+    }
+  });
+
+  const win = window.open(&quot;&quot;, &quot;&quot;, &quot;width=900,height=700&quot;);
+  win.document.write(content);
+  win.document.close();
+  win.print();
+};
+
+&lt;/script&gt;
+ 
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>
