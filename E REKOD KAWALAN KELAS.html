@@ -1,28 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
-		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
-	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!doctype html&gt;
-&lt;html lang=&quot;ms&quot; class=&quot;h-full&quot;&gt;
- &lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-  &lt;title&gt;E-Rekod Kawalan Kelas SK Umas-Umas Premium&lt;/title&gt;
-  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;/_sdk/element_sdk.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;/_sdk/data_sdk.js&quot;&gt;&lt;/script&gt;
-  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;amp;family=Poppins:wght@300;400;500;600;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-  &lt;style&gt;
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Rekod Kawalan Kelas SK Umas-Umas Premium</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body, #app { height: 100%; }
     .font-playfair { font-family: 'Playfair Display', serif; }
@@ -126,153 +112,153 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-  &lt;/style&gt;
-  &lt;style&gt;body { box-sizing: border-box; }&lt;/style&gt;
- &lt;/head&gt;
- &lt;body class=&quot;h-full dark-gradient font-poppins text-gray-100 overflow-hidden flex flex-col&quot;&gt;
-  &lt;div id=&quot;app&quot; class=&quot;w-full h-full flex flex-col&quot;&gt;
-   &lt;!-- Toast Container --&gt;
-   &lt;div id=&quot;toast-container&quot; class=&quot;fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 space-y-2 pointer-events-none&quot;&gt;&lt;/div&gt;&lt;!-- Header --&gt;
-   &lt;header class=&quot;w-full py-6 px-4 border-b border-yellow-500/30 glass-effect animate-slideInDown&quot;&gt;
-    &lt;div class=&quot;max-w-7xl mx-auto text-center&quot;&gt;
-     &lt;div class=&quot;inline-block mb-2 animate-float&quot;&gt;
-      &lt;div class=&quot;w-20 h-20 mx-auto gold-gradient rounded-full flex items-center justify-center shadow-lg animate-pulse-glow&quot;&gt;
-       &lt;span class=&quot;text-3xl&quot;&gt;🏫&lt;/span&gt;
-      &lt;/div&gt;
-     &lt;/div&gt;
-     &lt;h1 id=&quot;main-title&quot; class=&quot;font-playfair text-3xl md:text-4xl font-bold gold-gradient bg-clip-text text-transparent&quot;&gt;E-Rekod Kawalan Kelas&lt;/h1&gt;
-     &lt;h2 id=&quot;school-name&quot; class=&quot;font-playfair text-xl md:text-2xl text-yellow-400 mt-1&quot;&gt;SK Umas-Umas&lt;/h2&gt;
-     &lt;p id=&quot;motto&quot; class=&quot;text-yellow-500/80 italic mt-2 text-sm md:text-base&quot;&gt;&quot;Sepakat Memperkasakan Kecemerlangan&quot;&lt;/p&gt;
-    &lt;/div&gt;
-   &lt;/header&gt;&lt;!-- Navigation Tabs --&gt;
-   &lt;nav class=&quot;w-full px-4 py-4 border-b border-yellow-500/20 glass-effect&quot;&gt;
-    &lt;div class=&quot;max-w-7xl mx-auto flex justify-center gap-2 md:gap-4 flex-wrap&quot;&gt;
-     &lt;button id=&quot;tab-form&quot; onclick=&quot;showTab('form')&quot; class=&quot;px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 gold-gradient text-black hover:shadow-lg&quot;&gt; 📝 Borang Rekod &lt;/button&gt; &lt;button id=&quot;tab-records&quot; onclick=&quot;showTab('records')&quot; class=&quot;px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-gray-800 text-yellow-400 border border-yellow-500/30 hover:bg-gray-700&quot;&gt; 📋 Laporan &lt;/button&gt; &lt;button id=&quot;tab-favorites&quot; onclick=&quot;showTab('favorites')&quot; class=&quot;px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-gray-800 text-yellow-400 border border-yellow-500/30 hover:bg-gray-700&quot;&gt; ⭐ Kegemaran &lt;/button&gt;
-    &lt;/div&gt;
-   &lt;/nav&gt;&lt;!-- Main Content Wrapper --&gt;
-   &lt;main class=&quot;flex-1 overflow-y-auto scrollbar-gold&quot;&gt;
-    &lt;!-- Form Section --&gt;
-    &lt;section id=&quot;form-section&quot; class=&quot;w-full px-4 py-8&quot;&gt;
-     &lt;div class=&quot;max-w-4xl mx-auto&quot;&gt;
-      &lt;div class=&quot;glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp&quot;&gt;
-       &lt;h3 class=&quot;font-playfair text-2xl text-yellow-400 mb-6 flex items-center gap-3&quot;&gt;&lt;span class=&quot;w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black&quot;&gt;📝&lt;/span&gt; Borang Kawalan Kelas&lt;/h3&gt;
-       &lt;form id=&quot;record-form&quot; class=&quot;space-y-6&quot;&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Nama Guru&lt;/label&gt; &lt;select id=&quot;teacher&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Guru --&lt;/option&gt; &lt;/select&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Subjek&lt;/label&gt; &lt;select id=&quot;subject&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Subjek --&lt;/option&gt; &lt;option value=&quot;Bahasa Melayu&quot;&gt;📖 Bahasa Melayu&lt;/option&gt; &lt;option value=&quot;Bahasa Inggeris&quot;&gt;🇬🇧 Bahasa Inggeris&lt;/option&gt; &lt;option value=&quot;Matematik&quot;&gt;🔢 Matematik&lt;/option&gt; &lt;option value=&quot;Sejarah&quot;&gt;📜 Sejarah&lt;/option&gt; &lt;option value=&quot;Pendidikan Moral&quot;&gt;⚖️ Pendidikan Moral&lt;/option&gt; &lt;option value=&quot;Pendidikan Jasmani dan Kesihatan&quot;&gt;🏃 Pendidikan Jasmani dan Kesihatan&lt;/option&gt; &lt;option value=&quot;Pendidikan Seni&quot;&gt;🎨 Pendidikan Seni&lt;/option&gt; &lt;option value=&quot;Sains&quot;&gt;🔬 Sains&lt;/option&gt; &lt;option value=&quot;Pendidikan Islam&quot;&gt;☪️ Pendidikan Islam&lt;/option&gt; &lt;option value=&quot;Bahasa Arab&quot;&gt;🇸🇦 Bahasa Arab&lt;/option&gt; &lt;option value=&quot;Pendidikan Muzik&quot;&gt;🎵 Pendidikan Muzik&lt;/option&gt; &lt;option value=&quot;Rekabentuk dan Teknologi&quot;&gt;⚙️ Rekabentuk dan Teknologi&lt;/option&gt; &lt;/select&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Kelas&lt;/label&gt; &lt;select id=&quot;class-select&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt; &lt;option value=&quot;&quot;&gt;-- Pilih Kelas --&lt;/option&gt; &lt;optgroup label=&quot;📚 Prasekolah&quot;&gt; &lt;option value=&quot;Prasekolah Alza&quot;&gt;Prasekolah Alza&lt;/option&gt; &lt;option value=&quot;Prasekolah Inspira&quot;&gt;Prasekolah Inspira&lt;/option&gt; &lt;option value=&quot;Prasekolah Exora&quot;&gt;Prasekolah Exora&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 1&quot;&gt; &lt;option value=&quot;1 Inovatif&quot;&gt;1 Inovatif&lt;/option&gt; &lt;option value=&quot;1 Kreatif&quot;&gt;1 Kreatif&lt;/option&gt; &lt;option value=&quot;1 Kritis&quot;&gt;1 Kritis&lt;/option&gt; &lt;option value=&quot;1 Patriotik&quot;&gt;1 Patriotik&lt;/option&gt; &lt;option value=&quot;1 Proaktif&quot;&gt;1 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 2&quot;&gt; &lt;option value=&quot;2 Inovatif&quot;&gt;2 Inovatif&lt;/option&gt; &lt;option value=&quot;2 Kreatif&quot;&gt;2 Kreatif&lt;/option&gt; &lt;option value=&quot;2 Kritis&quot;&gt;2 Kritis&lt;/option&gt; &lt;option value=&quot;2 Patriotik&quot;&gt;2 Patriotik&lt;/option&gt; &lt;option value=&quot;2 Proaktif&quot;&gt;2 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 3&quot;&gt; &lt;option value=&quot;3 Inovatif&quot;&gt;3 Inovatif&lt;/option&gt; &lt;option value=&quot;3 Kreatif&quot;&gt;3 Kreatif&lt;/option&gt; &lt;option value=&quot;3 Kritis&quot;&gt;3 Kritis&lt;/option&gt; &lt;option value=&quot;3 Patriotik&quot;&gt;3 Patriotik&lt;/option&gt; &lt;option value=&quot;3 Proaktif&quot;&gt;3 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 4&quot;&gt; &lt;option value=&quot;4 Inovatif&quot;&gt;4 Inovatif&lt;/option&gt; &lt;option value=&quot;4 Kreatif&quot;&gt;4 Kreatif&lt;/option&gt; &lt;option value=&quot;4 Kritis&quot;&gt;4 Kritis&lt;/option&gt; &lt;option value=&quot;4 Patriotik&quot;&gt;4 Patriotik&lt;/option&gt; &lt;option value=&quot;4 Proaktif&quot;&gt;4 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 5&quot;&gt; &lt;option value=&quot;5 Inovatif&quot;&gt;5 Inovatif&lt;/option&gt; &lt;option value=&quot;5 Kreatif&quot;&gt;5 Kreatif&lt;/option&gt; &lt;option value=&quot;5 Kritis&quot;&gt;5 Kritis&lt;/option&gt; &lt;option value=&quot;5 Patriotik&quot;&gt;5 Patriotik&lt;/option&gt; &lt;option value=&quot;5 Proaktif&quot;&gt;5 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;📖 Tahun 6&quot;&gt; &lt;option value=&quot;6 Inovatif&quot;&gt;6 Inovatif&lt;/option&gt; &lt;option value=&quot;6 Kreatif&quot;&gt;6 Kreatif&lt;/option&gt; &lt;option value=&quot;6 Kritis&quot;&gt;6 Kritis&lt;/option&gt; &lt;option value=&quot;6 Patriotik&quot;&gt;6 Patriotik&lt;/option&gt; &lt;option value=&quot;6 Proaktif&quot;&gt;6 Proaktif&lt;/option&gt; &lt;/optgroup&gt; &lt;optgroup label=&quot;🌟 PPKI&quot;&gt; &lt;option value=&quot;PPKI Dinamik&quot;&gt;PPKI Dinamik&lt;/option&gt; &lt;option value=&quot;PPKI Fokus&quot;&gt;PPKI Fokus&lt;/option&gt; &lt;option value=&quot;PPKI Etika&quot;&gt;PPKI Etika&lt;/option&gt; &lt;/optgroup&gt; &lt;/select&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Tarikh&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;date&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Jumlah Murid&lt;/label&gt; &lt;input type=&quot;number&quot; id=&quot;student-count&quot; min=&quot;0&quot; required placeholder=&quot;Masukkan jumlah murid&quot; class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;grid grid-cols-2 gap-4&quot;&gt;
-         &lt;div&gt;
-          &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Masa Masuk&lt;/label&gt; &lt;input type=&quot;time&quot; id=&quot;time-in&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt;
-         &lt;/div&gt;
-         &lt;div&gt;
-          &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Masa Keluar&lt;/label&gt; &lt;input type=&quot;time&quot; id=&quot;time-out&quot; required class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect&quot;&gt;
-         &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;⚠️ Ulasan Salah Laku Disiplin (Jika Ada)&lt;/label&gt; &lt;textarea id=&quot;discipline-remarks&quot; rows=&quot;3&quot; placeholder=&quot;Masukkan ulasan salah laku disiplin jika ada...&quot; class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect resize-none&quot;&gt;&lt;/textarea&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-         &lt;label class=&quot;block text-yellow-400 font-medium mb-2&quot;&gt;Ulasan Guru&lt;/label&gt; &lt;textarea id=&quot;remarks&quot; rows=&quot;4&quot; placeholder=&quot;Masukkan ulasan...&quot; class=&quot;w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect resize-none&quot;&gt;&lt;/textarea&gt;
-        &lt;/div&gt;&lt;button type=&quot;submit&quot; id=&quot;submit-btn&quot; class=&quot;w-full gold-gradient text-black font-bold py-4 rounded-xl btn-hover transition-all duration-300 flex items-center justify-center gap-2&quot;&gt; &lt;span&gt;💾&lt;/span&gt; Simpan Rekod &lt;/button&gt;
-       &lt;/form&gt;
-       &lt;div id=&quot;status-message&quot; class=&quot;mt-4 text-center hidden&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-     &lt;/div&gt;
-    &lt;/section&gt;&lt;!-- Records Section --&gt;
-    &lt;section id=&quot;records-section&quot; class=&quot;w-full px-4 py-8 hidden&quot;&gt;
-     &lt;div class=&quot;max-w-6xl mx-auto&quot;&gt;
-      &lt;div class=&quot;glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp&quot;&gt;
-       &lt;div class=&quot;flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 flex-wrap&quot;&gt;
-        &lt;h3 class=&quot;font-playfair text-2xl text-yellow-400 flex items-center gap-3&quot;&gt;&lt;span class=&quot;w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black&quot;&gt;📋&lt;/span&gt; Laporan Tersimpan&lt;/h3&gt;
-        &lt;div class=&quot;flex gap-2 flex-wrap w-full md:w-auto&quot;&gt;
-         &lt;input type=&quot;text&quot; id=&quot;search-input&quot; placeholder=&quot;🔍 Cari...&quot; class=&quot;bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none input-glow text-sm glass-effect flex-1 md:flex-none&quot;&gt; &lt;select id=&quot;filter-class&quot; class=&quot;bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none text-sm glass-effect&quot;&gt; &lt;option value=&quot;&quot;&gt;Semua Kelas&lt;/option&gt; &lt;/select&gt; &lt;select id=&quot;sort-options&quot; class=&quot;bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none text-sm glass-effect&quot;&gt; &lt;option value=&quot;newest&quot;&gt;Terbaru&lt;/option&gt; &lt;option value=&quot;oldest&quot;&gt;Terawal&lt;/option&gt; &lt;option value=&quot;teacher&quot;&gt;Guru (A-Z)&lt;/option&gt; &lt;option value=&quot;students&quot;&gt;Jumlah Murid&lt;/option&gt; &lt;/select&gt;
-        &lt;/div&gt;
-       &lt;/div&gt;
-       &lt;div id=&quot;records-count&quot; class=&quot;text-yellow-500/70 mb-4 text-sm&quot;&gt;&lt;/div&gt;
-       &lt;div id=&quot;records-container&quot; class=&quot;space-y-3 max-h-96 overflow-y-auto scrollbar-gold pr-2&quot;&gt;
-        &lt;div class=&quot;text-center text-gray-500 py-8&quot;&gt;
-         &lt;span class=&quot;text-4xl&quot;&gt;📭&lt;/span&gt;
-         &lt;p class=&quot;mt-2&quot;&gt;Tiada rekod tersimpan&lt;/p&gt;
-        &lt;/div&gt;
-       &lt;/div&gt;
-      &lt;/div&gt;
-     &lt;/div&gt;
-    &lt;/section&gt;&lt;!-- Favorites Section --&gt;
-    &lt;section id=&quot;favorites-section&quot; class=&quot;w-full px-4 py-8 hidden&quot;&gt;
-     &lt;div class=&quot;max-w-6xl mx-auto&quot;&gt;
-      &lt;div class=&quot;glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp&quot;&gt;
-       &lt;h3 class=&quot;font-playfair text-2xl text-yellow-400 mb-6 flex items-center gap-3&quot;&gt;&lt;span class=&quot;w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black&quot;&gt;⭐&lt;/span&gt; Rekod Kegemaran&lt;/h3&gt;
-       &lt;div id=&quot;favorites-count&quot; class=&quot;text-yellow-500/70 mb-4 text-sm&quot;&gt;&lt;/div&gt;
-       &lt;div id=&quot;favorites-container&quot; class=&quot;space-y-3 max-h-96 overflow-y-auto scrollbar-gold pr-2&quot;&gt;
-        &lt;div class=&quot;text-center text-gray-500 py-8&quot;&gt;
-         &lt;span class=&quot;text-4xl&quot;&gt;💫&lt;/span&gt;
-         &lt;p class=&quot;mt-2&quot;&gt;Tiada rekod kegemaran&lt;/p&gt;
-        &lt;/div&gt;
-       &lt;/div&gt;
-      &lt;/div&gt;
-     &lt;/div&gt;
-    &lt;/section&gt;
-   &lt;/main&gt;&lt;!-- Footer --&gt;
-   &lt;footer class=&quot;w-full py-4 px-4 border-t border-yellow-500/20 glass-effect text-center&quot;&gt;
-    &lt;p class=&quot;text-yellow-500/60 text-sm&quot;&gt;© 2026 SK Umas-Umas. Hak Cipta Terpelihara.&lt;/p&gt;
-   &lt;/footer&gt;
-  &lt;/div&gt;&lt;!-- Delete Confirmation Modal --&gt;
-  &lt;div id=&quot;delete-modal&quot; class=&quot;fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4 backdrop-blur-sm&quot;&gt;
-   &lt;div class=&quot;glass-effect border border-yellow-500/30 rounded-2xl p-6 max-w-md w-full card-shadow animate-bounce-in&quot;&gt;
-    &lt;h4 class=&quot;text-xl text-yellow-400 font-semibold mb-4&quot;&gt;⚠️ Sahkan Pemadaman&lt;/h4&gt;
-    &lt;p class=&quot;text-gray-300 mb-6&quot;&gt;Adakah anda pasti mahu memadam rekod ini?&lt;/p&gt;
-    &lt;div class=&quot;flex gap-3&quot;&gt;
-     &lt;button id=&quot;cancel-delete&quot; class=&quot;flex-1 bg-gray-700 text-white py-3 rounded-xl hover:bg-gray-600 transition-all&quot;&gt;Batal&lt;/button&gt; &lt;button id=&quot;confirm-delete&quot; class=&quot;flex-1 bg-red-600 text-white py-3 rounded-xl hover:bg-red-500 transition-all&quot;&gt;Padam&lt;/button&gt;
-    &lt;/div&gt;
-   &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;script&gt;
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full dark-gradient font-poppins text-gray-100 overflow-hidden flex flex-col">
+  <div id="app" class="w-full h-full flex flex-col">
+   <!-- Toast Container -->
+   <div id="toast-container" class="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 space-y-2 pointer-events-none"></div><!-- Header -->
+   <header class="w-full py-6 px-4 border-b border-yellow-500/30 glass-effect animate-slideInDown">
+    <div class="max-w-7xl mx-auto text-center">
+     <div class="inline-block mb-2 animate-float">
+      <div class="w-20 h-20 mx-auto gold-gradient rounded-full flex items-center justify-center shadow-lg animate-pulse-glow">
+       <span class="text-3xl">🏫</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="font-playfair text-3xl md:text-4xl font-bold gold-gradient bg-clip-text text-transparent">E-Rekod Kawalan Kelas</h1>
+     <h2 id="school-name" class="font-playfair text-xl md:text-2xl text-yellow-400 mt-1">SK Umas-Umas</h2>
+     <p id="motto" class="text-yellow-500/80 italic mt-2 text-sm md:text-base">"Sepakat Memperkasakan Kecemerlangan"</p>
+    </div>
+   </header><!-- Navigation Tabs -->
+   <nav class="w-full px-4 py-4 border-b border-yellow-500/20 glass-effect">
+    <div class="max-w-7xl mx-auto flex justify-center gap-2 md:gap-4 flex-wrap">
+     <button id="tab-form" onclick="showTab('form')" class="px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 gold-gradient text-black hover:shadow-lg"> 📝 Borang Rekod </button> <button id="tab-records" onclick="showTab('records')" class="px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-gray-800 text-yellow-400 border border-yellow-500/30 hover:bg-gray-700"> 📋 Laporan </button> <button id="tab-favorites" onclick="showTab('favorites')" class="px-4 md:px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-gray-800 text-yellow-400 border border-yellow-500/30 hover:bg-gray-700"> ⭐ Kegemaran </button>
+    </div>
+   </nav><!-- Main Content Wrapper -->
+   <main class="flex-1 overflow-y-auto scrollbar-gold">
+    <!-- Form Section -->
+    <section id="form-section" class="w-full px-4 py-8">
+     <div class="max-w-4xl mx-auto">
+      <div class="glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp">
+       <h3 class="font-playfair text-2xl text-yellow-400 mb-6 flex items-center gap-3"><span class="w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black">📝</span> Borang Kawalan Kelas</h3>
+       <form id="record-form" class="space-y-6">
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Nama Guru</label> <select id="teacher" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect"> <option value="">-- Pilih Guru --</option> </select>
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Subjek</label> <select id="subject" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect"> <option value="">-- Pilih Subjek --</option> <option value="Bahasa Melayu">📖 Bahasa Melayu</option> <option value="Bahasa Inggeris">🇬🇧 Bahasa Inggeris</option> <option value="Matematik">🔢 Matematik</option> <option value="Sejarah">📜 Sejarah</option> <option value="Pendidikan Moral">⚖️ Pendidikan Moral</option> <option value="Pendidikan Jasmani dan Kesihatan">🏃 Pendidikan Jasmani dan Kesihatan</option> <option value="Pendidikan Seni">🎨 Pendidikan Seni</option> <option value="Sains">🔬 Sains</option> <option value="Pendidikan Islam">☪️ Pendidikan Islam</option> <option value="Bahasa Arab">🇸🇦 Bahasa Arab</option> <option value="Pendidikan Muzik">🎵 Pendidikan Muzik</option> <option value="Rekabentuk dan Teknologi">⚙️ Rekabentuk dan Teknologi</option> </select>
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Kelas</label> <select id="class-select" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect"> <option value="">-- Pilih Kelas --</option> <optgroup label="📚 Prasekolah"> <option value="Prasekolah Alza">Prasekolah Alza</option> <option value="Prasekolah Inspira">Prasekolah Inspira</option> <option value="Prasekolah Exora">Prasekolah Exora</option> </optgroup> <optgroup label="📖 Tahun 1"> <option value="1 Inovatif">1 Inovatif</option> <option value="1 Kreatif">1 Kreatif</option> <option value="1 Kritis">1 Kritis</option> <option value="1 Patriotik">1 Patriotik</option> <option value="1 Proaktif">1 Proaktif</option> </optgroup> <optgroup label="📖 Tahun 2"> <option value="2 Inovatif">2 Inovatif</option> <option value="2 Kreatif">2 Kreatif</option> <option value="2 Kritis">2 Kritis</option> <option value="2 Patriotik">2 Patriotik</option> <option value="2 Proaktif">2 Proaktif</option> </optgroup> <optgroup label="📖 Tahun 3"> <option value="3 Inovatif">3 Inovatif</option> <option value="3 Kreatif">3 Kreatif</option> <option value="3 Kritis">3 Kritis</option> <option value="3 Patriotik">3 Patriotik</option> <option value="3 Proaktif">3 Proaktif</option> </optgroup> <optgroup label="📖 Tahun 4"> <option value="4 Inovatif">4 Inovatif</option> <option value="4 Kreatif">4 Kreatif</option> <option value="4 Kritis">4 Kritis</option> <option value="4 Patriotik">4 Patriotik</option> <option value="4 Proaktif">4 Proaktif</option> </optgroup> <optgroup label="📖 Tahun 5"> <option value="5 Inovatif">5 Inovatif</option> <option value="5 Kreatif">5 Kreatif</option> <option value="5 Kritis">5 Kritis</option> <option value="5 Patriotik">5 Patriotik</option> <option value="5 Proaktif">5 Proaktif</option> </optgroup> <optgroup label="📖 Tahun 6"> <option value="6 Inovatif">6 Inovatif</option> <option value="6 Kreatif">6 Kreatif</option> <option value="6 Kritis">6 Kritis</option> <option value="6 Patriotik">6 Patriotik</option> <option value="6 Proaktif">6 Proaktif</option> </optgroup> <optgroup label="🌟 PPKI"> <option value="PPKI Dinamik">PPKI Dinamik</option> <option value="PPKI Fokus">PPKI Fokus</option> <option value="PPKI Etika">PPKI Etika</option> </optgroup> </select>
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Tarikh</label> <input type="date" id="date" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect">
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Jumlah Murid</label> <input type="number" id="student-count" min="0" required placeholder="Masukkan jumlah murid" class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+         <div>
+          <label class="block text-yellow-400 font-medium mb-2">Masa Masuk</label> <input type="time" id="time-in" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect">
+         </div>
+         <div>
+          <label class="block text-yellow-400 font-medium mb-2">Masa Keluar</label> <input type="time" id="time-out" required class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect">
+         </div>
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">⚠️ Ulasan Salah Laku Disiplin (Jika Ada)</label> <textarea id="discipline-remarks" rows="3" placeholder="Masukkan ulasan salah laku disiplin jika ada..." class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect resize-none"></textarea>
+        </div>
+        <div>
+         <label class="block text-yellow-400 font-medium mb-2">Ulasan Guru</label> <textarea id="remarks" rows="4" placeholder="Masukkan ulasan..." class="w-full bg-gray-800/50 border border-yellow-500/30 rounded-xl px-4 py-3 text-white focus:outline-none input-glow focus:border-yellow-500 transition-all glass-effect resize-none"></textarea>
+        </div><button type="submit" id="submit-btn" class="w-full gold-gradient text-black font-bold py-4 rounded-xl btn-hover transition-all duration-300 flex items-center justify-center gap-2"> <span>💾</span> Simpan Rekod </button>
+       </form>
+       <div id="status-message" class="mt-4 text-center hidden"></div>
+      </div>
+     </div>
+    </section><!-- Records Section -->
+    <section id="records-section" class="w-full px-4 py-8 hidden">
+     <div class="max-w-6xl mx-auto">
+      <div class="glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp">
+       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 flex-wrap">
+        <h3 class="font-playfair text-2xl text-yellow-400 flex items-center gap-3"><span class="w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black">📋</span> Laporan Tersimpan</h3>
+        <div class="flex gap-2 flex-wrap w-full md:w-auto">
+         <input type="text" id="search-input" placeholder="🔍 Cari..." class="bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none input-glow text-sm glass-effect flex-1 md:flex-none"> <select id="filter-class" class="bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none text-sm glass-effect"> <option value="">Semua Kelas</option> </select> <select id="sort-options" class="bg-gray-800/50 border border-yellow-500/30 rounded-lg px-4 py-2 text-white focus:outline-none text-sm glass-effect"> <option value="newest">Terbaru</option> <option value="oldest">Terawal</option> <option value="teacher">Guru (A-Z)</option> <option value="students">Jumlah Murid</option> </select>
+        </div>
+       </div>
+       <div id="records-count" class="text-yellow-500/70 mb-4 text-sm"></div>
+       <div id="records-container" class="space-y-3 max-h-96 overflow-y-auto scrollbar-gold pr-2">
+        <div class="text-center text-gray-500 py-8">
+         <span class="text-4xl">📭</span>
+         <p class="mt-2">Tiada rekod tersimpan</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Favorites Section -->
+    <section id="favorites-section" class="w-full px-4 py-8 hidden">
+     <div class="max-w-6xl mx-auto">
+      <div class="glass-effect rounded-2xl p-6 md:p-8 card-shadow border border-yellow-500/20 animate-fadeInUp">
+       <h3 class="font-playfair text-2xl text-yellow-400 mb-6 flex items-center gap-3"><span class="w-10 h-10 gold-gradient rounded-lg flex items-center justify-center text-black">⭐</span> Rekod Kegemaran</h3>
+       <div id="favorites-count" class="text-yellow-500/70 mb-4 text-sm"></div>
+       <div id="favorites-container" class="space-y-3 max-h-96 overflow-y-auto scrollbar-gold pr-2">
+        <div class="text-center text-gray-500 py-8">
+         <span class="text-4xl">💫</span>
+         <p class="mt-2">Tiada rekod kegemaran</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="w-full py-4 px-4 border-t border-yellow-500/20 glass-effect text-center">
+    <p class="text-yellow-500/60 text-sm">© 2026 SK Umas-Umas. Hak Cipta Terpelihara.</p>
+   </footer>
+  </div><!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
+   <div class="glass-effect border border-yellow-500/30 rounded-2xl p-6 max-w-md w-full card-shadow animate-bounce-in">
+    <h4 class="text-xl text-yellow-400 font-semibold mb-4">⚠️ Sahkan Pemadaman</h4>
+    <p class="text-gray-300 mb-6">Adakah anda pasti mahu memadam rekod ini?</p>
+    <div class="flex gap-3">
+     <button id="cancel-delete" class="flex-1 bg-gray-700 text-white py-3 rounded-xl hover:bg-gray-600 transition-all">Batal</button> <button id="confirm-delete" class="flex-1 bg-red-600 text-white py-3 rounded-xl hover:bg-red-500 transition-all">Padam</button>
+    </div>
+   </div>
+  </div>
+  <script>
     // Teacher list
     const teachers = [
-      &quot;A'in Fhatin Hanani binti Rijan&quot;, &quot;Abdul Rahim bin MD Lajim&quot;, &quot;Dzulfadly bin AG Anak&quot;,
-      &quot;Roslianah binti Roie&quot;, &quot;Abdul Rahman bin Taip&quot;, &quot;Ahmad Syazwan bin Saofi&quot;,
-      &quot;Alice Dapith&quot;, &quot;Antoni Riko Boling&quot;, &quot;Arbaena binti Nahang&quot;, &quot;Arfah bin Arase&quot;,
-      &quot;Azmah binti Asha'ari&quot;, &quot;Hjh. Palam binti Karim&quot;, &quot;Diana binti Darno&quot;,
-      &quot;Baiduri binti Dullah&quot;, &quot;Darmin bin Ladiro&quot;, &quot;Dyana Veronica Henry&quot;, &quot;Elly Massalo&quot;,
-      &quot;Sutrawiya binti Malong&quot;, &quot;Fauziah binti Senen&quot;, &quot;Halimahton Saadiah binti Mahamad&quot;,
-      &quot;Hjh. Masni Juitah binti Tuda&quot;, &quot;Juliyana binti Yahya&quot;, &quot;Herna binti Hussin&quot;,
-      &quot;Mahfuzah binti Mohamed Desa&quot;, &quot;Rabiatun binti Rahman&quot;, &quot;Marini binti Syed Ali&quot;,
-      &quot;Marliyana binti Mohammed&quot;, &quot;Merhma binti Masugi&quot;, &quot;Merlyn Loyola&quot;,
-      &quot;Mohammad Farid bin Mohd Arbi&quot;, &quot;Mohd Hasrul bin Mohd Redzuan&quot;,
-      &quot;Mohd Khairul Amir bin Ahmad&quot;, &quot;Mohd Khuzaifah Bin Ismail&quot;,
-      &quot;Mohd Sam bin Talip @ Mohd Isham&quot;, &quot;Azizah binti Haris&quot;,
-      &quot;Muhammad Shahrol Lizam bin Muhammad Khairul Akmal&quot;, &quot;Nor Asidah binti Kalbun&quot;,
-      &quot;Syahmie bin Syahrulhazni&quot;, &quot;Muhammad Admien bin Jasni&quot;,
-      &quot;Mohamad Nurlhafizi bin Abdulnur&quot;, &quot;Noorzalianah binti Insan&quot;,
-      &quot;Nurasyipa binti Ridwan&quot;, &quot;Norhainie binti Herman&quot;, &quot;Nur Anissa binti Roslan&quot;,
-      &quot;Nur Azlin binti Zulkifli&quot;, &quot;Nurhasanah binti Roslan&quot;, &quot;Nurul Aida binti Samsudin&quot;,
-      &quot;Nur Izzah binti Jainudin&quot;, &quot;Auni Nurfarahin binti Aripai&quot;, &quot;Rahman bin Soga&quot;,
-      &quot;Ridhuan bin Arbin&quot;, &quot;Nordin bin Lagudan&quot;, &quot;Hj. Ramsah bin Burhan&quot;,
-      &quot;Misnah binti Miasin&quot;, &quot;Roshaida binti Yeop Ahmad&quot;, &quot;Norliewati Binti Hassan&quot;,
-      &quot;Suhana Binti Sumino&quot;, &quot;Rosharisa binti Herman&quot;, &quot;Hazari bin Hakim&quot;,
-      &quot;Sharon Francis Chuan&quot;, &quot;Mohammad bin Abdul Rajak&quot;, &quot;Rozaimi bin Arshad&quot;,
-      &quot;Salbiah binti Karim&quot;, &quot;Kamisah binti Mohammad&quot;, &quot;Sharif bin Hamdani&quot;,
-      &quot;Siti Nur Syafiah binti Majid&quot;, &quot;Siti Robasiah binti Hj.Rahamat&quot;, &quot;Stevon Luntid&quot;,
-      &quot;Suraya binti Mat Yusop&quot;, &quot;Ummu Nasyibah binti Mamma&quot;, &quot;Wirna binti Abd Hamid&quot;,
-      &quot;Rozinah binti Amirul&quot;, &quot;Junita binti Ajirul&quot;, &quot;Hasbullah bin Ali&quot;
+      "A'in Fhatin Hanani binti Rijan", "Abdul Rahim bin MD Lajim", "Dzulfadly bin AG Anak",
+      "Roslianah binti Roie", "Abdul Rahman bin Taip", "Ahmad Syazwan bin Saofi",
+      "Alice Dapith", "Antoni Riko Boling", "Arbaena binti Nahang", "Arfah bin Arase",
+      "Azmah binti Asha'ari", "Hjh. Palam binti Karim", "Diana binti Darno",
+      "Baiduri binti Dullah", "Darmin bin Ladiro", "Dyana Veronica Henry", "Elly Massalo",
+      "Sutrawiya binti Malong", "Fauziah binti Senen", "Halimahton Saadiah binti Mahamad",
+      "Hjh. Masni Juitah binti Tuda", "Juliyana binti Yahya", "Herna binti Hussin",
+      "Mahfuzah binti Mohamed Desa", "Rabiatun binti Rahman", "Marini binti Syed Ali",
+      "Marliyana binti Mohammed", "Merhma binti Masugi", "Merlyn Loyola",
+      "Mohammad Farid bin Mohd Arbi", "Mohd Hasrul bin Mohd Redzuan",
+      "Mohd Khairul Amir bin Ahmad", "Mohd Khuzaifah Bin Ismail",
+      "Mohd Sam bin Talip @ Mohd Isham", "Azizah binti Haris",
+      "Muhammad Shahrol Lizam bin Muhammad Khairul Akmal", "Nor Asidah binti Kalbun",
+      "Syahmie bin Syahrulhazni", "Muhammad Admien bin Jasni",
+      "Mohamad Nurlhafizi bin Abdulnur", "Noorzalianah binti Insan",
+      "Nurasyipa binti Ridwan", "Norhainie binti Herman", "Nur Anissa binti Roslan",
+      "Nur Azlin binti Zulkifli", "Nurhasanah binti Roslan", "Nurul Aida binti Samsudin",
+      "Nur Izzah binti Jainudin", "Auni Nurfarahin binti Aripai", "Rahman bin Soga",
+      "Ridhuan bin Arbin", "Nordin bin Lagudan", "Hj. Ramsah bin Burhan",
+      "Misnah binti Miasin", "Roshaida binti Yeop Ahmad", "Norliewati Binti Hassan",
+      "Suhana Binti Sumino", "Rosharisa binti Herman", "Hazari bin Hakim",
+      "Sharon Francis Chuan", "Mohammad bin Abdul Rajak", "Rozaimi bin Arshad",
+      "Salbiah binti Karim", "Kamisah binti Mohammad", "Sharif bin Hamdani",
+      "Siti Nur Syafiah binti Majid", "Siti Robasiah binti Hj.Rahamat", "Stevon Luntid",
+      "Suraya binti Mat Yusop", "Ummu Nasyibah binti Mamma", "Wirna binti Abd Hamid",
+      "Rozinah binti Amirul", "Junita binti Ajirul", "Hasbullah bin Ali"
     ];
 
     const defaultConfig = {
-      main_title: &quot;E-Rekod Kawalan Kelas&quot;,
-      school_name: &quot;SK Umas-Umas&quot;,
-      motto: &quot;Sepakat Memperkasakan Kecemerlangan&quot;
+      main_title: "E-Rekod Kawalan Kelas",
+      school_name: "SK Umas-Umas",
+      motto: "Sepakat Memperkasakan Kecemerlangan"
     };
 
     let records = [];
@@ -289,13 +275,13 @@
       }`;
       toast.textContent = (type === 'success' ? '✅ ' : '❌ ') + message;
       container.appendChild(toast);
-      setTimeout(() =&gt; toast.remove(), 3000);
+      setTimeout(() => toast.remove(), 3000);
     }
 
     // Initialize teacher dropdown
     function initTeacherDropdown() {
       const select = document.getElementById('teacher');
-      teachers.sort().forEach(teacher =&gt; {
+      teachers.sort().forEach(teacher => {
         const option = document.createElement('option');
         option.value = teacher;
         option.textContent = teacher;
@@ -307,8 +293,8 @@
     function initFilterDropdown() {
       const filterSelect = document.getElementById('filter-class');
       const classSelect = document.getElementById('class-select');
-      Array.from(classSelect.options).forEach(opt =&gt; {
-        if (opt.value &amp;&amp; opt.value !== '-- Pilih Kelas --') {
+      Array.from(classSelect.options).forEach(opt => {
+        if (opt.value && opt.value !== '-- Pilih Kelas --') {
           const option = document.createElement('option');
           option.value = opt.value;
           option.textContent = opt.value;
@@ -320,7 +306,7 @@
     // Show tab
     function showTab(tab) {
       const tabs = ['form', 'records', 'favorites'];
-      tabs.forEach(t =&gt; {
+      tabs.forEach(t => {
         const section = document.getElementById(`${t}-section`);
         const btn = document.getElementById(`tab-${t}`);
         if (t === tab) {
@@ -348,18 +334,18 @@
       const filterClass = document.getElementById('filter-class').value;
       currentSort = document.getElementById('sort-options').value;
 
-      let filtered = records.filter(r =&gt; {
+      let filtered = records.filter(r => {
         const matchSearch = !searchTerm || 
           r.teacher_name.toLowerCase().includes(searchTerm) ||
           r.class_name.toLowerCase().includes(searchTerm) ||
           r.subject_name.toLowerCase().includes(searchTerm) ||
-          (r.remarks &amp;&amp; r.remarks.toLowerCase().includes(searchTerm));
+          (r.remarks && r.remarks.toLowerCase().includes(searchTerm));
         const matchClass = !filterClass || r.class_name === filterClass;
-        return matchSearch &amp;&amp; matchClass;
+        return matchSearch && matchClass;
       });
 
       // Sort
-      filtered.sort((a, b) =&gt; {
+      filtered.sort((a, b) => {
         if (currentSort === 'newest') return new Date(b.created_at) - new Date(a.created_at);
         if (currentSort === 'oldest') return new Date(a.created_at) - new Date(b.created_at);
         if (currentSort === 'teacher') return a.teacher_name.localeCompare(b.teacher_name);
@@ -370,25 +356,25 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          &lt;div class=&quot;text-center text-gray-500 py-8&quot;&gt;
-            &lt;span class=&quot;text-4xl&quot;&gt;📭&lt;/span&gt;
-            &lt;p class=&quot;mt-2&quot;&gt;${records.length === 0 ? 'Tiada rekod tersimpan' : 'Tiada rekod dijumpai'}&lt;/p&gt;
-          &lt;/div&gt;
+          <div class="text-center text-gray-500 py-8">
+            <span class="text-4xl">📭</span>
+            <p class="mt-2">${records.length === 0 ? 'Tiada rekod tersimpan' : 'Tiada rekod dijumpai'}</p>
+          </div>
         `;
         return;
       }
 
       const existingCards = new Map();
-      container.querySelectorAll('[data-record-id]').forEach(el =&gt; {
+      container.querySelectorAll('[data-record-id]').forEach(el => {
         existingCards.set(el.dataset.recordId, el);
       });
 
-      const newIds = new Set(filtered.map(r =&gt; r.id));
-      existingCards.forEach((el, id) =&gt; {
+      const newIds = new Set(filtered.map(r => r.id));
+      existingCards.forEach((el, id) => {
         if (!newIds.has(id)) el.remove();
       });
 
-      filtered.forEach((record, index) =&gt; {
+      filtered.forEach((record, index) => {
         let card = existingCards.get(record.id);
         const isFavorite = record.is_favorite;
         
@@ -400,48 +386,48 @@
         }
 
         card.innerHTML = `
-          &lt;div class=&quot;flex flex-col md:flex-row justify-between gap-4&quot;&gt;
-            &lt;div class=&quot;flex-1 space-y-2&quot;&gt;
-              &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
-                &lt;span class=&quot;text-yellow-400 font-semibold&quot;&gt;${record.teacher_name}&lt;/span&gt;
-                &lt;span class=&quot;px-3 py-1 gold-gradient text-black text-xs rounded-full font-semibold&quot;&gt;${record.class_name}&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div class=&quot;text-gray-300 text-sm font-medium&quot;&gt;${record.subject_name}&lt;/div&gt;
-              &lt;div class=&quot;text-gray-400 text-sm flex flex-wrap gap-4&quot;&gt;
-                &lt;span&gt;📅 ${formatDate(record.date)}&lt;/span&gt;
-                &lt;span&gt;👥 ${record.student_count} murid&lt;/span&gt;
-                &lt;span&gt;🕐 ${record.time_in} - ${record.time_out}&lt;/span&gt;
-              &lt;/div&gt;
-              ${record.discipline_remarks ? `&lt;div class=&quot;bg-red-900/20 border border-red-500/30 rounded-lg p-3 mt-3&quot;&gt;&lt;p class=&quot;text-red-400 text-sm font-semibold&quot;&gt;⚠️ Salah Laku Disiplin:&lt;/p&gt;&lt;p class=&quot;text-gray-300 text-sm mt-1&quot;&gt;&quot;${record.discipline_remarks}&quot;&lt;/p&gt;&lt;/div&gt;` : ''}
-              ${record.remarks ? `&lt;p class=&quot;text-gray-300 text-sm mt-2 italic&quot;&gt;&quot;${record.remarks}&quot;&lt;/p&gt;` : ''}
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+          <div class="flex flex-col md:flex-row justify-between gap-4">
+            <div class="flex-1 space-y-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-yellow-400 font-semibold">${record.teacher_name}</span>
+                <span class="px-3 py-1 gold-gradient text-black text-xs rounded-full font-semibold">${record.class_name}</span>
+              </div>
+              <div class="text-gray-300 text-sm font-medium">${record.subject_name}</div>
+              <div class="text-gray-400 text-sm flex flex-wrap gap-4">
+                <span>📅 ${formatDate(record.date)}</span>
+                <span>👥 ${record.student_count} murid</span>
+                <span>🕐 ${record.time_in} - ${record.time_out}</span>
+              </div>
+              ${record.discipline_remarks ? `<div class="bg-red-900/20 border border-red-500/30 rounded-lg p-3 mt-3"><p class="text-red-400 text-sm font-semibold">⚠️ Salah Laku Disiplin:</p><p class="text-gray-300 text-sm mt-1">"${record.discipline_remarks}"</p></div>` : ''}
+              ${record.remarks ? `<p class="text-gray-300 text-sm mt-2 italic">"${record.remarks}"</p>` : ''}
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+              </button>
+            </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+              </button>
+            </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
+              </button>
+            </div>
+          </div>
         `;
       });
     }
@@ -449,31 +435,31 @@
     // Render favorites
     function renderFavorites() {
       const container = document.getElementById('favorites-container');
-      const favorites = records.filter(r =&gt; r.is_favorite).sort((a, b) =&gt; new Date(b.created_at) - new Date(a.created_at));
+      const favorites = records.filter(r => r.is_favorite).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
       document.getElementById('favorites-count').textContent = `${favorites.length} rekod kegemaran`;
 
       if (favorites.length === 0) {
         container.innerHTML = `
-          &lt;div class=&quot;text-center text-gray-500 py-8&quot;&gt;
-            &lt;span class=&quot;text-4xl&quot;&gt;💫&lt;/span&gt;
-            &lt;p class=&quot;mt-2&quot;&gt;Tiada rekod kegemaran. Mulakan dengan menandai ⭐&lt;/p&gt;
-          &lt;/div&gt;
+          <div class="text-center text-gray-500 py-8">
+            <span class="text-4xl">💫</span>
+            <p class="mt-2">Tiada rekod kegemaran. Mulakan dengan menandai ⭐</p>
+          </div>
         `;
         return;
       }
 
       const existingCards = new Map();
-      container.querySelectorAll('[data-record-id]').forEach(el =&gt; {
+      container.querySelectorAll('[data-record-id]').forEach(el => {
         existingCards.set(el.dataset.recordId, el);
       });
 
-      const newIds = new Set(favorites.map(r =&gt; r.id));
-      existingCards.forEach((el, id) =&gt; {
+      const newIds = new Set(favorites.map(r => r.id));
+      existingCards.forEach((el, id) => {
         if (!newIds.has(id)) el.remove();
       });
 
-      favorites.forEach((record) =&gt; {
+      favorites.forEach((record) => {
         let card = existingCards.get(record.id);
         
         if (!card) {
@@ -484,56 +470,56 @@
         }
 
         card.innerHTML = `
-          &lt;div class=&quot;flex flex-col md:flex-row justify-between gap-4&quot;&gt;
-            &lt;div class=&quot;flex-1 space-y-2&quot;&gt;
-              &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
-                &lt;span class=&quot;text-2xl&quot;&gt;⭐&lt;/span&gt;
-                &lt;span class=&quot;text-yellow-400 font-semibold&quot;&gt;${record.teacher_name}&lt;/span&gt;
-                &lt;span class=&quot;px-3 py-1 gold-gradient text-black text-xs rounded-full font-semibold&quot;&gt;${record.class_name}&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;div class=&quot;text-gray-300 text-sm font-medium&quot;&gt;${record.subject_name}&lt;/div&gt;
-              &lt;div class=&quot;text-gray-400 text-sm flex flex-wrap gap-4&quot;&gt;
-                &lt;span&gt;📅 ${formatDate(record.date)}&lt;/span&gt;
-                &lt;span&gt;👥 ${record.student_count} murid&lt;/span&gt;
-                &lt;span&gt;🕐 ${record.time_in} - ${record.time_out}&lt;/span&gt;
-              &lt;/div&gt;
-              ${record.discipline_remarks ? `&lt;div class=&quot;bg-red-900/20 border border-red-500/30 rounded-lg p-3 mt-3&quot;&gt;&lt;p class=&quot;text-red-400 text-sm font-semibold&quot;&gt;⚠️ Salah Laku Disiplin:&lt;/p&gt;&lt;p class=&quot;text-gray-300 text-sm mt-1&quot;&gt;&quot;${record.discipline_remarks}&quot;&lt;/p&gt;&lt;/div&gt;` : ''}
-              ${record.remarks ? `&lt;p class=&quot;text-gray-300 text-sm mt-2 italic&quot;&gt;&quot;${record.remarks}&quot;&lt;/p&gt;` : ''}
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+          <div class="flex flex-col md:flex-row justify-between gap-4">
+            <div class="flex-1 space-y-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-2xl">⭐</span>
+                <span class="text-yellow-400 font-semibold">${record.teacher_name}</span>
+                <span class="px-3 py-1 gold-gradient text-black text-xs rounded-full font-semibold">${record.class_name}</span>
+              </div>
+              <div class="text-gray-300 text-sm font-medium">${record.subject_name}</div>
+              <div class="text-gray-400 text-sm flex flex-wrap gap-4">
+                <span>📅 ${formatDate(record.date)}</span>
+                <span>👥 ${record.student_count} murid</span>
+                <span>🕐 ${record.time_in} - ${record.time_out}</span>
+              </div>
+              ${record.discipline_remarks ? `<div class="bg-red-900/20 border border-red-500/30 rounded-lg p-3 mt-3"><p class="text-red-400 text-sm font-semibold">⚠️ Salah Laku Disiplin:</p><p class="text-gray-300 text-sm mt-1">"${record.discipline_remarks}"</p></div>` : ''}
+              ${record.remarks ? `<p class="text-gray-300 text-sm mt-2 italic">"${record.remarks}"</p>` : ''}
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+              </button>
+            </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 ${isFavorite ? 'bg-yellow-500/30 text-yellow-400' : 'bg-gray-700 text-gray-400'} rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;flex items-start gap-2&quot;&gt;
-              &lt;button onclick=&quot;toggleFavorite('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm&quot;&gt;
+              </button>
+            </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <button onclick="toggleFavorite('${record.__backendId}')" class="px-3 py-2 bg-yellow-500/30 text-yellow-400 rounded-lg hover:scale-110 transition-all text-sm">
                 ⭐
-              &lt;/button&gt;
-              &lt;button onclick=&quot;confirmDelete('${record.__backendId}')&quot; class=&quot;px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm&quot;&gt;
+              </button>
+              <button onclick="confirmDelete('${record.__backendId}')" class="px-3 py-2 bg-red-900/30 text-red-400 rounded-lg hover:bg-red-900/50 transition-all text-sm">
                 🗑️
-              &lt;/button&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
+              </button>
+            </div>
+          </div>
         `;
       });
     }
 
     // Toggle favorite
     async function toggleFavorite(backendId) {
-      const record = records.find(r =&gt; r.__backendId === backendId);
+      const record = records.find(r => r.__backendId === backendId);
       if (!record) return;
 
       const updated = { ...record, is_favorite: !record.is_favorite };
@@ -546,7 +532,7 @@
 
     // Confirm delete
     function confirmDelete(backendId) {
-      recordToDelete = records.find(r =&gt; r.__backendId === backendId);
+      recordToDelete = records.find(r => r.__backendId === backendId);
       document.getElementById('delete-modal').classList.remove('hidden');
       document.getElementById('delete-modal').classList.add('flex');
     }
@@ -563,7 +549,7 @@
       if (!recordToDelete) return;
       
       const confirmBtn = document.getElementById('confirm-delete');
-      confirmBtn.innerHTML = '&lt;div class=&quot;spinner mx-auto&quot;&gt;&lt;/div&gt;';
+      confirmBtn.innerHTML = '<div class="spinner mx-auto"></div>';
       confirmBtn.disabled = true;
 
       const result = await window.dataSdk.delete(recordToDelete);
@@ -580,7 +566,7 @@
     // Data handler
     const dataHandler = {
       onDataChanged(data) {
-        records = data.map(r =&gt; ({ ...r, is_favorite: r.is_favorite || false }));
+        records = data.map(r => ({ ...r, is_favorite: r.is_favorite || false }));
         currentRecordCount = data.length;
         if (!document.getElementById('records-section').classList.contains('hidden')) {
           renderRecords();
@@ -592,16 +578,16 @@
     };
 
     // Form submission
-    document.getElementById('record-form').addEventListener('submit', async (e) =&gt; {
+    document.getElementById('record-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      if (currentRecordCount &gt;= 999) {
+      if (currentRecordCount >= 999) {
         showToast('Had maksimum 999 rekod telah dicapai', 'error');
         return;
       }
 
       const submitBtn = document.getElementById('submit-btn');
-      submitBtn.innerHTML = '&lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt; Menyimpan...';
+      submitBtn.innerHTML = '<div class="spinner"></div> Menyimpan...';
       submitBtn.disabled = true;
 
       const newRecord = {
@@ -621,7 +607,7 @@
 
       const result = await window.dataSdk.create(newRecord);
 
-      submitBtn.innerHTML = '&lt;span&gt;💾&lt;/span&gt; Simpan Rekod';
+      submitBtn.innerHTML = '<span>💾</span> Simpan Rekod';
       submitBtn.disabled = false;
 
       if (result.isOk) {
@@ -639,7 +625,7 @@
     document.getElementById('search-input').addEventListener('input', renderRecords);
     document.getElementById('filter-class').addEventListener('change', renderRecords);
     document.getElementById('sort-options').addEventListener('change', renderRecords);
-    document.getElementById('delete-modal').addEventListener('click', (e) =&gt; {
+    document.getElementById('delete-modal').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) closeModal();
     });
 
@@ -647,7 +633,7 @@
     async function onConfigChange(config) {
       document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
       document.getElementById('school-name').textContent = config.school_name || defaultConfig.school_name;
-      document.getElementById('motto').textContent = `&quot;${config.motto || defaultConfig.motto}&quot;`;
+      document.getElementById('motto').textContent = `"${config.motto || defaultConfig.motto}"`;
     }
 
     // Initialize
@@ -660,13 +646,13 @@
         window.elementSdk.init({
           defaultConfig,
           onConfigChange,
-          mapToCapabilities: (config) =&gt; ({
+          mapToCapabilities: (config) => ({
             recolorables: [],
             borderables: [],
             fontEditable: undefined,
             fontSizeable: undefined
           }),
-          mapToEditPanelValues: (config) =&gt; new Map([
+          mapToEditPanelValues: (config) => new Map([
             ['main_title', config.main_title || defaultConfig.main_title],
             ['school_name', config.school_name || defaultConfig.school_name],
             ['motto', config.motto || defaultConfig.motto]
@@ -683,8 +669,6 @@
     }
 
     init();
-  &lt;/script&gt;
- &lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML=&quot;window.__CF$cv$params={r:'9d26e8e882b7a483',t:'MTc3MTg1MTY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);&quot;;b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;&lt;/body&gt;
-&lt;/html&gt;</pre>
-</body>
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d26e8e882b7a483',t:'MTc3MTg1MTY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
