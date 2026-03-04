@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Kokurikulum</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&amp;family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    .luxury-bg {
+      background: #0a0a0a;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+      position: relative;
+    }
+
+    .luxury-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(218, 165, 32, 0.03) 2px, rgba(218, 165, 32, 0.03) 4px);
+      pointer-events: none;
+    }
+
+    .gold-gradient {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2416 50%, #1a1410 100%);
+    }
+
+    .gold-text {
+      color: #DAA520;
+      text-shadow: 0 0 20px rgba(218, 165, 32, 0.4), 0 0 40px rgba(218, 165, 32, 0.2);
+    }
+
+    .section-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      border: 2px solid rgba(218, 165, 32, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .section-card:hover::before {
+      left: 100%;
+    }
+
+    .section-card:hover {
+      border-color: rgba(218, 165, 32, 0.8);
+      transform: translateY(-8px);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(218, 165, 32, 0.3),
+        inset 0 0 20px rgba(218, 165, 32, 0.05);
+    }
+
+    .icon-circle {
+      background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+      box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .section-card:hover .icon-circle {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 6px 25px rgba(218, 165, 32, 0.6);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+      color: #000;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .btn-gold:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(218, 165, 32, 0.5);
+    }
+
+    .abstract-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .decorative-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #DAA520, transparent);
+      margin: 30px 0;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+      background-size: 1000px 100%;
+      animation: shimmer 3s infinite;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full luxury-bg font-['Poppins']">
+  <div class="w-full h-full overflow-auto">
+   <div class="min-h-full p-8">
+    <!-- Header Mewah -->
+    <header class="relative mb-12 p-10 rounded-3xl overflow-hidden gold-gradient border-2 border-yellow-600 shadow-2xl">
+     <svg class="abstract-pattern" viewbox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <lineargradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DAA520;stop-opacity:0.8" />
+        <stop offset="50%" style="stop-color:#FFD700;stop-opacity:0.6" />
+        <stop offset="100%" style="stop-color:#B8860B;stop-opacity:0.8" />
+       </lineargradient>
+       <pattern id="batikGold" x="0" y="0" width="120" height="120" patternunits="userSpaceOnUse">
+        <circle cx="60" cy="60" r="25" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.5" />
+        <circle cx="60" cy="60" r="18" fill="none" stroke="#DAA520" stroke-width="1" opacity="0.4" />
+        <path d="M60,35 L68,48 L60,60 L52,48 Z" fill="#DAA520" opacity="0.3" />
+        <path d="M60,60 L68,72 L60,85 L52,72 Z" fill="#DAA520" opacity="0.3" />
+        <path d="M35,60 L48,68 L60,60 L48,52 Z" fill="#DAA520" opacity="0.3" />
+        <path d="M60,60 L72,68 L85,60 L72,52 Z" fill="#DAA520" opacity="0.3" />
+       </pattern>
+       <filter id="glow">
+        <fegaussianblur stddeviation="4" result="coloredBlur" />
+        <femerge>
+         <femergenode in="coloredBlur" />
+         <femergenode in="SourceGraphic" />
+        </femerge>
+       </filter>
+      </defs> <rect width="1200" height="300" fill="url(#batikGold)" /> <!-- Bunga Raya Emas Kiri --> <g transform="translate(180, 150)" filter="url(#glow)">
+       <circle cx="0" cy="0" r="50" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" opacity="0.7" />
+       <path d="M0,-50 Q18,-32 0,-15 Q-18,-32 0,-50 Z" fill="url(#goldGrad)" opacity="0.4" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(72)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(144)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(216)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(288)" />
+       <circle cx="0" cy="0" r="15" fill="#FFD700" opacity="0.6" />
+      </g> <!-- Bunga Raya Emas Kanan --> <g transform="translate(1020, 150)" filter="url(#glow)">
+       <circle cx="0" cy="0" r="50" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" opacity="0.7" />
+       <path d="M0,-50 Q18,-32 0,-15 Q-18,-32 0,-50 Z" fill="url(#goldGrad)" opacity="0.4" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(72)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(144)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(216)" />
+       <path d="M35.4,-35.4 Q32,-15 15,0 Q32,15 35.4,-35.4 Z" fill="url(#goldGrad)" opacity="0.4" transform="rotate(288)" />
+       <circle cx="0" cy="0" r="15" fill="#FFD700" opacity="0.6" />
+      </g> <!-- Motif Geometri Songket --> <g transform="translate(600, 220)" opacity="0.6">
+       <path d="M-100,0 L-50,-25 L0,0 L50,-25 L100,0" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" />
+       <path d="M-75,0 L-50,20 L-25,0 L0,20 L25,0 L50,20 L75,0" fill="none" stroke="#FFD700" stroke-width="2" />
+       <circle cx="-50" cy="-25" r="6" fill="#FFD700" opacity="0.8" />
+       <circle cx="0" cy="0" r="6" fill="#FFD700" opacity="0.8" />
+       <circle cx="50" cy="-25" r="6" fill="#FFD700" opacity="0.8" />
+      </g> <!-- Garisan Dekoratif Berkurva --> <path d="M80,150 Q250,110 420,150 T740,150" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5" /> <path d="M460,150 Q630,190 800,150 T1120,150" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5" />
+     </svg>
+     <div class="relative z-10 text-center">
+      <h1 id="dashboard-title" class="font-['Cinzel_Decorative'] text-6xl font-black mb-3 gold-text tracking-wider">KOKURIKULUM</h1>
+      <div class="decorative-line w-64 mx-auto"></div>
+      <p class="text-yellow-100 text-xl mt-3 font-light tracking-wide">Sistem Pengurusan Aktiviti Sekolah</p>
+     </div>
+    </header><!-- Grid Bahagian Premium -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+     <!-- Laporan Perjumpaan Mingguan -->
+     <div class="section-card rounded-2xl p-8 shimmer">
+      <div class="flex flex-col items-center text-center">
+       <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h2 id="meeting-title" class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">Laporan Perjumpaan Mingguan</h2>
+       <p class="text-gray-300 mb-6 leading-relaxed">Pantau dan rekod mesyuarat serta perjumpaan aktiviti kokurikulum</p><button onclick="showMeetingForm()" class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg"> Lihat Laporan → </button>
+      </div>
+     </div>
+	 
+	 <!-- Borang Rekod Kehadiran Murid -->
+<div class="section-card rounded-2xl p-8 shimmer md:col-span-2 lg:col-span-1">
+  <div class="flex flex-col items-center text-center">
+    <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+      <svg class="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+      </svg>
+    </div>
+    <h2 class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">Borang Rekod Kehadiran Murid</h2>
+    <p class="text-gray-300 mb-6 leading-relaxed">Rekod kehadiran murid untuk aktiviti kokurikulum</p>
+    <button id="rekodKehadiranMurBtn" class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg">
+      Lihat Borang → 
+    </button>
+  </div>
+</div>
+	 
+	 <!-- Laporan 1 Murid 1 Sukan -->
+     <div class="section-card rounded-2xl p-8 shimmer">
+      <div class="flex flex-col items-center text-center">
+       <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+       </div>
+       <h2 id="sports-title" class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">Laporan 1 Murid 1 Sukan</h2>
+       <p class="text-gray-300 mb-6 leading-relaxed">Jejak penyertaan murid dalam program 1 Murid 1 Sukan</p><button class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg"> Lihat Laporan → </button>
+      </div>
+     </div><!-- Rekod Pencapaian -->
+     <div class="section-card rounded-2xl p-8 shimmer">
+      <div class="flex flex-col items-center text-center">
+       <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+       </div>
+       <h2 id="achievement-title" class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">Rekod Pencapaian</h2>
+       <p class="text-gray-300 mb-6 leading-relaxed">Dokumentasi pencapaian dan kejayaan murid dalam aktiviti</p><button class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg"> Lihat Laporan → </button>
+      </div>
+     </div><!-- One Page Report -->
+     <div class="section-card rounded-2xl p-8 shimmer">
+      <div class="flex flex-col items-center text-center">
+       <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+       </div>
+       <h2 id="report-title" class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">One Page Report</h2>
+       <p class="text-gray-300 mb-6 leading-relaxed">Ringkasan laporan menyeluruh dalam satu halaman</p><button class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg"> Lihat Laporan → </button>
+      </div>
+     </div><!-- Gambar Perjumpaan Mingguan -->
+     <div class="section-card rounded-2xl p-8 shimmer md:col-span-2 lg:col-span-1">
+      <div class="flex flex-col items-center text-center">
+       <div class="icon-circle w-20 h-20 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+       </div>
+       <h2 id="photos-title" class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 mb-4">Gambar Perjumpaan Mingguan</h2>
+       <p class="text-gray-300 mb-6 leading-relaxed">Galeri foto dokumentasi aktiviti perjumpaan mingguan</p><button class="btn-gold w-full py-4 px-6 rounded-xl relative z-10 text-lg"> Lihat Gambar → </button>
+      </div>
+     </div>
+    </div><!-- Footer Dekoratif -->
+    <div class="decorative-line mt-16 mb-8"></div>
+    <footer class="text-center text-yellow-600 text-sm">
+     <p>© 2026 Sistem Pengurusan Kokurikulum</p>
+    </footer>
+   </div><!-- Modal Borang Perjumpaan -->
+   <div id="meetingModal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-50 overflow-auto p-4">
+    <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-auto border-2 border-yellow-600 shadow-2xl">
+     <div class="sticky top-0 bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 rounded-t-3xl flex justify-between items-center z-10">
+      <h2 class="font-['Cinzel_Decorative'] text-3xl font-bold text-black">Borang Perjumpaan Mingguan</h2><button onclick="closeMeetingForm()" class="text-black hover:text-gray-800 text-3xl font-bold transition-colors">×</button>
+     </div>
+     <form id="meetingForm" class="p-8 space-y-6">
+      <!-- Perjumpaan Ke & Tarikh -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div>
+        <label for="meetingNumber" class="block text-yellow-400 font-semibold mb-2">Perjumpaan Ke</label> <select id="meetingNumber" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih...</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> </select>
+       </div>
+       <div>
+        <label for="meetingDate" class="block text-yellow-400 font-semibold mb-2">Tarikh</label> <input type="date" id="meetingDate" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+       </div>
+      </div><!-- Tempat -->
+      <div>
+       <label for="meetingPlace" class="block text-yellow-400 font-semibold mb-2">Tempat</label> <input type="text" id="meetingPlace" required placeholder="Masukkan tempat perjumpaan" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+      </div><!-- Kategori Aktiviti -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+       <div>
+        <label for="uniformBody" class="block text-yellow-400 font-semibold mb-2">Badan Beruniform</label> <select id="uniformBody" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih...</option> <option value="Pengakap">Pengakap</option> <option value="BSMM">BSMM</option> <option value="TKRS">TKRS</option> <option value="PPIM">PPIM</option> <option value="Pandu Puteri Tunas">Pandu Puteri Tunas</option> </select>
+       </div>
+       <div>
+        <label for="clubAssociation" class="block text-yellow-400 font-semibold mb-2">Kelab &amp; Persatuan</label> <select id="clubAssociation" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih...</option> <option value="Bahasa Melayu">Bahasa Melayu</option> <option value="Bahasa Inggeris">Bahasa Inggeris</option> <option value="STEM">STEM</option> <option value="Agama Islam">Agama Islam</option> <option value="Kerjaya">Kerjaya</option> <option value="Rukun Negara">Rukun Negara</option> <option value="SPBT">SPBT</option> <option value="Doktor Muda">Doktor Muda</option> <option value="Kesenian">Kesenian</option> <option value="Robotik">Robotik</option> </select>
+       </div>
+       <div>
+        <label for="sportsGames" class="block text-yellow-400 font-semibold mb-2">Sukan &amp; Permainan</label> <select id="sportsGames" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih...</option> <option value="Olahraga">Olahraga</option> <option value="Hoki">Hoki</option> <option value="Bola Jaring">Bola Jaring</option> <option value="Bola Tampar">Bola Tampar</option> <option value="Bola Sepak">Bola Sepak</option> <option value="Sepak Takraw">Sepak Takraw</option> <option value="Badminton">Badminton</option> </select>
+       </div>
+      </div><!-- Masa & Kehadiran -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div>
+        <label for="meetingTime" class="block text-yellow-400 font-semibold mb-2">Masa</label> <select id="meetingTime" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih...</option> <option value="6.45-8.45 pagi">6.45-8.45 pagi</option> <option value="8.45-10.45 pagi">8.45-10.45 pagi</option> <option value="11.00-1.00 petang">11.00-1.00 petang</option> </select>
+       </div>
+       <div>
+        <label for="studentAttendance" class="block text-yellow-400 font-semibold mb-2">Jumlah Kehadiran Murid</label> <input type="number" id="studentAttendance" required min="0" placeholder="0" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+       </div>
+      </div><!-- Kehadiran Guru (10 ruang) -->
+      <div>
+       <label class="block text-yellow-400 font-semibold mb-4">Kehadiran Guru (Sila pilih sehingga 10 guru)</label>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="teacherContainer">
+        <!-- Teacher dropdowns will be added here by JavaScript -->
+       </div>
+      </div><!-- Tajuk -->
+      <div>
+       <label for="meetingTitle" class="block text-yellow-400 font-semibold mb-2">Tajuk</label> <input type="text" id="meetingTitle" required placeholder="Masukkan tajuk perjumpaan" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+      </div><!-- Nilai -->
+      <div>
+       <label for="meetingValues" class="block text-yellow-400 font-semibold mb-2">Nilai</label> <select id="meetingValues" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih nilai...</option> <option value="Kasih Sayang">Kasih Sayang</option> <option value="Tanggungjawab">Tanggungjawab</option> <option value="Hemah Tinggi">Hemah Tinggi</option> <option value="Keadilan">Keadilan</option> <option value="Kebebasan">Kebebasan</option> <option value="Keberanian">Keberanian</option> <option value="Kejujuran">Kejujuran</option> <option value="Kerajinan">Kerajinan</option> <option value="Kerjasama">Kerjasama</option> <option value="Kesederhanaan">Kesederhanaan</option> <option value="Berdikari">Berdikari</option> <option value="Bersyukur">Bersyukur</option> <option value="Rasional">Rasional</option> <option value="Amanah">Amanah</option> </select>
+      </div><!-- Aktiviti -->
+      <div>
+       <label for="meetingActivity" class="block text-yellow-400 font-semibold mb-2">Aktiviti</label> <textarea id="meetingActivity" required rows="4" placeholder="Huraikan aktiviti yang dijalankan..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+      </div><!-- Refleksi/Ulasan -->
+      <div>
+       <label for="meetingReflection" class="block text-yellow-400 font-semibold mb-2">Refleksi/Ulasan</label> <textarea id="meetingReflection" required rows="3" placeholder="Refleksi atau ulasan tentang perjumpaan..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+      </div><!-- Decorative Divider -->
+      <div class="py-4">
+       <div class="h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent"></div>
+       <h3 class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 text-center mt-6 mb-2">Sisipan PIKeBM dalam Aktiviti Kokurikulum</h3>
+       <div class="h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent mt-2"></div>
+      </div><!-- PIKeBM Section -->
+      <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl border border-yellow-700 space-y-6">
+       <!-- Waktu Laksana -->
+       <div>
+        <label for="pikebmTiming" class="block text-yellow-400 font-semibold mb-2">Waktu Laksana</label> <select id="pikebmTiming" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih waktu...</option> <option value="Permulaan Aktiviti">Permulaan Aktiviti</option> <option value="Pertengahan Aktiviti">Pertengahan Aktiviti</option> <option value="Penghujung Aktiviti">Penghujung Aktiviti</option> </select>
+       </div><!-- Tajuk PIKeBM -->
+       <div>
+        <label for="pikebmTitle" class="block text-yellow-400 font-semibold mb-2">Tajuk</label> <input type="text" id="pikebmTitle" required placeholder="Tajuk PIKeBM" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+       </div><!-- Bahan Bantu Mengajar -->
+       <div>
+        <label for="pikebmTeachingAids" class="block text-yellow-400 font-semibold mb-2">Bahan Bantu Mengajar</label> <select id="pikebmTeachingAids" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih bahan bantu...</option> <option value="Carta">Carta</option> <option value="Model">Model</option> <option value="Video">Video</option> <option value="Slaid Pembentangan">Slaid Pembentangan</option> <option value="Buku Teks">Buku Teks</option> <option value="Lembaran Kerja">Lembaran Kerja</option> <option value="Alat Permainan">Alat Permainan</option> <option value="Papan Putih">Papan Putih</option> <option value="Komputer/Tablet">Komputer/Tablet</option> <option value="Bahan Kitar Semula">Bahan Kitar Semula</option> </select>
+       </div><!-- Objektif PIKeBM -->
+       <div>
+        <label for="pikebmObjective" class="block text-yellow-400 font-semibold mb-2">Objektif</label> <textarea id="pikebmObjective" required rows="3" placeholder="Nyatakan objektif PIKeBM..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div><!-- Langkah Aktiviti -->
+       <div>
+        <label for="pikebmSteps" class="block text-yellow-400 font-semibold mb-2">Langkah Aktiviti</label> <textarea id="pikebmSteps" required rows="4" placeholder="Huraikan langkah-langkah aktiviti PIKeBM..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div><!-- Refleksi/Impak dan Ulasan Guru -->
+       <div>
+        <label for="pikebmReflection" class="block text-yellow-400 font-semibold mb-2">Refleksi/Impak dan Ulasan Guru</label> <textarea id="pikebmReflection" required rows="3" placeholder="Refleksi, impak dan ulasan guru..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div>
+      </div><!-- Decorative Divider -->
+      <div class="py-4">
+       <div class="h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent"></div>
+       <h3 class="font-['Cinzel_Decorative'] text-2xl font-bold text-yellow-400 text-center mt-6 mb-2">Penerapan Amalan Sivik dalam Kokurikulum</h3>
+       <p class="text-yellow-200 text-center text-sm">(4 Nilai Teras - 20 Minit)</p>
+       <div class="h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent mt-2"></div>
+      </div><!-- Penerapan Amalan Sivik Section -->
+      <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl border border-yellow-700 space-y-6">
+       <!-- Nilai -->
+       <div>
+        <label for="civicValue" class="block text-yellow-400 font-semibold mb-2">Nilai</label> <select id="civicValue" required class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"> <option value="">Pilih nilai...</option> <option value="Kasih Sayang">Kasih Sayang</option> <option value="Hormat-Menghormati">Hormat-Menghormati</option> <option value="Bertanggungjawab">Bertanggungjawab</option> <option value="Kegembiraan">Kegembiraan</option> </select>
+       </div><!-- Tema Khusus -->
+       <div>
+        <label for="civicTheme" class="block text-yellow-400 font-semibold mb-2">Tema Khusus</label> <input type="text" id="civicTheme" required placeholder="Tema khusus untuk amalan sivik" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+       </div><!-- Matlamat -->
+       <div>
+        <label for="civicGoal" class="block text-yellow-400 font-semibold mb-2">Matlamat</label> <textarea id="civicGoal" required rows="3" placeholder="Nyatakan matlamat penerapan amalan sivik..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div><!-- Aktiviti Sivik -->
+       <div>
+        <label for="civicActivity" class="block text-yellow-400 font-semibold mb-2">Aktiviti</label> <textarea id="civicActivity" required rows="4" placeholder="Huraikan aktiviti amalan sivik yang dilaksanakan..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div><!-- Saranan -->
+       <div>
+        <label for="civicSuggestion" class="block text-yellow-400 font-semibold mb-2">Saranan</label> <textarea id="civicSuggestion" required rows="3" placeholder="Saranan untuk penambahbaikan..." class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+       </div>
+      </div><!-- Buttons -->
+      <div class="flex gap-4 pt-4">
+       <button type="submit" class="flex-1 btn-gold py-4 px-6 rounded-xl text-lg font-bold"> Simpan Laporan </button> <button type="button" onclick="closeMeetingForm()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-4 px-6 rounded-xl transition-colors"> Batal </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <script>
+    const teacherList = [
+      "Salbiah binti Karim",
+      "Kamisah binti Mohammad",
+      "Mohd Sam bin Talip @ Mohd Isham",
+      "Azizah binti Haris",
+      "Siti Robasiah binti Hj.Rahamat",
+      "Norhainie binti Herman",
+      "Noorzalianah binti Insan",
+      "Nurasyipa binti Ridwan",
+      "Mohd Khairul Amir bin Ahmad",
+      "Stevon Luntid",
+      "Hjh. Masni Juitah binti Tuda",
+      "Ridhuan bin Arbin",
+      "Nordin bin Lagudan",
+      "Hj. Ramsah bin Burhan",
+      "Misnah binti Miasin",
+      "Azmah binti Asha'ari",
+      "Hjh. Palam binti Karim",
+      "Diana binti Darno",
+      "Mohd Hasrul bin Mohd Redzuan",
+      "Antoni Riko Boling",
+      "Arbaena binti Nahang",
+      "Mohammad Farid bin Mohd Arbi",
+      "Alice Dapith",
+      "A'in Fhatin Hanani binti Rijan",
+      "Mohd Khuzaifah Bin Ismail",
+      "Rahman bin Soga",
+      "Darmin bin Ladiro",
+      "Halimahton Saadiah binti Mahamad",
+      "Siti Nur Syafiah binti Majid",
+      "Abdul Rahim bin MD Lajim",
+      "Dzulfadly bin AG Anak",
+      "Roslianah binti Roie",
+      "Sharif bin Hamdani",
+      "Marini binti Syed Ali",
+      "Nurhasanah binti Roslan",
+      "Abdul Rahman bin Taip",
+      "Rozaimi bin Arshad",
+      "Wirna binti Abd Hamid",
+      "Rozinah binti Amirul",
+      "Junita binti Ajirul",
+      "Hasbullah bin Ali",
+      "Rosharisa binti Herman",
+      "Hazari bin Hakim",
+      "Sharon Francis Chuan",
+      "Mohammad bin Abdul Rajak",
+      "Dyana Veronica Henry",
+      "Marliyana binti Mohammed",
+      "Merlyn Loyola",
+      "Arfah bin Arase",
+      "Mahfuzah binti Mohamed Desa",
+      "Rabiatun binti Rahman",
+      "Elly Massalo",
+      "Sutrawiya binti Malong",
+      "Juliyana binti Yahya",
+      "Herna binti Hussin",
+      "Ummu Nasyibah binti Mamma",
+      "Nur Azlin binti Zulkifli",
+      "Nurul Aida binti Samsudin",
+      "Nur Izzah binti Jainudin",
+      "Auni Nurfarahin binti Aripai",
+      "Baiduri binti Dullah",
+      "Suraya binti Mat Yusop",
+      "Nur Anissa binti Roslan",
+      "Fauziah binti Senen",
+      "Merhma binti Masugi",
+      "Muhammad Shahrol Lizam bin Muhammad Khairul Akmal",
+      "Nor Asidah binti Kalbun",
+      "Syahmie bin Syahrulhazni",
+      "Muhammad Admien bin Jasni",
+      "Mohamad Nurlhafizi bin Abdulnur",
+      "Ahmad Syazwan bin Saofi",
+      "Roshaida binti Yeop Ahmad",
+      "Norliewati Binti Hassan",
+      "Suhana Binti Sumino"
+    ];
+
+    function showMeetingForm() {
+      const modal = document.getElementById('meetingModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMeetingForm() {
+      const modal = document.getElementById('meetingModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = 'auto';
+      document.getElementById('meetingForm').reset();
+    }
+
+    // Initialize teacher dropdowns
+    function initializeTeacherDropdowns() {
+      const container = document.getElementById('teacherContainer');
+      for (let i = 1; i <= 10; i++) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <label for="teacher${i}" class="block text-yellow-300 text-sm mb-1">Guru ${i}</label>
+          <select id="teacher${i}" class="w-full bg-gray-800 text-white border-2 border-yellow-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            <option value="">Pilih guru...</option>
+            ${teacherList.map(teacher => `<option value="${teacher}">${teacher}</option>`).join('')}
+          </select>
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    // Form submission handler
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeTeacherDropdowns();
+
+      document.getElementById('meetingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Collect selected teachers
+        const selectedTeachers = [];
+        for (let i = 1; i <= 10; i++) {
+          const teacher = document.getElementById(`teacher${i}`).value;
+          if (teacher) selectedTeachers.push(teacher);
+        }
+
+        // Prepare data
+        const formData = {
+          meetingNumber: document.getElementById('meetingNumber').value,
+          date: document.getElementById('meetingDate').value,
+          place: document.getElementById('meetingPlace').value,
+          uniformBody: document.getElementById('uniformBody').value,
+          clubAssociation: document.getElementById('clubAssociation').value,
+          sportsGames: document.getElementById('sportsGames').value,
+          time: document.getElementById('meetingTime').value,
+          studentAttendance: document.getElementById('studentAttendance').value,
+          teachers: selectedTeachers,
+          title: document.getElementById('meetingTitle').value,
+          values: document.getElementById('meetingValues').value,
+          activity: document.getElementById('meetingActivity').value,
+          reflection: document.getElementById('meetingReflection').value,
+          pikebm: {
+            timing: document.getElementById('pikebmTiming').value,
+            title: document.getElementById('pikebmTitle').value,
+            teachingAids: document.getElementById('pikebmTeachingAids').value,
+            objective: document.getElementById('pikebmObjective').value,
+            steps: document.getElementById('pikebmSteps').value,
+            reflection: document.getElementById('pikebmReflection').value
+          },
+          civic: {
+            value: document.getElementById('civicValue').value,
+            theme: document.getElementById('civicTheme').value,
+            goal: document.getElementById('civicGoal').value,
+            activity: document.getElementById('civicActivity').value,
+            suggestion: document.getElementById('civicSuggestion').value
+          }
+        };
+
+        console.log('Form Data:', formData);
+
+        // Show success message
+        const successDiv = document.createElement('div');
+        successDiv.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-4 rounded-xl shadow-2xl z-[60] font-bold border-2 border-yellow-700';
+        successDiv.textContent = '✓ Laporan berjaya disimpan!';
+        document.body.appendChild(successDiv);
+
+        setTimeout(() => {
+          successDiv.remove();
+          closeMeetingForm();
+        }, 2000);
+      });
+    });
+
+    const defaultConfig = {
+      dashboard_title: "KOKURIKULUM",
+      meeting_title: "Laporan Perjumpaan Mingguan",
+      sports_title: "Laporan 1 Murid 1 Sukan",
+      achievement_title: "Rekod Pencapaian",
+      report_title: "One Page Report",
+      photos_title: "Gambar Perjumpaan Mingguan"
+    };
+
+    async function onConfigChange(config) {
+      document.getElementById('dashboard-title').textContent = config.dashboard_title || defaultConfig.dashboard_title;
+      document.getElementById('meeting-title').textContent = config.meeting_title || defaultConfig.meeting_title;
+      document.getElementById('sports-title').textContent = config.sports_title || defaultConfig.sports_title;
+      document.getElementById('achievement-title').textContent = config.achievement_title || defaultConfig.achievement_title;
+      document.getElementById('report-title').textContent = config.report_title || defaultConfig.report_title;
+      document.getElementById('photos-title').textContent = config.photos_title || defaultConfig.photos_title;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["dashboard_title", config.dashboard_title || defaultConfig.dashboard_title],
+        ["meeting_title", config.meeting_title || defaultConfig.meeting_title],
+        ["sports_title", config.sports_title || defaultConfig.sports_title],
+        ["achievement_title", config.achievement_title || defaultConfig.achievement_title],
+        ["report_title", config.report_title || defaultConfig.report_title],
+        ["photos_title", config.photos_title || defaultConfig.photos_title]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d26fd1c30fda483',t:'MTc3MTg1MjQ5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ 
+ <script type="module">
+
+import { getFirestore, collection, addDoc, serverTimestamp } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getApp } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+const app = getApp();
+const db = getFirestore(app);
+
+/* ================= SAVE TO FIREBASE ================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const form = document.getElementById('meetingForm');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Collect selected teachers
+    const selectedTeachers = [];
+    for (let i = 1; i <= 10; i++) {
+      const teacher = document.getElementById(`teacher${i}`).value;
+      if (teacher) selectedTeachers.push(teacher);
+    }
+
+    const formData = {
+      meetingNumber: meetingNumber.value,
+      meetingDate: meetingDate.value,
+      meetingPlace: meetingPlace.value,
+      uniformBody: uniformBody.value,
+      clubAssociation: clubAssociation.value,
+      sportsGames: sportsGames.value,
+      meetingTime: meetingTime.value,
+      studentAttendance: studentAttendance.value,
+      teachers: selectedTeachers,
+      meetingTitle: meetingTitle.value,
+      meetingValues: meetingValues.value,
+      meetingActivity: meetingActivity.value,
+      meetingReflection: meetingReflection.value,
+      pikebm: {
+        timing: pikebmTiming.value,
+        title: pikebmTitle.value,
+        teachingAids: pikebmTeachingAids.value,
+        objective: pikebmObjective.value,
+        steps: pikebmSteps.value,
+        reflection: pikebmReflection.value
+      },
+      civic: {
+        value: civicValue.value,
+        theme: civicTheme.value,
+        goal: civicGoal.value,
+        activity: civicActivity.value,
+        suggestion: civicSuggestion.value
+      },
+      createdAt: serverTimestamp()
+    };
+
+    try {
+      await addDoc(collection(db, "kokurikulum_perjumpaan_mingguan"), formData);
+
+      showSuccessMessage();
+      closeMeetingForm();
+
+    } catch (error) {
+      console.error("Firebase Error:", error);
+      alert("Gagal simpan ke Firebase.");
+    }
+
+  });
+
+});
+
+/* ================= SUCCESS POPUP ================= */
+
+function showSuccessMessage() {
+  const successDiv = document.createElement('div');
+  successDiv.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-6 py-4 rounded-xl shadow-2xl z-[60] font-bold border-2 border-yellow-700';
+  successDiv.textContent = '✓ Laporan berjaya disimpan ke Firebase!';
+  document.body.appendChild(successDiv);
+
+  setTimeout(() => {
+    successDiv.remove();
+  }, 2500);
+}
+
+/* ================= PDF DOWNLOAD ================= */
+
+window.downloadMeetingPDF = function(data) {
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(16);
+  doc.text("LAPORAN PERJUMPAAN MINGGUAN", 105, 15, { align: "center" });
+
+  let y = 25;
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (typeof value !== "object") {
+      doc.text(`${key}: ${value}`, 20, y);
+      y += 8;
+    }
+  });
+
+  doc.save("Laporan_Perjumpaan_Mingguan.pdf");
+};
+
+/* ================= PRINT ================= */
+
+window.printMeetingReport = function(data) {
+
+  let content = `<h2>Laporan Perjumpaan Mingguan</h2><hr/>`;
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (typeof value !== "object") {
+      content += `<p><b>${key}</b>: ${value}</p>`;
+    }
+  });
+
+  const win = window.open("", "", "width=900,height=700");
+  win.document.write(content);
+  win.document.close();
+  win.print();
+};
+
+</script>
+ 
+ </body>
+</html>
