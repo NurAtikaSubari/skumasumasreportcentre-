@@ -99,60 +99,48 @@ setupForm("pemantauanPDPForm", "pemantauanPDP", [
 // ================================
 // 4️⃣ Rekod Kehadiran Harian Murid 
 // ================================
-setupForm("muridForm", "muridAttendance", [
-  { id: "teacher-select" },
-  { id: "date-input" },
-  { id: "class-select" },
-  { id: "attendance_data" }, // Object of student attendance
-  { id: "notes-input", nameInSheet: "Catatan" },
-  { id: "absent_students" }, // Names of students who didn't come
-  { id: "present_count" },    // Number of students present
-  { id: "total_students" },   // Total students
-  { id: "absent_count" }      // Number of students absent
-]);
+document.getElementById("murid-form").addEventListener("submit", async function(e){
+  e.preventDefault();
 
-function prepareAttendanceForSheet(formData) {
-  const students = studentLists[formData.class_select] || [];
-  const attendance = formData.attendance_data || {};
+  const teacher = document.getElementById("teacher-select").value;
+  const date = document.getElementById("date-input").value;
+  const className = document.getElementById("class-select").value;
+  const notes = document.getElementById("notes-input").value;
 
+  const students = studentLists[className] || [];
+  const attendanceData = {}; // You should fill this from your UI marking present/absent
   let presentCount = 0;
   const absentStudents = [];
 
-  Object.keys(attendance).forEach(idx => {
-    if (attendance[idx] === "present") {
-      presentCount++;
-    } else {
-      absentStudents.push(students[idx]);
-    }
+  // Calculate present/absent
+  students.forEach((student, idx) => {
+    const status = attendanceData[idx] || "absent"; // default absent
+    if(status === "present") presentCount++;
+    else absentStudents.push(student);
   });
 
   const totalStudents = students.length;
   const absentCount = totalStudents - presentCount;
 
-  formData.absent_students = absentStudents.join(", ");
-  formData.present_count = presentCount;
-  formData.total_students = totalStudents;
-  formData.absent_count = absentCount;
+  // Prepare object for Google Sheets
+  const rowData = {
+    Tarikh: date,
+    Guru: teacher,
+    Kelas: className,
+    Jumlah: totalStudents,
+    Hadir: presentCount,
+    "T.Hadir": absentCount,
+    Catatan: notes,
+    "Murid Tidak Hadir": absentStudents.join(", ")
+  };
 
-  // Rename notes-input to Catatan
-  if (formData.notes_input) {
-    formData.Catatan = formData.notes_input;
-    delete formData.notes_input;
+  try {
+    await saveToGoogleSheet("muridAttendance", rowData);
+    showToast("✅ Rekod kehadiran berjaya disimpan!");
+  } catch(err) {
+    showToast("❌ Gagal menyimpan rekod: " + err.message);
   }
-
-  return formData;
-}
-
-// Hook into form submit
-document.getElementById("murid-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  let formData = getFormData("muridForm"); // your helper to get form values
-  formData = prepareAttendanceForSheet(formData);
-  saveToGoogleSheet("muridAttendance", formData)
-    .then(() => showToast("✅ Rekod kehadiran berjaya disimpan!"))
-    .catch(err => showToast("❌ Gagal menyimpan rekod: " + err.message));
 });
-
 
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
