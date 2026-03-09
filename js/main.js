@@ -90,9 +90,9 @@ setupForm("pemantauanPDPForm", "pemantauanPDP", [
   { id: "subjek-pdp" },
   { id: "nama-guru-dipantau" },
   { id: "fokus-pemantauan" },
-  { name: "gred_pdp" },
-  { name: "gred_rph" },
-  { name: "gred_buku_latihan" },
+  { id: "gred_pdp", type: "radio" },
+  { id: "gred_rph", type: "radio" },
+  { id: "gred_buku_latihan", type: "radio" },
   { id: "ulasan-cadangan-pdp" },
 ]);
 
