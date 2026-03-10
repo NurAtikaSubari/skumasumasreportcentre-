@@ -146,6 +146,28 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
 });
 
 // ================================
+// 8️⃣ Laporan RMT Murid
+// ================================
+setupForm("rmt-form", "laporanRMTMurid", [
+  { id: "rmt-tarikh" },
+  { id: "rmt-guru" },
+  { id: "rmt-menu" },
+  { id: "rmt-buah" },
+  { id: "rmt-ulasan" }
+]);
+
+// ================================
+// 9️⃣ Laporan RMT Guru
+// ================================
+setupForm("guru-form", "laporanRMTGuru", [
+  { id: "guru-tarikh" },
+  { id: "guru-nama" },
+  { id: "guru-jumlah" },
+  { id: "guru-kelas" },
+  { id: "guru-ulasan" }
+]);
+
+// ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
 setupForm("formKehadiranKokurikulum", "Kehadiran_Kokurikulum", [
