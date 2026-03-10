@@ -99,49 +99,47 @@ setupForm("pemantauanPDPForm", "pemantauanPDP", [
 // ================================
 // 4️⃣ Rekod Kehadiran Harian Murid 
 // ================================
-
 document.getElementById("murid-form")?.addEventListener("submit", async function(e){
   e.preventDefault();
 
-  const guru = document.getElementById("teacher-select").value;
   const tarikh = document.getElementById("date-input").value;
+  const guru = document.getElementById("teacher-select").value;
   const kelas = document.getElementById("class-select").value;
   const catatan = document.getElementById("notes-input").value;
 
   const students = document.querySelectorAll("#students-list .student-item");
 
+  let jumlahMurid = students.length;
   let hadir = 0;
   let tidakHadir = 0;
   let senaraiTidakHadir = [];
 
-  students.forEach(student=>{
-      const name = student.innerText.trim();
+  students.forEach(student => {
+    const name = student.dataset.name || student.innerText.replace("❌","").trim();
 
-      if(student.classList.contains("present")){
-          hadir++;
-      }
-      else if(student.classList.contains("absent")){
-          tidakHadir++;
-          senaraiTidakHadir.push(name);
-      }
+    if (student.classList.contains("present")) {
+      hadir++;
+    } else if (student.classList.contains("absent")) {
+      tidakHadir++;
+      senaraiTidakHadir.push(name);
+    }
   });
 
   const row = [
-      tarikh,
-      guru,
-      kelas,
-      catatan,
-      hadir,
-      tidakHadir,
-      senaraiTidakHadir.join(", "),
-      new Date()
+    tarikh,
+    guru,
+    kelas,
+    jumlahMurid,
+    hadir,
+    tidakHadir,
+    senaraiTidakHadir.join(", "),
+    new Date()
   ];
 
   await sendToGoogleSheet("rekodKehadiranMurid", row);
 
   alert("Rekod berjaya disimpan!");
 });
-
 
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
