@@ -109,20 +109,34 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
   alert("Rekod berjaya disimpan!");
 });
 
-// 3️⃣ RMT Murid
-setupForm("rmt-form", "laporanRMTMurid", [
-  { id: "rmt-tarikh" },
-  { id: "rmt-guru" },
-  { id: "rmt-menu" },
-  { id: "rmt-buah" },
-  { id: "rmt-ulasan" }
-]);
+document.addEventListener("DOMContentLoaded", () => {
 
-// 4️⃣ RMT Guru
-setupForm("guru-form", "laporanRMTGuru", [
-  { id: "guru-tarikh" },
-  { id: "guru-nama" },
-  { id: "guru-jumlah" },
-  { id: "guru-kelas" },
-  { id: "guru-ulasan" }
-]);
+  // 1️⃣ RMT Murid
+  const rmtMuridForm = document.getElementById("rmt-form");
+  if (rmtMuridForm) {
+    setupForm("rmt-form", "laporanRMTMurid", [
+      { id: "rmt-tarikh" },
+      { id: "rmt-guru" },
+      { id: "rmt-menu" },
+      { id: "rmt-buah" },
+      { id: "rmt-ulasan" }
+    ]);
+  } else {
+    console.warn("RMT Murid form not found!");
+  }
+
+  // 2️⃣ RMT Guru
+  const rmtGuruForm = document.getElementById("guru-form");
+  if (rmtGuruForm) {
+    setupForm("guru-form", "laporanRMTGuru", [
+      { id: "guru-tarikh" },
+      { id: "guru-nama" },
+      { id: "guru-jumlah" },
+      { id: "guru-kelas" },
+      { id: "guru-ulasan" }
+    ]);
+  } else {
+    console.warn("RMT Guru form not found!");
+  }
+
+});
