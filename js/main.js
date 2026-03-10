@@ -105,7 +105,7 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
   const tarikh = document.getElementById("date-input").value;
   const guru = document.getElementById("teacher-select").value;
   const kelas = document.getElementById("class-select").value;
-  const catatan = document.getElementById("notes-input").value;
+  const catatan = document.getElementById("notes-input").value || "";
 
   const students = document.querySelectorAll("#students-list .student-item");
 
@@ -115,27 +115,30 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
   let senaraiTidakHadir = [];
 
   students.forEach(student => {
-    const name = student.dataset.name || student.innerText.replace("❌","").trim();
 
-    if (student.classList.contains("present")) {
+    const name = student.innerText.replace("❌","").trim();
+
+    if(student.classList.contains("present")){
       hadir++;
-    } else if (student.classList.contains("absent")) {
+    }
+    else if(student.classList.contains("absent")){
       tidakHadir++;
       senaraiTidakHadir.push(name);
     }
+
   });
 
   const row = [
-  tarikh,
-  guru,
-  kelas,
-  jumlahMurid,
-  hadir,
-  tidakHadir,
-  senaraiTidakHadir.join(", "),
-  catatan,
-  new Date()
-];
+    tarikh,
+    guru,
+    kelas,
+    jumlahMurid,
+    hadir,
+    tidakHadir,
+    senaraiTidakHadir.join(", "),
+    catatan,
+    new Date()
+  ];
 
   await sendToGoogleSheet("rekodKehadiranMurid", row);
 
