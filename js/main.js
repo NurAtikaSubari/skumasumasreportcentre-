@@ -99,76 +99,50 @@ setupForm("pemantauanPDPForm", "pemantauanPDP", [
 // ================================
 // 4️⃣ Rekod Kehadiran Harian Murid 
 // ================================
-const SHEET_HEADERS = [
-  "Tarikh",
-  "Guru",
-  "Kelas",
-  "Catatan",
-  "Hadir",
-  "Jumlah Tidak Hadir",
-  "Senarai Tidak Hadir"
-];
 
-// ----------------------------
-// 2️⃣ Function to gather attendance
-// ----------------------------
-function getAttendanceData() {
-  const date = document.getElementById("date-input").value;
-  const teacher = document.getElementById("teacher-select").value;
+document.getElementById("murid-form")?.addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const guru = document.getElementById("teacher-select").value;
+  const tarikh = document.getElementById("date-input").value;
   const kelas = document.getElementById("class-select").value;
-  const notes = document.getElementById("notes-input").value;
+  const catatan = document.getElementById("notes-input").value;
 
-  // Students container
-  const studentElements = document.querySelectorAll("#students-list .student-item");
-  
-  let hadirCount = 0;
-  let absentCount = 0;
-  let absentNames = [];
+  const students = document.querySelectorAll("#students-list .student-item");
 
-  studentElements.forEach(student => {
-    const name = student.dataset.name; // ensure each student-item has data-name
-    if (student.classList.contains("present")) {
-      hadirCount++;
-    } else {
-      absentCount++;
-      absentNames.push(name);
-    }
+  let hadir = 0;
+  let tidakHadir = 0;
+  let senaraiTidakHadir = [];
+
+  students.forEach(student=>{
+      const name = student.innerText.trim();
+
+      if(student.classList.contains("present")){
+          hadir++;
+      }
+      else if(student.classList.contains("absent")){
+          tidakHadir++;
+          senaraiTidakHadir.push(name);
+      }
   });
 
-  return {
-    Tarikh: date,
-    Guru: teacher,
-    Kelas: kelas,
-    Catatan: notes,
-    Hadir: hadirCount,
-    "Jumlah Tidak Hadir": absentCount,
-    "Senarai Tidak Hadir": absentNames.join(", ")
-  };
-}
+  const row = [
+      tarikh,
+      guru,
+      kelas,
+      catatan,
+      hadir,
+      tidakHadir,
+      senaraiTidakHadir.join(", "),
+      new Date()
+  ];
 
-// ----------------------------
-// 3️⃣ Save to Google Sheets
-// ----------------------------
-// Assumes you have set up your Sheets API or firebase 'dataSdk' object
-async function saveAttendance() {
-  const rowData = getAttendanceData();
-  try {
-    await window.dataSdk.save("rekodKehadiranMurid", rowData); // Sheet page name: rekod_kehadiran_murid
-    showToast("✅ Rekod berjaya disimpan!");
-    updateStats(); // optional, refresh dashboard stats
-  } catch (err) {
-    console.error(err);
-    showToast("❌ Gagal menyimpan rekod. Sila cuba lagi.");
-  }
-}
+  await sendToGoogleSheet("rekodKehadiranMurid", row);
 
-// ----------------------------
-// 4️⃣ Form submission
-// ----------------------------
-document.getElementById("murid-form").addEventListener("submit", e => {
-  e.preventDefault();
-  saveAttendance();
+  alert("Rekod berjaya disimpan!");
 });
+
+
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
