@@ -1,5 +1,5 @@
 // ================================
-// main.js – Google Sheets Connector for 4 Forms
+// main.js – Google Sheets Connector for All Forms
 // ================================
 
 // Paste your Web App URL here (from Apps Script deployment)
@@ -17,15 +17,16 @@ async function sendToGoogleSheet(sheetName, row) {
   }
 }
 
-// Generic form setup function
-function setupForm(formId, sheetName, fields) {
+// Universal form setup function with optional preprocessing callback
+function setupForm(formId, sheetName, fields = [], preprocessRow) {
   const form = document.getElementById(formId);
   if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const row = [];
+    let row = [];
 
+    // Gather standard field values
     for (const field of fields) {
       if (field.type === "radio") {
         const radios = document.getElementsByName(field.id);
@@ -37,13 +38,18 @@ function setupForm(formId, sheetName, fields) {
       }
     }
 
+    // Apply optional custom preprocessing
+    if (typeof preprocessRow === "function") {
+      row = preprocessRow(row);
+    }
+
     // Append timestamp
     row.push(new Date());
 
     // Send to Google Sheets
     await sendToGoogleSheet(sheetName, row);
 
-    // Optional: Reset form
+    // Reset form
     form.reset();
 
     alert("Rekod berjaya disimpan!");
@@ -64,7 +70,7 @@ setupForm("formKawalanKelas", "Kawalan_Kelas", [
 ]);
 
 // ================================
-//  2️⃣ Kawalan Kelas Form
+// 2️⃣ Kawalan Kelas Form
 // ================================
 setupForm("record-form", "rekodKawalanKelas", [
   { id: "teacher" },
@@ -97,11 +103,9 @@ setupForm("pemantauanPDPForm", "pemantauanPDP", [
 ]);
 
 // ================================
-// 4️⃣ Rekod Kehadiran Harian Murid 
+// 4️⃣ Rekod Kehadiran Harian Murid
 // ================================
-document.getElementById("murid-form")?.addEventListener("submit", async function(e){
-  e.preventDefault();
-
+setupForm("murid-form", "rekodKehadiranMurid", [], () => {
   const tarikh = document.getElementById("date-input").value;
   const guru = document.getElementById("teacher-select").value;
   const kelas = document.getElementById("class-select").value;
@@ -115,34 +119,16 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
   let senaraiTidakHadir = [];
 
   students.forEach(student => {
-
-    const name = student.innerText.replace("❌","").trim();
-
-    if(student.classList.contains("present")){
+    const name = student.innerText.replace("❌", "").trim();
+    if (student.classList.contains("present")) {
       hadir++;
-    }
-    else if(student.classList.contains("absent")){
+    } else if (student.classList.contains("absent")) {
       tidakHadir++;
       senaraiTidakHadir.push(name);
     }
-
   });
 
-  const row = [
-    tarikh,
-    guru,
-    kelas,
-    jumlahMurid,
-    hadir,
-    tidakHadir,
-    senaraiTidakHadir.join(", "),
-    catatan,
-    new Date()
-  ];
-
-  await sendToGoogleSheet("rekodKehadiranMurid", row);
-
-  alert("Rekod berjaya disimpan!");
+  return [tarikh, guru, kelas, jumlahMurid, hadir, tidakHadir, senaraiTidakHadir.join(", "), catatan];
 });
 
 // ================================
@@ -153,7 +139,7 @@ setupForm("rmt-form", "laporanRMTMurid", [
   { id: "rmt-guru" },
   { id: "rmt-menu" },
   { id: "rmt-buah" },
-  { id: "rmt-ulasan" }
+  { id: "rmt-ulasan" },
 ]);
 
 // ================================
@@ -164,7 +150,7 @@ setupForm("guru-form", "laporanRMTGuru", [
   { id: "guru-nama" },
   { id: "guru-jumlah" },
   { id: "guru-kelas" },
-  { id: "guru-ulasan" }
+  { id: "guru-ulasan" },
 ]);
 
 // ================================
