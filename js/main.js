@@ -126,15 +126,16 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
   });
 
   const row = [
-    tarikh,
-    guru,
-    kelas,
-    jumlahMurid,
-    hadir,
-    tidakHadir,
-    senaraiTidakHadir.join(", "),
-    new Date()
-  ];
+  tarikh,
+  guru,
+  kelas,
+  jumlahMurid,
+  hadir,
+  tidakHadir,
+  senaraiTidakHadir.join(", "),
+  catatan,
+  new Date()
+];
 
   await sendToGoogleSheet("rekodKehadiranMurid", row);
 
