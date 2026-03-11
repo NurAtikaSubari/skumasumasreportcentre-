@@ -146,7 +146,7 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
 });
 
 // ================================
-// 8️⃣ Laporan RMT Murid
+// 5️⃣ Laporan RMT Murid
 // ================================
 setupForm("rmt-form", "laporanRMTMurid", [
   { id: "rmt-tarikh" },
@@ -157,7 +157,7 @@ setupForm("rmt-form", "laporanRMTMurid", [
 ]);
 
 // ================================
-// 9️⃣ Laporan RMT Guru
+// 6️⃣ Laporan RMT Guru
 // ================================
 setupForm("guru-form", "laporanRMTGuru", [
   { id: "guru-tarikh" },
@@ -168,23 +168,23 @@ setupForm("guru-form", "laporanRMTGuru", [
 ]);
 
 // ================================
-// 2️⃣ Kehadiran Kokurikulum Form
+// 7️⃣ Kehadiran Kokurikulum Form
 // ================================
-setupForm("formKehadiranKokurikulum", "Kehadiran_Kokurikulum", [
+setupForm("formKehadiranKokurikulum", "kehadiranKokurikulum", [
   { id: "tarikh" },
   { id: "guru" },
   { id: "kelas" },
   { id: "jumlah" },
   { id: "hadir" },
-  { id: "tidak-hadir" },
-  { id: "senarai-tidak-hadir" },
+  { id: "tidakHadir" },
+  { id: "senaraiTidakHadir" },
 ]);
 
 // ================================
-// 3️⃣ Pencapaian Murid Form
+// 8️⃣ Pencapaian Murid Form
 // ================================
 setupForm("formPencapaianMurid", "Pencapaian_Murid", [
-  { id: "nama-murid" },
+  { id: "namaMurid" },
   { id: "subjek" },
   { id: "tarikh" },
   { id: "pencapaian" },
