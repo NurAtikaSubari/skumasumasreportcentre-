@@ -183,29 +183,24 @@ setupForm("formKehadiranKokurikulum", "kehadiranKokurikulum", [
 // ================================
 // 8️⃣ Pencapaian Murid Form
 // ================================
-document.getElementById("pencapaian-form")?.addEventListener("submit", async function(e){
-
+document.getElementById("pencapaian-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const tarikh = document.getElementById("tarikh").value;
-  const penganjur = document.getElementById("penganjur").value;
-  const pencapaian = document.getElementById("pencapaian").value;
-  const peringkat = document.getElementById("peringkat").value;
+  const tarikh = document.getElementById("tarikh")?.value || "";
+  const penganjur = document.getElementById("penganjur")?.value || "";
+  const pencapaian = document.getElementById("pencapaian")?.value || "";
+  const peringkat = document.getElementById("peringkat")?.value || "";
 
-  const guru = [];
-  const murid = [];
+  // Collect all guru inputs dynamically
+  const guruInputs = Array.from(document.querySelectorAll('[id^="guru"]'));
+  const guru = guruInputs.map(input => input.value || "");
 
-  for (let i = 1; i <= 10; i++) {
-    const guruInput = document.getElementById(`guru${i}`);
-    const muridInput = document.getElementById(`murid${i}`);
+  // Collect all murid inputs dynamically
+  const muridInputs = Array.from(document.querySelectorAll('[id^="murid"]'));
+  const murid = muridInputs.map(input => input.value || "");
 
-    guru.push(guruInput ? guruInput.value : "");
-    murid.push(muridInput ? muridInput.value : "");
-  }
-
-  // Build row using arrays directly
-  
-  const row = [
+  // Combine everything into one row
+ const row = [
   tarikh,
   penganjur,
   pencapaian,
@@ -238,12 +233,13 @@ document.getElementById("pencapaian-form")?.addEventListener("submit", async fun
 ];
 
 
+  // Send to Google Sheets
   await sendToGoogleSheet("pencapaianMurid", row);
 
   alert("Rekod berjaya disimpan!");
 
+  // Reset form
   document.getElementById("pencapaian-form").reset();
-
 });
 
 // ================================
