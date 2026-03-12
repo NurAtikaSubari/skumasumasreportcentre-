@@ -559,19 +559,23 @@
         year: currentYear.toString()
       };
       
-      const result = await window.dataSdk.create(formData);
-      
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Simpan Rekod';
-      
-      if (result.isOk) {
-        showToast('Rekod berjaya disimpan!');
-        e.target.reset();
-        generateTeacherDropdowns();
-        generateStudentRows();
-      } else {
-        showToast('Gagal menyimpan rekod. Sila cuba lagi.', 'error');
-      }
+     async function handleSubmit(e) {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "Menyimpan...";
+
+  await sendToGoogleSheet("pencapaianMurid", formData);
+
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Simpan Rekod';
+
+  showToast('Rekod berjaya disimpan!');
+  e.target.reset();
+  generateTeacherDropdowns();
+  generateStudentRows();
+}
     }
 
     // Data handler
