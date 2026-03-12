@@ -183,8 +183,7 @@ setupForm("formKehadiranKokurikulum", "kehadiranKokurikulum", [
 // ================================
 // 8️⃣ Pencapaian Murid Form
 // ================================
-document.getElementById("achievementForm")?.addEventListener("submit", async function(e) {
-
+  document.getElementById("achievementForm")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const tarikh = document.getElementById("tarikh")?.value || "";
@@ -192,20 +191,19 @@ document.getElementById("achievementForm")?.addEventListener("submit", async fun
   const pencapaian = document.getElementById("pencapaian")?.value || "";
   const peringkat = document.getElementById("peringkat")?.value || "";
 
-  // Get guru values
+  // Collect guru values
   const guru = [];
   for (let i = 1; i <= 10; i++) {
-    const el = document.getElementById(`guru${i}`);
-    guru.push(el ? el.value : "");
+    guru.push(document.getElementById(`guru${i}`)?.value || "");
   }
 
-  // Get murid values
+  // Collect murid values
   const murid = [];
   for (let i = 1; i <= 10; i++) {
-    const el = document.getElementById(`murid${i}`);
-    murid.push(el ? el.value : "");
+    murid.push(document.getElementById(`murid${i}`)?.value || "");
   }
 
+  // Construct row array (same format as other forms)
   const row = [
     tarikh,
     penganjur,
@@ -217,11 +215,14 @@ document.getElementById("achievementForm")?.addEventListener("submit", async fun
     new Date().getFullYear()
   ];
 
-  await sendToGoogleSheet("pencapaianMurid", row);
-
-  alert("Rekod berjaya disimpan!");
-  document.getElementById("achievementForm").reset();
-
+  try {
+    await sendToGoogleSheet("pencapaianMurid", row); // same array-based function as other forms
+    alert("Rekod berjaya disimpan!");
+    document.getElementById("achievementForm").reset();
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan rekod. Sila cuba lagi.");
+  }
 });
 
 // ================================
