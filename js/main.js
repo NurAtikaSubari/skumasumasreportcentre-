@@ -184,6 +184,7 @@ setupForm("formKehadiranKokurikulum", "kehadiranKokurikulum", [
 // 8️⃣ Pencapaian Murid Form
 // ================================
 document.getElementById("pencapaian-form")?.addEventListener("submit", async function(e) {
+
   e.preventDefault();
 
   const tarikh = document.getElementById("tarikh")?.value || "";
@@ -191,55 +192,36 @@ document.getElementById("pencapaian-form")?.addEventListener("submit", async fun
   const pencapaian = document.getElementById("pencapaian")?.value || "";
   const peringkat = document.getElementById("peringkat")?.value || "";
 
-  // Collect all guru inputs dynamically
-  const guruInputs = Array.from(document.querySelectorAll('[id^="guru"]'));
-  const guru = guruInputs.map(input => input.value || "");
+  // Get guru values
+  const guru = [];
+  for (let i = 1; i <= 10; i++) {
+    const el = document.getElementById(`guru${i}`);
+    guru.push(el ? el.value : "");
+  }
 
-  // Collect all murid inputs dynamically
-  const muridInputs = Array.from(document.querySelectorAll('[id^="murid"]'));
-  const murid = muridInputs.map(input => input.value || "");
+  // Get murid values
+  const murid = [];
+  for (let i = 1; i <= 10; i++) {
+    const el = document.getElementById(`murid${i}`);
+    murid.push(el ? el.value : "");
+  }
 
-  // Combine everything into one row
- const row = [
-  tarikh,
-  penganjur,
-  pencapaian,
-  peringkat,
+  const row = [
+    tarikh,
+    penganjur,
+    pencapaian,
+    peringkat,
+    ...guru,
+    ...murid,
+    new Date(),
+    new Date().getFullYear()
+  ];
 
-  guru1,
-  guru2,
-  guru3,
-  guru4,
-  guru5,
-  guru6,
-  guru7,
-  guru8,
-  guru9,
-  guru10,
-
-  murid1,
-  murid2,
-  murid3,
-  murid4,
-  murid5,
-  murid6,
-  murid7,
-  murid8,
-  murid9,
-  murid10,
-
-  new Date(),
-  new Date().getFullYear()
-];
-
-
-  // Send to Google Sheets
   await sendToGoogleSheet("pencapaianMurid", row);
 
   alert("Rekod berjaya disimpan!");
-
-  // Reset form
   document.getElementById("pencapaian-form").reset();
+
 });
 
 // ================================
