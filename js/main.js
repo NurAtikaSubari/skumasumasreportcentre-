@@ -179,7 +179,7 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
   const kategori = document.getElementById("kategori")?.value || "";
   const aktiviti = document.getElementById("aktiviti")?.value || "";
 
-  const students = document.querySelectorAll("#student-list .student-item");
+  const students = document.querySelectorAll("#student-list input[type='checkbox']");
 
   let jumlah = students.length;
   let hadir = 0;
@@ -188,12 +188,11 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
 
   students.forEach(student => {
 
-    const name = student.innerText.trim();
+    const name = student.dataset.name || student.value || "Murid";
 
-    if(student.classList.contains("present")){
+    if(student.checked){
       hadir++;
-    }
-    else{
+    } else {
       tidakHadir++;
       senaraiTidakHadir.push(name);
     }
@@ -218,6 +217,7 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
 
   alert("Rekod berjaya disimpan!");
 });
+
 // ================================
 // 3️⃣ Pencapaian Murid Form
 // ================================
