@@ -8,7 +8,7 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk
 // Universal function to send row data to Google Sheets
 async function sendToGoogleSheet(sheetName, row) {
   try {
-    const response = await fetch("YOUR_WEB_APP_URL", { // replace with your Web App URL
+    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", { // replace with your Web App URL
       method: "POST",
       mode: "cors",
       headers: {
