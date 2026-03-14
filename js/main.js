@@ -185,23 +185,6 @@ setupForm("guru-form", "laporanRMTGuru", [
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
-async function sendToGoogleSheet(sheetName, row) {
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sheet: sheetName, row })
-    });
-
-    const result = await response.json();
-    if (result.status !== "ok") throw new Error(result.message || "Unknown error");
-    return { isOk: true };
-  } catch (err) {
-    console.error("sendToGoogleSheet error:", err);
-    return { isOk: false, error: err.message };
-  }
-}
-
 document.getElementById("attendance-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
@@ -210,14 +193,12 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
   submitBtn.disabled = true;
   submitBtn.innerHTML = "Menyimpan...";
 
-  // Collect form fields
   const namaGuru = document.getElementById("nama-guru")?.value || "";
   const tarikh = document.getElementById("tarikh")?.value || "";
   const perjumpaan = document.getElementById("perjumpaan")?.value || "";
   const kategori = document.getElementById("kategori")?.value || "";
   const aktiviti = document.getElementById("aktiviti")?.value || "";
 
-  // Collect student checkboxes
   const students = document.querySelectorAll("#student-list input[type='checkbox']");
   const jumlah = students.length;
   let hadir = 0;
@@ -234,7 +215,6 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     }
   });
 
-  // Prepare row
   const row = [
     namaGuru,
     tarikh,
@@ -249,19 +229,27 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     new Date().getFullYear()
   ];
 
-  // Send to Google Sheets
-  const result = await sendToGoogleSheet("kehadiranKokurikulum", row);
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", { // <-- replace with your Web App URL
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sheet: "kehadiranKokurikulum", row })
+    });
 
-  // Reset button
+    const result = await response.json();
+
+    if (result.status === "success") {
+      alert("Rekod berjaya disimpan!");
+    } else {
+      alert("Ralat: " + result.message);
+    }
+
+  } catch (err) {
+    alert("Ralat menghantar data: " + err.message);
+  }
+
   submitBtn.disabled = false;
   submitBtn.innerHTML = originalText;
-
-  if (result.isOk) {
-    alert("Rekod berjaya disimpan!");
-    document.getElementById("attendance-form").reset();
-  } else {
-    alert("Ralat semasa menyimpan: " + result.error);
-  }
 });
 
 // ================================
