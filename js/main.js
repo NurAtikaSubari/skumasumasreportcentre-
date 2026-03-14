@@ -173,6 +173,11 @@ setupForm("guru-form", "laporanRMTGuru", [
 document.getElementById("attendance-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  const submitBtn = document.getElementById("submit-btn");
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "Menyimpan...";
+
   const namaGuru = document.getElementById("nama-guru")?.value || "";
   const tarikh = document.getElementById("tarikh")?.value || "";
   const perjumpaan = document.getElementById("perjumpaan")?.value || "";
@@ -180,7 +185,6 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
   const aktiviti = document.getElementById("aktiviti")?.value || "";
 
   const students = document.querySelectorAll("#student-list input[type='checkbox']");
-
   const jumlah = students.length;
   let hadir = 0;
   let tidakHadir = 0;
@@ -188,7 +192,6 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
 
   students.forEach(student => {
     const name = student.value || student.dataset.name || "Murid";
-
     if (student.checked) {
       hadir++;
     } else {
@@ -207,26 +210,32 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     hadir,
     tidakHadir,
     senaraiTidakHadir.join(", "),
-    new Date().toLocaleString(), // timestamp
+    new Date().toLocaleString(),
     new Date().getFullYear()
   ];
 
   try {
-    await sendToGoogleSheet("kehadiranKokurikulum", row);
+    // ✅ Ensure sendToGoogleSheet returns a Promise
+    const result = await sendToGoogleSheet("kehadiranKokurikulum", row);
+    
+    // If result has isOk flag (depending on your implementation)
+    if (result?.isOk === false) throw new Error("Failed to save");
+
     alert("✅ Rekod berjaya disimpan!");
     this.reset();
-    // Reset student checkboxes
     students.forEach(cb => cb.checked = false);
-    // Reset counters if you have UI spans
     document.getElementById("total-students").textContent = jumlah;
     document.getElementById("present-count").textContent = "0";
     document.getElementById("attendance-percentage").textContent = "0%";
   } catch (err) {
     console.error(err);
     alert("❌ Ralat menyimpan rekod. Sila cuba lagi.");
+  } finally {
+    // Always re-enable button
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
   }
 });
-
 // ================================
 // 3️⃣ Pencapaian Murid Form
 // ================================
