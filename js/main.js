@@ -185,6 +185,23 @@ setupForm("guru-form", "laporanRMTGuru", [
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
+async function sendToGoogleSheet(sheetName, row) {
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sheet: sheetName, row })
+    });
+
+    const result = await response.json();
+    if (result.status !== "ok") throw new Error(result.message || "Unknown error");
+    return { isOk: true };
+  } catch (err) {
+    console.error("sendToGoogleSheet error:", err);
+    return { isOk: false, error: err.message };
+  }
+}
+
 document.getElementById("attendance-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
@@ -193,66 +210,57 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
   submitBtn.disabled = true;
   submitBtn.innerHTML = "Menyimpan...";
 
-  try {
-    // --- Collect form values ---
-    const namaGuru = document.getElementById("nama-guru")?.value || "";
-    const tarikh = document.getElementById("tarikh")?.value || "";
-    const perjumpaan = document.getElementById("perjumpaan")?.value || "";
-    const kategori = document.getElementById("kategori")?.value || "";
-    const aktiviti = document.getElementById("aktiviti")?.value || "";
+  // Collect form fields
+  const namaGuru = document.getElementById("nama-guru")?.value || "";
+  const tarikh = document.getElementById("tarikh")?.value || "";
+  const perjumpaan = document.getElementById("perjumpaan")?.value || "";
+  const kategori = document.getElementById("kategori")?.value || "";
+  const aktiviti = document.getElementById("aktiviti")?.value || "";
 
-    const students = document.querySelectorAll("#student-list input[type='checkbox']");
-    const jumlah = students.length;
-    let hadir = 0;
-    let tidakHadir = 0;
-    const senaraiTidakHadir = [];
+  // Collect student checkboxes
+  const students = document.querySelectorAll("#student-list input[type='checkbox']");
+  const jumlah = students.length;
+  let hadir = 0;
+  let tidakHadir = 0;
+  const senaraiTidakHadir = [];
 
-    students.forEach(student => {
-      const name = student.value || student.dataset.name || "Murid";
-      if (student.checked) {
-        hadir++;
-      } else {
-        tidakHadir++;
-        senaraiTidakHadir.push(name);
-      }
-    });
-
-    // --- Prepare row for Google Sheets ---
-    const row = [
-      namaGuru,
-      tarikh,
-      perjumpaan,
-      kategori,
-      aktiviti,
-      jumlah,
-      hadir,
-      tidakHadir,
-      senaraiTidakHadir.join(", "),
-      new Date().toLocaleString(),
-      new Date().getFullYear()
-    ];
-
-    // --- Send to Google Sheets (reuse working function) ---
-    const result = await sendToGoogleSheet("kehadiranKokurikulum", row);
-
-    if (result?.isOk) {
-      showToast("Rekod berjaya disimpan!");
-      this.reset();
-      document.querySelectorAll("#student-list input[type='checkbox']").forEach(cb => cb.checked = false);
-      document.getElementById("present-count").textContent = "0";
-      document.getElementById("attendance-percentage").textContent = "0%";
-      document.getElementById("aktiviti").innerHTML = '<option value="">Pilih aktiviti dahulu</option>';
-      document.getElementById("aktiviti").disabled = true;
+  students.forEach(student => {
+    const name = student.value || student.dataset.name || "Murid";
+    if (student.checked) {
+      hadir++;
     } else {
-      throw new Error(result?.error || "Sila cuba lagi");
+      tidakHadir++;
+      senaraiTidakHadir.push(name);
     }
+  });
 
-  } catch (err) {
-    console.error(err);
-    showToast("Ralat: " + err.message, true);
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalText;
+  // Prepare row
+  const row = [
+    namaGuru,
+    tarikh,
+    perjumpaan,
+    kategori,
+    aktiviti,
+    jumlah,
+    hadir,
+    tidakHadir,
+    senaraiTidakHadir.join(", "),
+    new Date().toLocaleString(),
+    new Date().getFullYear()
+  ];
+
+  // Send to Google Sheets
+  const result = await sendToGoogleSheet("kehadiranKokurikulum", row);
+
+  // Reset button
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = originalText;
+
+  if (result.isOk) {
+    alert("Rekod berjaya disimpan!");
+    document.getElementById("attendance-form").reset();
+  } else {
+    alert("Ralat semasa menyimpan: " + result.error);
   }
 });
 
