@@ -229,25 +229,19 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     new Date().getFullYear()
   ];
 
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", { // <-- replace with your Web App URL
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sheet: "kehadiranKokurikulum", row })
-    });
+ const response = await fetch("YOUR_WEB_APP_URL", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ sheet: "kehadiranKokurikulum", row })
+});
 
-    const result = await response.json();
+const resultText = await response.text();
 
-    if (result.status === "success") {
-      alert("Rekod berjaya disimpan!");
-    } else {
-      alert("Ralat: " + result.message);
-    }
-
-  } catch (err) {
-    alert("Ralat menghantar data: " + err.message);
-  }
-
+if (resultText === "Success") {
+  alert("Rekod berjaya disimpan!");
+} else {
+  alert("Ralat: " + resultText);
+}
   submitBtn.disabled = false;
   submitBtn.innerHTML = originalText;
 });
