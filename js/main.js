@@ -170,7 +170,7 @@ setupForm("guru-form", "laporanRMTGuru", [
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
-document.getElementById("attendance-form")?.addEventListener("submit", async function(e){
+document.getElementById("attendance-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const namaGuru = document.getElementById("nama-guru")?.value || "";
@@ -181,22 +181,20 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
 
   const students = document.querySelectorAll("#student-list input[type='checkbox']");
 
-  let jumlah = students.length;
+  const jumlah = students.length;
   let hadir = 0;
   let tidakHadir = 0;
-  let senaraiTidakHadir = [];
+  const senaraiTidakHadir = [];
 
   students.forEach(student => {
+    const name = student.value || student.dataset.name || "Murid";
 
-    const name = student.dataset.name || student.value || "Murid";
-
-    if(student.checked){
+    if (student.checked) {
       hadir++;
     } else {
       tidakHadir++;
       senaraiTidakHadir.push(name);
     }
-
   });
 
   const row = [
@@ -209,13 +207,24 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     hadir,
     tidakHadir,
     senaraiTidakHadir.join(", "),
-    new Date(),
+    new Date().toLocaleString(), // timestamp
     new Date().getFullYear()
   ];
 
-  await sendToGoogleSheet("kehadiranKokurikulum", row);
-
-  alert("Rekod berjaya disimpan!");
+  try {
+    await sendToGoogleSheet("kehadiranKokurikulum", row);
+    alert("✅ Rekod berjaya disimpan!");
+    this.reset();
+    // Reset student checkboxes
+    students.forEach(cb => cb.checked = false);
+    // Reset counters if you have UI spans
+    document.getElementById("total-students").textContent = jumlah;
+    document.getElementById("present-count").textContent = "0";
+    document.getElementById("attendance-percentage").textContent = "0%";
+  } catch (err) {
+    console.error(err);
+    alert("❌ Ralat menyimpan rekod. Sila cuba lagi.");
+  }
 });
 
 // ================================
