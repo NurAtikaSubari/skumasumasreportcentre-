@@ -170,16 +170,54 @@ setupForm("guru-form", "laporanRMTGuru", [
 // ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
-setupForm("formKehadiranKokurikulum", "Kehadiran_Kokurikulum", [
-  { id: "tarikh" },
-  { id: "guru" },
-  { id: "kelas" },
-  { id: "jumlah" },
-  { id: "hadir" },
-  { id: "tidak-hadir" },
-  { id: "senarai-tidak-hadir" },
-]);
+document.getElementById("attendance-form")?.addEventListener("submit", async function(e){
+  e.preventDefault();
 
+  const namaGuru = document.getElementById("nama-guru")?.value || "";
+  const tarikh = document.getElementById("tarikh")?.value || "";
+  const perjumpaan = document.getElementById("perjumpaan")?.value || "";
+  const kategori = document.getElementById("kategori")?.value || "";
+  const aktiviti = document.getElementById("aktiviti")?.value || "";
+
+  const students = document.querySelectorAll("#student-list .student-item");
+
+  let jumlah = students.length;
+  let hadir = 0;
+  let tidakHadir = 0;
+  let senaraiTidakHadir = [];
+
+  students.forEach(student => {
+
+    const name = student.innerText.trim();
+
+    if(student.classList.contains("present")){
+      hadir++;
+    }
+    else{
+      tidakHadir++;
+      senaraiTidakHadir.push(name);
+    }
+
+  });
+
+  const row = [
+    namaGuru,
+    tarikh,
+    perjumpaan,
+    kategori,
+    aktiviti,
+    jumlah,
+    hadir,
+    tidakHadir,
+    senaraiTidakHadir.join(", "),
+    new Date(),
+    new Date().getFullYear()
+  ];
+
+  await sendToGoogleSheet("kehadiranKokurikulum", row);
+
+  alert("Rekod berjaya disimpan!");
+});
 // ================================
 // 3️⃣ Pencapaian Murid Form
 // ================================
