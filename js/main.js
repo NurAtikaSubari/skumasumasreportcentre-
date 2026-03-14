@@ -229,19 +229,15 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     new Date().getFullYear()
   ];
 
- const response = await fetch("https://script.google.com/macros/s/AKfycbycpdQ8m-a_Gjx2M3dnwXG7tI8ZQ_d0jzhXm-4F9OjGySjkzuHlP9WBIQKhHI-q-FXiyQ/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ sheet: "kehadiranKokurikulum", row })
-});
+  // Use the universal function
+  const result = await sendToGoogleSheet("kehadiranKokurikulum", row);
 
-const resultText = await response.text();
+  if (result.isOk) {
+    alert("Rekod berjaya disimpan!");
+  } else {
+    alert("Ralat: " + result.error);
+  }
 
-if (resultText === "Success") {
-  alert("Rekod berjaya disimpan!");
-} else {
-  alert("Ralat: " + resultText);
-}
   submitBtn.disabled = false;
   submitBtn.innerHTML = originalText;
 });
