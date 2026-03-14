@@ -229,7 +229,7 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
     new Date().getFullYear()
   ];
 
- const response = await fetch("YOUR_WEB_APP_URL", {
+ const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ sheet: "kehadiranKokurikulum", row })
