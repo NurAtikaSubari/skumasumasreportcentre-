@@ -182,6 +182,94 @@ setupForm("guru-form", "laporanRMTGuru", [
 ]);
 
 // ================================
+// 6️⃣ Borang Perjumpaan Mingguan
+// ================================
+document.getElementById("meetingForm")?.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  const meetingNumber = document.getElementById("meetingNumber")?.value || "";
+  const meetingDate = document.getElementById("meetingDate")?.value || "";
+  const meetingPlace = document.getElementById("meetingPlace")?.value || "";
+
+  const uniformBody = document.getElementById("uniformBody")?.value || "";
+  const clubAssociation = document.getElementById("clubAssociation")?.value || "";
+  const sportsGames = document.getElementById("sportsGames")?.value || "";
+
+  const meetingTime = document.getElementById("meetingTime")?.value || "";
+  const studentAttendance = document.getElementById("studentAttendance")?.value || "";
+
+  const meetingTitle = document.getElementById("meetingTitle")?.value || "";
+  const meetingValues = document.getElementById("meetingValues")?.value || "";
+  const meetingActivity = document.getElementById("meetingActivity")?.value || "";
+  const meetingReflection = document.getElementById("meetingReflection")?.value || "";
+
+  // Collect teachers (up to 10)
+  const teachers = [];
+  const teacherSelects = document.querySelectorAll("#teacherContainer select");
+
+  teacherSelects.forEach(select => {
+    if(select.value){
+      teachers.push(select.value);
+    }
+  });
+
+  // PIKeBM section
+  const pikebmTiming = document.getElementById("pikebmTiming")?.value || "";
+  const pikebmTitle = document.getElementById("pikebmTitle")?.value || "";
+  const pikebmTeachingAids = document.getElementById("pikebmTeachingAids")?.value || "";
+  const pikebmObjective = document.getElementById("pikebmObjective")?.value || "";
+  const pikebmSteps = document.getElementById("pikebmSteps")?.value || "";
+  const pikebmReflection = document.getElementById("pikebmReflection")?.value || "";
+
+  // Civic section
+  const civicValue = document.getElementById("civicValue")?.value || "";
+  const civicTheme = document.getElementById("civicTheme")?.value || "";
+  const civicGoal = document.getElementById("civicGoal")?.value || "";
+  const civicActivity = document.getElementById("civicActivity")?.value || "";
+  const civicSuggestion = document.getElementById("civicSuggestion")?.value || "";
+
+  const row = [
+    meetingNumber,
+    meetingDate,
+    meetingPlace,
+    uniformBody,
+    clubAssociation,
+    sportsGames,
+    meetingTime,
+    studentAttendance,
+    teachers.join(", "),
+    meetingTitle,
+    meetingValues,
+    meetingActivity,
+    meetingReflection,
+    pikebmTiming,
+    pikebmTitle,
+    pikebmTeachingAids,
+    pikebmObjective,
+    pikebmSteps,
+    pikebmReflection,
+    civicValue,
+    civicTheme,
+    civicGoal,
+    civicActivity,
+    civicSuggestion,
+    new Date(),
+    new Date().getFullYear()
+  ];
+
+  const result = await sendToGoogleSheet("perjumpaanMingguan", row);
+
+  if(result.isOk){
+    alert("Laporan Perjumpaan Mingguan berjaya disimpan!");
+    document.getElementById("meetingForm").reset();
+  } else {
+    alert("Ralat: " + result.error);
+  }
+
+});
+
+// ================================
 // 2️⃣ Kehadiran Kokurikulum Form
 // ================================
 document.getElementById("attendance-form")?.addEventListener("submit", async function(e) {
