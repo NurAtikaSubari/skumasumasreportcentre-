@@ -409,3 +409,74 @@ setupForm("laporanGBPKForm", "laporanGBPK", [
   { id: "soalan_11", type: "radio" },
   { id: "soalan_12", type: "radio" },
 ]);
+
+// Fetch all Laporan GB/PKanan from Google Sheets
+async function fetchLaporanGBPK() {
+  try {
+    // Assuming your Google Apps Script returns JSON array of rows
+    const response = await fetch(`${SHEET_URL}?sheet=laporanGBPK`);
+    const data = await response.json();
+
+    const container = document.getElementById("laporan-gbpk-container");
+    container.innerHTML = ""; // Clear previous content
+
+    if (!data || data.length === 0) {
+      container.innerHTML = `<p class="text-gray-400">Tiada rekod ditemui.</p>`;
+      return;
+    }
+
+    // Render each row as a card
+    data.forEach((row, index) => {
+      // Adjust index according to your sheet column structure
+      const [
+        namaPemantau,
+        tarikh,
+        hari,
+        masa,
+        soalan_1,
+        soalan_2,
+        soalan_3,
+        soalan_4,
+        soalan_5,
+        soalan_6,
+        soalan_7,
+        soalan_8,
+        soalan_9,
+        soalan_10,
+        soalan_11,
+        soalan_12,
+        timestamp
+      ] = row;
+
+      const card = document.createElement("div");
+      card.className = "bg-gray-700 p-4 mb-4 rounded-lg border border-gray-600";
+
+      card.innerHTML = `
+        <h6 class="font-semibold text-yellow-400 mb-2">Rekod #${index + 1} - ${namaPemantau}</h6>
+        <p class="text-gray-300 mb-1"><strong>Tarikh:</strong> ${tarikh} (${hari})</p>
+        <p class="text-gray-300 mb-1"><strong>Masa:</strong> ${masa}</p>
+        <div class="mt-2 text-gray-300">
+          <p><strong>1.</strong> ${soalan_1}</p>
+          <p><strong>2.</strong> ${soalan_2}</p>
+          <p><strong>3.</strong> ${soalan_3}</p>
+          <p><strong>4.</strong> ${soalan_4}</p>
+          <p><strong>5.</strong> ${soalan_5}</p>
+          <p><strong>6.</strong> ${soalan_6}</p>
+          <p><strong>7.</strong> ${soalan_7}</p>
+          <p><strong>8.</strong> ${soalan_8}</p>
+          <p><strong>9.</strong> ${soalan_9}</p>
+          <p><strong>10.</strong> ${soalan_10}</p>
+          <p><strong>11.</strong> ${soalan_11}</p>
+          <p><strong>12.</strong> ${soalan_12}</p>
+        </div>
+        <p class="text-gray-400 text-sm mt-2"><em>Disimpan pada: ${timestamp}</em></p>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Error fetching laporan GB/PK:", err);
+    document.getElementById("laporan-gbpk-container").innerHTML = `<p class="text-red-500">Ralat memuatkan rekod.</p>`;
+  }
+}
