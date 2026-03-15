@@ -160,7 +160,7 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
 });
 
 // ================================
-// 8️⃣ Laporan RMT Murid
+// RMT Murid Form
 // ================================
 setupForm("rmt-form", "laporanRMTMurid", [
   { id: "rmt-tarikh" },
@@ -171,15 +171,36 @@ setupForm("rmt-form", "laporanRMTMurid", [
 ]);
 
 // ================================
-// 9️⃣ Laporan RMT Guru
+// RMT Guru Form
 // ================================
-setupForm("guru-form", "laporanRMTGuru", [
-  { id: "guru-tarikh" },
-  { id: "guru-nama" },
-  { id: "guru-jumlah" },
-  { id: "guru-kelas" },
-  { id: "guru-ulasan" }
-]);
+document.getElementById("guru-form")?.addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const guruTarikh = document.getElementById("guru-tarikh")?.value || "";
+  const guruNama = document.getElementById("guru-nama")?.value || "";
+  const guruJumlah = document.getElementById("guru-jumlah")?.value || "";
+  const guruKelas = document.getElementById("guru-kelas")?.value || "";
+  const guruUlasan = document.getElementById("guru-ulasan")?.value || "";
+
+  const row = [
+    guruTarikh,
+    guruNama,
+    guruJumlah,
+    guruKelas,
+    guruUlasan,
+    new Date(),
+    new Date().getFullYear()
+  ];
+
+  const result = await sendToGoogleSheet("laporanRMTGuru", row);
+
+  if(result.isOk){
+    alert("Laporan RMT Guru berjaya disimpan!");
+    document.getElementById("guru-form").reset();
+  } else {
+    alert("Ralat: " + result.error);
+  }
+});
 
 // ================================
 // 6️⃣ Borang Perjumpaan Mingguan
