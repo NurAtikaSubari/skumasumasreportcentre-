@@ -8,7 +8,8 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbycpdQ8m-a_Gjx2M3dnwX
 // Universal function to send row data to Google Sheets
 async function sendToGoogleSheet(sheetName, row) {
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbygzmRHlrTyMRlejqdlLk93BQ7jMb9jopWTFE9mCYiGccHuuPorhFXkN1VZ5GNOxleoDw/exec", { // replace with your Web App URL
+
+    const response = await fetch(SHEET_URL, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -26,12 +27,12 @@ async function sendToGoogleSheet(sheetName, row) {
     console.log("Google Sheets response:", text);
 
     return { isOk: true };
+
   } catch (err) {
     console.error("sendToGoogleSheet error:", err);
     return { isOk: false, error: err.message };
   }
 }
-
 // Generic form setup function
 function setupForm(formId, sheetName, fields) {
   const form = document.getElementById(formId);
