@@ -154,10 +154,78 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
     new Date()
   ];
 
-  await sendToGoogleSheet("rekodKehadiranMurid", row);
+await sendToGoogleSheet("rekodKehadiranMurid", row);
 
-  alert("Rekod berjaya disimpan!");
+alert("Rekod berjaya disimpan!");
+
+loadRekodKehadiranMurid();
 });
+
+// ================================
+// LOAD REKOD KEHADIRAN HARIAN MURID
+// ================================
+async function loadRekodKehadiranMurid(){
+
+  const container = document.getElementById("kehadiran-murid-records");
+  if(!container) return;
+
+  container.innerHTML = "Memuatkan rekod...";
+
+  try{
+
+    const res = await fetch(`${SHEET_URL}?sheet=rekodKehadiranMurid`);
+    const json = await res.json();
+
+    if(json.result !== "success"){
+      container.innerHTML = "Ralat memuatkan rekod.";
+      return;
+    }
+
+    const data = json.data;
+
+    if(!data || data.length <= 1){
+      container.innerHTML = "Tiada rekod ditemui.";
+      return;
+    }
+
+    let html = "";
+
+    for(let i = 1; i < data.length; i++){
+
+      const row = data[i];
+
+      const tarikh = row[0];
+      const guru = row[1];
+      const kelas = row[2];
+      const jumlahMurid = row[3];
+      const hadir = row[4];
+      const tidakHadir = row[5];
+      const senarai = row[6] || "-";
+      const catatan = row[7] || "-";
+
+      html += `
+        <div class="glass-card rounded-xl p-6 mb-4">
+          <p><strong>📅 Tarikh:</strong> ${tarikh}</p>
+          <p><strong>👩‍🏫 Guru:</strong> ${guru}</p>
+          <p><strong>🏫 Kelas:</strong> ${kelas}</p>
+          <p><strong>👥 Jumlah Murid:</strong> ${jumlahMurid}</p>
+          <p><strong>✅ Hadir:</strong> ${hadir}</p>
+          <p><strong>❌ Tidak Hadir:</strong> ${tidakHadir}</p>
+          <p><strong>📋 Senarai Tidak Hadir:</strong> ${senarai}</p>
+          <p><strong>📝 Catatan:</strong> ${catatan}</p>
+        </div>
+      `;
+
+    }
+
+    container.innerHTML = html;
+
+  }
+  catch(err){
+    container.innerHTML = "Gagal memuatkan rekod.";
+  }
+
+}
 
 // ================================
 // RMT Murid Form
