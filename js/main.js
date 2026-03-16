@@ -412,50 +412,65 @@ setupForm("laporanGBPKForm", "laporanGBPK", [
 
 // Fetch all Laporan GB/PKanan from Google Sheets
 async function loadLaporanGBPK() {
+
   const container = document.getElementById("laporan-gbpk-container");
   container.innerHTML = "Memuatkan rekod...";
 
   try {
+
     const res = await fetch(`${SHEET_URL}?sheet=laporanGBPK`);
-   const json = await res.json();
+    const json = await res.json();
 
-if(json.result !== "success"){
-  container.innerHTML = "Ralat memuatkan rekod: " + json.message;
-  return; // stop here
-}
-
-const data = json.data; // only use this if result === success
+    if(json.result !== "success"){
+      container.innerHTML = "Ralat memuatkan rekod: " + json.message;
+      return;
+    }
 
     const data = json.data;
 
-    // If sheet is empty
-    if(data.length <= 1){
+    if(!data || data.length <= 1){
       container.innerHTML = "Tiada rekod ditemui.";
       return;
     }
 
-    // Build table
-    let html = `<div class="overflow-x-auto"><table class="min-w-full border border-gray-600">`;
+    let html = `
+      <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-600 text-sm">
+    `;
 
     // Header
     html += "<tr class='bg-gray-700 text-yellow-400'>";
-    data[0].forEach(h => html += `<th class="px-4 py-2 border border-gray-600">${h}</th>`);
+
+    data[0].forEach(header=>{
+      html += `<th class="px-4 py-2 border border-gray-600">${header}</th>`;
+    });
+
     html += "</tr>";
 
     // Rows
-    for(let i=1; i<data.length; i++){
+    for(let i=1;i<data.length;i++){
+
       html += "<tr class='bg-gray-800 text-white'>";
-      data[i].forEach(cell => html += `<td class="px-4 py-2 border border-gray-600">${cell}</td>`);
+
+      data[i].forEach(cell=>{
+        html += `<td class="px-4 py-2 border border-gray-600">${cell}</td>`;
+      });
+
       html += "</tr>";
+
     }
 
     html += "</table></div>";
+
     container.innerHTML = html;
 
-  } catch(err) {
-    container.innerHTML = "Ralat memuatkan rekod: " + err.message;
+  } catch(err){
+
     console.error(err);
+    container.innerHTML = "Ralat memuatkan rekod: " + err.message;
+
   }
+
 }
 
 // Load when user switches to "Lihat Laporan" tab
