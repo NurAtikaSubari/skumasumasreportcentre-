@@ -154,11 +154,16 @@ document.getElementById("murid-form")?.addEventListener("submit", async function
     new Date()
   ];
 
-await sendToGoogleSheet("rekodKehadiranMurid", row);
+  // ✅ send to Google Sheets
+  await sendToGoogleSheet("rekodKehadiranMurid", row);
 
-//window.addEventListener("DOMContentLoaded", () => {
-  loadRekodKehadiranMurid();
-});;
+  // ✅ reload data AFTER save
+  if(typeof loadRekodKehadiranMurid === "function"){
+    loadRekodKehadiranMurid();
+  }
+
+  alert("Rekod berjaya disimpan!");
+
 });
 
 // ================================
