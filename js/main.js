@@ -166,7 +166,7 @@ await sendToGoogleSheet("rekodKehadiranMurid", row);
 // ================================
 async function loadRekodKehadiranMurid(){
 
-  const container = document.getElementById("kehadiran-murid-records");
+ const table = document.getElementById("records-table");
   if(!container) return;
 
   container.innerHTML = "Memuatkan rekod...";
@@ -218,11 +218,11 @@ async function loadRekodKehadiranMurid(){
 
     }
 
-    container.innerHTML = html;
+   table.innerHTML = html;
 
   }
   catch(err){
-    container.innerHTML = "Gagal memuatkan rekod.";
+    table.innerHTML = "Gagal memuatkan rekod.";
   }
 
 }
