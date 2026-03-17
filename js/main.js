@@ -166,7 +166,7 @@ window.addEventListener("DOMContentLoaded", () => {
 // ================================
 async function loadRekodKehadiranMurid(){
 
-  const table = document.getElementById("records-table");
+  const container = document.getElementById("kehadiran-murid-records");
   if(!container) return;
 
   container.innerHTML = "Memuatkan rekod...";
@@ -194,7 +194,7 @@ async function loadRekodKehadiranMurid(){
 
       const row = data[i];
 
-     const tarikh = new Date(row[0]).toLocaleDateString("ms-MY");
+      const tarikh = row[0];
       const guru = row[1];
       const kelas = row[2];
       const jumlahMurid = row[3];
@@ -203,24 +203,26 @@ async function loadRekodKehadiranMurid(){
       const senarai = row[6] || "-";
       const catatan = row[7] || "-";
 
-     html += `
-<tr class="border-b border-yellow-900/20">
-  <td class="px-3 py-3">${tarikh}</td>
-  <td class="px-3 py-3">${guru}</td>
-  <td class="px-3 py-3">${kelas}</td>
-  <td class="px-3 py-3 text-center">${jumlahMurid}</td>
-  <td class="px-3 py-3 text-center text-green-400">${hadir}</td>
-  <td class="px-3 py-3 text-center text-red-400">${tidakHadir}</td>
-  <td class="px-3 py-3 text-center">-</td>
-</tr>
-`;
+      html += `
+        <div class="glass-card rounded-xl p-6 mb-4">
+          <p><strong>📅 Tarikh:</strong> ${tarikh}</p>
+          <p><strong>👩‍🏫 Guru:</strong> ${guru}</p>
+          <p><strong>🏫 Kelas:</strong> ${kelas}</p>
+          <p><strong>👥 Jumlah Murid:</strong> ${jumlahMurid}</p>
+          <p><strong>✅ Hadir:</strong> ${hadir}</p>
+          <p><strong>❌ Tidak Hadir:</strong> ${tidakHadir}</p>
+          <p><strong>📋 Senarai Tidak Hadir:</strong> ${senarai}</p>
+          <p><strong>📝 Catatan:</strong> ${catatan}</p>
+        </div>
+      `;
+
     }
 
-table.innerHTML = html;
+    container.innerHTML = html;
 
   }
   catch(err){
-   table.innerHTML = html;
+    container.innerHTML = "Gagal memuatkan rekod.";
   }
 
 }
