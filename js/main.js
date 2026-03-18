@@ -498,6 +498,64 @@ document.getElementById("attendance-form")?.addEventListener("submit", async fun
 });
 
 // ================================
+// LOAD Kehadiran Kokurikulum (MATCHED)
+// ================================
+async function loadKehadiranKokurikulum() {
+
+  try {
+
+    const res = await fetch(`${SHEET_URL}?sheet=kehadiranKokurikulum`);
+    const json = await res.json();
+
+    if (json.result !== "success") {
+      console.error("Gagal load:", json.message);
+      return;
+    }
+
+    const data = json.data;
+
+    if (!data || data.length <= 1) {
+      renderReportsTable([]);
+      return;
+    }
+
+    // buang header
+    const rows = data.slice(1);
+
+    const formatted = rows.map((row, index) => {
+
+      // IMPORTANT: match EXACT column index
+      return {
+        __backendId: index.toString(),
+
+        nama_guru: row[0],
+        tarikh: row[1],
+        perjumpaan: parseInt(row[2]) || 0,
+        kategori: row[3],
+        aktiviti: row[4],
+        jumlah_hadir: row[6],   // HADIR (bukan jumlah!)
+        
+        // you did NOT store hadir list → leave empty
+        murid_hadir: "",
+
+        created_at: row[9]
+      };
+
+    });
+
+    // global (for view/delete)
+    allReportsData = formatted;
+
+    // display
+    renderReportsTable(formatted);
+
+  } catch (err) {
+    console.error("Error load:", err);
+  }
+
+}
+
+// ================================
 // 3️⃣ Pencapaian Murid Form
 // ================================
 document.getElementById("achievementForm")?.addEventListener("submit", async function(e) {
