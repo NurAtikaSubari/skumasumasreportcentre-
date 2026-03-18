@@ -646,6 +646,10 @@ data-section="kehadiran">
       document.querySelectorAll('.nav-btn').forEach(el => {
         el.classList.remove('active', 'text-yellow-400');
         el.classList.add('text-gray-300');
+
+       if(sectionId === "laporan"){
+  loadLaporan();
+}
       });
       
       const section = document.getElementById('section-' + sectionId);
