@@ -530,19 +530,6 @@ data-section="kehadiran">
       }
     };
 
-   function showSection(sectionId){
-
-  document.querySelectorAll(".section-content").forEach(sec => {
-    sec.classList.add("hidden");
-  });
-
-  document.getElementById(sectionId)?.classList.remove("hidden");
-
-  // ✅ AUTO LOAD LIKE GBPK
-  if(sectionId === "kehadiran"){
-    loadRekodKehadiranMurid();
-  }
-}
 
     // Initialize Data SDK
     async function initDataSDK() {
